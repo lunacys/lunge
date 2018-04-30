@@ -1,0 +1,35 @@
+Every module should be covered by tests
+These modules should be done in order to the game engine to be released:
+    ☐ Debug Info:
+        ☐ Debug Profiler
+        ☐ FPS Counter
+        ☐ MsPerFrame Counter
+        ☐ FPS & MsPerFrame Graphs
+        ☐ Scene Graphs
+    ☐ GUI:
+        ☐ GUI Window
+        ☐ Canvas
+        ☐ Label (Text)
+        ☐ Button
+        ☐ Text Box
+        ☐ Combo Box
+        ☐ Radio Box
+        ☐ Slider
+        ☐ Submenu
+    ☐ Physics:
+        ☐ Simple Rectangle collision detection & response
+        ☐ AABB collision detection
+        ☐ Impulse-based physics
+    ☐ AI:
+        ☐ A* pathfinding
+        ☐ Steering behaviors
+    ☐ Game Editor (2D):
+        ☐ Map Editor
+        ☐ Entity Editor
+        ☐ Particle Editor
+        ☐ Shader Editor
+    ☐ Scripting (a script should be processed by a content pipeline extension):
+        ☐ C# runtime-compiling scripts
+        ☐ Lua scripts (?)
+        ☐ Larg (Light gAme scRipting lanGuage) scripts
+    ☐ Localization Manager

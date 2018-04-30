@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LunarisGameEngine", "LunarisGameEngine\LunarisGameEngine.csproj", "{ADB71BC9-9926-4B3A-BD52-81D9BF653231}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LunarisGE.Library", "LunarisGE.Library\LunarisGE.Library.csproj", "{7DA8071F-91B3-468D-9722-FCB861FA42BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGame.DesktopGL", "TestGame.DesktopGL\TestGame.DesktopGL.csproj", "{9C9EDC99-60C6-4628-9F48-478E20EDD599}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGame.Android", "TestGame.Android\TestGame.Android.csproj", "{73FD6AA8-1860-4509-9CAA-05AA67F6BCD6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestGames", "TestGames", "{0474E88A-E553-4437-9599-732852C00D4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LunarisGE.Library.Tests", "LunarisGE.Library.Tests\LunarisGE.Library.Tests.csproj", "{A7C88B3F-A64E-45C1-B816-4F4B07E34B14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +19,31 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ADB71BC9-9926-4B3A-BD52-81D9BF653231}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ADB71BC9-9926-4B3A-BD52-81D9BF653231}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ADB71BC9-9926-4B3A-BD52-81D9BF653231}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ADB71BC9-9926-4B3A-BD52-81D9BF653231}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DA8071F-91B3-468D-9722-FCB861FA42BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DA8071F-91B3-468D-9722-FCB861FA42BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DA8071F-91B3-468D-9722-FCB861FA42BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DA8071F-91B3-468D-9722-FCB861FA42BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C9EDC99-60C6-4628-9F48-478E20EDD599}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C9EDC99-60C6-4628-9F48-478E20EDD599}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C9EDC99-60C6-4628-9F48-478E20EDD599}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C9EDC99-60C6-4628-9F48-478E20EDD599}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73FD6AA8-1860-4509-9CAA-05AA67F6BCD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73FD6AA8-1860-4509-9CAA-05AA67F6BCD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73FD6AA8-1860-4509-9CAA-05AA67F6BCD6}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{73FD6AA8-1860-4509-9CAA-05AA67F6BCD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73FD6AA8-1860-4509-9CAA-05AA67F6BCD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73FD6AA8-1860-4509-9CAA-05AA67F6BCD6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A7C88B3F-A64E-45C1-B816-4F4B07E34B14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7C88B3F-A64E-45C1-B816-4F4B07E34B14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7C88B3F-A64E-45C1-B816-4F4B07E34B14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7C88B3F-A64E-45C1-B816-4F4B07E34B14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9C9EDC99-60C6-4628-9F48-478E20EDD599} = {0474E88A-E553-4437-9599-732852C00D4F}
+		{73FD6AA8-1860-4509-9CAA-05AA67F6BCD6} = {0474E88A-E553-4437-9599-732852C00D4F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B8220726-0232-4444-BE3D-52287BF04A3D}
