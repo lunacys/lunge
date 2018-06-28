@@ -1,4 +1,4 @@
-# LunarisGameEngine (Lunge)
+# LunarisGameEngine (lunGE)
 
 A super mega game engine
 
