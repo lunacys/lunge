@@ -54,7 +54,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LunarisGE.Library\LunarisGE.Library.csproj">
+    <ProjectReference Include="..\lunge.Library\lunge.Library.csproj">
       <Project>{7da8071f-91b3-468d-9722-fcb861fa42ba}</Project>
       <Name>LunarisGE.Library</Name>
     </ProjectReference>

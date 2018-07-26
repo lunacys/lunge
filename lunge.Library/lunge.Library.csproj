@@ -5,15 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MonoGame.Extended" Version="1.0.617" />
-    <PackageReference Include="MonoGame.Extended.Animations" Version="1.0.617" />
     <PackageReference Include="MonoGame.Extended.Content.Pipeline" Version="1.0.617" />
-    <PackageReference Include="MonoGame.Extended.Graphics" Version="1.0.617" />
-    <PackageReference Include="MonoGame.Extended.Input" Version="1.0.617" />
-    <PackageReference Include="MonoGame.Extended.Particles" Version="1.0.617" />
-    <PackageReference Include="MonoGame.Framework.Content.Pipeline.Portable" Version="3.6.0.1625" />
-    <PackageReference Include="MonoGame.Framework.Portable" Version="3.6.0.1625" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MonoGame.Extended">
+      <HintPath>..\Deps\MonoGame.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended.Input">
+      <HintPath>..\Deps\MonoGame.Extended.Input.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
