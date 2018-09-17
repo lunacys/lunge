@@ -6,25 +6,57 @@ using MonoGame.Extended;
 
 namespace lunge.Library.Input
 {
+    // TODO: Make support for using Command pattern based on the Entity class
+    /// <summary>
+    /// Provides a complex mechanism to handle input in two ways:
+    /// by calling <see cref="HandleInput"/> method and by calling <see cref="Update"/> method.
+    /// Both methods can be used together at the same time.
+    /// </summary>
     public class InputHandler : GameComponent
     {
+        /// <summary>
+        /// Gets current mouse cursor position relative to the game window
+        /// </summary>
         public Vector2 MousePosition { get; private set; }
+
+        /// <summary>
+        /// Gets current mouse cursor velocity
+        /// </summary>
         public Vector2 MouseVelocity { get; private set; }
+
+        /// <summary>
+        /// Gets current mouse cursor rectangle. The size is 1 by 1 pixels
+        /// </summary>
         public RectangleF MouseRectangle
             => new RectangleF(MousePosition, new Size2(1, 1));
 
+        /// <summary>
+        /// Gets or sets current keyboard handler function. Default is <see cref="WasKeyPressed"/>
+        /// </summary>
         public Func<Keys, bool> KeyboardHandler { get; set; }
+
+        /// <summary>
+        /// Gets or sets current mouse handler function. Default is <see cref="WasMouseButtonPressed"/>
+        /// </summary>
         public Func<MouseButton, bool> MouseHandler { get; set; }
+
+        /// <summary>
+        /// Gets or sets current <see cref="GameWindow"/>
+        /// </summary>
+        public GameWindow Window { get; set; }
 
         private KeyboardState _keyboardState, _oldKeyboardState;
         private MouseState _mouseState, _oldMouseState;
         private Vector2 _oldMousePosition;
 
-        private readonly GameWindow _window;
-
+        // All added keyboard commands
         private readonly Dictionary<Keys, Action> _inputKeyCommands;
+        // All added mouse commands
         private readonly Dictionary<MouseButton, Action> _inputMouseButtonCommands;
 
+        /// <summary>
+        /// On command added event
+        /// </summary>
         public event EventHandler<InputHandlerOnCommandAdd> OnCommandAdded;
 
         public InputHandler(Game game)
@@ -36,15 +68,25 @@ namespace lunge.Library.Input
             KeyboardHandler = WasKeyPressed;
             MouseHandler = WasMouseButtonPressed;
 
-            _window = game.Window;
+            Window = game.Window;
         }
 
+        /// <summary>
+        /// Registers a new keyboard command or gets an exist one based on the key
+        /// </summary>
+        /// <param name="key"><see cref="Keys"/></param>
+        /// <returns>Action</returns>
         public Action this[Keys key]
         {
             get => _inputKeyCommands[key];
             set => RegisterKeyCommand(key, value);
         }
 
+        /// <summary>
+        /// Registers a new mouse command or gets an exist one based on the mouse button
+        /// </summary>
+        /// <param name="mouseButton"><see cref="MouseButton"/></param>
+        /// <returns>Action</returns>
         public Action this[MouseButton mouseButton]
         {
             get => _inputMouseButtonCommands[mouseButton];
@@ -110,7 +152,7 @@ namespace lunge.Library.Input
             _oldMousePosition = _oldMouseState.Position.ToVector2();
 
             _keyboardState = Keyboard.GetState();
-            _mouseState = Mouse.GetState(_window);
+            _mouseState = Mouse.GetState(Window);
             MousePosition = _mouseState.Position.ToVector2();
 
             MouseVelocity = MousePosition - _oldMousePosition;

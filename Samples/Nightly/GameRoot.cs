@@ -1,6 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using lunge.Library.Debugging.Logging;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using lunge.Library.Input;
 
 namespace Nightly
 {
@@ -8,19 +11,32 @@ namespace Nightly
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private InputHandler _input;
+        private int _testCount = 0;
 
         public GameRoot()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
             IsMouseVisible = true;
+
+            LogHelper.Target = LogTarget.Console;
         }
 
         protected override void Initialize()
         {
-
-
             base.Initialize();
+
+            _input = new InputHandler(this);
+            _input.KeyboardHandler = _input.IsKeyDown;
+            _input[Keys.Space] = () =>
+            {
+                _testCount++;
+                LogHelper.Log($"Space Key Pressed. Test count: {_testCount}");
+            };
+
+            Components.Add(_input);
         }
 
         protected override void LoadContent()
@@ -32,7 +48,9 @@ namespace Nightly
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            LogHelper.Update();
+
+            if (_input.IsKeyDown(Keys.Escape))
                 Exit();
             
 
