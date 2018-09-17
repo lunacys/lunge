@@ -12,9 +12,9 @@ Every component of the game engine is separated into its own module. A module is
  - ```lunge.Library.Debugging``` - module that implements some useful stuff in order to make debugging easier.
  - ```lunge.Library.Gui``` - GUI module.
  - ```lunge.Library.Physics``` - impulse-based physics.
- - ```lunge.Library.Collisions``` - the lite version of the ```LunGE.Physics``` module. Should be used when a game doesn't need complicated physics. Contains AABB collision detection and collision responses.
+ - ```lunge.Library.Collisions``` - the lite version of the ```lunge.Physics``` module. Should be used when a game doesn't need complicated physics. Contains AABB collision detection and collision responses.
  - ```lunge.Library.Ai``` - AI module. Contains behaviors (e.g. steering) and path finding algorithms.
- - ```lunge.Library.Scripting``` - this module contains an easy to use scripting API in either runtime-compiling C# scripts or Larg (**L**ite g**A**me sc**R**ipting lan**G**uage). Larg language will be created after the previous modules are done.
+ - ```lunge.Library.Scripting``` - this module contains an easy to use scripting API in either runtime-compiling C# scripts.
  - ```lunge.Library.ContentPipelineExtensions``` - content pipeline extensions for better experience.
  
 ### Tools
@@ -27,11 +27,6 @@ In addition to the modules the game engine contains the following tools:
   - ```lunge.ShaderEditor``` - easy shader editor.
   - ```lunge.LocalizationManager``` - a tool for creating localizations for games. 
   
- ### Sample games
- 
-  The repo contains some examples of game engine usage.
-  
-  - ```TestGame``` - a test game that uses the latest added stuff.
   
   ### Tests
   
