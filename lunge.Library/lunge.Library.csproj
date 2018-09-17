@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="MonoGame.Extended.Content.Pipeline" Version="1.0.617" />
+    <PackageReference Include="MonoGame.Framework.DesktopGL.Core" Version="3.7.0.7" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
