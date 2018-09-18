@@ -8,14 +8,14 @@ namespace lunge.Library.GameSystems
 {
     public class GameSystemComponent : DrawableGameComponent, IGameSystemManager
     {
-        private readonly List<GameSystem> _gameSystems;
+        private readonly List<DrawableGameSystem> _gameSystems;
 
         /// <summary>
-        /// <see cref="GameSystem"/> added
+        /// <see cref="DrawableGameSystem"/> added
         /// </summary>
         public event EventHandler<GameSystemAddedEventArgs> SystemAdded;
 
-        public GameSystemComponent(Game game, IEnumerable<GameSystem> systems) : this(game)
+        public GameSystemComponent(Game game, IEnumerable<DrawableGameSystem> systems) : this(game)
         {
             foreach (var gameSystem in systems)
                 Register(gameSystem);
@@ -23,15 +23,15 @@ namespace lunge.Library.GameSystems
 
         public GameSystemComponent(Game game) : base(game) 
         {
-            _gameSystems = new List<GameSystem>();
+            _gameSystems = new List<DrawableGameSystem>();
         }
 
         /// <summary>
-        /// Finds and returns <see cref="GameSystem"/> with specified type
+        /// Finds and returns <see cref="DrawableGameSystem"/> with specified type
         /// </summary>
         /// <typeparam name="T">Type of the system</typeparam>
-        /// <returns><see cref="GameSystem"/></returns>
-        public T FindSystem<T>() where T : GameSystem
+        /// <returns><see cref="DrawableGameSystem"/></returns>
+        public T FindSystem<T>() where T : DrawableGameSystem
         {
             var system = _gameSystems.OfType<T>().FirstOrDefault();
 
@@ -45,18 +45,18 @@ namespace lunge.Library.GameSystems
         /// Gets all registered game systems
         /// </summary>
         /// <returns>All registered game systems</returns>
-        public IList<GameSystem> GetAllGameSystems()
+        public IList<DrawableGameSystem> GetAllGameSystems()
         {
             return _gameSystems;
         }
 
         /// <summary>
-        /// Registers and returns <see cref="GameSystem"/>
+        /// Registers and returns <see cref="DrawableGameSystem"/>
         /// </summary>
-        /// <typeparam name="T"><see cref="GameSystem"/></typeparam>
-        /// <param name="system"><see cref="GameSystem"/></param>
-        /// <returns><see cref="GameSystem"/></returns>
-        public T Register<T>(T system) where T : GameSystem
+        /// <typeparam name="T"><see cref="DrawableGameSystem"/></typeparam>
+        /// <param name="system"><see cref="DrawableGameSystem"/></param>
+        /// <returns><see cref="DrawableGameSystem"/></returns>
+        public T Register<T>(T system) where T : DrawableGameSystem
         {
             LogHelper.Log($"GameSystemManager: Registering System {typeof(T)}");
             SystemAdded?.Invoke(this, new GameSystemAddedEventArgs(this, system));

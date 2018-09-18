@@ -5,12 +5,12 @@ namespace lunge.Library.GameSystems
     public class GameSystemAddedEventArgs : EventArgs
     {
         public IGameSystemManager GameSystemManager { get; }
-        public GameSystem GameSystem { get; }
+        public DrawableGameSystem DrawableGameSystem { get; }
 
-        public GameSystemAddedEventArgs(IGameSystemManager gameSystemManager, GameSystem gameSystem)
+        public GameSystemAddedEventArgs(IGameSystemManager gameSystemManager, DrawableGameSystem drawableGameSystem)
         {
             GameSystemManager = gameSystemManager;
-            GameSystem = gameSystem;
+            DrawableGameSystem = drawableGameSystem;
         }
     }
 }
