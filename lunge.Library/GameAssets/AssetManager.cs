@@ -127,7 +127,7 @@ namespace lunge.Library.GameAssets
                     : (Path.Combine(AssetDirectory, assetName));
 
             if (!File.Exists(filepath))
-                throw new FileNotFoundException();
+                throw new FileNotFoundException($"Unable to find specified file: {filepath}");
 
             // find if extension of the file is supported
             if (assetFileExtensions.All(s => Path.GetExtension(filepath) != s))
