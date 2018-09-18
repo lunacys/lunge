@@ -1,9 +1,15 @@
 ﻿using System;
+using System.IO;
 using lunge.Library.Debugging.Logging;
+using lunge.Library.GameAssets;
+using lunge.Library.GameTimers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using lunge.Library.Input;
+using lunge.Library.Serialization;
+using lunge.Library.Settings;
+using Newtonsoft.Json;
 
 namespace Nightly
 {
@@ -13,6 +19,17 @@ namespace Nightly
         private SpriteBatch _spriteBatch;
         private InputHandler _input;
         private int _testCount = 0;
+        private AssetManager _assetManager;
+
+        private Texture2D _testTexture;
+
+        [GameSettingsEntry("MusicVolume", 1.0)]
+        public double MusicVolume { get; set; }
+
+        [GameSettingsEntry("SfxVolume", 1.0)]
+        public double SfxVolume { get; set; }
+
+        private GameSettingsGameComponent _gameSettings;
 
         public GameRoot()
         {
@@ -26,8 +43,6 @@ namespace Nightly
 
         protected override void Initialize()
         {
-            base.Initialize();
-
             _input = new InputHandler(this);
             _input.KeyboardHandler = _input.IsKeyDown;
             _input[Keys.Space] = () =>
@@ -36,24 +51,61 @@ namespace Nightly
                 LogHelper.Log($"Space Key Pressed. Test count: {_testCount}");
             };
 
+            GameTimer gt = new GameTimer(1.5, true);
+            gt.OnTimeElapsed += (sender, args) =>
+            {
+                LogHelper.Log($"SfxVolume: {SfxVolume}, MusicVolume: {MusicVolume}");
+            };
+            GameTimerManager.Add(gt);
+
+            _gameSettings = new GameSettingsGameComponent(this);
+
+            Components.Add(_gameSettings);
             Components.Add(_input);
+
+            base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            _assetManager = new AssetManager(GraphicsDevice, "Assets");
+
+            // TODO: use this.Content to load your game content here
+            try
+            {
+                _testTexture = _assetManager.Load<Texture2D>("Test.png");
+            }
+            catch (Exception e)
+            {
+                LogHelper.Log($"Error: {e.Message}");
+            }
             
 
+            SfxVolume = _gameSettings.Get<double>("SfxVolume");
+            MusicVolume = _gameSettings.Get<double>("MusicVolume");
+        }
+
+        protected override void UnloadContent()
+        {
+            base.UnloadContent();
+
+            string str = JsonConvert.SerializeObject(_gameSettings.GameSettings, Formatting.Indented, new GameSettingsConverter());
+
+            using (StreamWriter sw = new StreamWriter("Settings.json"))
+            {
+                sw.WriteLine(str);
+            }
         }
 
         protected override void Update(GameTime gameTime)
         {
-            LogHelper.Update();
-
             if (_input.IsKeyDown(Keys.Escape))
                 Exit();
-            
 
+            LogHelper.Update();
+            GameTimerManager.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -62,6 +114,10 @@ namespace Nightly
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             
+            _spriteBatch.Begin();
+            if (_testTexture != null)
+                _spriteBatch.Draw(_testTexture, new Vector2(64, 64), null, Color.White);
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
