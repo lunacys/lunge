@@ -39,5 +39,10 @@ namespace lunge.Library.GameSystems
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        public virtual void Reset()
+        {
+            OnReset?.Invoke(this, EventArgs.Empty);
+        }
     }
 }
