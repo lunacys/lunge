@@ -2,6 +2,8 @@
 
 A super mega game engine
 
+**CURRENT STAGE:** Moving and adapting code from [BeatTheNotes Library](https://github.com/lunacys/BeatTheNotes)
+
 ## Description
 
 Every component of the game engine is separated into its own module. A module is a different project that implements some important component. The list of the modules is below.
