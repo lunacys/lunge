@@ -19,7 +19,7 @@ namespace lunge.Library.GameAssets
         private readonly GraphicsDevice _graphicsDevice;
 
         /// <summary>
-        /// Gets asset directory which is currently in use
+        /// Gets or sets asset directory which is currently in use
         /// </summary>
         public string AssetDirectory { get; set; }
 
@@ -30,10 +30,23 @@ namespace lunge.Library.GameAssets
             AssetDirectory = assetDirectory;
         }
 
-        public object this[string name] => _loadedAssets[name];
+        /// <summary>
+        /// Gets a loaded asset by name. If there is no asset with this name, returns null.
+        /// </summary>
+        /// <param name="name">Asset name</param>
+        /// <returns>Asset object</returns>
+        public object this[string name]
+        {
+            get
+            {
+                if (_loadedAssets.ContainsKey(name))
+                    return _loadedAssets[name];
+                return null;
+            }
+        }
 
         /// <summary>
-        /// Load an asset from the <see cref="AssetDirectory"/>
+        /// Loads and returns an asset from the <see cref="AssetDirectory"/>
         /// </summary>
         /// <typeparam name="T">Type of asset</typeparam>
         /// <param name="assetName">Asset name</param>
@@ -109,39 +122,21 @@ namespace lunge.Library.GameAssets
             IEnumerable<string> assetFileExtensions)
         {
             var filepath =
-                (assetSubdirectory != null)
+                (assetSubdirectory != null) // if subdir is null then the asset is placed in the root of the content directory
                     ? (Path.Combine(AssetDirectory, assetSubdirectory, assetName))
                     : (Path.Combine(AssetDirectory, assetName));
 
             if (!File.Exists(filepath))
                 throw new FileNotFoundException();
 
-            if (!IsInCollection(assetFileExtensions, filepath))
+            // find if extension of the file is supported
+            if (assetFileExtensions.All(s => Path.GetExtension(filepath) != s))
                 throw new Exception("Cannot load an asset with this extension");
-
-            //if (_loadedAssets.ContainsKey(assetName)) return (T)_loadedAssets[assetName];
 
             var asset = assetLoader.LoadAsset(filepath);
             _loadedAssets.Add(assetName, asset);
 
             return asset;
         }
-
-        private bool IsInCollection(IEnumerable<string> fileExtensions, string filepath)
-        {
-            bool result = false;
-
-            foreach (var extension in fileExtensions)
-            {
-                var ext = Path.GetExtension(filepath);
-
-                if (ext == extension)
-                    result = true;
-            }
-
-            return result;
-        }
-
-
     }
 }
