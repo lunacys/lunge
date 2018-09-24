@@ -1,6 +1,6 @@
 # LunarisGameEngine (lunge)
 
-A super mega game engine
+A MonoGame + MonoGame.Extended Game Engine. The project aims to be as simple to use as possible to create 2D games. The game engine provides a lot of useful instruments for creating games.
 
 **CURRENT STAGE:** Moving and adapting code from [BeatTheNotes Library](https://github.com/lunacys/BeatTheNotes)
 
@@ -23,11 +23,11 @@ Every component of the game engine is separated into its own module. A module is
 
 In addition to the modules the game engine contains the following tools:
 
-  - ```lunge.MapEditor``` - allows user to create maps for his game.
-  - ```lunge.EntityEditor``` - an easy way to create game enities and then use them using the map editor
-  - ```lunge.ParticleEditor``` - creating particle systems, emitters, particles, etc.
-  - ```lunge.ShaderEditor``` - easy shader editor.
-  - ```lunge.LocalizationManager``` - a tool for creating localizations for games. 
+  - ```lunge.MapEditor``` - a complex tool that allows an user create maps for their games;
+  - ```lunge.EntityEditor``` - an easy way to create game enities and then use them using the map editor;
+  - ```lunge.ParticleEditor``` - create particle systems, emitters, particles, etc;
+  - ```lunge.ShaderEditor``` - an easy-to-use shader editor;
+  - ```lunge.LocalizationManager``` - a simple tool for creating localizations for games.
   
   
   ### Tests
