@@ -9,9 +9,10 @@ namespace lunge.Library.GameSystems
         /// Gets <see cref="Microsoft.Xna.Framework.Graphics.SpriteBatch"/> which is currently in use
         public SpriteBatch SpriteBatch { get; }
 
-        protected DrawableGameSystem(GraphicsDevice graphicsDevice)
+        protected DrawableGameSystem(Game game)
+            : base(game)
         {
-            SpriteBatch = new SpriteBatch(graphicsDevice);
+            SpriteBatch = new SpriteBatch(GameRoot.GraphicsDevice);
         }
 
         public virtual void Draw(GameTime gameTime) { }

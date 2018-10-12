@@ -21,6 +21,16 @@ namespace lunge.Library.GameTimers
 
         public bool IsLooped { get; set; }
 
+        public GameTimer(double interval, EventHandler<GameTimerEventArgs> onElapsed)
+            : this(interval, true, onElapsed)
+        { }
+
+        public GameTimer(double interval, bool isLooped, EventHandler<GameTimerEventArgs> onElapsed)
+            : this(interval, isLooped)
+        {
+            OnTimeElapsed = onElapsed;
+        }
+
         public GameTimer(double interval, bool isLooped)
         {
             Interval = interval;

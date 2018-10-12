@@ -1,21 +1,26 @@
 ﻿using System;
+using lunge.Library.GameSystems;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace lunge.Library.Screens
 {
     public abstract class Screen : IDisposable
     {
-        protected Screen()
+        protected Game GameRoot { get; }
+        protected GameSystemComponent GameSystemComponent { get; }
+        protected SpriteBatch SpriteBatch { get; private set; }
+
+        protected Screen(Game game)
         {
+            GameRoot = game;
+            GameSystemComponent = new GameSystemComponent(GameRoot);
+            GameRoot.Components.Add(GameSystemComponent);
         }
 
         public IScreenManager ScreenManager { get; internal set; }
         public bool IsInitialized { get; private set; }
-        public bool IsVisible { get; set; }
-
-        public virtual void Dispose()
-        {
-        }
+        public bool IsVisible { get; private set; }
 
         public T FindScreen<T>() where T : Screen
         {
@@ -42,11 +47,17 @@ namespace lunge.Library.Screens
                 Initialize();
 
             IsVisible = true;
+
+            foreach (var gameSystem in GameSystemComponent.GetAllGameSystems())
+                gameSystem.IsActive = true;
         }
 
         public void Hide()
         {
             IsVisible = false;
+
+            foreach (var gameSystem in GameSystemComponent.GetAllGameSystems())
+                gameSystem.IsActive = false;
         }
 
         public virtual void Initialize()
@@ -56,6 +67,7 @@ namespace lunge.Library.Screens
 
         public virtual void LoadContent()
         {
+            SpriteBatch = new SpriteBatch(GameRoot.GraphicsDevice);
         }
 
         public virtual void UnloadContent()
@@ -68,6 +80,20 @@ namespace lunge.Library.Screens
 
         public virtual void Draw(GameTime gameTime)
         {
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                GameRoot.Components.Remove(GameSystemComponent);
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

@@ -17,7 +17,12 @@ namespace lunge.Library.GameSystems
         /// </summary>
         public bool IsActive { get; set; }
 
-        protected GameSystem() { }
+        protected Game GameRoot { get; }
+
+        protected GameSystem(Game game)
+        {
+            GameRoot = game;
+        }
 
         /// <summary>
         /// Finds and returns <see cref="DrawableGameSystem"/> with specified type
