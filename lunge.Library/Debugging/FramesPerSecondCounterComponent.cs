@@ -9,7 +9,7 @@ namespace lunge.Library.Debugging
     /// <summary>
     /// Smooth FPS counter. Uses the average value from the last <see cref="MaximumSamples"/>. 
     /// </summary>
-    public class FpsCounter : DrawableGameComponent
+    public class FramesPerSecondCounterComponent : DrawableGameComponent
     {
         #region Private Fields
 
@@ -56,7 +56,7 @@ namespace lunge.Library.Debugging
 
         #endregion
 
-        public FpsCounter(Game game)
+        public FramesPerSecondCounterComponent(Game game)
             : base(game)
         { }
 
