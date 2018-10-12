@@ -13,22 +13,9 @@ namespace lunge.Library.GameSystems
         public IGameSystemManager GameSystemManager { get; internal set; }
 
         /// <summary>
-        /// Gets <see cref="IGameSystemManager"/>
-        /// </summary>
-        public IGameSystemManager GameSystemManager { get; internal set; }
-
-        public virtual void Initialize() { }
-        public virtual void Update(GameTime gameTime) { }
-
-        public virtual void Reset()
-        {
-            OnReset?.Invoke(this, EventArgs.Empty);
-        }
-
-        /// <summary>
         /// Gets or sets whether the game system is working
         /// </summary>
-        public bool IsWorking { get; set; }
+        public bool IsActive { get; set; }
 
         protected GameSystem() { }
 
