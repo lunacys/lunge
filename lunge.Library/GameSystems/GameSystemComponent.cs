@@ -84,11 +84,25 @@ namespace lunge.Library.GameSystems
         /// </summary>
         public override void Initialize()
         {
+            Console.WriteLine("Intitialize()");
             foreach (var gameSystem in _gameSystems)
             {
                 LogHelper.Log($"GameSystemManager: Initializing System {gameSystem}");
                 gameSystem.Initialize();
                 LogHelper.Log($"GameSystemManager: End Initializing System {gameSystem}");
+            }
+
+            base.Initialize();
+        }
+
+        protected override void LoadContent()
+        {
+            base.LoadContent();
+
+            Console.WriteLine("LoadContent()");
+            foreach (var gameSystem in _gameSystems)
+            {
+                gameSystem.LoadContent();
             }
         }
 

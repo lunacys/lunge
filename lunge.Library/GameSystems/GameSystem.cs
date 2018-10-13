@@ -1,4 +1,5 @@
 ﻿using System;
+using lunge.Library.Screens;
 using Microsoft.Xna.Framework;
 
 namespace lunge.Library.GameSystems
@@ -19,9 +20,12 @@ namespace lunge.Library.GameSystems
 
         protected Game GameRoot { get; }
 
-        protected GameSystem(Game game)
+        protected Screen HostScreen { get; }
+
+        protected GameSystem(Game game, Screen hostScreen)
         {
             GameRoot = game;
+            HostScreen = hostScreen;
         }
 
         /// <summary>
@@ -35,6 +39,7 @@ namespace lunge.Library.GameSystems
         }
 
         public virtual void Initialize() { }
+        public virtual void LoadContent() { }
         public virtual void Update(GameTime gameTime) { }
 
         protected virtual void Dispose(bool disposing) { }
