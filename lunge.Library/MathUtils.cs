@@ -66,5 +66,10 @@ namespace lunge.Library
             vec = vec.Normalized() * max;
             return vec;
         }
+
+        public static float DistanceBetween(Vector2 a, Vector2 b)
+        {
+            return (float)(Math.Abs(a.X - b.X) + Math.Abs(a.Y - b.Y));
+        }
     }
 }
