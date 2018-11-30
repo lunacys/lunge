@@ -9,7 +9,8 @@ namespace lunge.Library
     public static class MathUtils
     {
         /// <summary>
-        /// Finds the intermediate value between <paramref name="minValue"/> and <paramref name="maxValue"/> with specified <paramref name="width"/> and <paramref name="currentValue"/>.
+        /// Finds the intermediate value between <paramref name="minValue"/> and <paramref name="maxValue"/>
+        /// with specified <paramref name="width"/> and <paramref name="currentValue"/>.
         /// </summary>
         /// <param name="width">Width or length of the value</param>
         /// <param name="currentValue">Current value</param>
@@ -30,6 +31,11 @@ namespace lunge.Library
         public static Vector2 FromPolar(float angle, float magnitude)
         {
             return magnitude * new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
+        }
+
+        public static Vector2 FromPolar(float angle, float magnitude, Vector2 positionFrom)
+        {
+            return new Vector2(magnitude * (float)Math.Cos(angle) + positionFrom.X, magnitude * (float)Math.Sin(angle) + positionFrom.Y);
         }
 
         /// <summary>
@@ -62,14 +68,45 @@ namespace lunge.Library
         /// <returns></returns>
         public static Vector2 Truncate(Vector2 vector, float max)
         {
-            var vec = vector;
-            vec = vec.Normalized() * max;
-            return vec;
+            if (vector.Length() > max)
+            {
+                vector.Normalize();
+                if (float.IsNaN(vector.X))
+                    vector.X = 0;
+                if (float.IsNaN(vector.Y))
+                    vector.Y = 0;
+
+                return vector * max;
+            }
+            if (float.IsNaN(vector.X))
+                vector.X = 0;
+            if (float.IsNaN(vector.Y))
+                vector.Y = 0;
+
+            return vector;
         }
 
+        /// <summary>
+        /// Calculates distance between two points
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static float DistanceBetween(Vector2 a, Vector2 b)
         {
             return (float)(Math.Abs(a.X - b.X) + Math.Abs(a.Y - b.Y));
+        }
+
+        /// <summary>
+        /// Normalizes value to a range between 0 and 1 from current value based on minimum and maximum of that value
+        /// </summary>
+        /// <param name="value">Value</param>
+        /// <param name="min">Minimum value possible</param>
+        /// <param name="max">Maximum value possible</param>
+        /// <returns>Normalized value in range [0;1]</returns>
+        public static float Normalize(float value, float min, float max)
+        {
+            return (value - min) / (max - min);
         }
     }
 }

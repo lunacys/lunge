@@ -19,6 +19,10 @@ namespace lunge.Library.Input
         /// </summary>
         public Vector2 MousePosition { get; private set; }
 
+        public Vector2 MousePositionWorldToScreen => Camera?.WorldToScreen(MousePosition) ?? MousePosition;
+
+        public Vector2 MousePositionScreenToWorld => Camera?.ScreenToWorld(MousePosition) ?? MousePosition;
+
         /// <summary>
         /// Gets current mouse cursor velocity
         /// </summary>
@@ -45,6 +49,8 @@ namespace lunge.Library.Input
         /// </summary>
         public GameWindow Window { get; set; }
 
+        public OrthographicCamera Camera { get; set; }
+
         private KeyboardState _keyboardState, _oldKeyboardState;
         private MouseState _mouseState, _oldMouseState;
         private Vector2 _oldMousePosition;
@@ -59,7 +65,7 @@ namespace lunge.Library.Input
         /// </summary>
         public event EventHandler<InputHandlerOnCommandAdd> OnCommandAdded;
 
-        public InputHandler(Game game)
+        public InputHandler(Game game, OrthographicCamera camera = null)
             : base(game)
         {
             _inputKeyCommands = new Dictionary<Keys, Action>();
@@ -69,6 +75,8 @@ namespace lunge.Library.Input
             MouseHandler = WasMouseButtonPressed;
 
             Window = game.Window;
+
+            Camera = camera;
         }
 
         /// <summary>
@@ -81,6 +89,7 @@ namespace lunge.Library.Input
             get => _inputKeyCommands[key];
             set => RegisterKeyCommand(key, value);
         }
+        
 
         /// <summary>
         /// Registers a new mouse command or gets an exist one based on the mouse button

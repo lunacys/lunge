@@ -3,13 +3,16 @@ using System.IO;
 using lunge.Library.Debugging.Logging;
 using lunge.Library.GameAssets;
 using lunge.Library.GameTimers;
+using lunge.Library.Graphs;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using lunge.Library.Input;
 using lunge.Library.Serialization;
 using lunge.Library.Settings;
+using MonoGame.Extended;
 using Newtonsoft.Json;
+using FramesPerSecondCounterComponent = lunge.Library.Debugging.FramesPerSecondCounterComponent;
 
 namespace Nightly
 {
@@ -20,6 +23,7 @@ namespace Nightly
         private InputHandler _input;
         private int _testCount = 0;
         private AssetManager _assetManager;
+        private GraphCanvas _fpsCanvas;
 
         private Texture2D _testTexture;
 
@@ -30,6 +34,8 @@ namespace Nightly
         public double SfxVolume { get; set; }
 
         private GameSettingsGameComponent _gameSettings;
+
+        private FramesPerSecondCounterComponent _fpsCounter;
 
         public GameRoot()
         {
@@ -60,6 +66,25 @@ namespace Nightly
 
             _gameSettings = new GameSettingsGameComponent(this);
 
+            _fpsCanvas = new GraphCanvas(this)
+            {
+                Position = new Vector2(16, 128),
+                Size = new Size2(512, 128),
+                MaxValue = 60,
+                CellSize = new Size2(16, 16),
+                MinValue = 0,
+                ShouldDrawBars = false
+            };
+            
+
+            _fpsCounter = new FramesPerSecondCounterComponent(this);
+            _fpsCounter.OnFpsUpdate += (sender, args) =>
+            {
+                _fpsCanvas.PushValue(_fpsCounter.FramesPerSecond);
+            };
+
+            //Components.Add(_fpsCanvas);
+            Components.Add(_fpsCounter);
             Components.Add(_gameSettings);
             Components.Add(_input);
 

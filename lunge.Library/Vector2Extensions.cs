@@ -24,7 +24,7 @@ namespace lunge.Library
         /// </summary>
         /// <param name="vector"><see cref="Vector2"/> to be converted</param>
         /// <returns>Angle in radians</returns>
-        public static float ToAngle(this Vector2 vector)
+        public static float ConvertToAngle(this Vector2 vector)
         {
             return (float)Math.Atan2(vector.Y, vector.X);
         }

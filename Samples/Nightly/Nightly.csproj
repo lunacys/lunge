@@ -18,4 +18,10 @@
     <ProjectReference Include="..\..\lunge.Library\lunge.Library.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="MonoGame.Extended">
+      <HintPath>..\..\Deps\MonoGame.Extended.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
