@@ -21,6 +21,8 @@ namespace lunge.Library.GameTimers
 
         public bool IsLooped { get; set; }
 
+        internal bool IsExpired { get; set; }
+
         public GameTimer()
             : this(1.0)
         { }

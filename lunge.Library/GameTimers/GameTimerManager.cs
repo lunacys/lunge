@@ -9,7 +9,7 @@ namespace lunge.Library.GameTimers
     /// </summary>
     public static class GameTimerManager
     {
-        private static readonly List<GameTimer> GameTimerList = new List<GameTimer>();
+        private static List<GameTimer> _gameTimerList = new List<GameTimer>();
 
         /// <summary>
         /// Adds a <see cref="GameTimer"/>
@@ -18,8 +18,8 @@ namespace lunge.Library.GameTimers
         /// <returns>Index of the added timer</returns>
         public static int Add(GameTimer gameTimer)
         {
-            GameTimerList.Add(gameTimer);
-            return GameTimerList.Count - 1;
+            _gameTimerList.Add(gameTimer);
+            return _gameTimerList.Count - 1;
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace lunge.Library.GameTimers
         /// <returns><see cref="GameTimer"/></returns>
         public static GameTimer Get(int index)
         {
-            return GameTimerList[index];
+            return _gameTimerList[index];
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace lunge.Library.GameTimers
         /// </summary>
         public static void StopAll()
         {
-            foreach (var gameTimer in GameTimerList)
+            foreach (var gameTimer in _gameTimerList)
             {
                 gameTimer.Stop();
             }
@@ -48,7 +48,7 @@ namespace lunge.Library.GameTimers
         /// </summary>
         public static void StartAll()
         {
-            foreach (var gameTimer in GameTimerList)
+            foreach (var gameTimer in _gameTimerList)
             {
                 gameTimer.Start();
             }
@@ -59,7 +59,7 @@ namespace lunge.Library.GameTimers
         /// </summary>
         public static void Clear()
         {
-            GameTimerList.Clear();
+            _gameTimerList.Clear();
         }
 
         /// <summary>
@@ -68,10 +68,15 @@ namespace lunge.Library.GameTimers
         /// <param name="gameTime"><see cref="GameTime"/></param>
         public static void Update(GameTime gameTime)
         {
-            foreach (var gameTimer in GameTimerList)
+            foreach (var gameTimer in _gameTimerList)
             {
                 gameTimer.Update(gameTime);
+
+                if (gameTimer.IsStopped)
+                    gameTimer.IsExpired = true;
             }
+
+            _gameTimerList = _gameTimerList.Where(timer => !timer.IsExpired).ToList();
         }
     }
 }
