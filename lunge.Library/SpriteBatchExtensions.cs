@@ -49,5 +49,10 @@ namespace lunge.Library
 
             spriteBatch.DrawString(spriteFont, text, pos, color, 0, origin, 1, SpriteEffects.None, 0);
         }
+
+        public static void Draw(this SpriteBatch spriteBatch, Sprite sprite, Vector2 position)
+        {
+            spriteBatch.Draw(sprite.Texture, position, null, sprite.Tint, sprite.Rotation, sprite.Origin, sprite.Scale, sprite.Effect, sprite.Depth);
+        }
     }
 }
