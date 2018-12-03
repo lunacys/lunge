@@ -1,4 +1,5 @@
 ﻿using System;
+using lunge.Library.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
@@ -52,7 +53,7 @@ namespace lunge.Library
 
         public static void Draw(this SpriteBatch spriteBatch, Sprite sprite, Vector2 position)
         {
-            spriteBatch.Draw(sprite.Texture, position, null, sprite.Tint, sprite.Rotation, sprite.Origin, sprite.Scale, sprite.Effect, sprite.Depth);
+            spriteBatch.Draw(sprite.Image, position, null, sprite.Tint, sprite.Rotation, sprite.Origin, sprite.Scale, sprite.Effects, sprite.Depth);
         }
     }
 }
