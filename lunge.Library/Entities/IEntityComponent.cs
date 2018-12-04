@@ -2,6 +2,6 @@
 {
     public interface IEntityComponent
     {
-        
+        void Initialize();
     }
 }
