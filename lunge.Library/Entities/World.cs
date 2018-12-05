@@ -12,6 +12,7 @@ namespace lunge.Library.Entities
         private List<IDrawSystem> _drawSystems;
 
         internal EntityManager EntityManager { get; }
+        internal ComponentManager ComponentManager { get; }
 
         public int EntityCount => EntityManager.ActiveCount;
 
@@ -20,7 +21,8 @@ namespace lunge.Library.Entities
             _updateSystems = new List<IUpdateSystem>();
             _drawSystems = new List<IDrawSystem>();
 
-            RegisterSystem(EntityManager = new EntityManager());
+            RegisterSystem(ComponentManager = new ComponentManager());
+            RegisterSystem(EntityManager = new EntityManager(ComponentManager));
         }
 
         public void RegisterSystem(ISystem system)
