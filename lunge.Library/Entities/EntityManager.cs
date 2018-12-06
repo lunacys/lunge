@@ -14,7 +14,7 @@ namespace lunge.Library.Entities
         public int ActiveCount { get; private set; }
         public int Count => _entities.Count;
 
-        private List<Entity> _entities;
+        private Dictionary<int, Entity> _entities;
         private List<Entity> _addedEntities;
         private List<Entity> _removedEntities;
 
@@ -24,7 +24,7 @@ namespace lunge.Library.Entities
         {
             World = world;
 
-            _entities = new List<Entity>();
+            _entities = new Dictionary<int, Entity>();
             _addedEntities = new List<Entity>();
             _removedEntities = new List<Entity>();
         }
@@ -36,8 +36,20 @@ namespace lunge.Library.Entities
             _addedEntities.Add(entity);
         }
 
+        public Entity Get(int entityId)
+        {
+            return _entities[entityId];
+        }
+
         public void Destroy(Entity entity)
         {
+            entity.Destroy();
+            _removedEntities.Add(entity);
+        }
+
+        public void Destroy(int entityId)
+        {
+            var entity = _entities[entityId];
             entity.Destroy();
             _removedEntities.Add(entity);
         }
@@ -46,7 +58,7 @@ namespace lunge.Library.Entities
         {
             foreach (var entity in _addedEntities)
             {
-                _entities.Add(entity);
+                _entities[entity.Id] = entity;
                 entity.Initialize(World);
                 ActiveCount++;
                 EntityAdded?.Invoke(entity);
@@ -54,8 +66,8 @@ namespace lunge.Library.Entities
 
             foreach (var entity in _removedEntities)
             {
-                if (_entities.Contains(entity))
-                    _entities.Remove(entity);
+                if (_entities.ContainsKey(entity.Id))
+                    _entities.Remove(entity.Id);
                 entity.Deinitialize();
                 ActiveCount--;
                 EntityRemoved?.Invoke(entity);
@@ -66,10 +78,10 @@ namespace lunge.Library.Entities
 
             foreach (var entity in _entities)
             {
-                if (!entity.IsExpired)
-                    entity.Update(gameTime);
+                if (!entity.Value.IsExpired)
+                    entity.Value.Update(gameTime);
                 else 
-                    _removedEntities.Add(entity);
+                    _removedEntities.Add(entity.Value);
             }
         }
 
@@ -77,7 +89,7 @@ namespace lunge.Library.Entities
         {
             foreach (var entity in _entities)
             {
-                entity.Draw(gameTime);
+                entity.Value.Draw(gameTime);
             }
         }
     }
