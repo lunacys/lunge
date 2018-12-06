@@ -1,5 +1,4 @@
-﻿using lunge.Library.Entities.Components;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace lunge.Library.Entities
 {
