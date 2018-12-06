@@ -69,7 +69,6 @@ namespace lunge.Library.Entities
             {
                 if (_entities.ContainsKey(entity.Id))
                     _entities.Remove(entity.Id);
-                entity.Deinitialize();
                 ActiveCount--;
                 EntityRemoved?.Invoke(entity);
             }

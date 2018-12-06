@@ -18,8 +18,6 @@ namespace lunge.Library.Entities
 
         public virtual void Initialize(World world) { }
 
-        public virtual void Deinitialize() { }
-
         public virtual void Update(GameTime gameTime) { }
 
         public virtual void Draw(GameTime gameTime) { }
