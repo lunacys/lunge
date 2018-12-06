@@ -2,7 +2,7 @@
 
 namespace lunge.Library.Entities.Systems
 {
-    public interface IDrawSystem : IUpdateSystem
+    public interface IDrawSystem : ISystem
     {
         void Draw(GameTime gameTime);
     }

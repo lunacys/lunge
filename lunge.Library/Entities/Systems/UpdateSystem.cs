@@ -13,17 +13,14 @@ namespace lunge.Library.Entities.Systems
         /// </summary>
         public ISystemManager SystemManager { get; set; }
 
-        public World World { get; }
-
         /// <summary>
         /// Gets or sets whether the game system is working
         /// </summary>
         public bool IsActive { get; set; }
         
-        protected UpdateSystem(World world)
+        protected UpdateSystem()
         {
             IsActive = true;
-            World = world;
         }
 
         /// <summary>
@@ -37,7 +34,7 @@ namespace lunge.Library.Entities.Systems
         }
 
         public virtual void Initialize(World world) { }
-        public virtual void LoadContent() { }
+
         public virtual void Update(GameTime gameTime) { }
 
         protected virtual void Dispose(bool disposing) { }

@@ -25,8 +25,11 @@ namespace lunge.Library.Entities
         public World Build()
         {
             var world = new World(_game);
-            
 
+            foreach (var system in _systems)
+            {
+                world.RegisterSystem(system);
+            }
 
             return world;
         }

@@ -1,21 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using lunge.Library.Entities.Systems;
 using Microsoft.Xna.Framework;
-using MonoGame.Extended;
 
 namespace lunge.Library.Entities
 {
-    public class World : DrawableGameComponent
+    public class World : DrawableGameComponent, ISystemManager
     {
         public Game GameRoot { get; }
 
         internal EntityManager EntityManager { get; }
-        internal SystemManager SystemManager { get; }
-
+        
         private List<IUpdateSystem> _updateSystems;
         private List<IDrawSystem> _drawSystems;
 
         public int EntityCount => EntityManager.ActiveCount;
+
+        public event EventHandler<SystemAddedEventArgs> SystemAdded;
 
         internal World(Game game)
             : base(game)
@@ -26,17 +28,33 @@ namespace lunge.Library.Entities
             _drawSystems = new List<IDrawSystem>();
 
             EntityManager = new EntityManager(this);
-            SystemManager = new SystemManager(this);
         }
 
         public void RegisterSystem<T>(T system) where T : ISystem
         {
-            SystemManager.Register(system);
+            system.SystemManager = this;
+            system.IsActive = true;
+
+            if (system is IUpdateSystem updateSystem)
+                _updateSystems.Add(updateSystem);
+            if (system is IDrawSystem drawSystem)
+                _drawSystems.Add(drawSystem);
+
+            SystemAdded?.Invoke(this, new SystemAddedEventArgs(this, system));
+            system.Initialize(this);
         }
 
-        public ISystem FindSystem<T>() where T : ISystem
+        public T FindSystem<T>() where T : ISystem
         {
-            return SystemManager.FindSystem<T>();
+            var system = _updateSystems.OfType<T>().First();
+
+            if (system == null)
+                system = _drawSystems.OfType<T>().First();
+
+            if (system == null)
+                throw new InvalidOperationException($"{typeof(T).Name} not registered");
+
+            return system;
         }
 
         public void AddEntity(Entity entity)
@@ -61,13 +79,17 @@ namespace lunge.Library.Entities
 
         public override void Update(GameTime gameTime)
         {
-            SystemManager.Update(gameTime);
+            foreach (var system in _updateSystems)
+                system.Update(gameTime);
+
             EntityManager.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
-            SystemManager.Draw(gameTime);
+            foreach (var system in _drawSystems)
+                system.Draw(gameTime);
+
             EntityManager.Draw(gameTime);
         }
     }

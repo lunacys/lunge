@@ -19,9 +19,12 @@ namespace lunge.Library.Entities
 
         private int _nextId;
 
+        private World _world;
+
         public EntityManager(World world)
-            : base(world)
         {
+            _world = world;
+
             _entities = new Dictionary<int, Entity>();
             _addedEntities = new List<Entity>();
             _removedEntities = new List<Entity>();
@@ -57,7 +60,7 @@ namespace lunge.Library.Entities
             foreach (var entity in _addedEntities)
             {
                 _entities[entity.Id] = entity;
-                entity.Initialize(World);
+                entity.Initialize(_world);
                 ActiveCount++;
                 EntityAdded?.Invoke(entity);
             }
