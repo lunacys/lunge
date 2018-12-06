@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using lunge.Library.Entities.Systems;
 using Microsoft.Xna.Framework;
 
 namespace lunge.Library.Entities
 {
-    public class EntityManager
+    public class EntityManager : DrawSystem
     {
-        public World World { get; }
-
         public event Action<Entity> EntityAdded;
         public event Action<Entity> EntityRemoved;
 
@@ -21,9 +20,8 @@ namespace lunge.Library.Entities
         private int _nextId;
 
         public EntityManager(World world)
+            : base(world)
         {
-            World = world;
-
             _entities = new Dictionary<int, Entity>();
             _addedEntities = new List<Entity>();
             _removedEntities = new List<Entity>();
@@ -53,8 +51,8 @@ namespace lunge.Library.Entities
             entity.Destroy();
             _removedEntities.Add(entity);
         }
-
-        public void Update(GameTime gameTime)
+        
+        public override void Update(GameTime gameTime)
         {
             foreach (var entity in _addedEntities)
             {
@@ -85,7 +83,7 @@ namespace lunge.Library.Entities
             }
         }
 
-        public void Draw(GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
             foreach (var entity in _entities)
             {

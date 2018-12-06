@@ -1,5 +1,5 @@
 ﻿using System;
-using lunge.Library.GameSystems;
+using lunge.Library.Entities.Systems;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -8,14 +8,11 @@ namespace lunge.Library.Screens
     public abstract class Screen : IDisposable
     {
         protected Game GameRoot { get; }
-        protected GameSystemComponent GameSystemComponent { get; }
         protected SpriteBatch SpriteBatch { get; private set; }
 
         protected Screen(Game game)
         {
             GameRoot = game;
-            GameSystemComponent = new GameSystemComponent(GameRoot);
-            GameRoot.Components.Add(GameSystemComponent);
         }
 
         public IScreenManager ScreenManager { get; internal set; }
@@ -47,17 +44,11 @@ namespace lunge.Library.Screens
                 Initialize();
 
             IsVisible = true;
-
-            foreach (var gameSystem in GameSystemComponent.GetAllGameSystems())
-                gameSystem.IsActive = true;
         }
 
         public void Hide()
         {
             IsVisible = false;
-
-            foreach (var gameSystem in GameSystemComponent.GetAllGameSystems())
-                gameSystem.IsActive = false;
         }
 
         public virtual void Initialize()
@@ -83,12 +74,7 @@ namespace lunge.Library.Screens
         }
 
         protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                GameRoot.Components.Remove(GameSystemComponent);
-            }
-        }
+        { }
 
         public void Dispose()
         {

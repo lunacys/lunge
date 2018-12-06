@@ -1,19 +1,18 @@
-﻿using System;
-using lunge.Library.Screens;
+﻿using lunge.Library.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace lunge.Library.GameSystems
+namespace lunge.Library.Entities.Systems
 {
-    public abstract class DrawableGameSystem : GameSystem
+    public abstract class DrawSystem : UpdateSystem, IDrawSystem
     {
         /// Gets <see cref="Microsoft.Xna.Framework.Graphics.SpriteBatch"/> which is currently in use
         public SpriteBatch SpriteBatch { get; }
 
-        protected DrawableGameSystem(Game game, Screen hostScreen)
-            : base(game, hostScreen)
+        protected DrawSystem(World world)
+            : base(world)
         {
-            SpriteBatch = new SpriteBatch(GameRoot.GraphicsDevice);
+            SpriteBatch = new SpriteBatch(world.GameRoot.GraphicsDevice);
         }
 
         public virtual void Draw(GameTime gameTime) { }
