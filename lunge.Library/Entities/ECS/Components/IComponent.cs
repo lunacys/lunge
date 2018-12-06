@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace lunge.Library.Entities.Components
+namespace lunge.Library.Entities.ECS.Components
 {
     public interface IComponent
     {

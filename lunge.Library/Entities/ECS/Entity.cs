@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace lunge.Library.Entities
+namespace lunge.Library.Entities.ECS
 {
     public class Entity : IEquatable<Entity>
     {

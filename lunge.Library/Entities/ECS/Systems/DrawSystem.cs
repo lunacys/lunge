@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace lunge.Library.Entities.Systems
+namespace lunge.Library.Entities.ECS.Systems
 {
     public abstract class DrawSystem : IDrawSystem
     {

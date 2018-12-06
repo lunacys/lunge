@@ -7,7 +7,7 @@ using lunge.Library.Entities.Systems;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended.Collections;
 
-namespace lunge.Library.Entities
+namespace lunge.Library.Entities.ECS
 {
     public class EntityManager : UpdateSystem
     {
@@ -46,14 +46,14 @@ namespace lunge.Library.Entities
         {
             foreach (var entityId in _addedEntities)
             {
-                _entityToComponentBits[entityId] = _componentManager.CreateComponentBits(entityId);
+                //_entityToComponentBits[entityId] = _componentManager.CreateComponentBits(entityId);
                 ActiveCount++;
                 EntityAdded?.Invoke(entityId);
             }
 
             foreach (var entityId in _updatedEntities)
             {
-                _entityToComponentBits[entityId] = _componentManager.CreateComponentBits(entityId);
+                //_entityToComponentBits[entityId] = _componentManager.CreateComponentBits(entityId);
                 EntityChanged?.Invoke(entityId);
             }
 
@@ -61,7 +61,7 @@ namespace lunge.Library.Entities
             {
                 var entity = _entities[entityId];
                 _entities.Remove(entity);
-                _componentManager.Destroy(entityId);
+                //_componentManager.Destroy(entityId);
                 ActiveCount--;
                 
                 EntityRemoved?.Invoke(entityId);

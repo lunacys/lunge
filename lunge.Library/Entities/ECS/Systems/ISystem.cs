@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace lunge.Library.Entities.Systems
+namespace lunge.Library.Entities.ECS.Systems
 {
     public interface ISystem : IDisposable
     {

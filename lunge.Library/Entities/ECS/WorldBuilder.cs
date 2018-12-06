@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using lunge.Library.Entities.Systems;
+using lunge.Library.Entities.ECS.Systems;
 
-namespace lunge.Library.Entities
+namespace lunge.Library.Entities.ECS
 {
     public class WorldBuilder
     {

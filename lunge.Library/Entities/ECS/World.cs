@@ -4,7 +4,7 @@ using lunge.Library.Entities.Systems;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 
-namespace lunge.Library.Entities
+namespace lunge.Library.Entities.ECS
 {
     public class World : SimpleDrawableGameComponent
     {

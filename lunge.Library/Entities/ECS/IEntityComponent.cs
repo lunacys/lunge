@@ -1,4 +1,4 @@
-﻿namespace lunge.Library.Entities
+﻿namespace lunge.Library.Entities.ECS
 {
     public interface IEntityComponent
     {

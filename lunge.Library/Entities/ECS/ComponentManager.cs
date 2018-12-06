@@ -1,8 +1,8 @@
 ﻿using System;
-using lunge.Library.Entities.Systems;
+using lunge.Library.Entities.ECS.Systems;
 using Microsoft.Xna.Framework;
 
-namespace lunge.Library.Entities
+namespace lunge.Library.Entities.ECS
 {
     public class ComponentManager : UpdateSystem
     {
