@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using lunge.Library.Entities.Components;
+using lunge.Library.Entities.ECS.Components;
 
 namespace lunge.Library.Entities
 {

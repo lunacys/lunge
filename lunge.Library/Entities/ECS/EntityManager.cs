@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Linq;
-using lunge.Library.Entities.Systems;
+using lunge.Library.Entities.ECS.Systems;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended.Collections;
 

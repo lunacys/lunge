@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using lunge.Library.Entities.Systems;
+using lunge.Library.Entities.ECS.Systems;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 
