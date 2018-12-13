@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using lunge.Library.Entities.Systems;
 using Microsoft.Xna.Framework;
 
@@ -40,6 +41,11 @@ namespace lunge.Library.Entities
         public Entity Get(int entityId)
         {
             return _entities[entityId];
+        }
+
+        public T Get<T>() where T : Entity
+        {
+            return (T)_entities.Values.First(entity => entity.GetType() == typeof(T));
         }
 
         public void Destroy(Entity entity)
