@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,7 +20,13 @@
 
   <ItemGroup>
     <Reference Include="MonoGame.Extended">
-      <HintPath>..\..\Deps\MonoGame.Extended.dll</HintPath>
+      <HintPath>..\..\..\Deps\MonoGame.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended.Input">
+      <HintPath>..\..\..\Deps\MonoGame.Extended.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended.Particles">
+      <HintPath>..\..\..\Deps\MonoGame.Extended.Particles.dll</HintPath>
     </Reference>
   </ItemGroup>
 
