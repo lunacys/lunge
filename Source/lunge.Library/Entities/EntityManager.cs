@@ -48,6 +48,11 @@ namespace lunge.Library.Entities
             return (T)_entities.Values.First(entity => entity.GetType() == typeof(T));
         }
 
+        public int CountOf<T>() where T : Entity
+        {
+            return _entities.Values.Count(entity => entity.GetType() == typeof(T));
+        }
+
         public void Destroy(Entity entity)
         {
             entity.Destroy();

@@ -57,6 +57,11 @@ namespace lunge.Library.Entities
             return system;
         }
 
+        public int CountOf<T>() where T : Entity
+        {
+            return EntityManager.CountOf<T>();
+        }
+
         public void AddEntity(Entity entity)
         {
             EntityManager.Add(entity);
