@@ -1,8 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 
 namespace lunge.Library.Entities
 {
-    public abstract class Entity
+    public abstract class Entity : IDisposable
     {
         public int Id { get; internal set; }
         public EntityManager EntityManager { get; internal set; }
@@ -21,5 +22,10 @@ namespace lunge.Library.Entities
         public virtual void Update(GameTime gameTime) { }
 
         public virtual void Draw(GameTime gameTime) { }
+
+        public virtual void Dispose()
+        {
+	        EntityManager?.Dispose();
+        }
     }
 }
