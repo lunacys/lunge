@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using lunge.Library.Utils;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace lunge.Library.GameAssets.AssetLoaders
@@ -14,12 +15,9 @@ namespace lunge.Library.GameAssets.AssetLoaders
             if (GraphicsDevice == null)
                 throw new InvalidOperationException("Please initialize GraphicsDevice first");
 
-            Texture2D texture;
+            TextureStream.GraphicsDevice = GraphicsDevice;
 
-            using (var fs = new FileStream(assetFilePath, FileMode.Open))
-                texture = Texture2D.FromStream(GraphicsDevice, fs);
-
-            return texture;
+            return TextureStream.Load(assetFilePath);
         }
     }
 }
