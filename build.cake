@@ -66,7 +66,7 @@ Task("Pack")
     CreateDirectory(artifactsDirectory);
     CleanDirectory(artifactsDirectory);    
 
-    foreach (var project in GetFiles($"./Source/lunge.Library*/*.csproj"))
+    foreach (var project in GetFiles($"./Source/lunge.*/*.csproj"))
     {
         DotNetCorePack(project.FullPath, new DotNetCorePackSettings 
         {
