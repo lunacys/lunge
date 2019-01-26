@@ -13,9 +13,11 @@ namespace UnexpectedJourney
 
         public Texture2D TileSetImage { get; }
 
-        private Texture2D[,] _tiles;
+        private readonly Texture2D[,] _tiles;
 
         public Texture2D this[int x, int y] => GetTile(x, y);
+
+        public Texture2D this[Point position] => GetTile(position.X, position.Y);
 
         public TileSet(Texture2D tileSetImage, int tileWidth, int tileHeight)
         {
