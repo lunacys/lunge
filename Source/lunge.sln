@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nightly", "Demos\Nightly\Ni
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0943A64D-15D5-4892-94AF-5DFFB1FB1844}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lunge.Library.Tests", "Tests\lunge.Library.Tests\lunge.Library.Tests.csproj", "{72FDCFDE-C93F-48BD-BE89-8EB9DCBA3477}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lunge.Library.Tests", "Tests\lunge.Library.Tests\lunge.Library.Tests.csproj", "{72FDCFDE-C93F-48BD-BE89-8EB9DCBA3477}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lunge.MapEditor", "lunge.MapEditor\lunge.MapEditor.csproj", "{AC19748F-BAB5-49DE-90C5-660765E3A188}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,10 @@ Global
 		{72FDCFDE-C93F-48BD-BE89-8EB9DCBA3477}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72FDCFDE-C93F-48BD-BE89-8EB9DCBA3477}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72FDCFDE-C93F-48BD-BE89-8EB9DCBA3477}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC19748F-BAB5-49DE-90C5-660765E3A188}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC19748F-BAB5-49DE-90C5-660765E3A188}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC19748F-BAB5-49DE-90C5-660765E3A188}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC19748F-BAB5-49DE-90C5-660765E3A188}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
