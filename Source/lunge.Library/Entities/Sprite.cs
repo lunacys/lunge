@@ -65,12 +65,12 @@ namespace lunge.Library.Entities
             }
         }
 
-        public static implicit operator Texture2D(Sprite sprite)
+        public static explicit operator Texture2D(Sprite sprite)
         {
             return sprite.Image;
         }
 
-        public static implicit operator Sprite(Texture2D texture2D)
+        public static explicit operator Sprite(Texture2D texture2D)
         {
             return new Sprite(texture2D);
         }
