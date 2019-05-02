@@ -1,7 +1,9 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace lunge.Library.Debugging.Logging
 {
+    [Flags]
     public enum LogTarget
     {
         /// <summary>
@@ -11,7 +13,8 @@ namespace lunge.Library.Debugging.Logging
         /// <summary>
         /// File target provided by <see cref="FileStream"/> class
         /// </summary>
-        File = 2
+        File = 2,
+        Database = 4
     }
 }
 

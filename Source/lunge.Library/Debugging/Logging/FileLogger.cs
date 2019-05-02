@@ -9,15 +9,18 @@ namespace lunge.Library.Debugging.Logging
         public string FileDir => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs");
 
         public string FilePath => Path.Combine(FileDir,
-            $"log-{DateTime.Now.Month}.{DateTime.Now.Day}.{DateTime.Now.Year}.txt");
+            $"log-{DateTime.Now:yyyy-MM-dd}.txt");
 
-        public override void Log(string message)
+        public FileLogger()
+        {
+            if (!Directory.Exists(FileDir))
+                Directory.CreateDirectory(FileDir);
+        }
+
+        public override void Log(string message, LogLevel level)
         {
             lock (LockObject)
             {
-                if (!Directory.Exists(FileDir))
-                    Directory.CreateDirectory(FileDir);
-
                 using (var sw = new StreamWriter(FilePath, true))
                 {
                     sw.WriteLine(message);
@@ -25,11 +28,8 @@ namespace lunge.Library.Debugging.Logging
             }
         }
 
-        public override async Task LogAsync(string message)
+        public override async Task LogAsync(string message, LogLevel level)
         {
-            if (!Directory.Exists(FileDir))
-                Directory.CreateDirectory(FileDir);
-
             using (var sw = new StreamWriter(FilePath, true))
             {
                 await sw.WriteLineAsync(message);

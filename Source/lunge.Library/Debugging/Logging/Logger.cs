@@ -6,7 +6,7 @@ namespace lunge.Library.Debugging.Logging
     {
         protected readonly object LockObject = new object();
 
-        public abstract void Log(string message);
-        public abstract Task LogAsync(string message);
+        public abstract void Log(string message, LogLevel level);
+        public abstract Task LogAsync(string message, LogLevel level);
     }
 }
