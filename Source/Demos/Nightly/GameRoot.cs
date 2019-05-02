@@ -44,7 +44,7 @@ namespace Nightly
 
             IsMouseVisible = true;
 
-            LogHelper.Target = LogTarget.Console;
+            LogHelper.Target = LogTarget.Console | LogTarget.File;
         }
 
         protected override void Initialize()
@@ -54,7 +54,7 @@ namespace Nightly
             _input[Keys.Space] = () =>
             {
                 _testCount++;
-                LogHelper.Log($"Space Key Pressed. Test count: {_testCount}");
+                LogHelper.LogAsync($"Space Key Pressed. Test count: {_testCount}").Wait();
             };
 
             GameTimer gt = new GameTimer(1.5, true);
@@ -63,6 +63,8 @@ namespace Nightly
                 LogHelper.Log($"SfxVolume: {SfxVolume}, MusicVolume: {MusicVolume}");
             };
             GameTimerManager.Add(gt);
+
+            LogHelper.LogAsync("TEST ERROR!", LogLevel.Error).Wait();
 
             _gameSettings = new GameSettingsGameComponent(this);
 
@@ -128,8 +130,7 @@ namespace Nightly
         {
             if (_input.IsKeyDown(Keys.Escape))
                 Exit();
-
-            LogHelper.Update();
+            
             GameTimerManager.Update(gameTime);
 
             base.Update(gameTime);
