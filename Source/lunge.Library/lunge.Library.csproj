@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -22,13 +22,25 @@
 
   <ItemGroup>
     <Reference Include="MonoGame.Extended">
-      <HintPath>..\..\Deps\MonoGame.Extended.dll</HintPath>
+      <HintPath>..\..\Deps\MonoGame.Extended\MonoGame.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended.Collisions">
+      <HintPath>..\..\Deps\MonoGame.Extended\MonoGame.Extended.Collisions.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended.Content.Pipeline">
+      <HintPath>..\..\Deps\MonoGame.Extended\MonoGame.Extended.Content.Pipeline.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended.Graphics">
+      <HintPath>..\..\Deps\MonoGame.Extended\MonoGame.Extended.Graphics.dll</HintPath>
     </Reference>
     <Reference Include="MonoGame.Extended.Input">
-      <HintPath>..\..\Deps\MonoGame.Extended.Input.dll</HintPath>
+      <HintPath>..\..\Deps\MonoGame.Extended\MonoGame.Extended.Input.dll</HintPath>
     </Reference>
     <Reference Include="MonoGame.Extended.Particles">
-      <HintPath>..\..\Deps\MonoGame.Extended.Particles.dll</HintPath>
+      <HintPath>..\..\Deps\MonoGame.Extended\MonoGame.Extended.Particles.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended.Tiled">
+      <HintPath>..\..\Deps\MonoGame.Extended\MonoGame.Extended.Tiled.dll</HintPath>
     </Reference>
   </ItemGroup>
 
