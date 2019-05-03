@@ -46,10 +46,10 @@ namespace lunge.Library.Entities
 
         public T FindSystem<T>() where T : ISystem
         {
-            var system = _updateSystems.OfType<T>().First();
+            var system = _updateSystems.OfType<T>().FirstOrDefault();
 
             if (system == null)
-                system = _drawSystems.OfType<T>().First();
+                system = _drawSystems.OfType<T>().FirstOrDefault();
 
             if (system == null)
                 throw new InvalidOperationException($"{typeof(T).Name} not registered");

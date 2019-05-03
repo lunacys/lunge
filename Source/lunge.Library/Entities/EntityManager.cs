@@ -45,17 +45,7 @@ namespace lunge.Library.Entities
 
         public T Get<T>() where T : Entity
         {
-            T result;
-            try
-            {
-                result = (T)_entities.Values.First(entity => entity.GetType() == typeof(T));
-            }
-            catch (InvalidOperationException)
-            {
-                result = null;
-            }
-            
-            return result;
+            return (T)_entities.Values.FirstOrDefault(entity => entity.GetType() == typeof(T)); ;
         }
 
         public int CountOf<T>() where T : Entity
