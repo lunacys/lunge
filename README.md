@@ -15,3 +15,29 @@ In order to build the engine, you need to download **.NET Core 2.2 SDK** or high
 The sources are located at `./Source/lunge.Library`.
 
 Tests are located at `./Source/Tests/lunge.Lib`.
+
+### Current roadmap
+
+- [ ] Game Engine Architecture (On paper)
+- [ ] ECS Basis/Architecture
+- [ ] Main ECS Components/Systems:
+  - [ ] Input handlers: Keyboard, Mouse, GamePad
+  - [ ] Entity components:
+    - [ ] Sprite
+    - [ ] Animation
+  - [ ] Resource Manager/Dispatcher
+  - [ ] System container
+  - [ ] States
+  - [ ] World
+  - [ ] Dispatcher
+  - [ ] Event channel
+- [ ] Asset manager
+- [ ] GUI
+- [ ] Shadows/Lights system
+- [ ] Collision detection
+- [ ] Physics
+- [ ] Map editor
+- [ ] Entity editor
+- [ ] Particle editor
+- [ ] Scripting (modding)
+- [ ] Localization editor
