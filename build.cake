@@ -1,6 +1,7 @@
 #tool nuget:?package=vswhere
 #tool nuget:?package=NUnit.Runners&version=2.6.4
 #tool nuget:?package=GitVersion.CommandLine&prerelease
+#tool nuget:?package=Microsoft.Packaging.Tools.Trimming&prerelease&version=1.1.0-preview1-26619-01
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
@@ -78,7 +79,46 @@ Task("Pack")
     }
 });
 
+Task("Publish")
+    .IsDependentOn("Pack")
+    .Does(() =>
+{
+    var artifactsDirectory = "./artifacts";
+    var publishDirectory = "./artifacts/publish";
+
+    CreateDirectory(publishDirectory);
+    CleanDirectory(publishDirectory);
+
+    var projectsToPublish = new KeyValuePair<string, string>[] 
+    { 
+        new KeyValuePair<string, string>("./Source/Demos/Nightly/Nightly.csproj", "DemoNightly"),
+        //new KeyValuePair<string, string>("./Source/lunge.Library/lunge.Library.csproj", "lunge.Library"),
+        new KeyValuePair<string, string>("./Source/lunge.MapEditor/lunge.MapEditor.csproj", "lunge.MapEditor")
+    };
+
+    foreach (var projKv in projectsToPublish)
+    {
+        var outputDir = publishDirectory + "/" + projKv.Value;
+
+        CreateDirectory(outputDir);
+        CleanDirectory(outputDir);
+
+        var settings = new DotNetCorePublishSettings
+        {
+            Framework = "netcoreapp2.1",
+            Configuration = "Release",
+            Runtime = "win-x86",
+            SelfContained = true,
+            OutputDirectory = "./artifacts/publish/" + projKv.Value,
+            ArgumentCustomization = args => args.Append("/p:TrimUnusedDependencies=true")
+        };
+
+        DotNetCorePublish(projKv.Key, settings);
+    }
+    
+});
+
 Task("Default")
-    .IsDependentOn("Pack");
+    .IsDependentOn("Publish");
 
 RunTarget(target);
