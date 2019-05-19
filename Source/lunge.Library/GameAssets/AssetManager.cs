@@ -11,7 +11,7 @@ namespace lunge.Library.GameAssets
     /// <summary>
     /// Represents an asset loader that can load raw (not converted to .xnb format) files.
     /// </summary>
-    public class AssetManager
+    public class AssetManager : IAssetManager
     {
         private readonly Dictionary<string, object> _loadedAssets = new Dictionary<string, object>();
         private readonly Dictionary<string, object> _assetLoaders = new Dictionary<string, object>();
@@ -26,7 +26,7 @@ namespace lunge.Library.GameAssets
         public AssetManager(GraphicsDevice graphicsDevice, string assetDirectory = "Content")
         {
             _graphicsDevice = graphicsDevice;
-
+            
             AssetDirectory = assetDirectory;
         }
 
@@ -137,6 +137,11 @@ namespace lunge.Library.GameAssets
             _loadedAssets.Add(assetName, asset);
 
             return asset;
+        }
+
+        public void Dispose()
+        {
+            _graphicsDevice.Dispose();
         }
     }
 }

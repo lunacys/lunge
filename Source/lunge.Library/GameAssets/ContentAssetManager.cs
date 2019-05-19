@@ -4,19 +4,27 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace lunge.Library.GameAssets
 {
-    public class ContentAssetManager : AssetManager
+    public class ContentAssetManager : IAssetManager
     {
         public ContentManager Content { get; }
 
-        public ContentAssetManager(GraphicsDevice graphicsDevice, string assetDirectory, ContentManager contentManager)
-            : base(graphicsDevice, assetDirectory)
+        public string AssetDirectory { get; set; }
+
+        public ContentAssetManager(ContentManager contentManager, string contentDirectory = "Content", string assetDirectory = "")
         {
+            AssetDirectory = assetDirectory;
             Content = contentManager;
+            Content.RootDirectory = contentDirectory;
         }
 
-        public override T Load<T>(string assetName)
+        public T Load<T>(string assetName)
         {
-            return Content.Load<T>(Path.Combine(AssetDirectory, assetName));
+            return Content.Load<T>(!string.IsNullOrEmpty(AssetDirectory) ? Path.Combine(AssetDirectory, assetName) : assetName);
+        }
+
+        public void Dispose()
+        {
+            Content.Dispose();
         }
     }
 }
