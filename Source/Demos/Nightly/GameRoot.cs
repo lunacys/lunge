@@ -10,6 +10,8 @@ using Microsoft.Xna.Framework.Input;
 using lunge.Library.Input;
 using lunge.Library.Serialization;
 using lunge.Library.Settings;
+using MonoGame.Extended.Entities;
+using MonoGame.Extended.Entities.Systems;
 using MonoGame.Extended;
 using Newtonsoft.Json;
 using FramesPerSecondCounterComponent = lunge.Library.Debugging.FramesPerSecondCounterComponent;
@@ -37,6 +39,8 @@ namespace Nightly
 
         private FramesPerSecondCounterComponent _fpsCounter;
 
+        private World _world;
+
         public GameRoot()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -44,7 +48,7 @@ namespace Nightly
 
             IsMouseVisible = true;
 
-            LogHelper.Target = LogTarget.Console | LogTarget.File;
+            LogHelper.Target = LogTarget.Console | LogTarget.File | LogTarget.Database;
         }
 
         protected override void Initialize()
