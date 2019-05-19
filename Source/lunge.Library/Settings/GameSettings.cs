@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace lunge.Library.Settings
 {
@@ -17,7 +18,6 @@ namespace lunge.Library.Settings
             _gameSettings = new Dictionary<string, object>();
 
             DefaultGameSettings = GetDefaultGameSettings();
-            FillDefaultGameSettings(DefaultGameSettings);
         }
 
         public void Add(string name, object value)
@@ -34,6 +34,12 @@ namespace lunge.Library.Settings
                 throw new ArgumentException("Cannot find setting with this name", name);
 
             return _gameSettings[name];
+        }
+
+        public void LoadDefaults()
+        {
+            GameSettingsGameComponent.ScanAssembly(Assembly.GetCallingAssembly(), this);
+            //FillDefaultGameSettings(DefaultGameSettings);
         }
 
         private void FillDefaultGameSettings(DefaultGameSettings defaultGameSettings)

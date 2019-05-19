@@ -15,13 +15,16 @@ namespace lunge.Library.Settings
 
         public string SettingsFileName { get; set; }
 
+        private bool _doScanAssembly;
+
         public object this[string name] => GameSettings.Get(name);
 
-        public GameSettingsGameComponent(Game game, GameSettings gameSettings = null)
+        public GameSettingsGameComponent(Game game, GameSettings gameSettings = null, bool doScanAssembly = true)
             : base(game)
         {
             GameSettings = gameSettings ?? new GameSettings();
             SettingsFileName = "Settings.json";
+            _doScanAssembly = doScanAssembly;
         }
 
         public override void Initialize()
@@ -31,21 +34,35 @@ namespace lunge.Library.Settings
 
         protected override void LoadContent()
         {
-            if (File.Exists(SettingsFileName))
+            if (_doScanAssembly)
+                Scan(Assembly.GetEntryAssembly());
+
+            TryLoad();
+
+            base.LoadContent();
+        }
+
+        public void TryLoad()
+        {
+            TryLoad(GameSettings, SettingsFileName);
+        }
+
+        public static void TryLoad(GameSettings gameSettings, string fileName)
+        {
+            if (File.Exists(fileName))
             {
                 string str;
-                using (StreamReader sr = new StreamReader(SettingsFileName))
+                using (StreamReader sr = new StreamReader(fileName))
                 {
                     str = sr.ReadToEnd();
                 }
 
-                GameSettings = JsonConvert.DeserializeObject<GameSettings>(str, new GameSettingsConverter());
+                var tmp = JsonConvert.DeserializeObject<GameSettings>(str, new GameSettingsConverter());
+                foreach (var gameSetting in tmp)
+                {
+                    gameSettings.Add(gameSetting.Key, gameSetting.Value);
+                }
             }
-
-            Scan(Assembly.GetEntryAssembly());
-            Scan(Assembly.GetCallingAssembly());
-
-            base.LoadContent();
         }
 
         protected override void UnloadContent()
@@ -77,6 +94,11 @@ namespace lunge.Library.Settings
 
         private void Scan(Assembly assembly)
         {
+            ScanAssembly(assembly, GameSettings);
+        }
+
+        public static void ScanAssembly(Assembly assembly, GameSettings gameSettings)
+        {
             LogHelper.Log($"Scanning assembly: {assembly.FullName}");
 
             var types = assembly.GetTypes();
@@ -97,7 +119,7 @@ namespace lunge.Library.Settings
                     string name = !string.IsNullOrEmpty(attr.SettingName) ? attr.SettingName : prop.Name;
                     object value = attr.DefaultValue;
 
-                    GameSettings.Add(name, value);
+                    gameSettings.Add(name, value);
                 }
             }
         }

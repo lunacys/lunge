@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using lunge.Library.Debugging.Logging;
 using lunge.Library.GameAssets;
 using lunge.Library.GameTimers;
@@ -23,20 +24,7 @@ namespace lunge.Library
         protected GameSettingsGameComponent GameSettingsComponent { get; private set; }
         protected ScreenGameComponent ScreenManagerComponent { get; private set; }
         
-
-        public GameBase()
-            : this(null, null)
-        {
-            
-        }
-
-        public GameBase(GameSettings gameSettings)
-            : this(null, gameSettings)
-        {
-            
-        }
-
-        public GameBase(IAssetManager assetManager, GameSettings gameSettings)
+        public GameBase(IAssetManager assetManager = null, GameSettings gameSettings = null)
         {
             Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -46,7 +34,7 @@ namespace lunge.Library
             if (assetManager == null)
                 assetManager = new ContentAssetManager(Content);
             AssetManager = assetManager;
-
+            
             if (gameSettings == null)
             {
                 gameSettings = new GameSettings();
@@ -54,15 +42,19 @@ namespace lunge.Library
                 
             GameSettings = gameSettings;
 
-            Graphics.PreferredBackBufferWidth = (int)GameSettings["WindowWidth"];
-            Graphics.PreferredBackBufferHeight = (int)GameSettings["WindowHeight"];
+            GameSettingsComponent = new GameSettingsGameComponent(this, GameSettings);
+            GameSettingsComponent.TryLoad();
+
+            Graphics.PreferredBackBufferWidth = Convert.ToInt32(GameSettings["WindowWidth"]);
+            Graphics.PreferredBackBufferHeight = Convert.ToInt32(GameSettings["WindowHeight"]);
             IsMouseVisible = (bool)GameSettings["IsMouseVisible"];
             Graphics.IsFullScreen = (bool) GameSettings["IsFullScreen"];
 
             ResourceManager = new ResourceManager();
 
             ScreenManagerComponent = new ScreenGameComponent(this);
-            GameSettingsComponent = new GameSettingsGameComponent(this, GameSettings);
+
+            GameSettings = GameSettingsComponent.GameSettings;
 
             Components.Add(ScreenManagerComponent);
             Components.Add(GameSettingsComponent);
@@ -70,8 +62,6 @@ namespace lunge.Library
 
         protected override void Initialize()
         {
-            
-
             Services.AddService(AssetManager);
             Services.AddService(GameSettings);
             Services.AddService(ResourceManager);
