@@ -44,6 +44,8 @@ namespace lunge.Library.Input
         /// </summary>
         public Func<MouseButton, bool> MouseHandler { get; set; }
 
+        public Func<Buttons, bool> GamePadHandler { get; set; }
+
         /// <summary>
         /// Gets or sets current <see cref="GameWindow"/>
         /// </summary>
@@ -53,12 +55,14 @@ namespace lunge.Library.Input
 
         private KeyboardState _keyboardState, _oldKeyboardState;
         private MouseState _mouseState, _oldMouseState;
+        private GamePadState _gamePadState, _oldGamePadState;
         private Vector2 _oldMousePosition;
 
         // All added keyboard commands
         private readonly Dictionary<Keys, Action> _inputKeyCommands;
         // All added mouse commands
         private readonly Dictionary<MouseButton, Action> _inputMouseButtonCommands;
+        private readonly Dictionary<Buttons, Action> _inputButtonCommands;
 
         /// <summary>
         /// On command added event
@@ -70,6 +74,7 @@ namespace lunge.Library.Input
         {
             _inputKeyCommands = new Dictionary<Keys, Action>();
             _inputMouseButtonCommands = new Dictionary<MouseButton, Action>();
+            _inputButtonCommands = new Dictionary<Buttons, Action>();
 
             KeyboardHandler = WasKeyPressed;
             MouseHandler = WasMouseButtonPressed;
@@ -102,50 +107,61 @@ namespace lunge.Library.Input
             set => RegisterMouseButtonCommand(mouseButton, value);
         }
 
+        public Action this[Buttons button]
+        {
+            get => _inputButtonCommands[button];
+
+        }
+
         public void RegisterKeyCommand(Keys key, Action command)
         {
-            if (_inputKeyCommands.ContainsValue(command))
-                throw new InputCommandAlreadyRegisteredException(command);
-
             _inputKeyCommands[key] = command;
-
+            
             OnCommandAdded?.Invoke(this, new InputHandlerOnCommandAdd(this, key, null, command));
         }
 
         public void RegisterMouseButtonCommand(MouseButton mouseButton, Action command)
         {
-            if (_inputMouseButtonCommands.ContainsValue(command))
-                throw new InputCommandAlreadyRegisteredException(command);
-
             _inputMouseButtonCommands[mouseButton] = command;
 
             OnCommandAdded?.Invoke(this, new InputHandlerOnCommandAdd(this, null, mouseButton, command));
+        }
+
+        public void RegisterButtonCommand(Buttons button, Action command)
+        {
+            _inputButtonCommands[button] = command;
+
+            OnCommandAdded?.Invoke(this, new InputHandlerOnCommandAdd(this, null, null, command));
         }
 
         /// <summary>
         /// Handle all the input provided by IInputCommand interface. Works with both keyboard and mouse.
         /// This method returns a IEnumerable collection in order to process simultaneous pressed keys.
         /// </summary>
-        /// <param name="keyboardHandler">Functor for keyboard handling process, if null, set WasKeyPressed method as the handler</param>
-        /// <param name="mouseHandler">Functor for mouse handling process, if null set WasMouseButtonPressed as the handler</param>
+        /// <param name="KeyboardHandler">Functor for keyboard handling process, if null, set WasKeyPressed method as the handler</param>
+        /// <param name="MouseHandler">Functor for mouse handling process, if null set WasMouseButtonPressed as the handler</param>
         /// <returns>Command interface Enumerable</returns>
-        public IEnumerable<Action> HandleInput(Func<Keys, bool> keyboardHandler = null, Func<MouseButton, bool> mouseHandler = null)
+        public IEnumerable<Action> HandleInput()
         {
-            if (keyboardHandler == null)
-                keyboardHandler = WasKeyPressed;
-            if (mouseHandler == null)
-                mouseHandler = WasMouseButtonPressed;
+            if (KeyboardHandler == null)
+                KeyboardHandler = WasKeyPressed;
+            if (MouseHandler == null)
+                MouseHandler = WasMouseButtonPressed;
 
             // Process keyboard input
             foreach (var inputCommand in _inputMouseButtonCommands)
-                if (mouseHandler(inputCommand.Key))
+                if (MouseHandler(inputCommand.Key))
                     yield return inputCommand.Value;
             //yield return inputCommand.Value;
 
             // Process mouse input
             foreach (var inputCommand in _inputKeyCommands)
-                if (keyboardHandler(inputCommand.Key))
+                if (KeyboardHandler(inputCommand.Key))
                     yield return inputCommand.Value;
+
+            /*foreach (var inputCommand in _inputButtonCommands)
+                if (gamePadHandler(inputCommand.Key))
+                    yield return inputCommand.Value;*/
 
             yield return () => { }; // do nothing
         }

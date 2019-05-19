@@ -8,10 +8,10 @@ namespace lunge.Library.Input
         /// <summary>
         /// Gets or sets command that should be processed
         /// </summary>
-        //public Action<Entity> Command { get; set; }
+        public Action<Entity> Command { get; set; }
         /// <summary>
         /// Gets or sets <see cref="Entity"/> that should be processed
         /// </summary>
-        //public Entity Entity { get; set; }
+        public Entity Entity { get; set; }
     }
 }
