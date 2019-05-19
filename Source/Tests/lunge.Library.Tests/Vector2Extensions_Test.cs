@@ -28,5 +28,20 @@ namespace lunge.Library.Tests
             Assert.AreEqual(testVec2.ConvertToAngle(), -(float)Math.PI / 2);
             Assert.AreEqual(testVec3.ConvertToAngle(), (float)Math.PI);
         }
+
+        [Test]
+        public void Abs_Test()
+        {
+            Vector2 vec1 = new Vector2(-1, -2);
+            Vector2 vec2 = new Vector2(15, -15);
+            Vector2 vec3 = new Vector2(-10, 99999);
+            
+            vec2.Abs();
+            vec3.Abs();
+
+            Assert.That(vec1.Abs() == new Vector2(1, 2));
+            Assert.That(vec2 == new Vector2(15, -15));
+            Assert.That(vec3.Abs() == new Vector2(10, 99999));
+        }
     }
 }
