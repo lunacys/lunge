@@ -78,12 +78,7 @@ namespace lunge.Library
 
         protected override void UnloadContent()
         {
-            string str = JsonConvert.SerializeObject(GameSettingsComponent.GameSettings, Formatting.Indented, new GameSettingsConverter());
-
-            using (StreamWriter sw = new StreamWriter("Settings.json"))
-            {
-                sw.WriteLine(str);
-            }
+            GameSettingsComponent.DeserializeToFile();
 
             base.UnloadContent();
         }

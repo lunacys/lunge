@@ -67,14 +67,19 @@ namespace lunge.Library.Settings
 
         protected override void UnloadContent()
         {
+            DeserializeToFile();
+
+            base.UnloadContent();
+        }
+
+        public void DeserializeToFile()
+        {
             string str = JsonConvert.SerializeObject(GameSettings, Formatting.Indented);
 
             using (StreamWriter sw = new StreamWriter(SettingsFileName))
             {
                 sw.WriteLine(str);
             }
-
-            base.UnloadContent();
         }
 
         public override void Update(GameTime gameTime)
