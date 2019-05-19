@@ -1,4 +1,5 @@
 ﻿using System;
+using lunge.Library.Collisions;
 using Microsoft.Xna.Framework;
 
 namespace lunge.Library
@@ -36,6 +37,62 @@ namespace lunge.Library
         public static Vector2 FromPolar(float angle, float magnitude, Vector2 positionFrom)
         {
             return new Vector2(magnitude * (float)Math.Cos(angle) + positionFrom.X, magnitude * (float)Math.Sin(angle) + positionFrom.Y);
+        }
+
+        public static Vector2 SetAngle(Vector2 vec, float value)
+        {
+            var len = vec.Length();
+            vec.X = (float)Math.Cos(value) * len;
+            vec.Y = (float)Math.Sin(value) * len;
+            return vec;
+        }
+
+        public static float DistanceBetween2(Vector2 a, Vector2 b)
+        {
+            return (float)
+                Math.Sqrt((a.X - b.X) * (a.X - b.X) +
+                          (a.Y - b.Y) * (a.Y - b.Y));
+        }
+
+        public static bool DoesLineIntersectCircle(Vector2 ahead, Vector2 ahead2, Vector2 circleCenter, float circleRadius)
+        {
+            return DistanceBetween2(circleCenter, ahead) <= circleRadius ||
+                   DistanceBetween2(circleCenter, ahead2) <= circleRadius;
+        }
+
+        public static bool DoesLineIntersectCircle(Vector2 ahead, Vector2 ahead2, Obstacle circle)
+        {
+            return DoesLineIntersectCircle(ahead, ahead2, circle.Center, circle.Radius);
+        }
+
+        public static int GetPolarity(float currentAngle, float angleError)
+        {
+            /*if (Math.Abs(currentAngle) < angleError)
+                return 1;
+            if (Math.Abs(currentAngle - Math.PI / 4) < angleError)
+                return 2;
+            if (Math.Abs(currentAngle - Math.PI / 2) < angleError)
+                return 3;
+            if (Math.Abs(currentAngle - 3 * Math.PI / 4) < angleError)
+                return 4;
+            if (Math.Abs(currentAngle - Math.PI) < angleError)
+                return 5;
+            if (currentAngle <= -3 * Math.PI / 4 + angleError)
+                return 6;
+            if (Math.Abs(currentAngle - -Math.PI / 2) < angleError)
+                return 7;
+            if (Math.Abs(currentAngle - (-Math.PI / 4)) < angleError)
+                return 8;*/
+            if (Math.Abs(currentAngle) < angleError)
+                return 1;
+            if (Math.Abs(currentAngle - Math.PI / 2) < angleError)
+                return 2;
+            if (Math.Abs(currentAngle - Math.PI) < angleError)
+                return 3;
+            if (currentAngle <= -Math.PI / 2 + angleError)
+                return 4;
+
+            return 0;
         }
 
         /// <summary>

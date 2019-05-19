@@ -28,5 +28,12 @@ namespace lunge.Library
         {
             return (float)Math.Atan2(vector.Y, vector.X);
         }
+
+        public static Vector2 Abs(this Vector2 vec2)
+        {
+            vec2.X = Math.Abs(vec2.X);
+            vec2.Y = Math.Abs(vec2.Y);
+            return vec2;
+        }
     }
 }
