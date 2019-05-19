@@ -6,8 +6,6 @@ namespace lunge.Library.Entities.Systems
 {
     public abstract class UpdateSystem : IUpdateSystem, IDisposable
     {
-        public event EventHandler OnReset;
-
         /// <summary>
         /// Gets <see cref="ISystemManager"/>
         /// </summary>
