@@ -17,10 +17,10 @@ namespace lunge.Library.Settings
 
         public object this[string name] => GameSettings.Get(name);
 
-        public GameSettingsGameComponent(Game game)
+        public GameSettingsGameComponent(Game game, GameSettings gameSettings = null)
             : base(game)
         {
-            GameSettings = new GameSettings();
+            GameSettings = gameSettings ?? new GameSettings();
             SettingsFileName = "Settings.json";
         }
 
@@ -43,6 +43,9 @@ namespace lunge.Library.Settings
             }
 
             Scan(Assembly.GetEntryAssembly());
+            Scan(Assembly.GetCallingAssembly());
+
+            base.LoadContent();
         }
 
         protected override void UnloadContent()
@@ -53,11 +56,13 @@ namespace lunge.Library.Settings
             {
                 sw.WriteLine(str);
             }
+
+            base.UnloadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
-
+            base.Update(gameTime);
         }
 
         public T Get<T>(string name)

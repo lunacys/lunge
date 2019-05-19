@@ -1,10 +1,14 @@
-﻿using lunge.Library.GameAssets;
+﻿using System.IO;
+using lunge.Library.Debugging.Logging;
+using lunge.Library.GameAssets;
 using lunge.Library.GameTimers;
 using lunge.Library.Resources;
 using lunge.Library.Screens;
+using lunge.Library.Serialization;
 using lunge.Library.Settings;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Newtonsoft.Json;
 
 namespace lunge.Library
 {
@@ -16,7 +20,8 @@ namespace lunge.Library
         protected ResourceManager ResourceManager { get; set; }
         protected IAssetManager AssetManager { get; set; }
 
-        private ScreenGameComponent _screenGameComponent;
+        protected GameSettingsGameComponent GameSettingsComponent { get; private set; }
+        protected ScreenGameComponent ScreenManagerComponent { get; private set; }
         
 
         public GameBase()
@@ -35,25 +40,37 @@ namespace lunge.Library
         {
             Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            IsMouseVisible = true;
 
-            Graphics.PreferredBackBufferWidth = 1600;
-            Graphics.PreferredBackBufferHeight = 900;
+            LogHelper.Target = LogTarget.Console | LogTarget.File;
 
             if (assetManager == null)
                 assetManager = new ContentAssetManager(Content);
             AssetManager = assetManager;
 
             if (gameSettings == null)
+            {
                 gameSettings = new GameSettings();
+            }
+                
             GameSettings = gameSettings;
 
+            Graphics.PreferredBackBufferWidth = (int)GameSettings["WindowWidth"];
+            Graphics.PreferredBackBufferHeight = (int)GameSettings["WindowHeight"];
+            IsMouseVisible = (bool)GameSettings["IsMouseVisible"];
+            Graphics.IsFullScreen = (bool) GameSettings["IsFullScreen"];
+
             ResourceManager = new ResourceManager();
+
+            ScreenManagerComponent = new ScreenGameComponent(this);
+            GameSettingsComponent = new GameSettingsGameComponent(this, GameSettings);
+
+            Components.Add(ScreenManagerComponent);
+            Components.Add(GameSettingsComponent);
         }
 
         protected override void Initialize()
         {
-            _screenGameComponent = new ScreenGameComponent(this);
+            
 
             Services.AddService(AssetManager);
             Services.AddService(GameSettings);
@@ -65,14 +82,19 @@ namespace lunge.Library
         protected override void LoadContent()
         {
             SpriteBatch = new SpriteBatch(GraphicsDevice);
-
-            Components.Add(_screenGameComponent);
-
+            
             base.LoadContent();
         }
 
         protected override void UnloadContent()
         {
+            string str = JsonConvert.SerializeObject(GameSettingsComponent.GameSettings, Formatting.Indented, new GameSettingsConverter());
+
+            using (StreamWriter sw = new StreamWriter("Settings.json"))
+            {
+                sw.WriteLine(str);
+            }
+
             base.UnloadContent();
         }
 
@@ -90,7 +112,7 @@ namespace lunge.Library
 
         public void AddScreen<T>(T screen, bool showImmediately = true) where T : Screen
         {
-            _screenGameComponent.Register(screen);
+            ScreenManagerComponent.Register(screen);
             if (showImmediately)
                 screen.Show<T>();
         }

@@ -10,9 +10,14 @@ namespace lunge.Library.Settings
 
         public object this[string name] => Get(name);
 
+        public DefaultGameSettings DefaultGameSettings { get; }
+
         public GameSettings()
         {
             _gameSettings = new Dictionary<string, object>();
+
+            DefaultGameSettings = GetDefaultGameSettings();
+            FillDefaultGameSettings(DefaultGameSettings);
         }
 
         public void Add(string name, object value)
@@ -29,6 +34,19 @@ namespace lunge.Library.Settings
                 throw new ArgumentException("Cannot find setting with this name", name);
 
             return _gameSettings[name];
+        }
+
+        private void FillDefaultGameSettings(DefaultGameSettings defaultGameSettings)
+        {
+            Add(nameof(defaultGameSettings.IsFullScreen), defaultGameSettings.IsFullScreen);
+            Add(nameof(defaultGameSettings.WindowWidth), defaultGameSettings.WindowWidth);
+            Add(nameof(defaultGameSettings.WindowHeight), defaultGameSettings.WindowHeight);
+            Add(nameof(defaultGameSettings.IsMouseVisible), defaultGameSettings.IsMouseVisible);
+        }
+
+        public static DefaultGameSettings GetDefaultGameSettings()
+        {
+            return new DefaultGameSettings();
         }
 
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator()
