@@ -31,7 +31,9 @@ namespace lunge.Library.Settings
         public object Get(string name)
         {
             if (!_gameSettings.ContainsKey(name))
+            {
                 throw new ArgumentException("Cannot find setting with this name", name);
+            }
 
             return _gameSettings[name];
         }

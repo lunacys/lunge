@@ -19,10 +19,21 @@ namespace lunge.Library
         protected SpriteBatch SpriteBatch { get; set; }
         protected GameSettings GameSettings { get; set; }
         protected ResourceManager ResourceManager { get; set; }
-        protected IAssetManager AssetManager { get; set; }
+
+        public IAssetManager AssetManager
+        {
+            get => _assetManager;
+            protected set
+            {
+                _assetManager?.Dispose();
+                _assetManager = value;
+            }
+        }
 
         protected GameSettingsGameComponent GameSettingsComponent { get; private set; }
         protected ScreenGameComponent ScreenManagerComponent { get; private set; }
+
+        private IAssetManager _assetManager;
         
         public GameBase(IAssetManager assetManager = null, GameSettings gameSettings = null)
         {
@@ -43,7 +54,8 @@ namespace lunge.Library
             GameSettings = gameSettings;
 
             GameSettingsComponent = new GameSettingsGameComponent(this, GameSettings);
-            GameSettingsComponent.TryLoad();
+            if (!GameSettingsComponent.TryLoad())
+                GameSettings.LoadDefaults();
 
             Graphics.PreferredBackBufferWidth = Convert.ToInt32(GameSettings["WindowWidth"]);
             Graphics.PreferredBackBufferHeight = Convert.ToInt32(GameSettings["WindowHeight"]);

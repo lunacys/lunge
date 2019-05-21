@@ -37,17 +37,20 @@ namespace lunge.Library.Settings
             if (_doScanAssembly)
                 Scan(Assembly.GetEntryAssembly());
 
-            TryLoad();
+            if (!TryLoad())
+            {
+                GameSettings.LoadDefaults();
+            }
 
             base.LoadContent();
         }
 
-        public void TryLoad()
+        public bool TryLoad()
         {
-            TryLoad(GameSettings, SettingsFileName);
+            return TryLoad(GameSettings, SettingsFileName);
         }
 
-        public static void TryLoad(GameSettings gameSettings, string fileName)
+        public static bool TryLoad(GameSettings gameSettings, string fileName)
         {
             if (File.Exists(fileName))
             {
@@ -62,7 +65,11 @@ namespace lunge.Library.Settings
                 {
                     gameSettings.Add(gameSetting.Key, gameSetting.Value);
                 }
+
+                return true;
             }
+
+            return false;
         }
 
         protected override void UnloadContent()
