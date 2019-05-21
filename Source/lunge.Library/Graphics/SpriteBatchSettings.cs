@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace lunge.Library.Graphics
 {
-    public struct SpriteBatchSettings
+    public class SpriteBatchSettings
     {
         public SpriteSortMode SpriteSortMode { get; set; }
         public BlendState BlendState { get; set; }
