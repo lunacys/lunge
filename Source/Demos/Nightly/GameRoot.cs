@@ -10,8 +10,6 @@ using Microsoft.Xna.Framework.Input;
 using lunge.Library.Input;
 using lunge.Library.Serialization;
 using lunge.Library.Settings;
-using MonoGame.Extended.Entities;
-using MonoGame.Extended.Entities.Systems;
 using MonoGame.Extended;
 using Newtonsoft.Json;
 using FramesPerSecondCounterComponent = lunge.Library.Debugging.FramesPerSecondCounterComponent;
@@ -38,8 +36,7 @@ namespace Nightly
         private GameSettingsGameComponent _gameSettings;
 
         private FramesPerSecondCounterComponent _fpsCounter;
-
-        private World _world;
+		
 
         public GameRoot()
         {
