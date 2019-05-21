@@ -6,6 +6,7 @@ namespace lunge.Library.Debugging.Logging
     [Flags]
     public enum LogTarget
     {
+        None = 0,
         /// <summary>
         /// Console target provided by <see cref="Console"/> class
         /// </summary>

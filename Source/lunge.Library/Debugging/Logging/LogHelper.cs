@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 namespace lunge.Library.Debugging.Logging
 {
+    // TODO: ADD CONTEXT (e.g. GameplayScreen, GameRoot, etc.)!
     /// <summary>
     /// Provides a logging system which might work on either sync or async.
     /// </summary>
@@ -11,7 +12,12 @@ namespace lunge.Library.Debugging.Logging
     {
         private static Logger _logger;
         private static readonly List<Logger> _activeLoggers = new List<Logger>();
-        
+
+        static LogHelper()
+        {
+            Target = LogTarget.None;
+        }
+
         public static LogTarget Target
         {
             get => _target;
@@ -19,12 +25,20 @@ namespace lunge.Library.Debugging.Logging
             {
                 _activeLoggers.Clear();
 
-                if (value.HasFlag(LogTarget.Console))
-                    _activeLoggers.Add(new ConsoleLogger());
-                if (value.HasFlag(LogTarget.File))
-                    _activeLoggers.Add(new FileLogger());
-                if (value.HasFlag(LogTarget.Database))
-                    _activeLoggers.Add(new DatabaseLogger());
+                if (value == LogTarget.None || value.HasFlag(LogTarget.None))
+                {
+                    _activeLoggers.Add(new QueueLogger());
+                    // TODO: Implement post factum logging to selected target(s) if this getter is called
+                }
+                else
+                {
+                    if (value.HasFlag(LogTarget.Console))
+                        _activeLoggers.Add(new ConsoleLogger());
+                    if (value.HasFlag(LogTarget.File))
+                        _activeLoggers.Add(new FileLogger());
+                    if (value.HasFlag(LogTarget.Database))
+                        _activeLoggers.Add(new DatabaseLogger());
+                }
 
                 _target = value;
             }
