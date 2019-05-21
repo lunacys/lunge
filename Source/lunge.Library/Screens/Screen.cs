@@ -7,10 +7,10 @@ namespace lunge.Library.Screens
 {
     public abstract class Screen : IDisposable
     {
-        protected Game GameRoot { get; }
+        protected GameBase GameRoot { get; }
         protected SpriteBatch SpriteBatch { get; private set; }
 
-        protected Screen(Game game)
+        protected Screen(GameBase game)
         {
             GameRoot = game;
         }
