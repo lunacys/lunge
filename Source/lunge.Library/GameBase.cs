@@ -9,6 +9,7 @@ using lunge.Library.Serialization;
 using lunge.Library.Settings;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.ViewportAdapters;
 using Newtonsoft.Json;
 
 namespace lunge.Library
@@ -19,6 +20,21 @@ namespace lunge.Library
         protected SpriteBatch SpriteBatch { get; set; }
         protected GameSettings GameSettings { get; set; }
         protected ResourceManager ResourceManager { get; set; }
+
+        private ViewportAdapter _viewportAdapter;
+        public ViewportAdapter ViewportAdapter
+        {
+            get
+            {
+                if (_viewportAdapter == null)
+                {
+                    _viewportAdapter = new DefaultViewportAdapter(GraphicsDevice);
+                }
+
+                return _viewportAdapter;
+            }
+            set { _viewportAdapter = value; }
+        }
 
         public IAssetManager AssetManager
         {
@@ -67,9 +83,6 @@ namespace lunge.Library
             ScreenManagerComponent = new ScreenGameComponent(this);
 
             GameSettings = GameSettingsComponent.GameSettings;
-
-            Components.Add(ScreenManagerComponent);
-            Components.Add(GameSettingsComponent);
         }
 
         protected override void Initialize()
@@ -84,13 +97,14 @@ namespace lunge.Library
         protected override void LoadContent()
         {
             SpriteBatch = new SpriteBatch(GraphicsDevice);
-            
+            Components.Add(ScreenManagerComponent);
+            Components.Add(GameSettingsComponent);
             base.LoadContent();
         }
 
         protected override void UnloadContent()
         {
-            GameSettingsComponent.DeserializeToFile();
+            //GameSettingsComponent.DeserializeToFile();
 
             base.UnloadContent();
         }
@@ -99,11 +113,15 @@ namespace lunge.Library
         {
             GameTimerManager.Update(gameTime);
 
+            ScreenManagerComponent.Update(gameTime);
+
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
+            ScreenManagerComponent.Draw(gameTime);
+
             base.Draw(gameTime);
         }
 
