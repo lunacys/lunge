@@ -58,6 +58,11 @@ namespace lunge.Library.Entities
 	        return _entities.Values.ToList().FindAll(entity => entity.GetType() == typeof(T)).Cast<T>();
         }
 
+        public IEnumerable<Entity> GetAll()
+        {
+            return _entities.Values.ToList();
+        }
+
         public void Destroy(Entity entity)
         {
             entity.Destroy();

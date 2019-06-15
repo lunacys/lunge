@@ -80,7 +80,7 @@ namespace lunge.Library
 
             ResourceManager = new ResourceManager();
 
-            ScreenManagerComponent = new ScreenGameComponent(this);
+            
 
             GameSettings = GameSettingsComponent.GameSettings;
         }
@@ -91,14 +91,20 @@ namespace lunge.Library
             Services.AddService(GameSettings);
             Services.AddService(ResourceManager);
 
+            ScreenManagerComponent = new ScreenGameComponent(this);
+
+            
+
             base.Initialize();
+
+            Components.Add(ScreenManagerComponent);
+            Components.Add(GameSettingsComponent);
         }
 
         protected override void LoadContent()
         {
             SpriteBatch = new SpriteBatch(GraphicsDevice);
-            Components.Add(ScreenManagerComponent);
-            Components.Add(GameSettingsComponent);
+            
             base.LoadContent();
         }
 
@@ -128,8 +134,8 @@ namespace lunge.Library
         public void AddScreen<T>(T screen, bool showImmediately = true) where T : Screen
         {
             ScreenManagerComponent.Register(screen);
-            if (showImmediately)
-                screen.Show<T>();
+            //if (showImmediately)
+            //    screen.Show<T>();
         }
     }
 }

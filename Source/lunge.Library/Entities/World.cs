@@ -77,6 +77,11 @@ namespace lunge.Library.Entities
             return EntityManager.Get<T>();
         }
 
+        public IEnumerable<Entity> GetAllEntities()
+        {
+            return EntityManager.GetAll();
+        }
+
         public void DestroyEntity(int entityId)
         {
             EntityManager.Destroy(entityId);

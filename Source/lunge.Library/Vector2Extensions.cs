@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using MonoGame.Extended;
 
 namespace lunge.Library
 {
@@ -34,6 +35,27 @@ namespace lunge.Library
             vec2.X = Math.Abs(vec2.X);
             vec2.Y = Math.Abs(vec2.Y);
             return vec2;
+        }
+
+        public static Vector2 Copy(this Vector2 vec)
+        {
+            return new Vector2(vec.X, vec.Y);
+        }
+
+        public static Vector2 ClampToRectangleF(this Vector2 vec, RectangleF rect)
+        {
+            var result = vec.Copy();
+
+            if (result.X < rect.X)
+                result.X = rect.X;
+            if (result.X > rect.X + rect.Width)
+                result.X = rect.X + rect.Width;
+            if (result.Y < rect.Y)
+                result.Y = rect.Y;
+            if (result.Y > rect.Y + rect.Height)
+                result.Y = rect.Y + rect.Height;
+
+            return result;
         }
     }
 }
