@@ -1,12 +1,14 @@
 # LunarisGameEngine (lunge)
 
-A C# 2D Game Engine.
+A cross-platform 2D Game Engine written in C# using **MonoGame** and **MonoGame.Extended**.
 
 ## Description
 
+
+
 ### Dependencies
 
-The project uses MonoGame together with MonoGame.Extended, MonoGame.Extended.Input and MonoGame.Extended.Particles. The MonoGame.Extended dependencies are placed in the /Deps directory.
+The project uses MonoGame together with **MonoGame.Extended**, **MonoGame.Extended.Input** and **MonoGame.Extended.Particles**. The **MonoGame.Extended** dependencies are placed in the `~/Deps` directory.
 
 ### Build
 
@@ -18,23 +20,56 @@ Tests are located at `./Source/Tests/lunge.Lib`.
 
 ### Current roadmap
 
-- [ ] Game Engine Architecture (On paper)
-- [ ] ECS Basis/Architecture
-- [ ] Main ECS Components/Systems:
-  - [ ] Input handlers: Keyboard, Mouse, GamePad
+#### TODO
+
+- [x] Game Engine Architecture (On paper)
+- [ ] ~~ECS Basis/Architecture~~ Changing to other system related to ECS
+- [ ] Main Components/Systems:
+  - [ ] Input handlers
+    - [x] Keyboard
+    - [x] Mouse
+    - [ ] GamePad
+    - [ ] Handler as component
+    - [ ] Input commands
   - [ ] Entity components:
-    - [ ] Sprite
-    - [ ] Animation
+    - [x] Sprite
+    - [x] Animation
   - [ ] Resource Manager/Dispatcher
   - [ ] System container
   - [ ] States
-  - [ ] World
-  - [ ] Dispatcher
-  - [ ] Event channel
-- [ ] Asset manager
+  - [x] World
+  - [x] ~~Event channel~~ Using C# events instead
+- [x] Asset manager
 - [ ] GUI
+  - [ ] Subcontrols
+  - [ ] Controls:
+    - [x] Canvas
+    - [x] Label
+    - [ ] Chart
+      - [x] Base data view (points + lines)
+      - [ ] Bar view
+      - [ ] Tooltips with formatted data
+      - [ ] Helper buttons & labels (clear, average value, etc.)
+      - [ ] Move left/right
+      - [ ] Take snapshot
+    - [x] Button
+    - [ ] Tooltip
+    - [ ] Panel
+    - [ ] TreeView
+    - [ ] TextBox
+    - [ ] RadioButton
+    - [ ] CheckBox
+    - [ ] ComboBox
+    - [ ] GroupBox
+    - [ ] ScrollBar
+    - [ ] LinkLabel
+    - [ ] ProgressBar
+    - [ ] TrackBar
+    - [ ] GridView
+- [ ] Steering behaviors & Steering behavior manager
+- [ ] Basic AI
 - [ ] Shadows/Lights system
-- [ ] Collision detection
+- [ ] Collision detection/Collision resolving
 - [ ] Physics
 - [ ] Map editor
 - [ ] Entity editor
