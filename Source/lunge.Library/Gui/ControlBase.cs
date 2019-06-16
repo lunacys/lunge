@@ -1,4 +1,5 @@
 ﻿using System;
+using lunge.Library.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -29,7 +30,7 @@ namespace lunge.Library.Gui
         {
             Initialized?.Invoke(this, EventArgs.Empty);
         }
-        public virtual void Update(GameTime gameTime) { }
+        public virtual void Update(GameTime gameTime, InputHandler inputHandler) { }
         public virtual void Draw(SpriteBatch spriteBatch) { }
 
         protected virtual void Dispose(bool disposing)

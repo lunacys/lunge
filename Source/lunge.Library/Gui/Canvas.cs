@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using lunge.Library.Entities.Systems;
+using lunge.Library.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -25,6 +26,8 @@ namespace lunge.Library.Gui
 
         private bool _isUpdating;
 
+        protected InputHandler InputHandler { get; }
+
         public Canvas(Game game, int width, int height)
             : base(game)
         {
@@ -34,6 +37,10 @@ namespace lunge.Library.Gui
             _controls = new Dictionary<string, IControl>();
             _controlList = new List<IControl>();
             _controlsToAdd = new List<IControl>();
+
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            InputHandler = new InputHandler(game);
         }
 
         public void AddControl(IControl control)
@@ -71,18 +78,20 @@ namespace lunge.Library.Gui
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            
 
             base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
+            InputHandler.Update(gameTime);
+
             _isUpdating = true;
 
             foreach (var control in _controlList)
             {
-                control.Update(gameTime);
+                control.Update(gameTime, InputHandler);
             }
 
             _isUpdating = false;
@@ -109,6 +118,19 @@ namespace lunge.Library.Gui
             _spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                foreach (var control in _controlList)
+                {
+                    control.Dispose();
+                }
+            }
+
+            base.Dispose(disposing);
         }
     }
 }

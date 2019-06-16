@@ -1,14 +1,16 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using lunge.Library.Input;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace lunge.Library.Gui
 {
-    public interface IControl
+    public interface IControl : IDisposable
     {
         string Name { get; }
 
         void Initialize(Canvas canvas);
-        void Update(GameTime gameTime);
+        void Update(GameTime gameTime, InputHandler inputHandler);
 
         /// <summary>
         /// Draws control using <see cref="SpriteBatch"/>. Note: do not call Begin() method
