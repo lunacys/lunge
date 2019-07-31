@@ -79,11 +79,6 @@ namespace lunge.Library.Gui.Controls
             }
         }
 
-        public override void Update(GameTime gameTime, InputHandler inputHandler)
-        {
-            base.Update(gameTime, inputHandler);
-        }
-
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (DrawBackground)
