@@ -8,14 +8,17 @@ namespace lunge.Library.Debugging.Logging
     /// <summary>
     /// Provides a logging system which might work on either sync or async.
     /// </summary>
-    public static class LogHelper
+    public class LogHelper
     {
-        private static Logger _logger;
-        private static readonly List<Logger> _activeLoggers = new List<Logger>();
+        private static readonly List<Logger> ActiveLoggers = new List<Logger>();
+        private static readonly Dictionary<string, LogHelper> LogHelpers = new Dictionary<string, LogHelper>();
+        public string Context { get; }
 
-        static LogHelper()
+        internal LogHelper(string context, LogTarget target)
         {
-            Target = LogTarget.None;
+            Context = context;
+
+            Target = target;
         }
 
         public static LogTarget Target
@@ -23,22 +26,14 @@ namespace lunge.Library.Debugging.Logging
             get => _target;
             set
             {
-                _activeLoggers.Clear();
+                ActiveLoggers.Clear();
 
-                if (value == LogTarget.None || value.HasFlag(LogTarget.None))
-                {
-                    _activeLoggers.Add(new QueueLogger());
-                    // TODO: Implement post factum logging to selected target(s) if this getter is called
-                }
-                else
-                {
-                    if (value.HasFlag(LogTarget.Console))
-                        _activeLoggers.Add(new ConsoleLogger());
-                    if (value.HasFlag(LogTarget.File))
-                        _activeLoggers.Add(new FileLogger());
-                    if (value.HasFlag(LogTarget.Database))
-                        _activeLoggers.Add(new DatabaseLogger());
-                }
+                if (value.HasFlag(LogTarget.Console))
+                    ActiveLoggers.Add(new ConsoleLogger());
+                if (value.HasFlag(LogTarget.File))
+                    ActiveLoggers.Add(new FileLogger());
+                if (value.HasFlag(LogTarget.Database))
+                    ActiveLoggers.Add(new DatabaseLogger());
 
                 _target = value;
             }
@@ -46,38 +41,50 @@ namespace lunge.Library.Debugging.Logging
         
         private static LogTarget _target;
 
-        public static void Log(string message, LogLevel level = LogLevel.Info)
+        public static LogHelper GetLogger(string context = "", LogTarget target = LogTarget.Console | LogTarget.File)
+        {
+            if (!LogHelpers.ContainsKey(context))
+            {
+                LogHelpers[context] = new LogHelper(context, target);
+            }
+
+            return LogHelpers[context];
+        }
+
+        public void Log(string message, LogLevel level = LogLevel.Info)
         {
             var builtString = BuildString(message, level);
 
-            foreach (var logger in _activeLoggers)
+            foreach (var logger in ActiveLoggers)
                 logger.Log(builtString, level);
         }
 
-        public static async Task LogAsync(string message, LogLevel level = LogLevel.Info)
+        public async Task LogAsync(string message, LogLevel level = LogLevel.Info)
         {
             var buildString = BuildString(message, level);
 
-            foreach (var logger in _activeLoggers)
-                await logger.LogAsync(buildString, level);
+            foreach (var logger in ActiveLoggers)
+                await logger.LogAsync(buildString, level).ConfigureAwait(false);
         }
 
-        private static string BuildString(string message, LogLevel level)
+        private string BuildString(string message, LogLevel level)
         {
             string result = "";
+            string curDateTimeStr = DateTime.Now.ToString("G");
+
             switch (level)
             {
                 case LogLevel.Info:
-                    result += "[INFO]: ";
+                    result += $"[INFO] - {curDateTimeStr} - {Context} - ";
                     break;
                 case LogLevel.Warning:
-                    result += "[WARN]: ";
+                    result += $"[WARN] - {curDateTimeStr} - {Context} - ";
                     break;
                 case LogLevel.Error:
-                    result += "[ERROR]: ";
+                    result += $"[ERROR] - {curDateTimeStr} - {Context} - ";
                     break;
                 case LogLevel.Critical:
-                    result += "[FATAL]: ";
+                    result += $"[FATAL] - {curDateTimeStr} - {Context} - ";
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(level), level, null);

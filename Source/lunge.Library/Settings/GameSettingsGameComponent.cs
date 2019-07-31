@@ -19,6 +19,8 @@ namespace lunge.Library.Settings
 
         public object this[string name] => GameSettings.Get(name);
 
+        private static LogHelper _logger = LogHelper.GetLogger("GameSettingsGameComponent");
+
         public GameSettingsGameComponent(Game game, GameSettings gameSettings = null, bool doScanAssembly = true)
             : base(game)
         {
@@ -111,7 +113,7 @@ namespace lunge.Library.Settings
 
         public static void ScanAssembly(Assembly assembly, GameSettings gameSettings)
         {
-            LogHelper.Log($"Scanning assembly: {assembly.FullName}");
+            _logger.Log($"Scanning assembly: {assembly.FullName}");
 
             var types = assembly.GetTypes();
             foreach (var type in types)
@@ -123,7 +125,7 @@ namespace lunge.Library.Settings
 
                 foreach (var prop in props)
                 {
-                    LogHelper.Log($"{nameof(GameSettingsGameComponent)}: Found setting property: {prop.Name}");
+                    _logger.Log($"Found setting property: {prop.Name}");
 
                     var attr = (GameSettingsEntryAttribute)prop.GetCustomAttribute(typeof(GameSettingsEntryAttribute), false);
 

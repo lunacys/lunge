@@ -73,7 +73,7 @@ namespace lunge.Library.Debugging.Logging
                     throw new ArgumentOutOfRangeException(nameof(level), level, null);
             }
 
-            await Console.Out.WriteLineAsync(message);
+            await Console.Out.WriteLineAsync(message).ConfigureAwait(false);
             
             Console.ForegroundColor = _origColor;
         }
