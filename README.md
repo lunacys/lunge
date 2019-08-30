@@ -8,7 +8,7 @@ A cross-platform 2D Game Engine written in C# using **MonoGame** and **MonoGame.
 
 ### Dependencies
 
-The project uses MonoGame together with **MonoGame.Extended**, **MonoGame.Extended.Input** and **MonoGame.Extended.Particles**. The **MonoGame.Extended** dependencies are placed in the `~/Deps` directory.
+The project uses MonoGame together with **MonoGame.Extended**, **MonoGame.Extended.Input** and **MonoGame.Extended.Particles**. The **MonoGame.Extended** dependencies are placed in the `~/Deps` directory. The reason why the deps are placed just inside a folder as DLL file and not as NuGet package is that there are some changes in the deps and they are compiled as .NET Standard projects.
 
 ### Build
 
@@ -41,7 +41,7 @@ Tests are located at `./Source/Tests/lunge.Lib`.
   - [x] ~~Event channel~~ Using C# events instead
 - [x] Asset manager
 - [ ] GUI
-  - [ ] Subcontrols
+  - [x] ~~Subcontrols~~ Parent controls
   - [ ] Controls:
     - [x] Canvas
     - [x] Label
@@ -53,7 +53,7 @@ Tests are located at `./Source/Tests/lunge.Lib`.
       - [ ] Move left/right
       - [ ] Take snapshot
     - [x] Button
-    - [ ] Tooltip
+    - [x] Tooltip
     - [ ] Panel
     - [ ] TreeView
     - [ ] TextBox
@@ -66,6 +66,7 @@ Tests are located at `./Source/Tests/lunge.Lib`.
     - [ ] ProgressBar
     - [ ] TrackBar
     - [ ] GridView
+  - [ ] Make all the properties of a control changeable
 - [ ] Steering behaviors & Steering behavior manager
 - [ ] Basic AI
 - [ ] Shadows/Lights system
@@ -74,5 +75,5 @@ Tests are located at `./Source/Tests/lunge.Lib`.
 - [ ] Map editor
 - [ ] Entity editor
 - [ ] Particle editor
-- [ ] Scripting (modding)
+- [ ] Scripting (modding) with C#
 - [ ] Localization editor
