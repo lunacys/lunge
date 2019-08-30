@@ -80,8 +80,8 @@ namespace lunge.Library
 
             ResourceManager = new ResourceManager();
 
-            
-
+            ScreenManagerComponent = new ScreenGameComponent(this);
+            Components.Add(ScreenManagerComponent);
             GameSettings = GameSettingsComponent.GameSettings;
         }
 
@@ -91,13 +91,13 @@ namespace lunge.Library
             Services.AddService(GameSettings);
             Services.AddService(ResourceManager);
 
-            ScreenManagerComponent = new ScreenGameComponent(this);
+            
 
             
 
             base.Initialize();
 
-            Components.Add(ScreenManagerComponent);
+            
             Components.Add(GameSettingsComponent);
         }
 
