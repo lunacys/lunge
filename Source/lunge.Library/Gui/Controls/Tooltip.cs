@@ -1,4 +1,5 @@
-﻿using lunge.Library.Input;
+﻿using lunge.Library.GameTimers;
+using lunge.Library.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
@@ -8,22 +9,37 @@ namespace lunge.Library.Gui.Controls
     public class Tooltip : ControlBase
     {
         // TODO: Add Color
-        // TODO: Add showing delay
         public string Text { get; set; }
         public Vector2 Position { get; private set; }
         public Size2 Size { get; set; }
         public bool IsVisible { get; private set; }
         public SpriteFont Font { get; }
 
+        public double Delay
+        {
+            get => _delayTimer.Interval;
+            set
+            {
+                _delayTimer = new GameTimer(value, false, (sender, args) => { IsVisible = true; }, false);
+                _isTimerSet = true;
+            }
+        }
+
+        private bool _isTimerSet;
+        private GameTimer _delayTimer;
+
         public Tooltip(string name, IControl parentControl, SpriteFont font)
             : base(name, parentControl)
         {
             Font = font;
             DrawDepth = 0.0f; // Draw over all other content
+            _delayTimer = new GameTimer(0);
         }
 
         public override void Update(GameTime gameTime, InputHandler inputHandler)
         {
+            _delayTimer.Update(gameTime);
+
             // TODO: Measure string and change size only if Text property was changed
             var stringSize = Font.MeasureString(Text);
 
@@ -36,12 +52,18 @@ namespace lunge.Library.Gui.Controls
 
             if (ParentControl.GetBounds().Contains(mousePos))
             {
-                IsVisible = true;
+                if (_isTimerSet && !_delayTimer.IsStarted)
+                    _delayTimer.Start();
+                
+                if (!_isTimerSet)
+                    IsVisible = true;
                 // TODO: Add tooltip offset
                 Position = mousePos + new Vector2(24, 10);
             }
             else
             {
+                if (_isTimerSet)
+                    _delayTimer.Reset();
                 IsVisible = false;
             }
 
