@@ -27,26 +27,32 @@ namespace lunge.Library.GameTimers
             : this(1.0)
         { }
 
-        public GameTimer(double interval, bool isLooped = false)
-            : this(interval, isLooped, null)
+        public GameTimer(double interval, bool isLooped = false, bool isStarted = true)
+            : this(interval, isLooped, null, isStarted)
         {
             
         }
 
-        public GameTimer(double interval, EventHandler<GameTimerEventArgs> onElapsed)
-            : this(interval, true, onElapsed)
+        public GameTimer(double interval, EventHandler<GameTimerEventArgs> onElapsed, bool isStarted = true)
+            : this(interval, true, onElapsed, isStarted)
         { }
 
-        public GameTimer(double interval, bool isLooped, EventHandler<GameTimerEventArgs> onElapsed)
+        public GameTimer(double interval, bool isLooped, EventHandler<GameTimerEventArgs> onElapsed, bool isStarted = true)
         {
             Interval = interval;
             IsLooped = isLooped;
-            Start();
+
+            if (isStarted)
+                Start();
+
             OnTimeElapsed = onElapsed;
         }
 
         public void Start()
         {
+            if (Math.Abs(Interval) < 0.001)
+                return;
+
             OnStarted?.Invoke(this, new GameTimerEventArgs(TotalSeconds, Interval));
             IsStopped = false;
             IsStarted = true;
