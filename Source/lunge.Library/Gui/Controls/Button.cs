@@ -96,5 +96,10 @@ namespace lunge.Library.Gui.Controls
 
             base.Draw(spriteBatch);
         }
+
+        public override RectangleF GetBounds()
+        {
+            return BoundingRect;
+        }
     }
 }

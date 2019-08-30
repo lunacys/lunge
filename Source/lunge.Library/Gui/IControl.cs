@@ -2,12 +2,15 @@
 using lunge.Library.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 
 namespace lunge.Library.Gui
 {
     public interface IControl : IDisposable
     {
         string Name { get; }
+        float DrawDepth { get; set; }
+        IControl ParentControl { get; set; }
 
         void Initialize(Canvas canvas);
         void Update(GameTime gameTime, InputHandler inputHandler);
@@ -18,5 +21,7 @@ namespace lunge.Library.Gui
         /// </summary>
         /// <param name="spriteBatch"></param>
         void Draw(SpriteBatch spriteBatch);
+
+        RectangleF GetBounds();
     }
 }

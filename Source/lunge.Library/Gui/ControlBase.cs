@@ -2,20 +2,24 @@
 using lunge.Library.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 
 namespace lunge.Library.Gui
 {
     public abstract class ControlBase : IControl, IDisposable
     {
         public string Name { get; }
+        public float DrawDepth { get; set; } = 1.0f;
+        public IControl ParentControl { get; set; }
 
         public event EventHandler Created;
         public event EventHandler Initialized;
         public event EventHandler Disposed;
 
-        public ControlBase(string name)
+        public ControlBase(string name, IControl parentControl = null)
         {
             Name = name;
+            ParentControl = parentControl;
 
             Created?.Invoke(this, EventArgs.Empty);
         }
@@ -45,6 +49,11 @@ namespace lunge.Library.Gui
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public virtual RectangleF GetBounds()
+        {
+            return new RectangleF();
         }
     }
 }

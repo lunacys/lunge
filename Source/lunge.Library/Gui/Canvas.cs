@@ -5,6 +5,7 @@ using lunge.Library.Entities.Systems;
 using lunge.Library.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 
 namespace lunge.Library.Gui
 {
@@ -12,13 +13,13 @@ namespace lunge.Library.Gui
     /// Canvas is the main class for using GUI components, it has no parent and contains
     /// all the IControl elements. Canvas cannot have another canvas as a child.
     /// </summary>
-    public class Canvas : DrawableGameComponent
+    public class Canvas : DrawableGameComponent, IControl
     {
-        // TODO: Make controls to be stored with its name (e.g. change List<> to Dictionary<>)
-        public int Width { get; set; }
-        public int Height { get; set; }
+        // TODO: Add transitions for controls
+        public Point Position { get; set; }
+        public Size2 Size { get; set; }
 
-        private SpriteBatch _spriteBatch;
+        private readonly SpriteBatch _spriteBatch;
 
         private readonly List<IControl> _controlList;
         private readonly Dictionary<string, IControl> _controls;
@@ -28,11 +29,13 @@ namespace lunge.Library.Gui
 
         protected InputHandler InputHandler { get; }
 
-        public Canvas(Game game, int width, int height)
+        public Canvas(Game game, string name, Point position, Size2 size)
             : base(game)
         {
-            Width = width;
-            Height = height;
+            Position = position;
+            Size = size;
+            Name = name;
+            // TODO: Add position property
 
             _controls = new Dictionary<string, IControl>();
             _controlList = new List<IControl>();
@@ -66,7 +69,20 @@ namespace lunge.Library.Gui
 
         private void AddControlInternal(IControl control)
         {
+            if (control.ParentControl == null)
+                control.ParentControl = this;
+
             _controlList.Add(control);
+
+            _controlList.Sort((c1, c2) =>
+            {
+                if (c1.DrawDepth < c2.DrawDepth)
+                    return 1;
+                if (c1.DrawDepth > c2.DrawDepth)
+                    return -1;
+                return 0;
+            });
+
             _controls[control.Name] = control;
             control.Initialize(this);
         }
@@ -78,8 +94,6 @@ namespace lunge.Library.Gui
 
         protected override void LoadContent()
         {
-            
-
             base.LoadContent();
         }
 
@@ -131,6 +145,24 @@ namespace lunge.Library.Gui
             }
 
             base.Dispose(disposing);
+        }
+
+        public string Name { get; }
+        public float DrawDepth { get; set; } = 1.0f;
+        public IControl ParentControl { get; set; } = null;
+
+        public virtual void Initialize(Canvas canvas)
+        { }
+
+        public virtual void Update(GameTime gameTime, InputHandler inputHandler)
+        { }
+
+        public virtual void Draw(SpriteBatch spriteBatch)
+        { }
+
+        public RectangleF GetBounds()
+        {
+            return new RectangleF(Position, Size);
         }
     }
 }
