@@ -15,7 +15,7 @@ namespace lunge.Library.Gui.Controls
             set
             {
                 _position = value;
-                InitializeCells();
+                MoveCells();
             }
         }
         public Size2 Size { get; set; }
@@ -34,6 +34,8 @@ namespace lunge.Library.Gui.Controls
             var height = (int)Math.Floor(gridSize.Height / cellSize.Height);
             Cells = new GridCell[width, height];
 
+            InitializeCells();
+
             Position = Vector2.Zero;
             BorderWidth = 1.0f;
         }
@@ -48,6 +50,15 @@ namespace lunge.Library.Gui.Controls
                     Cells[i, j] = new GridCell(position, CellSize);
                 }
             }
+        }
+
+        private void MoveCells()
+        {
+            ForEach((cell, x, y) =>
+            {
+                var newPos = new Vector2(Position.X + x * CellSize.Width, Position.Y + y * CellSize.Height);
+                cell.Position = newPos;
+            });
         }
 
         public GridCell GetCellAt(int x, int y)

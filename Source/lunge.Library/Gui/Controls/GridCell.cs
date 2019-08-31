@@ -13,9 +13,18 @@ namespace lunge.Library.Gui.Controls
         public float BorderWidth { get; set; }
         public string Text { get; set; }
         public Image Image { get; set; }
-        public Vector2 Position { get; }
-        public Size2 Size { get; }
-        public Rectangle BoundingRectangle { get; }
+        private Vector2 _position;
+        public Vector2 Position
+        {
+            get => _position;
+            internal set
+            {
+                _position = value;
+                BoundingRectangle = new Rectangle(Position.ToPoint(), new Point((int)Size.Width, (int)Size.Height));
+            }
+        }
+        public Size2 Size { get; internal set; }
+        public Rectangle BoundingRectangle { get; private set; }
         public SpriteFont Font { get; set; }
         public TextAlignment TextAlign { get; set; }
 
