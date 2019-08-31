@@ -6,10 +6,9 @@ using MonoGame.Extended;
 
 namespace lunge.Library.Gui.Controls
 {
-    public class Image : ControlBase, IGraphicsControl
+    public class Image : ControlBase
     {
-        public Vector2 Position { get; set; }
-        public Size2 Size
+        public override Size2 Size
         {
             get
             {

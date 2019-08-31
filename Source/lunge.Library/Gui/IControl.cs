@@ -14,6 +14,8 @@ namespace lunge.Library.Gui
         IControl ParentControl { get; set; }
         ControlList ChildControls { get; set; }
         Canvas UsedCanvas { get; set; }
+        Vector2 Position { get; set; }
+        Size2 Size { get; set; }
 
         event EventHandler MouseHover;
         event EventHandler MouseIn;

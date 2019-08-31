@@ -28,8 +28,8 @@ namespace lunge.Library.Gui.Controls
         public SpriteFont Font { get; set; }
         public TextAlignment TextAlign { get; set; }
 
-        private IGraphicsControl _attachedControl;
-        public IGraphicsControl AttachedControl
+        private IControl _attachedControl;
+        public IControl AttachedControl
         {
             get => _attachedControl;
             set

@@ -4,10 +4,8 @@ using MonoGame.Extended;
 
 namespace lunge.Library.Gui.Controls
 {
-    public class Label : ControlBase, IGraphicsControl
+    public class Label : ControlBase
     {
-        public Vector2 Position { get; set; }
-        public Size2 Size { get; set; }
         public string Text { get; set; }
         public TextAlignment Alignment { get; set; }
         public SpriteFont Font { get; set; }

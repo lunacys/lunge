@@ -6,7 +6,7 @@ using MonoGame.Extended;
 
 namespace lunge.Library.Gui.Controls
 {
-    public class Tooltip : ControlBase, IGraphicsControl
+    public class Tooltip : ControlBase
     {
         // TODO: Add Color
         public string Text
@@ -23,7 +23,7 @@ namespace lunge.Library.Gui.Controls
                 }
             }
         }
-        public Vector2 Position
+        public override Vector2 Position
         {
             get => _position;
             set
@@ -32,7 +32,7 @@ namespace lunge.Library.Gui.Controls
                 _bounds.Position = _position;
             }
         }
-        public Size2 Size
+        public override Size2 Size
         {
             get => _size;
             set

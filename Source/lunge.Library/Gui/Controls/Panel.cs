@@ -6,16 +6,15 @@ using MonoGame.Extended;
 
 namespace lunge.Library.Gui.Controls
 {
-    public class Panel : ControlBase, IGraphicsControl
+    public class Panel : ControlBase
     {
-        public Vector2 Position { get; set; }
-        public Size2 Size { get; set; }
         public Color BackgroundColor { get; set; }
         public Color BorderColor { get; set; }
         public bool IsMoveable { get; set; }
         public float BorderWidth { get; set; }
 
         private bool _isMoving;
+        private Vector2 _pivot;
 
         public Panel(string name, IControl parentControl = null) 
             : base(name, parentControl)
@@ -44,11 +43,12 @@ namespace lunge.Library.Gui.Controls
             {
                 BorderColor = Color.DarkGray;
 
-                if (inputHandler.IsMouseButtonDown(MouseButton.Left))
+                if (inputHandler.WasMouseButtonPressed(MouseButton.Left))
                 {
+                    _pivot = mousePos - Position;
                     _isMoving = true;
                 }
-                else if (inputHandler.IsMouseButtonDown(MouseButton.Right))
+                else if (inputHandler.WasMouseButtonPressed(MouseButton.Right))
                 {
                     Close();
                 }
@@ -61,8 +61,8 @@ namespace lunge.Library.Gui.Controls
             if (_isMoving)
             {
                 BorderColor = Color.DarkGray;
-                
-                MoveControls(inputHandler.MouseVelocity);
+
+                Position = mousePos - _pivot;
             }
         }
 

@@ -16,7 +16,7 @@ namespace lunge.Library.Gui
     public class Canvas : DrawableGameComponent, IControl
     {
         // TODO: Add transitions for controls
-        public Point Position { get; set; }
+        public Vector2 Position { get; set; }
         public Size2 Size { get; set; }
         public Canvas UsedCanvas
         {
@@ -40,7 +40,7 @@ namespace lunge.Library.Gui
         public event EventHandler MouseIn;
         public event EventHandler MouseOut;
 
-        public Canvas(Game game, string name, Point position, Size2 size)
+        public Canvas(Game game, string name, Vector2 position, Size2 size)
             : base(game)
         {
             Position = position;
@@ -102,7 +102,7 @@ namespace lunge.Library.Gui
         private void AddControlInternal(IControl control)
         {
             control.UsedCanvas = UsedCanvas;
-
+            
             if (control.ParentControl == null)
             {
                 control.ParentControl = this;
@@ -137,6 +137,7 @@ namespace lunge.Library.Gui
             foreach (var control in _controlList)
             {
                 control.Update(gameTime, InputHandler);
+                CheckBounds(control);
             }
 
             _isUpdating = false;
@@ -167,6 +168,8 @@ namespace lunge.Library.Gui
                 control.Draw(_spriteBatch);
             }
 
+            _spriteBatch.DrawRectangle(Position, Size, Color.Red, 3f);
+
             _spriteBatch.End();
 
             base.Draw(gameTime);
@@ -194,5 +197,56 @@ namespace lunge.Library.Gui
             return new RectangleF(Position, Size);
         }
 
+        public void Visualize()
+        {
+            Console.WriteLine("Control List:");
+            foreach (var control in _controlList)
+            {
+                Console.WriteLine($" > {control.Name} (Depth: {control.DrawDepth})");
+            }
+
+            Console.WriteLine("\nTree:");
+            VisualizeControl(this);
+        }
+
+        private void VisualizeControl(IControl control)
+        {
+            Console.WriteLine($"C: {control.Name}");
+
+            foreach (var childControl in control.ChildControls)
+            {
+                Console.WriteLine("  | ");
+                VisualizeControl(childControl);
+            }
+        }
+
+        public void CheckBounds(IControl control)
+        {
+            var minX = control.Position.X;
+            var maxX = control.Position.X + control.Size.Width;
+            var minY = control.Position.Y;
+            var maxY = control.Position.Y + control.Size.Height;
+
+            var parentPos = control.ParentControl.Position;
+            var parentSize = control.ParentControl.Size;
+
+            if (minX < parentPos.X)
+            {
+                control.Position = new Vector2(parentPos.X, control.Position.Y);
+            }
+            else if (maxX > parentPos.X + parentSize.Width)
+            {
+                control.Position = new Vector2(parentPos.X + parentSize.Width - control.Size.Width, control.Position.Y);
+            }
+
+            if (minY < parentPos.Y)
+            {
+                control.Position = new Vector2(control.Position.X, parentPos.Y);
+            }
+            else if (maxY > parentPos.Y + parentSize.Height)
+            {
+                control.Position = new Vector2(control.Position.X, parentPos.Y + parentSize.Height - control.Size.Height);
+            }
+        }
     }
 }

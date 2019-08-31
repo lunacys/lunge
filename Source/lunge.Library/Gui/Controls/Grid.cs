@@ -6,10 +6,10 @@ using MonoGame.Extended;
 
 namespace lunge.Library.Gui.Controls
 {
-    public class Grid : ControlBase, IGraphicsControl
+    public class Grid : ControlBase
     {
         private Vector2 _position;
-        public Vector2 Position
+        public override Vector2 Position
         {
             get => _position;
             set
@@ -18,7 +18,6 @@ namespace lunge.Library.Gui.Controls
                 MoveCells();
             }
         }
-        public Size2 Size { get; set; }
         public Size2 CellSize { get; set; }
         public float BorderWidth { get; set; }
 

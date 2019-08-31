@@ -13,6 +13,10 @@ namespace lunge.Library.Gui
         public float DrawDepth { get; set; } = 1.0f;
         public IControl ParentControl { get; set; }
         public Canvas UsedCanvas { get; set; }
+        public virtual Vector2 Position { get; set; }
+        public virtual Size2 Size { get; set; }
+
+        private Vector2? _origPos;
 
         public ControlList ChildControls { get; set; }
 
@@ -47,28 +51,40 @@ namespace lunge.Library.Gui
 
         public virtual void Update(GameTime gameTime, InputHandler inputHandler)
         {
+            if (!_origPos.HasValue)
+                _origPos = Position;
+
             var mousePosition = inputHandler.MousePositionScreenToWorld;
 
+            if (ParentControl != null)
+            {
+                Position = Vector2.Add(ParentControl.Position, _origPos.Value);
+            }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch) { }
 
-        protected void MoveControlAndItsChildren(IControl controlToMove, Vector2 velocity)
+        protected void MoveControlAndItsChildren(IControl controlToMove, Vector2 newPosition)
         {
-            if (controlToMove is IGraphicsControl graphicsControl)
-            {
-                graphicsControl.Position += velocity;
-            }
+            controlToMove.Position = newPosition;
 
             foreach (var childControl in controlToMove.ChildControls)
             {
-                MoveControlAndItsChildren(childControl, velocity);
+                MoveControlAndItsChildren(childControl, newPosition);
             }
         }
 
-        protected void MoveControls(Vector2 velocity)
+        protected void MoveControls(Vector2 newPosition)
         {
-            MoveControlAndItsChildren(this, velocity);
+            MoveControlAndItsChildren(this, newPosition);
+        }
+
+        protected void MoveChildrenControls(Vector2 newPosition)
+        {
+            foreach (var childControl in ChildControls)
+            {
+                MoveControlAndItsChildren(childControl, newPosition);
+            }
         }
 
         public void Close()
