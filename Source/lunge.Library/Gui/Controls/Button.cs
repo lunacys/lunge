@@ -14,27 +14,26 @@ namespace lunge.Library.Gui.Controls
         Pressed
     }
 
-    public class Button : ControlBase
+    public class Button : ControlBase, IGraphicsControl
     {
-        public int Width { get; set; }
-        public int Height { get; set; }
         public string Text { get; set; }
 
         public event EventHandler Clicked;
 
-        public Point Position { get; set; }
-        public RectangleF BoundingRect => new RectangleF(Position, new Size2(Width, Height));
+        public Vector2 Position { get; set; }
+        public Size2 Size { get; set; }
+        public RectangleF BoundingRect => new RectangleF(Position, Size);
 
         public ButtonState State { get; private set; }
 
         public SpriteFont Font { get; set; }
 
-        public Button(string name, Point position, int width, int height, SpriteFont font) 
+        public Button(string name, Vector2 position, int width, int height, SpriteFont font) 
             : base(name)
         {
             Position = position;
-            Width = width;
-            Height = height;
+
+            Size = new Size2(width, height);
             State = ButtonState.None;
             Font = font;
         }

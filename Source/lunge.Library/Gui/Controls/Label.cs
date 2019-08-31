@@ -1,11 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 
 namespace lunge.Library.Gui.Controls
 {
-    public class Label : ControlBase
+    public class Label : ControlBase, IGraphicsControl
     {
         public Vector2 Position { get; set; }
+        public Size2 Size { get; set; }
         public string Text { get; set; }
         public TextAlignment Alignment { get; set; }
         public SpriteFont Font { get; set; }
@@ -23,9 +25,14 @@ namespace lunge.Library.Gui.Controls
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(Font, Text, Position, Color);
+            spriteBatch.DrawString(Font, Text, GetBounds().ToRectangle(), Color, Alignment);
 
             base.Draw(spriteBatch);
+        }
+
+        public override RectangleF GetBounds()
+        {
+            return new RectangleF(Position.ToPoint(), Size);
         }
     }
 }
