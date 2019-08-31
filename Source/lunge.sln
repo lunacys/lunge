@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonoGame.Extended", "..\..\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonoGame.Extended.Animations", "..\..\MonoGame.Extended\Source\MonoGame.Extended.Animations\MonoGame.Extended.Animations.csproj", "{FE03AB37-D520-4112-801B-74AAEC28FE2E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuiTests", "Demos\GuiTests\GuiTests.csproj", "{7B32EEF2-EBB1-4A2F-86AB-E2C4D63AA7EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{FE03AB37-D520-4112-801B-74AAEC28FE2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE03AB37-D520-4112-801B-74AAEC28FE2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE03AB37-D520-4112-801B-74AAEC28FE2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B32EEF2-EBB1-4A2F-86AB-E2C4D63AA7EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B32EEF2-EBB1-4A2F-86AB-E2C4D63AA7EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B32EEF2-EBB1-4A2F-86AB-E2C4D63AA7EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B32EEF2-EBB1-4A2F-86AB-E2C4D63AA7EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +73,7 @@ Global
 		{866CF8DE-ABCA-4263-AC65-4694771AEAA9} = {1BFD5B25-D7BA-48C4-A553-C15421169AA8}
 		{7DFA5572-241A-4A97-BEC0-D3AFE872855B} = {1BFD5B25-D7BA-48C4-A553-C15421169AA8}
 		{FE03AB37-D520-4112-801B-74AAEC28FE2E} = {1BFD5B25-D7BA-48C4-A553-C15421169AA8}
+		{7B32EEF2-EBB1-4A2F-86AB-E2C4D63AA7EE} = {0474E88A-E553-4437-9599-732852C00D4F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B8220726-0232-4444-BE3D-52287BF04A3D}

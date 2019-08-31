@@ -27,6 +27,8 @@ namespace Nightly
 
         private Texture2D _testTexture;
 
+        private LogHelper Logger => LogHelper.GetLogger("GameRoot", LogTarget.Console);
+
         [GameSettingsEntry("MusicVolume", 1.0)]
         public double MusicVolume { get; set; }
 
@@ -55,17 +57,17 @@ namespace Nightly
             _input[Keys.Space] = () =>
             {
                 _testCount++;
-                LogHelper.LogAsync($"Space Key Pressed. Test count: {_testCount}").Wait();
+                Logger.LogAsync($"Space Key Pressed. Test count: {_testCount}").Wait();
             };
 
             GameTimer gt = new GameTimer(1.5, true);
             gt.OnTimeElapsed += (sender, args) =>
             {
-                LogHelper.Log($"SfxVolume: {SfxVolume}, MusicVolume: {MusicVolume}");
+                Logger.Log($"SfxVolume: {SfxVolume}, MusicVolume: {MusicVolume}");
             };
             GameTimerManager.Add(gt);
 
-            LogHelper.LogAsync("TEST ERROR!", LogLevel.Error).Wait();
+            Logger.LogAsync("TEST ERROR!", LogLevel.Error).Wait();
 
             _gameSettings = new GameSettingsGameComponent(this);
 
@@ -78,7 +80,6 @@ namespace Nightly
                 MinValue = 0,
                 ShouldDrawBars = false
             };
-            
 
             _fpsCounter = new FramesPerSecondCounterComponent(this);
             _fpsCounter.OnFpsUpdate += (sender, args) =>
@@ -107,7 +108,7 @@ namespace Nightly
             }
             catch (Exception e)
             {
-                LogHelper.Log($"Error: {e.Message}");
+                Logger.Log($"Error: {e.Message}");
             }
             
 
