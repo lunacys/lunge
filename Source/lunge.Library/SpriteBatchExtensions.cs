@@ -46,6 +46,17 @@ namespace lunge.Library
             spriteBatch.Draw(sprite.Image, position, null, sprite.Tint, sprite.Rotation, sprite.Origin, sprite.Scale, sprite.Effects, sprite.Depth);
         }
 
+        public static void Draw(this SpriteBatch spriteBatch, Sprite sprite, Rectangle rect)
+        {
+            spriteBatch.Draw(sprite.Image, rect, null, sprite.Tint, sprite.Rotation, sprite.Origin, sprite.Effects, sprite.Depth);
+        }
+
+        public static void Draw(this SpriteBatch spriteBatch, Sprite sprite, Vector2 position, Rectangle rect)
+        {
+            spriteBatch.Draw(sprite.Image, position, rect, sprite.Tint, sprite.Rotation, sprite.Origin, sprite.Scale,
+                sprite.Effects, sprite.Depth);
+        }
+
         public static void Begin(this SpriteBatch spriteBatch, SpriteBatchSettings spriteBatchSettings)
         {
             spriteBatch.Begin(spriteBatchSettings.SpriteSortMode, spriteBatchSettings.BlendState,
