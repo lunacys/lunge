@@ -6,7 +6,7 @@ namespace lunge.Library.Entities
     public class Sprite
     {
         public Texture2D Image { get; private set; }
-        public Color Tint { get; set; }
+        public Color Tint { get; set; } = Color.White;
         public float Rotation { get; set; }
         public Vector2 Origin { get; set; }
         public Vector2 Scale { get; set; } = Vector2.One;
@@ -18,8 +18,8 @@ namespace lunge.Library.Entities
         private readonly Animation _animation;
         private readonly Texture2D[] _frameCache;
 
-        public int Width => Image.Width;
-        public int Height => Image.Height;
+        public float Width => Image.Width * Scale.X;
+        public float Height => Image.Height * Scale.Y;
 
         public int CurrentFrame
         {
