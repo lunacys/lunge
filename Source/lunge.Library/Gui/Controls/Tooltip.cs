@@ -9,11 +9,43 @@ namespace lunge.Library.Gui.Controls
     public class Tooltip : ControlBase
     {
         // TODO: Add Color
-        public string Text { get; set; }
-        public Vector2 Position { get; private set; }
-        public Size2 Size { get; set; }
+        public string Text
+        {
+            get => _text;
+            set
+            {
+                _text = value;
+                _stringSize = Font?.MeasureString(_text) ?? Vector2.Zero;
+
+                if (_stringSize.X > Size.Width || _stringSize.Y > Size.Height)
+                {
+                    Size = new Size2(_stringSize.X + 2, _stringSize.Y + 2);
+                }
+            }
+        }
+        public Vector2 Position
+        {
+            get => _position;
+            private set
+            {
+                _position = value;
+                _bounds.Position = _position;
+            }
+        }
+        public Size2 Size
+        {
+            get => _size;
+            set
+            {
+                _size = value;
+                _bounds = new RectangleF(Position, _size);
+            }
+        }
         public bool IsVisible { get; private set; }
         public SpriteFont Font { get; }
+        public Vector2 Offset { get; set; } = Vector2.Zero;
+
+        private RectangleF _bounds;
 
         public double Delay
         {
@@ -25,6 +57,10 @@ namespace lunge.Library.Gui.Controls
             }
         }
 
+        private string _text;
+        private Vector2 _stringSize;
+        private Vector2 _position;
+        private Size2 _size;
         private bool _isTimerSet;
         private GameTimer _delayTimer;
 
@@ -34,19 +70,13 @@ namespace lunge.Library.Gui.Controls
             Font = font;
             DrawDepth = 0.0f; // Draw over all other content
             _delayTimer = new GameTimer(0);
+
+            _bounds = new RectangleF(Position, Size);
         }
 
         public override void Update(GameTime gameTime, InputHandler inputHandler)
         {
             _delayTimer.Update(gameTime);
-
-            // TODO: Measure string and change size only if Text property was changed
-            var stringSize = Font.MeasureString(Text);
-
-            if (stringSize.X > Size.Width)
-            {
-                Size = new Size2(stringSize.X + 2, stringSize.Y);
-            }
 
             var mousePos = inputHandler.MousePositionScreenToWorld;
 
@@ -57,8 +87,8 @@ namespace lunge.Library.Gui.Controls
                 
                 if (!_isTimerSet)
                     IsVisible = true;
-                // TODO: Add tooltip offset
-                Position = mousePos + new Vector2(24, 10);
+                
+                Position = mousePos + Offset;
             }
             else
             {
@@ -72,7 +102,7 @@ namespace lunge.Library.Gui.Controls
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (IsVisible)
+            if (IsVisible && Font != null)
             {
                 spriteBatch.FillRectangle(Position, Size, Color.White);
                 spriteBatch.DrawString(Font, Text, GetBounds().ToRectangle(), Color.Black, TextAlignment.Center);
@@ -83,8 +113,7 @@ namespace lunge.Library.Gui.Controls
 
         public override RectangleF GetBounds()
         {
-            // TODO: Improve performance by changing the bounds only on size change
-            return new RectangleF(Position.ToPoint(), Size);
+            return _bounds;
         }
     }
 }
