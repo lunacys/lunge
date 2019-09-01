@@ -12,11 +12,29 @@ The project uses MonoGame together with **MonoGame.Extended**, **MonoGame.Extend
 
 ### Build
 
+#### Projects
+
 In order to build the engine, you need to download **.NET Core 2.2 SDK** or higher. Next, go to the root directory of the repo, and run `build.ps1` if you're using Windows, or `build.sh` if you're using Linux or MacOS.
 
 The sources are located at `./Source/lunge.Library`.
 
 Tests are located at `./Source/Tests/lunge.Lib`.
+
+#### Docs
+
+To build the docs you will need NPM to be installed on your PC. After NPM is ready, install `gitbook-cli` package globally using the following command in your command shell (e.g. git bash):
+
+```bash
+npm install -g gitbook-cli
+```
+
+Next, go to the Docs directory and run there:
+
+```bash
+gitbook build
+```
+
+After that, the book is ready to use from `_books/` directory as `index.html` file.
 
 ### Current roadmap
 
