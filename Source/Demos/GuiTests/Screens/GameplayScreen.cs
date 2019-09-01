@@ -122,8 +122,6 @@ namespace GuiTests.Screens
 
         private void DrawDebugInformation()
         {
-            var fpsCounterComponent = GameRoot.Services.GetService<FramesPerSecondCounterComponent>();
-
             var basePosition = _camera.ScreenToWorld(Vector2.One * 16);
             var debugString =
                 $"Use WASD keys to move camera around\n" +

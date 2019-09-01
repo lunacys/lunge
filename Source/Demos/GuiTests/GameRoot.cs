@@ -68,8 +68,6 @@ namespace GuiTests
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            //Assets.Load(Content);
-
             Logger.Log("Done loading content");
 
             base.LoadContent();
