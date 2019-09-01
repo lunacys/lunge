@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using lunge.Library;
 using lunge.Library.Debugging.Logging;
 using lunge.Library.Entities;
@@ -10,6 +11,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
+using MonoGame.Extended.TextureAtlases;
 using MonoGame.Extended.ViewportAdapters;
 
 namespace GuiTests.Screens
@@ -25,6 +27,8 @@ namespace GuiTests.Screens
         private InputHandler _inputHandler;
 
         private Canvas _mainCanvas;
+
+        private Button _btnPnl;
 
         public GameplayScreen(GameBase game) 
             : base(game)
@@ -93,6 +97,23 @@ namespace GuiTests.Screens
                 _camera.Move(Vector2.UnitY);
             }
 
+            if (_inputHandler.IsKeyDown(Keys.Left))
+            {
+                _btnPnl.Size -= new Size2(1, 0);
+            }
+            if (_inputHandler.IsKeyDown(Keys.Right))
+            {
+                _btnPnl.Size += new Size2(1, 0);
+            }
+            if (_inputHandler.IsKeyDown(Keys.Up))
+            {
+                _btnPnl.Size += new Size2(0, 1);
+            }
+            if (_inputHandler.IsKeyDown(Keys.Down))
+            {
+                _btnPnl.Size -= new Size2(0, 1);
+            }
+
             _mainCanvas.Update(gameTime);
             _world.Update(gameTime);
 
@@ -139,10 +160,42 @@ namespace GuiTests.Screens
 
         private void InitializeGuiControls()
         {
-            var btnExit = new Button("ButtonExit", Vector2.One, 48, 20, Assets.MainFont)
+            var textureAtlas = new TextureAtlas("Button", Assets.GuiControlAtlas, new Dictionary<string, Rectangle>
+            {
+                {
+                    "TopLeft", new Rectangle(0, 0, 16, 16)
+                },
+                {
+                    "Top", new Rectangle(16, 0, 16, 16)
+                },
+                {
+                    "TopRight", new Rectangle(32, 0, 16, 16)
+                },
+                {
+                    "Right", new Rectangle(32, 16, 16, 16)
+                },
+                {
+                    "BottomRight", new Rectangle(32, 32, 16, 16)
+                },
+                {
+                    "Bottom", new Rectangle(16, 32, 16, 16)
+                },
+                {
+                    "BottomLeft", new Rectangle(0, 32, 16, 16)
+                },
+                {
+                    "Left", new Rectangle(0, 16, 16, 16)
+                },
+                {
+                    "Center", new Rectangle(16, 16, 16, 16)
+                }
+            });
+
+            var btnExit = new Button("ButtonExit", Vector2.One, 128, 48, Assets.MainFont)
             {
                 Text = "Exit",
-                DrawDepth = 0.0f
+                DrawDepth = 0.0f,
+                //TextureAtlas = textureAtlas
             };
             btnExit.Clicked += (sender, args) => GameRoot.Exit();
             _mainCanvas.AddControl(btnExit);
@@ -164,6 +217,8 @@ namespace GuiTests.Screens
                 IsMoveable = true
             };
             _mainCanvas.AddControl(panel1);
+
+            
 
             var gridTest = new Grid("Grid1", new Size2(128, 256), new Size2(64, 64))
             {
@@ -197,12 +252,13 @@ namespace GuiTests.Screens
 
             _mainCanvas.AddControl(gridTest);
 
-            var btnPanel = new Button("BtnPnl", new Vector2(400, 16), 64, 20, Assets.MainFont)
+            _btnPnl = new Button("BtnPnl", new Vector2(250, 64), 138, 40, Assets.MainFont)
             {
                 ParentControl = panel1,
-                Text = "Hello!"
+                Text = "Click Me!",
+                TextureAtlas = textureAtlas
             };
-            _mainCanvas.AddControl(btnPanel);
+            _mainCanvas.AddControl(_btnPnl);
 
             _mainCanvas.Visualize();
         }
