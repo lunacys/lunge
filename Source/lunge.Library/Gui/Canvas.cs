@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using lunge.Library.Entities.Systems;
+using lunge.Library.Graphics;
 using lunge.Library.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -35,7 +36,8 @@ namespace lunge.Library.Gui
 
         protected InputHandler InputHandler { get; }
 
-        
+        public SpriteBatchSettings SpriteBatchSettings { get; }
+
         public event EventHandler MouseHover;
         public event EventHandler MouseIn;
         public event EventHandler MouseOut;
@@ -57,6 +59,8 @@ namespace lunge.Library.Gui
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             InputHandler = new InputHandler(game);
+
+            SpriteBatchSettings = new SpriteBatchSettings();
         }
 
         public void Close()
@@ -161,7 +165,7 @@ namespace lunge.Library.Gui
 
         public override void Draw(GameTime gameTime)
         {
-            _spriteBatch.Begin();
+            _spriteBatch.Begin(SpriteBatchSettings);
 
             foreach (var control in _controlList)
             {
@@ -186,10 +190,9 @@ namespace lunge.Library.Gui
 
         public ControlList ChildControls { get; set; }
 
+        // TODO: Get rid of these three methods
         public virtual void Initialize(Canvas canvas) { }
-
         public virtual void Update(GameTime gameTime, InputHandler inputHandler) { }
-
         public virtual void Draw(SpriteBatch spriteBatch) { }
 
         public RectangleF GetBounds()
