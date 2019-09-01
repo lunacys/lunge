@@ -28,6 +28,11 @@ namespace lunge.Library.Gui.Controls
         public SpriteFont Font { get; set; }
         public TextureAtlas TextureAtlas { get; set; }
 
+        public Color DefaultTint { get; set; } = Color.White;
+        public Color HoveredTint { get; set; } = new Color(.85f, .85f, .85f, 1f);
+        public Color ClickingTint { get; set; } = new Color(.65f, .65f, .65f, 1f);
+        public Color PressedTint { get; set; } = new Color(.65f, .65f, .65f, 1f);
+
         public Button(string name, Vector2 position, int width, int height, SpriteFont font) 
             : base(name)
         {
@@ -92,7 +97,6 @@ namespace lunge.Library.Gui.Controls
             }
             else
             {
-                spriteBatch.DrawRectangle(GetBounds(), Color.Black, 1f);
                 DrawAtlas(spriteBatch);
             }
 
@@ -111,6 +115,26 @@ namespace lunge.Library.Gui.Controls
 
         private void DrawAtlas(SpriteBatch spriteBatch)
         {
+            Color tint;
+
+            switch (State)
+            {
+                case ButtonState.None:
+                    tint = DefaultTint;
+                    break;
+                case ButtonState.Hovered:
+                    tint = HoveredTint;
+                    break;
+                case ButtonState.Clicking:
+                    tint = ClickingTint;
+                    break;
+                case ButtonState.Pressed:
+                    tint = PressedTint;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
             // TODO: Refactor & Optimize this shit
             var center = TextureAtlas["Center"];
             // Edges
@@ -138,7 +162,7 @@ namespace lunge.Library.Gui.Controls
                     width:  (int)(topRightPosition.X - (topLeftPosition.X + topLeft.Width)), 
                     height: (int)(bottomRightPosition.Y - (topLeftPosition.Y + topLeft.Height))
                     );
-                spriteBatch.Draw(center.Texture, rect, center.Bounds, Color.White);
+                spriteBatch.Draw(center.Texture, rect, center.Bounds, tint);
             }
 
             // Draw Sides:
@@ -150,7 +174,7 @@ namespace lunge.Library.Gui.Controls
                     width:  (int)(topRightPosition.X - (topLeftPosition.X + topLeft.Width)), 
                     height: top.Height
                     );
-                spriteBatch.Draw(top.Texture, rect, top.Bounds, Color.White);
+                spriteBatch.Draw(top.Texture, rect, top.Bounds, tint);
             }
             // Bottom
             {
@@ -160,7 +184,7 @@ namespace lunge.Library.Gui.Controls
                     width:  (int)(bottomRightPosition.X - (bottomLeftPosition.X + bottomLeft.Width)), 
                     height: (int)top.Height
                     );
-                spriteBatch.Draw(bottom.Texture, rect, bottom.Bounds, Color.White);
+                spriteBatch.Draw(bottom.Texture, rect, bottom.Bounds, tint);
             }
             // Left
             {
@@ -170,7 +194,7 @@ namespace lunge.Library.Gui.Controls
                     width:  (int)(left.Width),
                     height: (int)(bottomLeftPosition.Y - (topLeftPosition.Y + topLeft.Height))
                     );
-                spriteBatch.Draw(left.Texture, rect, left.Bounds, Color.White);
+                spriteBatch.Draw(left.Texture, rect, left.Bounds, tint);
             }
             // Right
             {
@@ -180,14 +204,14 @@ namespace lunge.Library.Gui.Controls
                     width:  (int)(right.Width),
                     height: (int)(bottomRightPosition.Y - (topRightPosition.Y + topRight.Height))
                 );
-                spriteBatch.Draw(right.Texture, rect, right.Bounds, Color.White);
+                spriteBatch.Draw(right.Texture, rect, right.Bounds, tint);
             }
 
             // Draw Edges
-            spriteBatch.Draw(topLeft.Texture, topLeftPosition, topLeft.Bounds, Color.White);
-            spriteBatch.Draw(bottomLeft.Texture, bottomLeftPosition, bottomLeft.Bounds, Color.White);
-            spriteBatch.Draw(topRight.Texture, topRightPosition, topRight.Bounds, Color.White);
-            spriteBatch.Draw(bottomRight.Texture, bottomRightPosition, bottomRight.Bounds, Color.White);
+            spriteBatch.Draw(topLeft.Texture, topLeftPosition, topLeft.Bounds, tint);
+            spriteBatch.Draw(bottomLeft.Texture, bottomLeftPosition, bottomLeft.Bounds, tint);
+            spriteBatch.Draw(topRight.Texture, topRightPosition, topRight.Bounds, tint);
+            spriteBatch.Draw(bottomRight.Texture, bottomRightPosition, bottomRight.Bounds, tint);
         }
     }
 }

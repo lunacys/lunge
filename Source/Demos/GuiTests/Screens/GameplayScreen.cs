@@ -195,7 +195,7 @@ namespace GuiTests.Screens
             {
                 Text = "Exit",
                 DrawDepth = 0.0f,
-                //TextureAtlas = textureAtlas
+                TextureAtlas = textureAtlas
             };
             btnExit.Clicked += (sender, args) => GameRoot.Exit();
             _mainCanvas.AddControl(btnExit);
