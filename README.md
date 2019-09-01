@@ -41,7 +41,7 @@ After that, the book is ready to use from `_books/` directory as `index.html` fi
 #### TODO
 
 - [x] Game Engine Architecture (On paper)
-- [ ] ~~ECS Basis/Architecture~~ Changing to other system related to ECS
+- [ ] ECS Basis/Architecture
 - [ ] Main Components/Systems:
   - [ ] Input handlers
     - [x] Keyboard
@@ -52,14 +52,13 @@ After that, the book is ready to use from `_books/` directory as `index.html` fi
   - [ ] Entity components:
     - [x] Sprite
     - [x] Animation
-  - [ ] Resource Manager/Dispatcher
+  - [x] Resource Manager/Dispatcher
   - [ ] System container
   - [ ] States
   - [x] World
-  - [x] ~~Event channel~~ Using C# events instead
 - [x] Asset manager
 - [ ] GUI
-  - [x] ~~Subcontrols~~ Parent controls
+  - [x] Parent/Child controls
   - [ ] Controls:
     - [x] Canvas
     - [x] Label
@@ -72,7 +71,7 @@ After that, the book is ready to use from `_books/` directory as `index.html` fi
       - [ ] Take snapshot
     - [x] Button
     - [x] Tooltip
-    - [ ] Panel
+    - [x] Panel
     - [ ] TreeView
     - [ ] TextBox
     - [ ] RadioButton
@@ -84,6 +83,8 @@ After that, the book is ready to use from `_books/` directory as `index.html` fi
     - [ ] ProgressBar
     - [ ] TrackBar
     - [ ] GridView
+      - [x] Basic output: draw a grid with attached controls (e.g. label, button, etc)
+      - [ ] Data source support
   - [ ] Make all the properties of a control changeable
 - [ ] Steering behaviors & Steering behavior manager
 - [ ] Basic AI
