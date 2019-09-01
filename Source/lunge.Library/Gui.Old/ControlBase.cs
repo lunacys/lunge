@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using lunge.Library.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 
-namespace lunge.Library.Gui
+namespace lunge.Library.Gui.Old
 {
+    [Obsolete("This GUI system is obsolete, please use the new one from the lunge.Library.Gui namespace")]
     public abstract class ControlBase : IControl
     {
         public string Name { get; }

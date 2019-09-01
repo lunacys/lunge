@@ -5,8 +5,9 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.TextureAtlases;
 
-namespace lunge.Library.Gui.Controls
+namespace lunge.Library.Gui.Old.Controls
 {
+    [Obsolete("This GUI system is obsolete, please use the new one from the lunge.Library.Gui namespace")]
     public enum ButtonState
     {
         None,
@@ -15,6 +16,7 @@ namespace lunge.Library.Gui.Controls
         Pressed
     }
 
+    [Obsolete("This GUI system is obsolete, please use the new one from the lunge.Library.Gui namespace")]
     public class Button : ControlBase
     {
         public string Text { get; set; }

@@ -1,5 +1,8 @@
-﻿namespace lunge.Library.Gui.Controls
+﻿using System;
+
+namespace lunge.Library.Gui.Old.Controls
 {
+    [Obsolete("This GUI system is obsolete, please use the new one from the lunge.Library.Gui namespace")]
     public class ChartNode
     {
         internal ChartNode Next;

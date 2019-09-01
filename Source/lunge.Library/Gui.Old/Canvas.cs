@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using lunge.Library.Entities.Systems;
 using lunge.Library.Graphics;
 using lunge.Library.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 
-namespace lunge.Library.Gui
+namespace lunge.Library.Gui.Old
 {
     /// <summary>
     /// Canvas is the main class for using GUI components, it has no parent and contains
     /// all the IControl elements. Canvas cannot have another canvas as a child.
     /// </summary>
+    [Obsolete("This GUI system is obsolete, please use the new one from the lunge.Library.Gui namespace")]
     public class Canvas : DrawableGameComponent, IControl
     {
         // TODO: Add transitions for controls

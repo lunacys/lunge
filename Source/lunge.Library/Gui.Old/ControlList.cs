@@ -1,12 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
-namespace lunge.Library.Gui
+namespace lunge.Library.Gui.Old
 {
     /// <summary>
     /// Represents an internal list of <see cref="IControl"/>.
     /// The only publicly accessible members are <see cref="Count"/> and <see cref="Capacity"/>
     /// </summary>
+    [Obsolete("This GUI system is obsolete, please use the new one from the lunge.Library.Gui namespace")]
     public class ControlList : IEnumerable<IControl>
     {
         private readonly List<IControl> _controls;

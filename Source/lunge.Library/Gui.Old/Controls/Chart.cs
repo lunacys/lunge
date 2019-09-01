@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using lunge.Library.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 
-namespace lunge.Library.Gui.Controls
+namespace lunge.Library.Gui.Old.Controls
 {
+    [Obsolete("This GUI system is obsolete, please use the new one from the lunge.Library.Gui namespace")]
     public enum ChartType
     {
         Bars,
@@ -14,6 +15,7 @@ namespace lunge.Library.Gui.Controls
         Points
     }
 
+    [Obsolete("This GUI system is obsolete, please use the new one from the lunge.Library.Gui namespace")]
     public class Chart : ControlBase
     {
         public Vector2 Position { get; set; }
