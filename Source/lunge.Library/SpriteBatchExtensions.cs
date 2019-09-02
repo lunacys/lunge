@@ -59,9 +59,15 @@ namespace lunge.Library
 
         public static void Begin(this SpriteBatch spriteBatch, SpriteBatchSettings spriteBatchSettings)
         {
-            spriteBatch.Begin(spriteBatchSettings.SpriteSortMode, spriteBatchSettings.BlendState,
-                spriteBatchSettings.SamplerState, spriteBatchSettings.DepthStencilState,
-                spriteBatchSettings.RasterizerState, spriteBatchSettings.Effect, spriteBatchSettings.TransformMatrix);
+            spriteBatch.Begin(
+                spriteBatchSettings.SpriteSortMode, 
+                spriteBatchSettings.BlendState,
+                spriteBatchSettings.SamplerState, 
+                spriteBatchSettings.DepthStencilState,
+                spriteBatchSettings.RasterizerState, 
+                spriteBatchSettings.Effect, 
+                spriteBatchSettings.TransformMatrix
+                );
         }
     }
 }
