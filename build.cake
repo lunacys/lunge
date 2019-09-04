@@ -91,7 +91,7 @@ Task("Publish")
 
     var projectsToPublish = new KeyValuePair<string, string>[] 
     { 
-        new KeyValuePair<string, string>("./Source/Demos/Nightly/Nightly.csproj", "DemoNightly"),
+        //new KeyValuePair<string, string>("./Source/Demos/Nightly/Nightly.csproj", "DemoNightly"),
         //new KeyValuePair<string, string>("./Source/lunge.Library/lunge.Library.csproj", "lunge.Library"),
         new KeyValuePair<string, string>("./Source/lunge.MapEditor/lunge.MapEditor.csproj", "lunge.MapEditor")
     };
@@ -105,16 +105,29 @@ Task("Publish")
 
         var settings = new DotNetCorePublishSettings
         {
-            Framework = "netcoreapp2.1",
+            Framework = "netcoreapp2.2",
             Configuration = "Release",
             Runtime = "win-x86",
             SelfContained = true,
-            OutputDirectory = "./artifacts/publish/" + projKv.Value,
-            ArgumentCustomization = args => args.Append("/p:TrimUnusedDependencies=true")
+            OutputDirectory = "./artifacts/publish/" + projKv.Value
         };
 
         DotNetCorePublish(projKv.Key, settings);
     }
+
+    CreateDirectory("./artifacts/publish/lunge.Library");
+    CleanDirectory("./artifacts/publish/lunge.Library");
+
+    var lungeSettings = new DotNetCorePublishSettings
+    {
+        Framework = "netstandard2.0",
+        Configuration = "Release",
+        Runtime = "win-x86",
+        SelfContained = false,
+        OutputDirectory = "./artifacts/publish/lunge.Library"
+    };
+
+    DotNetCorePublish("./Source/lunge.Library/lunge.Library.csproj", lungeSettings);
     
 });
 
