@@ -9,16 +9,7 @@ namespace lunge.Library.Serialization
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var gs = (GameSettings)value;
-
-            writer.WriteStartObject();
-            foreach (var setting in gs)
-            {
-                writer.WritePropertyName(setting.Key);
-                writer.WriteWhitespace(" ");
-                writer.WriteValue(setting.Value);
-            }
-            writer.WriteEndObject();
+            serializer.Serialize(writer, value, typeof(GameSettings));
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

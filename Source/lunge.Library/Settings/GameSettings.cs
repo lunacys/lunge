@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using Newtonsoft.Json;
 
 namespace lunge.Library.Settings
 {
@@ -11,6 +12,7 @@ namespace lunge.Library.Settings
 
         public object this[string name] => Get(name);
 
+        [JsonIgnore]
         public DefaultGameSettings DefaultGameSettings { get; }
 
         public GameSettings()

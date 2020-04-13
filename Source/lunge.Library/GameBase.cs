@@ -70,7 +70,7 @@ namespace lunge.Library
             GameSettings = gameSettings;
 
             GameSettingsComponent = new GameSettingsGameComponent(this, GameSettings);
-            if (!GameSettingsComponent.TryLoad())
+            // if (!GameSettingsComponent.TryLoad())
                 GameSettings.LoadDefaults();
 
             Graphics.PreferredBackBufferWidth = Convert.ToInt32(GameSettings["WindowWidth"]);
@@ -110,7 +110,7 @@ namespace lunge.Library
 
         protected override void UnloadContent()
         {
-            //GameSettingsComponent.DeserializeToFile();
+            //GameSettingsComponent.SerializeToFile();
 
             base.UnloadContent();
         }
