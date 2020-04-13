@@ -8,16 +8,11 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
-    # TODO: Fix build on all systems
-    #strategy:
-    #  matrix:
-    #    os: [windows-latest, ubuntu-latest, macOS-latest]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macOS-latest]
     steps:
-      - name: Checkout submodules
-        uses: textbook/git-checkout-submodule-action@master
-        with:
-          remote: true
       - name: Get the sources
         uses: actions/checkout@v1
       - name: Run the Cake build script
