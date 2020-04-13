@@ -1,0 +1,3 @@
+[submodule "Deps/FSMSharp"]
+	path = Deps/FSMSharp
+	url = https://github.com/lunacys/FSMsharp.git
