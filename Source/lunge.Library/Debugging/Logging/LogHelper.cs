@@ -32,8 +32,6 @@ namespace lunge.Library.Debugging.Logging
                     ActiveLoggers.Add(new ConsoleLogger());
                 if (value.HasFlag(LogTarget.File))
                     ActiveLoggers.Add(new FileLogger());
-                if (value.HasFlag(LogTarget.Database))
-                    ActiveLoggers.Add(new DatabaseLogger());
 
                 _target = value;
             }

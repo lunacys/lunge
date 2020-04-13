@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FSMSharp.Core" Version="1.0.0" />
     <PackageReference Include="MonoGame.Extended" Version="3.7.0" />
     <PackageReference Include="MonoGame.Extended.Input" Version="3.7.0" />
     <PackageReference Include="MonoGame.Extended.Particles" Version="3.7.0" />
@@ -21,10 +22,6 @@
   <ItemGroup>
     <Folder Include="Entities\Components\" />
     <Folder Include="Physics\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Deps\FSMSharp\src\FSMSharp\FSMSharp\FSMSharp.csproj" />
   </ItemGroup>
 
 </Project>
