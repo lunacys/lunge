@@ -1,18 +1,14 @@
-#tool nuget:?package=vswhere
 #tool nuget:?package=NUnit.Runners&version=2.6.4
-#tool nuget:?package=GitVersion.CommandLine&prerelease
-#tool nuget:?package=Microsoft.Packaging.Tools.Trimming&prerelease&version=1.1.0-preview1-26619-01
+#tool nuget:?package=GitVersion.CommandLine&version=5.0.1
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 var solution = "./Source/lunge.sln";
 
-var vsLatest  = VSWhereLatest();
-var msBuildPath = vsLatest?.CombineWithFilePath("./MSBuild/15.0/Bin/amd64/MSBuild.exe");
 var gitVersion = GitVersion();
 
-//TaskSetup(context => Information($"'{context.Task.Name}'"));
-//TaskTeardown(context => Information($"'{context.Task.Name}'"));
+TaskSetup(context => Information($"'{context.Task.Name}'"));
+TaskTeardown(context => Information($"'{context.Task.Name}'"));
 
 Task("Restore")
     .Does(() =>
@@ -39,6 +35,7 @@ Task("Test")
     var testRuns = 0;
     var failedRuns = 0;
     var testProjects = GetFiles($"./Source/Tests/**/*.Tests.csproj");
+    var failedProjectNames = new List<string>();
 
     foreach (var project in testProjects)
     { 
@@ -51,11 +48,21 @@ Task("Test")
         catch
         {
             failedRuns++;
+            failedProjectNames.Add(project.FullPath);
         }
     }
 
     if(failedRuns > 0)
-        throw new Exception($"{failedRuns} of {testRuns} test runs failed.");
+    {
+        string errorMsg = $"{failedRuns} of {testRuns} test runs failed. Failed tests:\n";
+
+        foreach (var project in failedProjectNames)
+        {
+            errorMsg += $" > {project}\n";
+        }
+
+        throw new Exception(errorMsg);
+    }
 });
 
 Task("Pack")
@@ -74,7 +81,7 @@ Task("Pack")
             Configuration = configuration,
             IncludeSymbols = true,
             OutputDirectory = artifactsDirectory,
-            ArgumentCustomization = args => args.Append($"/p:Version={gitVersion.NuGetVersion}")
+            ArgumentCustomization = args => args.Append($"/p:Version={gitVersion.NuGetVersion} /p:SymbolPackageFormat=snupkg")
         });
     }
 });
@@ -83,52 +90,36 @@ Task("Publish")
     .IsDependentOn("Pack")
     .Does(() =>
 {
-    var artifactsDirectory = "./artifacts";
+    var availableConfigs = new List<string>() {
+        "win-x86",
+        "win-x64",
+        "osx-x64",
+        "linux-x64"
+    };
+
     var publishDirectory = "./artifacts/publish";
 
     CreateDirectory(publishDirectory);
     CleanDirectory(publishDirectory);
 
-    var projectsToPublish = new KeyValuePair<string, string>[] 
-    { 
-        //new KeyValuePair<string, string>("./Source/Demos/Nightly/Nightly.csproj", "DemoNightly"),
-        //new KeyValuePair<string, string>("./Source/lunge.Library/lunge.Library.csproj", "lunge.Library"),
-        new KeyValuePair<string, string>("./Source/lunge.MapEditor/lunge.MapEditor.csproj", "lunge.MapEditor")
-    };
-
-    foreach (var projKv in projectsToPublish)
+    foreach (var cfg in availableConfigs)
     {
-        var outputDir = publishDirectory + "/" + projKv.Value;
+        var outputDir = $"./artifacts/publish/lunge.Library/{cfg}";
 
         CreateDirectory(outputDir);
         CleanDirectory(outputDir);
 
         var settings = new DotNetCorePublishSettings
         {
-            Framework = "netcoreapp3.1",
+            Framework = "netstandard2.1",
             Configuration = "Release",
-            Runtime = "win-x86",
-            SelfContained = true,
-            OutputDirectory = "./artifacts/publish/" + projKv.Value
+            Runtime = cfg,
+            SelfContained = false,
+            OutputDirectory = outputDir
         };
 
-        DotNetCorePublish(projKv.Key, settings);
+        DotNetCorePublish("./Source/lunge.Library/lunge.Library.csproj", settings);
     }
-
-    CreateDirectory("./artifacts/publish/lunge.Library");
-    CleanDirectory("./artifacts/publish/lunge.Library");
-
-    var lungeSettings = new DotNetCorePublishSettings
-    {
-        Framework = "netstandard2.1",
-        Configuration = "Release",
-        Runtime = "win-x86",
-        SelfContained = false,
-        OutputDirectory = "./artifacts/publish/lunge.Library"
-    };
-
-    DotNetCorePublish("./Source/lunge.Library/lunge.Library.csproj", lungeSettings);
-    
 });
 
 Task("Default")
