@@ -35,7 +35,8 @@ namespace GuiTests.Screens
         {
             Logger.Log("Constructing GameplayScreen..");
 
-            GameRoot.ViewportAdapter = new WindowViewportAdapter(GameRoot.Window, GameRoot.GraphicsDevice);
+            game.ViewportAdapter = new WindowViewportAdapter(game.Window, game.GraphicsDevice);
+            _camera = new OrthographicCamera(game.ViewportAdapter);
 
             Logger.Log("Done constructing GameplayScreen");
         }
@@ -44,13 +45,12 @@ namespace GuiTests.Screens
         {
             Logger.Log("Initializing..");
 
-            _world = new WorldBuilder(GameRoot).Build();
+            _world = new WorldBuilder(Game).Build();
 
-            _camera = new OrthographicCamera(GameRoot.ViewportAdapter);
 
-            _inputHandler = new InputHandler(GameRoot, _camera);
+            _inputHandler = new InputHandler(Game, _camera);
 
-            _mainCanvas = new Canvas(GameRoot, "MainCanvas", Vector2.Zero, new Size2(800, 600));
+            _mainCanvas = new Canvas(Game, "MainCanvas", Vector2.Zero, new Size2(800, 600));
             
 
             Logger.Log("Initialization done. Calling base.Initialize()");
@@ -64,9 +64,9 @@ namespace GuiTests.Screens
         {
             Logger.Log("Loading Content");
 
-            _spriteBatch = new SpriteBatch(GameRoot.GraphicsDevice);
+            _spriteBatch = new SpriteBatch(Game.GraphicsDevice);
             
-            Assets.Load(GameRoot.Content);
+            Assets.Load(Game.Content);
             InitializeGuiControls();
 
             Logger.Log("Finished Loading Content. Calling base.Initialize()");
@@ -116,8 +116,6 @@ namespace GuiTests.Screens
 
             _mainCanvas.Update(gameTime);
             _world.Update(gameTime);
-
-            base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
@@ -137,8 +135,6 @@ namespace GuiTests.Screens
             //{
             //}
             //_spriteBatch.End();
-
-            base.Draw(gameTime);
         }
 
         private void DrawDebugInformation()
@@ -197,7 +193,7 @@ namespace GuiTests.Screens
                 DrawDepth = 0.0f,
                 TextureAtlas = textureAtlas
             };
-            btnExit.Clicked += (sender, args) => GameRoot.Exit();
+            btnExit.Clicked += (sender, args) => Game.Exit();
             _mainCanvas.AddControl(btnExit);
 
             var btnExitTooltip = new Tooltip("TooltipButtonExit", btnExit, Assets.MainFont)

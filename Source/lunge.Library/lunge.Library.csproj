@@ -25,4 +25,8 @@
     <Folder Include="Physics\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Deps\FSMSharp\src\FSMSharp\FSMSharp\FSMSharp.csproj" />
+  </ItemGroup>
+
 </Project>

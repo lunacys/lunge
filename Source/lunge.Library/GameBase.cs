@@ -80,7 +80,7 @@ namespace lunge.Library
 
             ResourceManager = new ResourceManager();
 
-            ScreenManagerComponent = new ScreenGameComponent(this);
+            ScreenManagerComponent = new ScreenGameComponent();
             Components.Add(ScreenManagerComponent);
             GameSettings = GameSettingsComponent.GameSettings;
         }
@@ -133,7 +133,7 @@ namespace lunge.Library
 
         public void AddScreen<T>(T screen, bool showImmediately = true) where T : Screen
         {
-            ScreenManagerComponent.Register(screen);
+            // ScreenManagerComponent.Register(screen);
             //if (showImmediately)
             //    screen.Show<T>();
         }

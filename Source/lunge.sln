@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lunge.MapEditor", "lunge.Ma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuiTests", "Demos\GuiTests\GuiTests.csproj", "{7B32EEF2-EBB1-4A2F-86AB-E2C4D63AA7EE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deps", "Deps", "{852C6E38-C204-4722-9845-FC4BFDB8065A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FSMSharp", "..\Deps\FSMSharp\src\FSMSharp\FSMSharp\FSMSharp.csproj", "{835D5626-D16A-4FFA-8FE9-70752CF20900}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +41,10 @@ Global
 		{7B32EEF2-EBB1-4A2F-86AB-E2C4D63AA7EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B32EEF2-EBB1-4A2F-86AB-E2C4D63AA7EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B32EEF2-EBB1-4A2F-86AB-E2C4D63AA7EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{835D5626-D16A-4FFA-8FE9-70752CF20900}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{835D5626-D16A-4FFA-8FE9-70752CF20900}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{835D5626-D16A-4FFA-8FE9-70752CF20900}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{835D5626-D16A-4FFA-8FE9-70752CF20900}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +52,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{72FDCFDE-C93F-48BD-BE89-8EB9DCBA3477} = {0943A64D-15D5-4892-94AF-5DFFB1FB1844}
 		{7B32EEF2-EBB1-4A2F-86AB-E2C4D63AA7EE} = {0474E88A-E553-4437-9599-732852C00D4F}
+		{835D5626-D16A-4FFA-8FE9-70752CF20900} = {852C6E38-C204-4722-9845-FC4BFDB8065A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B8220726-0232-4444-BE3D-52287BF04A3D}
