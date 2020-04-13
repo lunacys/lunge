@@ -14,8 +14,7 @@ namespace lunge.Library.Debugging.Logging
         /// <summary>
         /// File target provided by <see cref="FileStream"/> class
         /// </summary>
-        File = 2,
-        Database = 4
+        File = 2
     }
 }
 
