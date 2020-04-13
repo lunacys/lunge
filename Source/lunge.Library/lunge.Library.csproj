@@ -16,11 +16,9 @@
     <PackageReference Include="MonoGame.Extended.Particles" Version="3.7.0" />
     <PackageReference Include="MonoGame.Framework.DesktopGL.Core" Version="3.8.0.13" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.112.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Db\Connections\" />
     <Folder Include="Entities\Components\" />
     <Folder Include="Physics\" />
   </ItemGroup>
