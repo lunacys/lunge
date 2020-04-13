@@ -3,6 +3,7 @@
 A cross-platform 2D Game Engine written in C# using **MonoGame** and **MonoGame.Extended**.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/1jkjxg3iupocpniy?svg=true)](https://ci.appveyor.com/project/lunacys/lunge)
+![CI](https://github.com/lunacys/lunge/workflows/CI/badge.svg?branch=develop)
 
 ## Description
 

@@ -62,7 +62,7 @@ namespace lunge.Library.Settings
                     str = sr.ReadToEnd();
                 }
 
-                var tmp = JsonConvert.DeserializeObject<GameSettings>(str, new GameSettingsConverter());
+                var tmp = JsonConvert.DeserializeObject<GameSettings>(str);
                 foreach (var gameSetting in tmp)
                 {
                     gameSettings.Add(gameSetting.Key, gameSetting.Value);
@@ -76,12 +76,12 @@ namespace lunge.Library.Settings
 
         protected override void UnloadContent()
         {
-            DeserializeToFile();
+            // SerializeToFile();
 
             base.UnloadContent();
         }
 
-        public void DeserializeToFile()
+        public void SerializeToFile()
         {
             string str = JsonConvert.SerializeObject(GameSettings, Formatting.Indented);
 

@@ -70,7 +70,7 @@ namespace lunge.Library
             GameSettings = gameSettings;
 
             GameSettingsComponent = new GameSettingsGameComponent(this, GameSettings);
-            if (!GameSettingsComponent.TryLoad())
+            // if (!GameSettingsComponent.TryLoad())
                 GameSettings.LoadDefaults();
 
             Graphics.PreferredBackBufferWidth = Convert.ToInt32(GameSettings["WindowWidth"]);
@@ -80,7 +80,7 @@ namespace lunge.Library
 
             ResourceManager = new ResourceManager();
 
-            ScreenManagerComponent = new ScreenGameComponent(this);
+            ScreenManagerComponent = new ScreenGameComponent();
             Components.Add(ScreenManagerComponent);
             GameSettings = GameSettingsComponent.GameSettings;
         }
@@ -110,7 +110,7 @@ namespace lunge.Library
 
         protected override void UnloadContent()
         {
-            //GameSettingsComponent.DeserializeToFile();
+            //GameSettingsComponent.SerializeToFile();
 
             base.UnloadContent();
         }
@@ -133,7 +133,7 @@ namespace lunge.Library
 
         public void AddScreen<T>(T screen, bool showImmediately = true) where T : Screen
         {
-            ScreenManagerComponent.Register(screen);
+            // ScreenManagerComponent.Register(screen);
             //if (showImmediately)
             //    screen.Show<T>();
         }

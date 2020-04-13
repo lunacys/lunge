@@ -42,8 +42,8 @@ namespace GuiTests
             _gameplayScreen = new GameplayScreen(this);
 
             Logger.Log("Registering new screen: GameplayScreen");
-            _screenComponent = new ScreenGameComponent(this);
-            _screenComponent.Register(_gameplayScreen);
+            _screenComponent = new ScreenGameComponent();
+            _screenComponent.LoadScreen(_gameplayScreen);
             Components.Add(_screenComponent);
 
             Logger.Log("Creating FramesPerSecondCounterComponent");

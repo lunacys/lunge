@@ -105,7 +105,7 @@ Task("Publish")
 
         var settings = new DotNetCorePublishSettings
         {
-            Framework = "netcoreapp2.2",
+            Framework = "netcoreapp3.1",
             Configuration = "Release",
             Runtime = "win-x86",
             SelfContained = true,
@@ -120,7 +120,7 @@ Task("Publish")
 
     var lungeSettings = new DotNetCorePublishSettings
     {
-        Framework = "netstandard2.0",
+        Framework = "netstandard2.1",
         Configuration = "Release",
         Runtime = "win-x86",
         SelfContained = false,

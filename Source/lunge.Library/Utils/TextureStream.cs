@@ -9,8 +9,6 @@ namespace lunge.Library.Utils
 {
     public static class TextureStream
     {
-        //static Texture2D _texture;
-
         public static GraphicsDevice GraphicsDevice { get; set; }
 
         /// <summary>
@@ -35,7 +33,8 @@ namespace lunge.Library.Utils
         /// <param name="texturePath">Path to the texture without Content directory.</param>
         public static Texture2D Load(string texturePath)
         {
-            if (GraphicsDevice == null) throw new NullReferenceException("CurrentGraphicsDevice is null!");
+            if (GraphicsDevice == null) 
+                throw new ArgumentNullException(nameof(GraphicsDevice), "Current GraphicsDevice is null!");
 
             Texture2D texture;
             if (File.Exists(texturePath))
@@ -54,14 +53,14 @@ namespace lunge.Library.Utils
             return texture;
         }
 
-        public static List<Texture2D> LoadToList(GraphicsDevice graphics, params string[] texturesPaths)
+        public static List<Texture2D> LoadToList(params string[] texturesPaths)
         {
             var list = new List<Texture2D>(texturesPaths.Length);
             list.AddRange(texturesPaths.Select(Load));
             return list;
         }
 
-        public static Dictionary<string, Texture2D> LoadToDictionary(GraphicsDevice graphics, params string[] texturePaths)
+        public static Dictionary<string, Texture2D> LoadToDictionary(params string[] texturePaths)
         {
             var dict = new Dictionary<string, Texture2D>(texturePaths.Length);
             foreach (var tp in texturePaths)

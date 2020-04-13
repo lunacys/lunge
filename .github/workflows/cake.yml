@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [ master, develop ]
+  pull_request:
+    branches: [ master, develop ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    # TODO: Fix build on all systems
+    #strategy:
+    #  matrix:
+    #    os: [windows-latest, ubuntu-latest, macOS-latest]
+    steps:
+      - name: Get the sources
+        uses: actions/checkout@v1
+      - name: Run the build script
+        uses: ecampidoglio/cake-action@master
+        with:
+          target: Default
