@@ -15,10 +15,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lunge.MapEditor", "lunge.Ma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuiTests", "Demos\GuiTests\GuiTests.csproj", "{7B32EEF2-EBB1-4A2F-86AB-E2C4D63AA7EE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deps", "Deps", "{852C6E38-C204-4722-9845-FC4BFDB8065A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FSMSharp", "..\Deps\FSMSharp\src\FSMSharp\FSMSharp\FSMSharp.csproj", "{835D5626-D16A-4FFA-8FE9-70752CF20900}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
