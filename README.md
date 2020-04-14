@@ -1,31 +1,41 @@
 # LunarisGameEngine (lunge)
 
-A cross-platform 2D Game Engine written in C# using **MonoGame** and **MonoGame.Extended**.
+A cross-platform 2D and 3D Game Engine written in C# using **MonoGame** and **MonoGame.Extended**.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/1jkjxg3iupocpniy?svg=true)](https://ci.appveyor.com/project/lunacys/lunge)
 
 | Branch | Badge |
 | --- | --- |
-| `master`: | ![Cake CI](https://github.com/lunacys/lunge/workflows/Cake%20CI/badge.svg?branch=master) |
-| `develop`: | ![CI](https://github.com/lunacys/lunge/workflows/Cake%20CI/badge.svg?branch=develop) |
+| `master` | ![Cake CI](https://github.com/lunacys/lunge/workflows/Cake%20CI/badge.svg?branch=master) |
+| `develop` | ![CI](https://github.com/lunacys/lunge/workflows/Cake%20CI/badge.svg?branch=develop) |
 
 ## Description
 
+### Documentation
 
+Compiled documentation can be found [here](http://loonacuse.link/lunge).
+
+The sources are in the `docs/` directory. You probably need files with `*.md` extension. The rest are compiled sources.
 
 ### Dependencies
 
-The project uses MonoGame together with **MonoGame.Extended**, **MonoGame.Extended.Input** and **MonoGame.Extended.Particles**. The **MonoGame.Extended** dependencies are placed in the `~/Deps` directory. The reason why the deps are placed just inside a folder as DLL file and not as NuGet package is that there are some changes in the deps and they are compiled as .NET Standard projects.
+Every required dependency is taken as a NuGet package. So everything will be ok after just restoring them using this command:
+
+```bash
+dotnet restore
+```
 
 ### Build
 
 #### Projects
 
-In order to build the engine, you need to download **.NET Core 2.2 SDK** or higher. Next, go to the root directory of the repo, and run `build.ps1` if you're using Windows, or `build.sh` if you're using Linux or MacOS.
+In order to build the engine and the demos, you need to download **.NET Core 3.1 SDK** or higher. Next, go to the root directory of the repo, and run `build.ps1` if you're on Windows, or `build.sh` if you're on Linux or MacOS.
 
-The sources are located at `./Source/lunge.Library`.
+Engine sources are located at `./Source/lunge.Library`.
 
-Tests are located at `./Source/Tests/lunge.Lib`.
+Engine Tests are located at `./Source/Tests/lunge.Lib`.
+
+Demos are at `./Source/Demos/`.
 
 #### Docs
 
@@ -97,7 +107,9 @@ After that, the book is ready to use from `_books/` directory as `index.html` fi
 - [ ] Basic AI
 - [ ] Shadows/Lights system
 - [ ] Collision detection/Collision resolving
-- [ ] Physics
+- [ ] Voxel graphics support
+- [ ] 2D Physics
+- [ ] 3D Physics
 - [ ] Map editor
 - [ ] Entity editor
 - [ ] Particle editor
