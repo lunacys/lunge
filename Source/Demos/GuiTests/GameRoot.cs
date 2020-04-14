@@ -17,11 +17,11 @@ namespace GuiTests
         private GameplayScreen _gameplayScreen;
         private FramesPerSecondCounterComponent _fpsCounter;
 
-        private readonly LogHelper Logger = LogHelper.GetLogger(nameof(GameRoot), LogTarget.Console);
+        private readonly LogHelper _logger = LoggerFactory.GetLogger(nameof(GameRoot));
 
         public GameRoot()
         {
-            Logger.Log("Constructing..");
+            _logger.Log("Constructing..");
 
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -31,44 +31,44 @@ namespace GuiTests
 
             Window.AllowUserResizing = true;
 
-            Logger.Log("Constructing done!");
+            _logger.Log("Constructing done!");
         }
 
         protected override void Initialize()
         {
-            Logger.Log("Initializing..");
+            _logger.Log("Initializing..");
 
-            Logger.Log("Creating a new screen: GameplayScreen");
+            _logger.Log("Creating a new screen: GameplayScreen");
             _gameplayScreen = new GameplayScreen(this);
 
-            Logger.Log("Registering new screen: GameplayScreen");
+            _logger.Log("Registering new screen: GameplayScreen");
             _screenComponent = new ScreenGameComponent();
             _screenComponent.LoadScreen(_gameplayScreen);
             Components.Add(_screenComponent);
 
-            Logger.Log("Creating FramesPerSecondCounterComponent");
+            _logger.Log("Creating FramesPerSecondCounterComponent");
             _fpsCounter = new FramesPerSecondCounterComponent(this);
             Components.Add(_fpsCounter);
-            Logger.Log("Adding FramesPerSecondCounterComponent as Service");
+            _logger.Log("Adding FramesPerSecondCounterComponent as Service");
             Services.AddService(_fpsCounter);
 
             var fpsCounter = Services.GetService<FramesPerSecondCounterComponent>();
-            Logger.Log("Service: " + fpsCounter);
+            _logger.Log("Service: " + fpsCounter);
 
-            Logger.Log("Initialization done. Calling base.Initialize()");
+            _logger.Log("Initialization done. Calling base.Initialize()");
 
             base.Initialize();
 
-            Logger.Log("Done Calling base.Initialize()");
+            _logger.Log("Done Calling base.Initialize()");
         }
 
         protected override void LoadContent()
         {
-            Logger.Log("Loading Content..");
+            _logger.Log("Loading Content..");
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Logger.Log("Done loading content");
+            _logger.Log("Done loading content");
 
             base.LoadContent();
         }

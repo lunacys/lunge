@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
+ using MonoGame.Extended.Input.InputListeners;
 
-namespace lunge.Library.Input
+ namespace lunge.Library.Input
 {
     // TODO: Make support for using Command pattern based on the Entity class
     /// <summary>

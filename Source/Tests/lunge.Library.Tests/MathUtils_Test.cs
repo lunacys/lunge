@@ -14,8 +14,8 @@ namespace lunge.Library.Tests
         [Test]
         public void InBetween_Test()
         {
-            Assert.AreEqual(MathUtils.InBetween(100f, 50f, 0f, 100f), 50.0f);
-            Assert.AreEqual(MathUtils.InBetween(200f, 50f, 0f, 100f), 100.0f);
+            Assert.AreEqual(MathUtils.NormalizeInRange(100f, 50f, 0f, 100f), 50.0f);
+            Assert.AreEqual(MathUtils.NormalizeInRange(200f, 50f, 0f, 100f), 100.0f);
         }
 
         [Test]

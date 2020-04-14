@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace lunge.Library.Debugging.Logging
+namespace lunge.Library.Debugging.Logging.Loggers
 {
     public class ConsoleLogger : Logger
     {
         private ConsoleColor _origColor;
+        public ConsoleColor ColorDebug { get; set; }
         public ConsoleColor ColorInfo { get; set; }
         public ConsoleColor ColorWarning { get; set; }
         public ConsoleColor ColorError { get; set; }
@@ -19,6 +20,7 @@ namespace lunge.Library.Debugging.Logging
 
         protected void TakeDefaultColors()
         {
+            ColorDebug = ConsoleColor.Gray;
             ColorInfo = ConsoleColor.White;
             ColorWarning = ConsoleColor.DarkYellow;
             ColorError = ConsoleColor.Red;
@@ -31,6 +33,9 @@ namespace lunge.Library.Debugging.Logging
             {
                 switch (level)
                 {
+                    case LogLevel.Debug:
+                        Console.ForegroundColor = ColorDebug;
+                        break;
                     case LogLevel.Info:
                         Console.ForegroundColor = ColorInfo;
                         break;
@@ -57,6 +62,9 @@ namespace lunge.Library.Debugging.Logging
         {
             switch (level)
             {
+                case LogLevel.Debug:
+                    Console.ForegroundColor = ColorDebug;
+                    break;
                 case LogLevel.Info:
                     Console.ForegroundColor = ColorInfo;
                     break;

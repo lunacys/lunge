@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace lunge.Library.Debugging.Logging
+namespace lunge.Library.Debugging.Logging.Loggers
 {
     public class QueueLogger : Logger
     {

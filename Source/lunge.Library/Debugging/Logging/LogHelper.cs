@@ -1,55 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace lunge.Library.Debugging.Logging
 {
-    // TODO: ADD CONTEXT (e.g. GameplayScreen, GameRoot, etc.)!
     /// <summary>
     /// Provides a logging system which might work on either sync or async.
     /// </summary>
     public class LogHelper
     {
-        private static readonly List<Logger> ActiveLoggers = new List<Logger>();
-        private static readonly Dictionary<string, LogHelper> LogHelpers = new Dictionary<string, LogHelper>();
         public string Context { get; }
+        private List<Logger> ActiveLoggers { get; }
+        private List<ILoggerDrawable> _drawableLoggers;
 
-        internal LogHelper(string context, LogTarget target)
+        public void AddLogger(Logger logger)
+        {
+            if (ActiveLoggers.Contains(logger))
+            {
+                return;
+            }
+
+            ActiveLoggers.Add(logger);
+
+            if (logger is ILoggerDrawable drawable)
+                _drawableLoggers.Add(drawable);
+        }
+
+        internal LogHelper(string context, IEnumerable<Logger> activeLoggers)
         {
             Context = context;
-
-            Target = target;
+            ActiveLoggers = new List<Logger>();
+            ActiveLoggers.AddRange(activeLoggers);
+            _drawableLoggers = new List<ILoggerDrawable>();
         }
 
-        public static LogTarget Target
-        {
-            get => _target;
-            set
-            {
-                ActiveLoggers.Clear();
-
-                if (value.HasFlag(LogTarget.Console))
-                    ActiveLoggers.Add(new ConsoleLogger());
-                if (value.HasFlag(LogTarget.File))
-                    ActiveLoggers.Add(new FileLogger());
-
-                _target = value;
-            }
-        }
-        
-        private static LogTarget _target;
-
-        public static LogHelper GetLogger(string context = "", LogTarget target = LogTarget.Console | LogTarget.File)
-        {
-            if (!LogHelpers.ContainsKey(context))
-            {
-                LogHelpers[context] = new LogHelper(context, target);
-            }
-
-            return LogHelpers[context];
-        }
-
-        public void Log(string message, LogLevel level = LogLevel.Info)
+        public void Log(string message, LogLevel level = LogLevel.Debug)
         {
             var builtString = BuildString(message, level);
 
@@ -57,12 +44,20 @@ namespace lunge.Library.Debugging.Logging
                 logger.Log(builtString, level);
         }
 
-        public async Task LogAsync(string message, LogLevel level = LogLevel.Info)
+        public async Task LogAsync(string message, LogLevel level = LogLevel.Debug)
         {
             var buildString = BuildString(message, level);
 
             foreach (var logger in ActiveLoggers)
                 await logger.LogAsync(buildString, level).ConfigureAwait(false);
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            foreach (var logger in _drawableLoggers)
+            {
+                logger.Draw(spriteBatch);
+            }
         }
 
         private string BuildString(string message, LogLevel level)
@@ -72,11 +67,14 @@ namespace lunge.Library.Debugging.Logging
 
             switch (level)
             {
+                case LogLevel.Debug:
+                    result += $"[DEBUG] - {curDateTimeStr} - {Context} - ";
+                    break;
                 case LogLevel.Info:
-                    result += $"[INFO] - {curDateTimeStr} - {Context} - ";
+                    result += $"[INFO]  - {curDateTimeStr} - {Context} - ";
                     break;
                 case LogLevel.Warning:
-                    result += $"[WARN] - {curDateTimeStr} - {Context} - ";
+                    result += $"[WARN]  - {curDateTimeStr} - {Context} - ";
                     break;
                 case LogLevel.Error:
                     result += $"[ERROR] - {curDateTimeStr} - {Context} - ";

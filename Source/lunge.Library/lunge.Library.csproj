@@ -4,6 +4,14 @@
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Entities\ECS\**" />
     <EmbeddedResource Remove="Entities\ECS\**" />
@@ -12,6 +20,9 @@
 
   <ItemGroup>
     <PackageReference Include="FSMSharp.Core" Version="1.0.0" />
+    <PackageReference Include="ImGui.NET" Version="1.75.0" />
+    <PackageReference Include="Lidgren.Network.Core2" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Win32.Registry" Version="4.7.0" />
     <PackageReference Include="MonoGame.Extended" Version="3.7.0" />
     <PackageReference Include="MonoGame.Extended.Input" Version="3.7.0" />
     <PackageReference Include="MonoGame.Extended.Particles" Version="3.7.0" />

@@ -1,16 +1,13 @@
 ﻿using System;
-using System.IO;
 using lunge.Library.Debugging.Logging;
 using lunge.Library.GameAssets;
 using lunge.Library.GameTimers;
 using lunge.Library.Resources;
 using lunge.Library.Screens;
-using lunge.Library.Serialization;
 using lunge.Library.Settings;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.ViewportAdapters;
-using Newtonsoft.Json;
 
 namespace lunge.Library
 {
@@ -56,8 +53,6 @@ namespace lunge.Library
             Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            LogHelper.Target = LogTarget.Console | LogTarget.File;
-
             if (assetManager == null)
                 assetManager = new ContentAssetManager(Content);
             AssetManager = assetManager;
@@ -91,9 +86,6 @@ namespace lunge.Library
             Services.AddService(GameSettings);
             Services.AddService(ResourceManager);
 
-            
-
-            
 
             base.Initialize();
 

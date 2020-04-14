@@ -18,7 +18,7 @@ namespace lunge.Library
         /// <param name="minValue">Minimal value</param>
         /// <param name="maxValue">Maximal value</param>
         /// <returns>The intermediate value</returns>
-        public static float InBetween(float width, float currentValue, float minValue, float maxValue)
+        public static float NormalizeInRange(float width, float currentValue, float minValue, float maxValue)
         {
             return width * (currentValue / (maxValue - minValue));
         }

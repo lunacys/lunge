@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using ImGuiNET;
 using lunge.Library;
 using lunge.Library.Debugging.Logging;
+using lunge.Library.Debugging.Logging.Loggers;
 using lunge.Library.Entities;
+using lunge.Library.Graphics;
 using lunge.Library.Gui.Old;
 using lunge.Library.Gui.Old.Controls;
 using lunge.Library.Input;
+using lunge.Library.Platform;
 using lunge.Library.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -18,7 +22,7 @@ namespace GuiTests.Screens
 {
     public class GameplayScreen : Screen
     {
-        private readonly LogHelper Logger = LogHelper.GetLogger(nameof(GameplayScreen), LogTarget.Console);
+        private readonly LogHelper _logger = LoggerFactory.GetLogger();
 
         private SpriteBatch _spriteBatch;
 
@@ -30,50 +34,58 @@ namespace GuiTests.Screens
 
         private Button _btnPnl;
 
+        private ImGuiRenderer _imGuiRenderer;
+        private bool _showTestWindow = true;
+
         public GameplayScreen(GameBase game) 
             : base(game)
         {
-            Logger.Log("Constructing GameplayScreen..");
+            _logger.AddLogger(new DrawableLogger(DrawableLoggerStyle.Append, Assets.MainFont, new Vector2(16, 16), Color.Black, 50));
+
+            _logger.Log("Constructing GameplayScreen..");
 
             game.ViewportAdapter = new WindowViewportAdapter(game.Window, game.GraphicsDevice);
             _camera = new OrthographicCamera(game.ViewportAdapter);
 
-            Logger.Log("Done constructing GameplayScreen");
+            _logger.Log("Done constructing GameplayScreen");
         }
 
         public override void Initialize()
         {
-            Logger.Log("Initializing..");
+            _logger.Log("Initializing..");
 
             _world = new WorldBuilder(Game).Build();
 
+            _imGuiRenderer = new ImGuiRenderer(Game);
+            _imGuiRenderer.RebuildFontAtlas();
 
             _inputHandler = new InputHandler(Game, _camera);
 
             _mainCanvas = new Canvas(Game, "MainCanvas", Vector2.Zero, new Size2(800, 600));
             
 
-            Logger.Log("Initialization done. Calling base.Initialize()");
+            _logger.Log("Initialization done. Calling base.Initialize()");
 
             base.Initialize();
 
-            Logger.Log("Done Calling base.Initialize()");
+            _logger.Log("Done Calling base.Initialize()");
         }
 
         public override void LoadContent()
         {
-            Logger.Log("Loading Content");
+            _logger.Log("Loading Content");
 
             _spriteBatch = new SpriteBatch(Game.GraphicsDevice);
             
             Assets.Load(Game.Content);
+
             InitializeGuiControls();
 
-            Logger.Log("Finished Loading Content. Calling base.Initialize()");
+            _logger.Log("Finished Loading Content. Calling base.Initialize()");
 
             base.LoadContent();
 
-            Logger.Log("Done Calling base.LoadContent()");
+            _logger.Log("Done Calling base.LoadContent()");
         }
 
         public override void Update(GameTime gameTime)
@@ -126,10 +138,16 @@ namespace GuiTests.Screens
                 _spriteBatch.DrawRectangle(_camera.BoundingRectangle, Color.LightGray, 5f);
                 
                 DrawDebugInformation();
+
+                _imGuiRenderer.BeforeLayout(gameTime);
+                ImGui.ShowDemoWindow(ref _showTestWindow);
+                _imGuiRenderer.AfterLayout();
             }
             _spriteBatch.End();
             //_mainCanvas.SpriteBatchSettings.TransformMatrix = _camera.GetViewMatrix();
             _mainCanvas.Draw(gameTime);
+
+            
 
             //_spriteBatch.Begin();
             //{
@@ -142,7 +160,8 @@ namespace GuiTests.Screens
             var basePosition = _camera.ScreenToWorld(Vector2.One * 16);
             var debugString =
                 $"Use WASD keys to move camera around\n" +
-                $"Camera Position: {_camera.Position}";
+                $"Camera Position: {_camera.Position}\n" +
+                $"Clipboard: {Clipboard.NativeClipboard.GetText()}";
 
             foreach (var entity in _world.GetAllEntities())
             {
@@ -151,7 +170,8 @@ namespace GuiTests.Screens
 
             debugString += "\n";
 
-            _spriteBatch.DrawString(Assets.MainFont, debugString, basePosition, Color.Black);
+            //_spriteBatch.DrawString(Assets.MainFont, debugString, basePosition, Color.Black);
+            _logger.Draw(_spriteBatch);
         }
 
         private void InitializeGuiControls()
