@@ -55,63 +55,19 @@ After that, the book is ready to use from `_books/` directory as `index.html` fi
 
 ### Current roadmap
 
-#### TODO
-
-- [x] Game Engine Architecture (On paper)
-- [ ] ECS Basis/Architecture
-- [ ] Main Components/Systems:
-  - [ ] Input handlers
-    - [x] Keyboard
-    - [x] Mouse
-    - [ ] GamePad
-    - [ ] Handler as component
-    - [ ] Input commands
-  - [ ] Entity components:
-    - [x] Sprite
-    - [x] Animation
-  - [x] Resource Manager/Dispatcher
-  - [ ] System container
-  - [ ] States
-  - [x] World
-- [x] Asset manager
-- [ ] GUI
-  - [x] Parent/Child controls
-  - [ ] Controls:
-    - [x] Canvas
-    - [x] Label
-    - [ ] Chart
-      - [x] Base data view (points + lines)
-      - [ ] Bar view
-      - [ ] Tooltips with formatted data
-      - [ ] Helper buttons & labels (clear, average value, etc.)
-      - [ ] Move left/right
-      - [ ] Take snapshot
-    - [x] Button
-    - [x] Tooltip
-    - [x] Panel
-    - [ ] TreeView
-    - [ ] TextBox
-    - [ ] RadioButton
-    - [ ] CheckBox
-    - [ ] ComboBox
-    - [ ] GroupBox
-    - [ ] ScrollBar
-    - [ ] LinkLabel
-    - [ ] ProgressBar
-    - [ ] TrackBar
-    - [ ] GridView
-      - [x] Basic output: draw a grid with attached controls (e.g. label, button, etc)
-      - [ ] Data source support
-  - [ ] Make all the properties of a control changeable
-- [ ] Steering behaviors & Steering behavior manager
-- [ ] Basic AI
-- [ ] Shadows/Lights system
-- [ ] Collision detection/Collision resolving
-- [ ] Voxel graphics support
-- [ ] 2D Physics
-- [ ] 3D Physics
-- [ ] Map editor
-- [ ] Entity editor
-- [ ] Particle editor
-- [ ] Scripting (modding) with C#
-- [ ] Localization editor
+ - Fully implement input management and measure its performance
+ - Implement GUI interfaces for mine version and ImGUI. Probably need an easy switch for them
+ - Add advanced debugging tools: visualize cycles and memory usage for every component, add support for changing params in real time, etc
+ - Add easy to use input command manipulation which is quite useful for game replays, undos/redos, AI, etc
+ - Add behavioral functions, especially steering behaviors
+ - Fix GameSettings and make it more useful
+ - Implement new GUI
+ - Fully implement base game class (GameBase.cs)
+ - Write tests
+ - Add new demos for every aspect
+ - Add playable demo games to show all the engine's features
+ - Collision Handling
+ - Physics
+ - Networking
+ - 3D voxel engine
+ - Scripting. Thinking about Lua, C# or self-made alternative. For the last option the Bytecode pattern will be quite useful
