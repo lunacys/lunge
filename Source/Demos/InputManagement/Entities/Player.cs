@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using lunge.Library.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -26,15 +27,20 @@ namespace InputManagement.Entities
     {
         public PlayerDirection Direction { get; }
         public float Speed { get; set; }
+        private Vector2 _oldPosition;
+        private Player _player;
 
-        public MoveCommand(PlayerDirection direction, float speed)
+        public MoveCommand(Player player, PlayerDirection direction, float speed)
         {
+            _player = player;
             Direction = direction;
             Speed = speed;
         }
 
         public void Execute(Player entity)
         {
+            _oldPosition = entity.Position;
+
             switch (Direction)
             {
                 case PlayerDirection.Up:
@@ -53,6 +59,11 @@ namespace InputManagement.Entities
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        public void Undo()
+        {
+            _player.Position = _oldPosition;
+        }
     }
 
     public class Player : IInputHandleable
@@ -62,11 +73,21 @@ namespace InputManagement.Entities
         public InputHandler<Keys, Player> _handler;
         public float MovementSpeed { get; set; }
 
+        private MoveCommand _moveUp;
+        private MoveCommand _moveRight;
+        private MoveCommand _moveDown;
+        private MoveCommand _moveLeft;
+
         public Player(Texture2D texture)
         {
             Texture = texture;
             MovementSpeed = 4.0f;
             _handler = new InputHandler<Keys, Player>();
+
+            _moveUp = new MoveCommand(this, PlayerDirection.Up, MovementSpeed);
+            _moveRight = new MoveCommand(this, PlayerDirection.Right, MovementSpeed);
+            _moveDown = new MoveCommand(this, PlayerDirection.Down, MovementSpeed);
+            _moveLeft = new MoveCommand(this, PlayerDirection.Left, MovementSpeed);
 
             _handler.Register(
                 new InputEntry<Keys>(Keys.Space, InputManager.WasKeyPressed),
@@ -74,24 +95,32 @@ namespace InputManagement.Entities
             );
             _handler.Register(
                 Keys.W, InputManager.IsKeyDown,
-                new MoveCommand(PlayerDirection.Up, MovementSpeed)
+                _moveUp
             );
             _handler.Register(
                 Keys.D, InputManager.IsKeyDown,
-                new MoveCommand(PlayerDirection.Right, MovementSpeed)
+                _moveRight
             );
             _handler.Register(
                 Keys.S, InputManager.IsKeyDown,
-                new MoveCommand(PlayerDirection.Down, MovementSpeed)
+                _moveDown
             );
             _handler.Register(
                 Keys.A, InputManager.IsKeyDown,
-                new MoveCommand(PlayerDirection.Left, MovementSpeed)
+                _moveLeft
             );
         }
 
         public void Update(GameTime gameTime)
         {
+            if (InputManager.WasKeyPressed(Keys.R))
+            {
+                _moveUp.Undo();
+                _moveRight.Undo();
+                _moveDown.Undo();
+                _moveLeft.Undo();
+            }
+
             _handler.Handle(this);
         }
 

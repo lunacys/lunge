@@ -17,6 +17,11 @@ namespace lunge.Library.Input
             _commandMapper.Map(entry, command);
         }
 
+        public void Register(T key, Func<T, bool> handler, IInputCommand command)
+        {
+            _commandMapper.Map(key, handler, command);
+        }
+
         public void Remove(InputEntry<T> entry)
         {
             _commandMapper.Remove(entry);
