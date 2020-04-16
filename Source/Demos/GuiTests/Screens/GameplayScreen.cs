@@ -28,7 +28,6 @@ namespace GuiTests.Screens
 
         private World _world;
         private OrthographicCamera _camera;
-        private InputHandler _inputHandler;
 
         private Canvas _mainCanvas;
 
@@ -59,8 +58,6 @@ namespace GuiTests.Screens
             _imGuiRenderer = new ImGuiRenderer(Game);
             _imGuiRenderer.RebuildFontAtlas();
 
-            _inputHandler = new InputHandler(Game, _camera);
-
             _mainCanvas = new Canvas(Game, "MainCanvas", Vector2.Zero, new Size2(800, 600));
             
 
@@ -90,38 +87,36 @@ namespace GuiTests.Screens
 
         public override void Update(GameTime gameTime)
         {
-            _inputHandler.Update(gameTime);
-
-            if (_inputHandler.IsKeyDown(Keys.A))
+            if (InputManager.IsKeyDown(Keys.A))
             {
                 _camera.Move(-Vector2.UnitX);
             }
-            if (_inputHandler.IsKeyDown(Keys.D))
+            if (InputManager.IsKeyDown(Keys.D))
             {
                 _camera.Move(Vector2.UnitX);
             }
-            if (_inputHandler.IsKeyDown(Keys.W))
+            if (InputManager.IsKeyDown(Keys.W))
             {
                 _camera.Move(-Vector2.UnitY);
             }
-            if (_inputHandler.IsKeyDown(Keys.S))
+            if (InputManager.IsKeyDown(Keys.S))
             {
                 _camera.Move(Vector2.UnitY);
             }
 
-            if (_inputHandler.IsKeyDown(Keys.Left))
+            if (InputManager.IsKeyDown(Keys.Left))
             {
                 _btnPnl.Size -= new Size2(1, 0);
             }
-            if (_inputHandler.IsKeyDown(Keys.Right))
+            if (InputManager.IsKeyDown(Keys.Right))
             {
                 _btnPnl.Size += new Size2(1, 0);
             }
-            if (_inputHandler.IsKeyDown(Keys.Up))
+            if (InputManager.IsKeyDown(Keys.Up))
             {
                 _btnPnl.Size += new Size2(0, 1);
             }
-            if (_inputHandler.IsKeyDown(Keys.Down))
+            if (InputManager.IsKeyDown(Keys.Down))
             {
                 _btnPnl.Size -= new Size2(0, 1);
             }

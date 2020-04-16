@@ -3,6 +3,7 @@ using lunge.Library;
 using lunge.Library.Debugging;
 using lunge.Library.Debugging.Logging;
 using lunge.Library.GameTimers;
+using lunge.Library.Input;
 using lunge.Library.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -75,6 +76,8 @@ namespace GuiTests
 
         protected override void Update(GameTime gameTime)
         {
+            InputManager.Update(gameTime);
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
