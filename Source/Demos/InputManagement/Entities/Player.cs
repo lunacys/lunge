@@ -73,30 +73,26 @@ namespace InputManagement.Entities
                 new JumpCommand()
             );
             _handler.Register(
-                new InputEntry<Keys>(Keys.W, InputManager.IsKeyDown),
+                Keys.W, InputManager.IsKeyDown,
                 new MoveCommand(PlayerDirection.Up, MovementSpeed)
             );
             _handler.Register(
-                new InputEntry<Keys>(Keys.D, InputManager.IsKeyDown),
+                Keys.D, InputManager.IsKeyDown,
                 new MoveCommand(PlayerDirection.Right, MovementSpeed)
             );
             _handler.Register(
-                new InputEntry<Keys>(Keys.S, InputManager.IsKeyDown),
+                Keys.S, InputManager.IsKeyDown,
                 new MoveCommand(PlayerDirection.Down, MovementSpeed)
             );
             _handler.Register(
-                new InputEntry<Keys>(Keys.A, InputManager.IsKeyDown),
+                Keys.A, InputManager.IsKeyDown,
                 new MoveCommand(PlayerDirection.Left, MovementSpeed)
             );
         }
 
         public void Update(GameTime gameTime)
         {
-            // TODO: Check high CPU usage. Probably because of 'yield return'
-            foreach (var cmd in _handler.Handle())
-            {
-                cmd.Execute(this);
-            }
+            _handler.Handle(this);
         }
 
         public void Draw(SpriteBatch spriteBatch)

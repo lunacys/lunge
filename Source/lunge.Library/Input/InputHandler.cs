@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace lunge.Library.Input
 {
@@ -49,7 +50,12 @@ namespace lunge.Library.Input
 
         public void Register(InputEntry<T> entry, IInputCommand<TK> command)
         {
-            _commandMapper.Map(entry, command);
+            Register(entry.Key, entry.Func, command);
+        }
+
+        public void Register(T key, Func<T, bool> handler, IInputCommand<TK> command)
+        {
+            _commandMapper.Map(key, handler, command);
         }
 
         public void Remove(InputEntry<T> entry)
@@ -57,6 +63,12 @@ namespace lunge.Library.Input
             _commandMapper.Remove(entry);
         }
 
+        /// <summary>
+        /// Handles all the registered actions and returns all the actions that
+        /// satisfy the handler condition. Note: because of yield return this method
+        /// may be relatively slow and CPU-dependent.
+        /// </summary>
+        /// <returns><see cref="IEnumerable{T}"/> of <see cref="IInputCommand{T}"/></returns>
         public IEnumerable<IInputCommand<TK>> Handle()
         {
             foreach (var command in _commandMapper)
@@ -66,6 +78,15 @@ namespace lunge.Library.Input
             }
 
             yield return NullCommand;
+        }
+
+        public void Handle(TK handleable)
+        {
+            foreach (var cmd in _commandMapper)
+            {
+                if (cmd.Key.Func(cmd.Key.Key))
+                    cmd.Value.Execute(handleable);
+            }
         }
     }
 }
