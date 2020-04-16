@@ -31,6 +31,11 @@ namespace lunge.Library.Input
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T">Key enum to use, for example Keys or MouseButton</typeparam>
+    /// <typeparam name="TK">Class for which input handling will be used</typeparam>
     public class InputHandler<T, TK> where T : System.Enum where TK : IInputHandleable
     {
         public static readonly IInputCommand<TK> NullCommand = new NullCommand<TK>();

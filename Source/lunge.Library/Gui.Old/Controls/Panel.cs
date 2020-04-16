@@ -25,18 +25,18 @@ namespace lunge.Library.Gui.Old.Controls
             IsMoveable = false;
         }
 
-        public override void Update(GameTime gameTime, InputHandler inputHandler)
+        public override void Update(GameTime gameTime)
         {
             if (!IsMoveable)
                 return;
 
-            if (inputHandler.WasMouseButtonReleased(MouseButton.Left))
+            if (InputManager.WasMouseButtonReleased(MouseButton.Left))
             {
                 _isMoving = false;
                 return;
             }
 
-            var mousePos = inputHandler.MousePositionWorldToScreen;
+            var mousePos = InputManager.MousePosition;
 
             var rect = new RectangleF(Position.ToPoint(), new Size2(Size.Width, 12));
 
@@ -44,12 +44,12 @@ namespace lunge.Library.Gui.Old.Controls
             {
                 BorderColor = Color.DarkGray;
 
-                if (inputHandler.WasMouseButtonPressed(MouseButton.Left))
+                if (InputManager.WasMouseButtonPressed(MouseButton.Left))
                 {
                     _pivot = mousePos - Position;
                     _isMoving = true;
                 }
-                else if (inputHandler.WasMouseButtonPressed(MouseButton.Right))
+                else if (InputManager.WasMouseButtonPressed(MouseButton.Right))
                 {
                     Close();
                 }

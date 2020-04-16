@@ -33,8 +33,6 @@ namespace lunge.Library.Gui.Old
 
         private bool _isUpdating;
 
-        protected InputHandler InputHandler { get; }
-
         public SpriteBatchSettings SpriteBatchSettings { get; }
 
         public event EventHandler MouseHover;
@@ -56,8 +54,6 @@ namespace lunge.Library.Gui.Old
             ChildControls = new ControlList();
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            InputHandler = new InputHandler(game);
 
             SpriteBatchSettings = new SpriteBatchSettings();
         }
@@ -133,13 +129,11 @@ namespace lunge.Library.Gui.Old
 
         public override void Update(GameTime gameTime)
         {
-            InputHandler.Update(gameTime);
-
             _isUpdating = true;
 
             foreach (var control in _controlList)
             {
-                control.Update(gameTime, InputHandler);
+                control.Update(gameTime);
                 CheckBounds(control);
             }
 
@@ -191,7 +185,6 @@ namespace lunge.Library.Gui.Old
 
         // TODO: Get rid of these three methods
         public virtual void Initialize(Canvas canvas) { }
-        public virtual void Update(GameTime gameTime, InputHandler inputHandler) { }
         public virtual void Draw(SpriteBatch spriteBatch) { }
 
         public RectangleF GetBounds()

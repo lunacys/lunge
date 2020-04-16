@@ -45,15 +45,15 @@ namespace lunge.Library.Gui.Old.Controls
             Font = font;
         }
 
-        public override void Update(GameTime gameTime, InputHandler inputHandler)
+        public override void Update(GameTime gameTime)
         {
-            if (BoundingRect.Contains(inputHandler.MousePosition))
+            if (BoundingRect.Contains(InputManager.MousePosition))
             {
-                if (inputHandler.IsMouseButtonDown(MouseButton.Left))
+                if (InputManager.IsMouseButtonDown(MouseButton.Left))
                 {
                     State = ButtonState.Clicking;
                 }
-                else if (inputHandler.WasMouseButtonReleased(MouseButton.Left))
+                else if (InputManager.WasMouseButtonReleased(MouseButton.Left))
                 {
                     if (State == ButtonState.Clicking)
                     {
@@ -72,7 +72,7 @@ namespace lunge.Library.Gui.Old.Controls
                 State = ButtonState.None;
             }
 
-            base.Update(gameTime, inputHandler);
+            base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

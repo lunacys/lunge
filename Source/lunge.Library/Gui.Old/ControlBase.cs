@@ -49,12 +49,12 @@ namespace lunge.Library.Gui.Old
             Initialized?.Invoke(this, EventArgs.Empty);
         }
 
-        public virtual void Update(GameTime gameTime, InputHandler inputHandler)
+        public virtual void Update(GameTime gameTime)
         {
             if (!_origPos.HasValue)
                 _origPos = Position;
 
-            var mousePosition = inputHandler.MousePositionScreenToWorld;
+            var mousePosition = InputManager.MousePosition;
 
             if (ParentControl != null)
             {

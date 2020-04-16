@@ -76,11 +76,11 @@ namespace lunge.Library.Gui.Old.Controls
             _bounds = new RectangleF(Position, Size);
         }
 
-        public override void Update(GameTime gameTime, InputHandler inputHandler)
+        public override void Update(GameTime gameTime)
         {
             _delayTimer.Update(gameTime);
 
-            var mousePos = inputHandler.MousePositionScreenToWorld;
+            var mousePos = InputManager.MousePosition;
 
             if (ParentControl.GetBounds().Contains(mousePos))
             {
@@ -99,7 +99,7 @@ namespace lunge.Library.Gui.Old.Controls
                 IsVisible = false;
             }
 
-            base.Update(gameTime, inputHandler);
+            base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

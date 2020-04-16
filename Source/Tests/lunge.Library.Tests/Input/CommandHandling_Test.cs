@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace lunge.Library.Tests.Input
 {
-    class TestEntity : Entity { }
+    class TestEntity : Entity, IInputHandleable { }
 
     class JumpCommand : IInputCommand<TestEntity>
     {
