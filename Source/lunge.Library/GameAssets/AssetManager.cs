@@ -14,7 +14,7 @@ namespace lunge.Library.GameAssets
     public class AssetManager : IAssetManager
     {
         private readonly Dictionary<string, object> _loadedAssets = new Dictionary<string, object>();
-        private readonly Dictionary<string, object> _assetLoaders = new Dictionary<string, object>();
+        private readonly List<Tuple<object, AssetLoaderAttribute>> _assetLoaders = new List<Tuple<object, AssetLoaderAttribute>>();
 
         private readonly GraphicsDevice _graphicsDevice;
 
@@ -28,6 +28,8 @@ namespace lunge.Library.GameAssets
             _graphicsDevice = graphicsDevice;
             
             AssetDirectory = assetDirectory;
+
+            InitializeContentLoaders();
         }
 
         /// <summary>
@@ -45,6 +47,39 @@ namespace lunge.Library.GameAssets
             }
         }
 
+        private void InitializeContentLoaders()
+        {
+            // Get current assembly
+            var loaderAssembly = Assembly.GetExecutingAssembly();
+
+            // Find all content loaders
+            var types = loaderAssembly
+                .GetTypes()
+                .Where(t => t.IsClass && t.GetInterfaces().Any(x =>
+                    x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IAssetLoader<>)));
+
+            // TODO: Add a better way to handle and load assets
+            foreach (var type in types)
+            {
+                if (type
+                    .GetCustomAttributes(false)
+                    .FirstOrDefault(a => a is AssetLoaderAttribute) is AssetLoaderAttribute assetLoaderAttribute)
+                {
+                    if (type.GetInterfaces().Any(x => x == typeof(IGraphicalAsset)))
+                    {
+                        var graphAsset = (IGraphicalAsset)Activator.CreateInstance(type);
+                        graphAsset.GraphicsDevice = _graphicsDevice;
+                        _assetLoaders.Add(new Tuple<object, AssetLoaderAttribute>(graphAsset, assetLoaderAttribute));
+                    }
+                    else
+                    {
+                        var assetLoader = Activator.CreateInstance(type);
+                        _assetLoaders.Add(new Tuple<object, AssetLoaderAttribute>(assetLoader, assetLoaderAttribute));
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// Loads and returns an asset from the <see cref="AssetDirectory"/>
         /// </summary>
@@ -56,64 +91,12 @@ namespace lunge.Library.GameAssets
             if (_loadedAssets.ContainsKey(assetName))
                 return (T)_loadedAssets[assetName];
 
-            // Get current assembly
-            var loaderAssembly = Assembly.GetExecutingAssembly();
+            var loader = _assetLoaders.FirstOrDefault(o => o.Item1 is IAssetLoader<T>);
 
-            //Console.WriteLine($"Name: {loaderAssembly.FullName}");
+            if (loader == null)
+                throw new NullReferenceException("Couldn't find asset loader for specified type");
 
-            // Get first class than implements IAssetLoader interface with generic type T
-            var type = loaderAssembly
-                .GetTypes()
-                .FirstOrDefault(t => t.IsClass && t.GetInterfaces().Any(x =>
-                                         x.IsGenericType &&
-                                         x.GetGenericTypeDefinition() == typeof(IAssetLoader<>) &&
-                                         x.GetGenericArguments()[0] == typeof(T)));
-
-            if (type == null) throw new InvalidOperationException("Cannot find loader for this asset type");
-
-            //Console.WriteLine($"Full Name: {type.FullName}");
-
-            string assetLoaderName = String.Empty;
-            string assetSubdirectory = null;
-            IEnumerable<string> assetFileExtensions = new List<string>();
-
-            var attribute = type.GetCustomAttributes(false).FirstOrDefault(a => a is AssetLoaderAttribute);
-            if (attribute is AssetLoaderAttribute a1)
-            {
-                assetLoaderName = a1.AssetLoaderName;
-                assetSubdirectory = a1.AssetSubdirectory;
-                assetFileExtensions = a1.AssetFileExtensions;
-            }
-
-            IAssetLoader<T> assetLoader;
-
-            // Optimization: if we've already used this asset loader we do not need to create instance of it again
-            if (_assetLoaders.ContainsKey(assetLoaderName))
-            {
-                assetLoader = (IAssetLoader<T>)_assetLoaders[assetLoaderName];
-            }
-            else
-            {
-                // If it is a graphic asset, we should set its GraphicsDevice property
-                if (type.GetInterfaces().Any(x => x == typeof(IGraphicalAsset)))
-                {
-                    var graphAsset = (IGraphicalAsset)Activator.CreateInstance(type);
-                    graphAsset.GraphicsDevice = _graphicsDevice;
-
-                    assetLoader = graphAsset as IAssetLoader<T>;
-                }
-                else
-                {
-                    assetLoader = (IAssetLoader<T>)Activator.CreateInstance(type);
-                }
-
-                _assetLoaders[assetLoaderName] = assetLoader;
-            }
-
-            // Pass through the Load method 
-            var asset = Load(assetName, assetLoader, assetSubdirectory, assetFileExtensions);
-
-            return asset;
+            return Load(assetName, loader.Item1 as IAssetLoader<T>, loader.Item2.AssetSubdirectory, loader.Item2.AssetFileExtensions);
         }
 
         private T Load<T>(string assetName,
