@@ -49,6 +49,9 @@ namespace lunge.Library.GameAssets
 
         private void InitializeContentLoaders()
         {
+            if (_graphicsDevice == null)
+                throw new NullReferenceException("Please initialize GraphicsDevice first");
+
             // Get current assembly
             var loaderAssembly = Assembly.GetExecutingAssembly();
 
