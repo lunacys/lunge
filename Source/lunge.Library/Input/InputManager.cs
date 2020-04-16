@@ -180,6 +180,24 @@ namespace lunge.Library.Input
             return false;
         }
 
+        public static bool IsGamePadConnected => _gamePadState.IsConnected;
+
+        public static bool IsButtonDown(Buttons button)
+        {
+            return _gamePadState.IsButtonDown(button);
+        }
+
+        public static bool IsButtonUp(Buttons button)
+        {
+            return _gamePadState.IsButtonUp(button);
+        }
+
+        public static bool WasButtonPressed(Buttons button) =>
+            _gamePadState.IsButtonDown(button) && _oldGamePadState.IsButtonUp(button);
+
+        public static bool WasButtonReleased(Buttons button) =>
+            _gamePadState.IsButtonUp(button) && _oldGamePadState.IsButtonDown(button);
+
         public static bool IsCtrlDown() => IsKeyDown(Keys.LeftControl) || IsKeyDown(Keys.RightControl);
         public static bool IsAltDown() => IsKeyDown(Keys.LeftAlt) || IsKeyDown(Keys.RightAlt);
         public static bool IsShiftDown() => IsKeyDown(Keys.LeftShift) || IsKeyDown(Keys.RightShift);
