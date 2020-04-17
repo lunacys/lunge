@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using lunge.Library.GameAssets.AssetLoaders;
+using lunge.Library.Assets.AssetLoaders;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace lunge.Library.GameAssets
+namespace lunge.Library.Assets
 {
     /// <summary>
     /// Represents an asset loader that can load raw (not converted to .xnb format) files.

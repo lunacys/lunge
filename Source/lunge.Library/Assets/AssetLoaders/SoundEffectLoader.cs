@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Microsoft.Xna.Framework.Audio;
 
-namespace lunge.Library.GameAssets.AssetLoaders
+namespace lunge.Library.Assets.AssetLoaders
 {
     [AssetLoader("SoundEffect", "Sfx", ".wav")]
     public class SoundEffectLoader : IAssetLoader<SoundEffect>

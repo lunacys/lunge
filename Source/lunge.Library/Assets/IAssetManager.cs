@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace lunge.Library.GameAssets
+namespace lunge.Library.Assets
 {
     public interface IAssetManager : IDisposable
     {

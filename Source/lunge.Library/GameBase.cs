@@ -1,6 +1,6 @@
 ﻿using System;
+using lunge.Library.Assets;
 using lunge.Library.Debugging.Logging;
-using lunge.Library.GameAssets;
 using lunge.Library.GameTimers;
 using lunge.Library.Resources;
 using lunge.Library.Screens;

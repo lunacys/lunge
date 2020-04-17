@@ -1,8 +1,7 @@
 ﻿using System.IO;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
 
-namespace lunge.Library.GameAssets
+namespace lunge.Library.Assets
 {
     public class ContentAssetManager : IAssetManager
     {

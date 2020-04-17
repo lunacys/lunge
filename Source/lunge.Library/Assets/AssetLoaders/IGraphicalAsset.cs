@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 
-namespace lunge.Library.GameAssets.AssetLoaders
+namespace lunge.Library.Assets.AssetLoaders
 {
     public interface IGraphicalAsset
     {

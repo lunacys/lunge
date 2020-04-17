@@ -1,9 +1,8 @@
 ﻿using System;
-using System.IO;
 using lunge.Library.Utils;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace lunge.Library.GameAssets.AssetLoaders
+namespace lunge.Library.Assets.AssetLoaders
 {
     [AssetLoader("Texture2D", "Images", ".png", ".jpg", ".bmp", ".gif", ".tif", ".dds")]
     public class Texture2DLoader : IAssetLoader<Texture2D>, IGraphicalAsset

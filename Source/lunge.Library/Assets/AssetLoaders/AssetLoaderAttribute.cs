@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace lunge.Library.GameAssets.AssetLoaders
+namespace lunge.Library.Assets.AssetLoaders
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
     public sealed class AssetLoaderAttribute : Attribute

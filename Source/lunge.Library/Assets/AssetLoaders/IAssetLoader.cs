@@ -1,4 +1,4 @@
-﻿namespace lunge.Library.GameAssets.AssetLoaders
+﻿namespace lunge.Library.Assets.AssetLoaders
 {
     public interface IAssetLoader<out T>
     {
