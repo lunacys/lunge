@@ -2,11 +2,13 @@
 using lunge.Library.Assets;
 using lunge.Library.Debugging.Logging;
 using lunge.Library.GameTimers;
+using lunge.Library.Input;
 using lunge.Library.Resources;
 using lunge.Library.Screens;
 using lunge.Library.Settings;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.Screens.Transitions;
 using MonoGame.Extended.ViewportAdapters;
 
 namespace lunge.Library
@@ -15,7 +17,7 @@ namespace lunge.Library
     {
         protected GraphicsDeviceManager Graphics { get; set; }
         protected SpriteBatch SpriteBatch { get; set; }
-        protected GameSettings GameSettings { get; set; }
+        // protected GameSettings GameSettings { get; set; }
         protected ResourceManager ResourceManager { get; set; }
 
         private ViewportAdapter _viewportAdapter;
@@ -43,7 +45,7 @@ namespace lunge.Library
             }
         }
 
-        protected GameSettingsGameComponent GameSettingsComponent { get; private set; }
+        // protected GameSettingsGameComponent GameSettingsComponent { get; private set; }
         protected ScreenGameComponent ScreenManagerComponent { get; private set; }
 
         private IAssetManager _assetManager;
@@ -62,35 +64,34 @@ namespace lunge.Library
                 gameSettings = new GameSettings();
             }
                 
-            GameSettings = gameSettings;
+            // TODO: Fix GameSettings loading/saving/handling
+            // GameSettings = gameSettings;
 
-            GameSettingsComponent = new GameSettingsGameComponent(this, GameSettings);
+            // GameSettingsComponent = new GameSettingsGameComponent(this, GameSettings);
             // if (!GameSettingsComponent.TryLoad())
-                GameSettings.LoadDefaults();
+            //    GameSettings.LoadDefaults();
 
-            Graphics.PreferredBackBufferWidth = Convert.ToInt32(GameSettings["WindowWidth"]);
-            Graphics.PreferredBackBufferHeight = Convert.ToInt32(GameSettings["WindowHeight"]);
-            IsMouseVisible = (bool)GameSettings["IsMouseVisible"];
-            Graphics.IsFullScreen = (bool) GameSettings["IsFullScreen"];
+            //Graphics.PreferredBackBufferWidth = Convert.ToInt32(GameSettings["WindowWidth"]);
+            //Graphics.PreferredBackBufferHeight = Convert.ToInt32(GameSettings["WindowHeight"]);
+            //IsMouseVisible = (bool)GameSettings["IsMouseVisible"];
+            //Graphics.IsFullScreen = (bool) GameSettings["IsFullScreen"];
 
             ResourceManager = new ResourceManager();
 
             ScreenManagerComponent = new ScreenGameComponent();
             Components.Add(ScreenManagerComponent);
-            GameSettings = GameSettingsComponent.GameSettings;
+            //GameSettings = GameSettingsComponent.GameSettings;
         }
 
         protected override void Initialize()
         {
             Services.AddService(AssetManager);
-            Services.AddService(GameSettings);
+            // Services.AddService(GameSettings);
             Services.AddService(ResourceManager);
 
 
             base.Initialize();
-
-            
-            Components.Add(GameSettingsComponent);
+            // Components.Add(GameSettingsComponent);
         }
 
         protected override void LoadContent()
@@ -109,25 +110,38 @@ namespace lunge.Library
 
         protected override void Update(GameTime gameTime)
         {
+            InputManager.Update(gameTime);
             GameTimerManager.Update(gameTime);
-
-            ScreenManagerComponent.Update(gameTime);
+            // ScreenManagerComponent.Update(gameTime);
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            ScreenManagerComponent.Draw(gameTime);
+            // ScreenManagerComponent.Draw(gameTime);
 
             base.Draw(gameTime);
         }
 
-        public void AddScreen<T>(T screen, bool showImmediately = true) where T : Screen
+        public void LoadScreen<T>(T screen) where T : Screen
         {
-            // ScreenManagerComponent.Register(screen);
-            //if (showImmediately)
-            //    screen.Show<T>();
+            ScreenManagerComponent.LoadScreen(screen);
+        }
+
+        public void LoadScreen<T>(T screen, Transition transition) where T : Screen
+        {
+            ScreenManagerComponent.LoadScreen(screen, transition);
+        }
+
+        public void LoadScreen(Screen screen)
+        {
+            ScreenManagerComponent.LoadScreen(screen);
+        }
+
+        public void LoadScreen(Screen screen, Transition transition)
+        {
+            ScreenManagerComponent.LoadScreen(screen, transition);
         }
     }
 }
