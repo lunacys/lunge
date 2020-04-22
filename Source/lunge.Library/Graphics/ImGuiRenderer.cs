@@ -6,10 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using ImGuiNET;
-using lunge.Library.Graphics.Vertices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using lunge.Library.Graphics.Vertices;
 
 namespace lunge.Library.Graphics
 {
@@ -192,7 +192,7 @@ namespace lunge.Library.Graphics
             var io = ImGui.GetIO();
 
             // MonoGame-specific
-            var offset = .5f;
+            var offset = 0; // was 0.5f before
 
             _effect.World = Matrix.Identity;
             _effect.View = Matrix.Identity;
