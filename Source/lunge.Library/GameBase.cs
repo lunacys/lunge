@@ -46,7 +46,7 @@ namespace lunge.Library
         }
 
         // protected GameSettingsGameComponent GameSettingsComponent { get; private set; }
-        protected ScreenGameComponent ScreenManagerComponent { get; private set; }
+        protected ScreenManager ScreenManagerComponent { get; private set; }
 
         private IAssetManager _assetManager;
         
@@ -78,7 +78,7 @@ namespace lunge.Library
 
             ResourceManager = new ResourceManager();
 
-            ScreenManagerComponent = new ScreenGameComponent();
+            ScreenManagerComponent = new ScreenManager();
             Components.Add(ScreenManagerComponent);
             //GameSettings = GameSettingsComponent.GameSettings;
         }

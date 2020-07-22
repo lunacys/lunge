@@ -61,6 +61,7 @@ namespace lunge.Library.Entities
             if (IsAnimated)
             {
                 _animation.UpdateFrame(gameTime);
+                // TODO: Use Source Rectangle instead of frame cache
                 Image = _frameCache[_animation.CurrentFrame];
             }
         }
