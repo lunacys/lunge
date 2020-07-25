@@ -15,7 +15,7 @@ namespace lunge.Library
 {
     public class GameBase : Game
     {
-        protected GraphicsDeviceManager Graphics { get; set; }
+        // protected GraphicsDeviceManager Graphics { get; set; }
         protected SpriteBatch SpriteBatch { get; set; }
         // protected GameSettings GameSettings { get; set; }
         protected ResourceManager ResourceManager { get; set; }
@@ -52,7 +52,7 @@ namespace lunge.Library
         
         public GameBase(IAssetManager assetManager = null, GameSettings gameSettings = null)
         {
-            Graphics = new GraphicsDeviceManager(this);
+            // Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
             if (assetManager == null)
