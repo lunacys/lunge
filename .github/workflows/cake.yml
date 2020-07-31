@@ -1,5 +1,11 @@
 name: Cake CI
 
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_CORE_SDK_VERSION: 3.1.301
+  SOLUTION_PATH: './Source/lunge.sln'
+  
 on:
   push:
     branches: [ master, develop ]
@@ -8,14 +14,61 @@ on:
 
 jobs:
   build:
+    name: 'Build, test & pack solution'
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest, macOS-latest]
+        os: [windows-latest, macos-latest, ubuntu-latest]
+
     steps:
-      - name: Get the sources
-        uses: actions/checkout@v1
-      - name: Run the Cake build script
-        uses: ecampidoglio/cake-action@master
-        with:
-          target: Default
+
+    - name: "Download NuGetVersion version artifact"
+      uses: actions/download-artifact@v2
+      with:
+        name: nuget-version
+
+    - name: "Read NuGetVersion artifact"
+      id: version
+      shell: bash
+      run: |
+        ls -a
+        export NUGET_VERSION=$(cat nuget-version.txt)
+        echo ::set-output name=nuGetVersion::$NUGET_VERSION
+    - name: "Checkout repository"
+      uses: actions/checkout@master
+      with:
+        submodules: true
+        lfs: true
+
+    - name: "Setup .NET Core CLI"
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '${{ env.DOTNET_CORE_SDK_VERSION }}'
+
+    - name: "Install fonts (Ubuntu)"
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | sudo debconf-set-selections
+        sudo apt-get install -y ttf-mscorefonts-installer
+        sudo apt-get install -y fontconfig
+        sudo fc-cache -f -v
+        sudo fc-match Arial
+    - name: "Install dependencies"
+      run: dotnet restore '${{ env.SOLUTION_PATH }}' --verbosity quiet
+
+    - name: "Build solution"
+      run: dotnet build '${{ env.SOLUTION_PATH }}' --nologo --verbosity minimal --configuration Release --no-restore
+
+    - name: "Test solution"
+      run: dotnet test '${{ env.SOLUTION_PATH }}' --nologo --verbosity normal --configuration Release --no-build
+
+    - name: "Pack solution (Ubuntu)"
+      if: matrix.os == 'ubuntu-latest'
+      run: dotnet pack '${{ env.SOLUTION_PATH }}' --nologo --output './nuget-packages' --verbosity minimal --configuration Release --no-build
+
+    - name: 'Upload packed artifacts (Ubuntu)'
+      if: matrix.os == 'ubuntu-latest'
+      uses: actions/upload-artifact@v2
+      with:
+        name: nuget-packages
+        path: './nuget-packages/*/**'
