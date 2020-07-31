@@ -3,17 +3,18 @@ name: Cake CI
 on:
   push:
     branches: [ master, develop ]
-  pull_request:
-    branches: [ master, develop ]
-
+    
 jobs:
   build:
+    
     runs-on: ${{ matrix.os }}
+    
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest, macOS-latest]
+        os: [windows-latest, ubuntu-latest]
+        
     steps:
-      - name: Get the sources
+      - name: Get The Sources
         uses: actions/checkout@v1
       - name: Run the Cake build script
         uses: ecampidoglio/cake-action@master
