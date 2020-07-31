@@ -7,13 +7,11 @@ namespace lunge.Library.Screens
     public class ScreenManager : SimpleDrawableGameComponent, IScreenManager
     {
         private IGameScreen _activeScreen;
-        private bool _isInitialized;
-        private bool _isLoaded;
         private Transition _activeTransition;
         
         public void LoadScreen(IGameScreen screen, Transition transition)
         {
-            if (this._activeTransition != null)
+            if (_activeTransition != null)
                 return;
 
             _activeTransition = transition;
@@ -41,7 +39,6 @@ namespace lunge.Library.Screens
             base.Initialize();
 
             _activeScreen?.Initialize();
-            _isInitialized = true;
         }
 
         protected override void LoadContent()
@@ -49,7 +46,6 @@ namespace lunge.Library.Screens
             base.LoadContent();
 
             _activeScreen?.LoadContent();
-            _isLoaded = true;
         }
 
         protected override void UnloadContent()
@@ -57,7 +53,6 @@ namespace lunge.Library.Screens
             base.UnloadContent();
 
             _activeScreen?.UnloadContent();
-            _isLoaded = false;
         }
 
         public override void Update(GameTime gameTime)
