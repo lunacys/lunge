@@ -6,11 +6,11 @@ namespace lunge.Library.Entities
 {
     public class WorldBuilder
     {
-        private readonly Game _game;
+        private readonly IGame _game;
 
         private readonly List<ISystem> _systems;
 
-        public WorldBuilder(Game game)
+        public WorldBuilder(IGame game)
         {
             _game = game;
             _systems = new List<ISystem>();

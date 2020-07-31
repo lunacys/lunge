@@ -18,7 +18,7 @@ namespace lunge.Library.Graphics
     /// </summary>
     public class ImGuiRenderer
     {
-        private Game _game;
+        private IGame _game;
 
         // Graphics
         private GraphicsDevice _graphicsDevice;
@@ -45,7 +45,7 @@ namespace lunge.Library.Graphics
 
         private List<int> _keys = new List<int>();
 
-        public ImGuiRenderer(Game game)
+        public ImGuiRenderer(IGame game)
         {
             var context = ImGui.CreateContext();
             ImGui.SetCurrentContext(context);

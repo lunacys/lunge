@@ -21,6 +21,10 @@ namespace lunge.Library.Entities
         public float Width => Image.Width * Scale.X;
         public float Height => Image.Height * Scale.Y;
 
+        public float ImageWidth => Image.Width;
+        public float ImageHeight => Image.Height;
+
+
         public int CurrentFrame
         {
             get
@@ -61,6 +65,7 @@ namespace lunge.Library.Entities
             if (IsAnimated)
             {
                 _animation.UpdateFrame(gameTime);
+                // TODO: Use Source Rectangle instead of frame cache
                 Image = _frameCache[_animation.CurrentFrame];
             }
         }

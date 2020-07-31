@@ -18,8 +18,6 @@ namespace lunge.Library.Gui.Old.Controls
     [Obsolete("This GUI system is obsolete, please use the new one from the lunge.Library.Gui namespace")]
     public class Chart : ControlBase
     {
-        public Vector2 Position { get; set; }
-        public Size2 Size { get; set; }
         public Size2 CellSize { get; set; }
 
         private float _minValue;
