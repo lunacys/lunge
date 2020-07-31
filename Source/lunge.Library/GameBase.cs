@@ -13,7 +13,7 @@ using MonoGame.Extended.ViewportAdapters;
 
 namespace lunge.Library
 {
-    public class GameBase : Game
+    public abstract class GameBase : Game, IGame
     {
         // protected GraphicsDeviceManager Graphics { get; set; }
         protected SpriteBatch SpriteBatch { get; set; }
@@ -49,6 +49,8 @@ namespace lunge.Library
         protected ScreenManager ScreenManagerComponent { get; private set; }
 
         private IAssetManager _assetManager;
+        
+        public Game Game => this;
         
         public GameBase(IAssetManager assetManager = null, GameSettings gameSettings = null)
         {
@@ -124,24 +126,24 @@ namespace lunge.Library
             base.Draw(gameTime);
         }
 
-        public void LoadScreen<T>(T screen) where T : Screen
+        public void LoadScreen<T>(T screen) where T : GameScreen
         {
             ScreenManagerComponent.LoadScreen(screen);
         }
 
-        public void LoadScreen<T>(T screen, Transition transition) where T : Screen
+        public void LoadScreen<T>(T screen, Transition transition) where T : GameScreen
         {
             ScreenManagerComponent.LoadScreen(screen, transition);
         }
 
-        public void LoadScreen(Screen screen)
+        public void LoadScreen(GameScreen gameScreen)
         {
-            ScreenManagerComponent.LoadScreen(screen);
+            ScreenManagerComponent.LoadScreen(gameScreen);
         }
 
-        public void LoadScreen(Screen screen, Transition transition)
+        public void LoadScreen(GameScreen gameScreen, Transition transition)
         {
-            ScreenManagerComponent.LoadScreen(screen, transition);
+            ScreenManagerComponent.LoadScreen(gameScreen, transition);
         }
     }
 }

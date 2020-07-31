@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using lunge.Library.Entities.Systems;
 using Microsoft.Xna.Framework;
+using MonoGame.Extended;
 
 namespace lunge.Library.Entities
 {
-    public class World : DrawableGameComponent, ISystemManager
+    public class World : SimpleDrawableGameComponent, ISystemManager
     {
-        public Game GameRoot { get; }
+        public IGame GameRoot { get; }
 
         internal EntityManager EntityManager { get; }
         
@@ -19,8 +20,7 @@ namespace lunge.Library.Entities
 
         public event EventHandler<SystemAddedEventArgs> SystemAdded;
 
-        internal World(Game game)
-            : base(game)
+        internal World(IGame game)
         {
             GameRoot = game;
 

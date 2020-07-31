@@ -9,7 +9,7 @@ namespace lunge.Library
         int FrameCount { get; set; }
         GameTime GameTime { get; set; }
         IGameWindow Window { get; }
-        Screen CurrentScreen { get; }
+        GameScreen CurrentGameScreen { get; }
         ScreenManager ScreenManager { get; }
     }
 }
