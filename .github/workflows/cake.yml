@@ -22,24 +22,6 @@ jobs:
 
     steps:
 
-    - name: "Download NuGetVersion version artifact"
-      uses: actions/download-artifact@v2
-      with:
-        name: nuget-version
-
-    - name: "Read NuGetVersion artifact"
-      id: version
-      shell: bash
-      run: |
-        ls -a
-        export NUGET_VERSION=$(cat nuget-version.txt)
-        echo ::set-output name=nuGetVersion::$NUGET_VERSION
-    - name: "Checkout repository"
-      uses: actions/checkout@master
-      with:
-        submodules: true
-        lfs: true
-
     - name: "Setup .NET Core CLI"
       uses: actions/setup-dotnet@v1
       with:
