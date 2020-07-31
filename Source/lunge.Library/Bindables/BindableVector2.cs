@@ -16,6 +16,8 @@ namespace lunge.Library.Bindables
             {
                 var prevVal = _value;
 
+                _value = value;
+
                 if (_value != prevVal)
                     ValueChanged?.Invoke(this, new BindableValueChangeEvent<Vector2>(_value, prevVal));
             }
