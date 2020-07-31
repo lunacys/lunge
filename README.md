@@ -1,31 +1,45 @@
 # LunarisGameEngine (lunge)
 
-A cross-platform 2D Game Engine written in C# using **MonoGame** and **MonoGame.Extended**.
+A cross-platform 2D and 3D Game Engine written in C# using **MonoGame** and **MonoGame.Extended**.
 
 [![Build status](https://ci.appveyor.com/api/projects/status/1jkjxg3iupocpniy?svg=true)](https://ci.appveyor.com/project/lunacys/lunge)
 
 | Branch | Badge |
 | --- | --- |
-| `master`: | ![Cake CI](https://github.com/lunacys/lunge/workflows/Cake%20CI/badge.svg?branch=master) |
-| `develop`: | ![CI](https://github.com/lunacys/lunge/workflows/Cake%20CI/badge.svg?branch=develop) |
+| `master` | ![Cake CI](https://github.com/lunacys/lunge/workflows/Cake%20CI/badge.svg?branch=master) |
+| `develop` | ![CI](https://github.com/lunacys/lunge/workflows/Cake%20CI/badge.svg?branch=develop) |
+
+## ATTENTION!
+
+**The project is heavily under development, so breaking changes after every commit is possible! Also the docs may be out of date as well!**
 
 ## Description
 
+### Documentation
 
+Compiled documentation can be found [here](http://loonacuse.link/lunge).
+
+The sources are in the `docs/` directory. You probably need files with `*.md` extension. The rest are compiled sources.
 
 ### Dependencies
 
-The project uses MonoGame together with **MonoGame.Extended**, **MonoGame.Extended.Input** and **MonoGame.Extended.Particles**. The **MonoGame.Extended** dependencies are placed in the `~/Deps` directory. The reason why the deps are placed just inside a folder as DLL file and not as NuGet package is that there are some changes in the deps and they are compiled as .NET Standard projects.
+Every required dependency is taken as a NuGet package. So everything will be ok after just restoring them using this command:
+
+```bash
+dotnet restore
+```
 
 ### Build
 
 #### Projects
 
-In order to build the engine, you need to download **.NET Core 2.2 SDK** or higher. Next, go to the root directory of the repo, and run `build.ps1` if you're using Windows, or `build.sh` if you're using Linux or MacOS.
+In order to build the engine and the demos, you need to download **.NET Core 3.1 SDK** or higher. Next, go to the root directory of the repo, and run `build.ps1` if you're on Windows, or `build.sh` if you're on Linux or MacOS.
 
-The sources are located at `./Source/lunge.Library`.
+Engine sources are located at `./Source/lunge.Library`.
 
-Tests are located at `./Source/Tests/lunge.Lib`.
+Engine Tests are located at `./Source/Tests/lunge.Lib`.
+
+Demos are at `./Source/Demos/`.
 
 #### Docs
 
@@ -45,61 +59,19 @@ After that, the book is ready to use from `_books/` directory as `index.html` fi
 
 ### Current roadmap
 
-#### TODO
-
-- [x] Game Engine Architecture (On paper)
-- [ ] ECS Basis/Architecture
-- [ ] Main Components/Systems:
-  - [ ] Input handlers
-    - [x] Keyboard
-    - [x] Mouse
-    - [ ] GamePad
-    - [ ] Handler as component
-    - [ ] Input commands
-  - [ ] Entity components:
-    - [x] Sprite
-    - [x] Animation
-  - [x] Resource Manager/Dispatcher
-  - [ ] System container
-  - [ ] States
-  - [x] World
-- [x] Asset manager
-- [ ] GUI
-  - [x] Parent/Child controls
-  - [ ] Controls:
-    - [x] Canvas
-    - [x] Label
-    - [ ] Chart
-      - [x] Base data view (points + lines)
-      - [ ] Bar view
-      - [ ] Tooltips with formatted data
-      - [ ] Helper buttons & labels (clear, average value, etc.)
-      - [ ] Move left/right
-      - [ ] Take snapshot
-    - [x] Button
-    - [x] Tooltip
-    - [x] Panel
-    - [ ] TreeView
-    - [ ] TextBox
-    - [ ] RadioButton
-    - [ ] CheckBox
-    - [ ] ComboBox
-    - [ ] GroupBox
-    - [ ] ScrollBar
-    - [ ] LinkLabel
-    - [ ] ProgressBar
-    - [ ] TrackBar
-    - [ ] GridView
-      - [x] Basic output: draw a grid with attached controls (e.g. label, button, etc)
-      - [ ] Data source support
-  - [ ] Make all the properties of a control changeable
-- [ ] Steering behaviors & Steering behavior manager
-- [ ] Basic AI
-- [ ] Shadows/Lights system
-- [ ] Collision detection/Collision resolving
-- [ ] Physics
-- [ ] Map editor
-- [ ] Entity editor
-- [ ] Particle editor
-- [ ] Scripting (modding) with C#
-- [ ] Localization editor
+ - Fully implement input management and measure its performance
+ - Implement GUI interfaces for mine version and ImGUI. Probably need an easy switch for them
+ - Add advanced debugging tools: visualize cycles and memory usage for every component, add support for changing params in real time, etc
+ - Add easy to use input command manipulation which is quite useful for game replays, undos/redos, AI, etc
+ - Add behavioral functions, especially steering behaviors
+ - Fix GameSettings and make it more useful
+ - Implement new GUI
+ - Fully implement base game class (GameBase.cs)
+ - Write tests
+ - Add new demos for every aspect
+ - Add playable demo games to show all the engine's features
+ - Collision Handling
+ - Physics
+ - Networking
+ - 3D voxel engine
+ - Scripting. Thinking about Lua, C# or self-made alternative. For the last option the Bytecode pattern will be quite useful

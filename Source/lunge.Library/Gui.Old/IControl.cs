@@ -22,7 +22,7 @@ namespace lunge.Library.Gui.Old
         event EventHandler MouseOut;
 
         void Initialize(Canvas canvas);
-        void Update(GameTime gameTime, InputHandler inputHandler);
+        void Update(GameTime gameTime);
         void Close();
 
         /// <summary>

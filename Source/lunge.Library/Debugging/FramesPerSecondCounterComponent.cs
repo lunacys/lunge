@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using Microsoft.Xna.Framework;
 
 namespace lunge.Library.Debugging
@@ -16,8 +14,6 @@ namespace lunge.Library.Debugging
         private const int RefreshesPerSecond = 16;  // how many times do we calculate FPS & UPS every second
         private readonly TimeSpan _refreshTime = TimeSpan.FromMilliseconds(1000.0f / RefreshesPerSecond);
         private TimeSpan _elapsedTime = TimeSpan.Zero;
-
-        private readonly Queue<float> _sampleBuffer = new Queue<float>();
 
         #endregion
 
@@ -49,10 +45,8 @@ namespace lunge.Library.Debugging
         public float MinimalFps { get; private set; } = float.MaxValue;
         public float MaximalFps { get; private set; } = 0;
 
-        /// <summary>
-        /// Maximum samples that the sample buffer can store.
-        /// </summary>
-        public const int MaximumSamples = 100;
+
+        private double _aggregatedFps = 0;
 
         #endregion
 
@@ -94,16 +88,11 @@ namespace lunge.Library.Debugging
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             FramesPerSecond = 1.0f / deltaTime;
 
-            _sampleBuffer.Enqueue(FramesPerSecond);
+            _aggregatedFps += FramesPerSecond;
 
-            if (_sampleBuffer.Count > MaximumSamples)
+            if (TotalFrames > 0)
             {
-                _sampleBuffer.Dequeue();
-                FramesPerSecond = _sampleBuffer.Average(i => i);
-            }
-            else
-            {
-                FramesPerSecond = FramesPerSecond;
+                FramesPerSecond = (float) (_aggregatedFps / TotalFrames);
             }
 
             TotalFrames++;

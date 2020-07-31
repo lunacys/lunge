@@ -18,8 +18,6 @@ namespace lunge.Library.Gui.Old.Controls
     [Obsolete("This GUI system is obsolete, please use the new one from the lunge.Library.Gui namespace")]
     public class Chart : ControlBase
     {
-        public Vector2 Position { get; set; }
-        public Size2 Size { get; set; }
         public Size2 CellSize { get; set; }
 
         private float _minValue;
@@ -114,7 +112,7 @@ namespace lunge.Library.Gui.Old.Controls
                 {
                     var pos = new Vector2(
                         Position.X + node.XOffset + _xOffset,
-                        Position.Y - MathUtils.InBetween(Size.Height, node.Value, MinValue, MaxValue) + Size.Height
+                        Position.Y - MathUtils.NormalizeInRange(Size.Height, node.Value, MinValue, MaxValue) + Size.Height
                     );
 
                     if (pos.X > Position.X)
@@ -131,7 +129,7 @@ namespace lunge.Library.Gui.Old.Controls
                             {
                                 var nextPos = new Vector2(
                                     Position.X + node.Next.XOffset + _xOffset,
-                                    Position.Y - MathUtils.InBetween(Size.Height, node.Next.Value, MinValue, MaxValue) + Size.Height
+                                    Position.Y - MathUtils.NormalizeInRange(Size.Height, node.Next.Value, MinValue, MaxValue) + Size.Height
                                 );
 
                                 spriteBatch.DrawPoint(nextPos, Color.Black, 4f);

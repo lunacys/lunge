@@ -1,6 +1,7 @@
 ﻿using System;
 using lunge.Library.Collisions;
 using Microsoft.Xna.Framework;
+using MonoGame.Extended;
 
 namespace lunge.Library
 {
@@ -18,7 +19,7 @@ namespace lunge.Library
         /// <param name="minValue">Minimal value</param>
         /// <param name="maxValue">Maximal value</param>
         /// <returns>The intermediate value</returns>
-        public static float InBetween(float width, float currentValue, float minValue, float maxValue)
+        public static float NormalizeInRange(float width, float currentValue, float minValue, float maxValue)
         {
             return width * (currentValue / (maxValue - minValue));
         }
@@ -164,6 +165,44 @@ namespace lunge.Library
         public static float Normalize(float value, float min, float max)
         {
             return (value - min) / (max - min);
+        }
+
+        /// <summary>
+        /// Snaps specified floating point value to a grid with specified size.
+        /// Note: this version of the function tends to round to the lowest value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="gridSize"></param>
+        /// <returns></returns>
+        public static float SnapToGridRounding(float value, float gridSize)
+        {
+            return value - value % gridSize;
+        }
+
+        /// <summary>
+        /// Snaps specified vector value to a grid with specified size.
+        /// Note: this version of the function tends to round to the lowest value.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="gridSize"></param>
+        /// <returns></returns>
+        public static Vector2 SnapToGridRounding(Vector2 value, Size2 gridSize)
+        {
+            return new Vector2(value.X - value.X % gridSize.Width, value.Y - value.Y % gridSize.Height);
+        }
+
+        public static float SnapToGrid(float value, float gridSize)
+        {
+            return (float) (Math.Round(value / gridSize) * gridSize);
+        }
+
+        public static Vector2 SnapToGrid(Vector2 value, Size2 gridSize)
+        {
+            return new Vector2
+            (
+                (float)(Math.Round(value.X / gridSize.Width) * gridSize.Width),
+                (float)(Math.Round(value.Y / gridSize.Height) * gridSize.Height)
+            );
         }
     }
 }
