@@ -2,8 +2,6 @@
 
 A cross-platform 2D and 3D Game Engine written in C# using **MonoGame** and **MonoGame.Extended**.
 
-[![Build status](https://ci.appveyor.com/api/projects/status/1jkjxg3iupocpniy?svg=true)](https://ci.appveyor.com/project/lunacys/lunge)
-
 | Branch | Badge |
 | --- | --- |
 | `master` | ![Cake CI](https://github.com/lunacys/lunge/workflows/Cake%20CI/badge.svg?branch=master) |
