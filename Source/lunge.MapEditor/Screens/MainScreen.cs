@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace lunge.MapEditor.Screens
 {
-    public class MainScreen : Screen
+    public class MainScreen : GameScreen
     {
         public MainScreen(GameBase game)
             : base(game)
