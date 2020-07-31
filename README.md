@@ -9,6 +9,10 @@ A cross-platform 2D and 3D Game Engine written in C# using **MonoGame** and **Mo
 | `master` | ![Cake CI](https://github.com/lunacys/lunge/workflows/Cake%20CI/badge.svg?branch=master) |
 | `develop` | ![CI](https://github.com/lunacys/lunge/workflows/Cake%20CI/badge.svg?branch=develop) |
 
+## ATTENTION!
+
+**The project is heavily under development, so breaking changes after every commit is possible! Also the docs may be out of date as well!**
+
 ## Description
 
 ### Documentation
