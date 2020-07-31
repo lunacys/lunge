@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Xna.Framework;
 
-namespace lunge.Library
+namespace lunge.Library.DI
 {
     public class Worker : IHostedService
     {

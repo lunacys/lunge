@@ -5,18 +5,18 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using lunge.Library.Screens;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace lunge.Library
+namespace lunge.Library.DI
 {
     public static class ServiceCollectionExtensions
     {
         public static void AddGameConfiguration(this IServiceCollection services)
         {
-            // your base DI def here
-            Console.WriteLine("Adding game DI!");
+            services.AddSingleton<IScreenManager, ScreenManager>();
         }
-
+        
         public static void AddPlugins(this IServiceCollection services)
         {
             var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
