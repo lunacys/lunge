@@ -3,7 +3,7 @@
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
-var solution = "./Source/lunge.sln";
+var solution = "./src/lunge.sln";
 
 var gitVersion = GitVersion();
 
@@ -34,7 +34,7 @@ Task("Test")
 {
     var testRuns = 0;
     var failedRuns = 0;
-    var testProjects = GetFiles($"./Source/Tests/**/*.Tests.csproj");
+    var testProjects = GetFiles($"./src/Tests/**/*.Tests.csproj");
     var failedProjectNames = new List<string>();
 
     foreach (var project in testProjects)
@@ -74,7 +74,7 @@ Task("Pack")
     CreateDirectory(artifactsDirectory);
     CleanDirectory(artifactsDirectory);    
 
-    foreach (var project in GetFiles($"./Source/lunge.*/*.csproj"))
+    foreach (var project in GetFiles($"./src/lunge.*/*.csproj"))
     {
         DotNetCorePack(project.FullPath, new DotNetCorePackSettings 
         {
@@ -118,7 +118,7 @@ Task("Publish")
             OutputDirectory = outputDir
         };
 
-        DotNetCorePublish("./Source/lunge.Library/lunge.Library.csproj", settings);
+        DotNetCorePublish("./src/lunge.Library/lunge.Library.csproj", settings);
     }
 });
 
