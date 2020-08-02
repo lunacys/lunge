@@ -11,9 +11,9 @@ namespace lunge.Library.Tests.Bindables
         {
             var bf1 = new BindableFloat(15, 0, 100, BindableActionHandler);
             
-            Assert.Equals(bf1.Value, 15);
-            Assert.Equals(bf1.MinValue, 0);
-            Assert.Equals(bf1.MaxValue, 0);
+            Assert.AreEqual(bf1.Value, 15);
+            Assert.AreEqual(bf1.MinValue, 0);
+            Assert.AreEqual(bf1.MaxValue, 100);
         }
 
         private void BindableActionHandler(object? sender, BindableValueChangeEvent<float> e)

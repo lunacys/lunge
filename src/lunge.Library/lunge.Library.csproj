@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <Authors>loonacuse</Authors>
+    <Description>A simple 2D game engine based on MonoGame Framework </Description>
+    <Copyright>loonacuse</Copyright>
+    <PackageProjectUrl>https://github.com/lunacys/lunge</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/lunacys/lunge/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/lunacys/lunge</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <Company>loonacuse</Company>
+    <Product>lunge</Product>
+    <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
