@@ -1,11 +1,13 @@
 ﻿using System;
 using lunge.Library.Assets;
 using lunge.Library.Debugging.Logging;
+using lunge.Library.DI;
 using lunge.Library.GameTimers;
 using lunge.Library.Input;
 using lunge.Library.Resources;
 using lunge.Library.Screens;
 using lunge.Library.Settings;
+using lunge.Library.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Screens.Transitions;
@@ -46,13 +48,15 @@ namespace lunge.Library
         }
 
         // protected GameSettingsGameComponent GameSettingsComponent { get; private set; }
-        protected ScreenManager ScreenManagerComponent { get; private set; }
+        public IScreenManager ScreenManager { get; private set; }
+
+        public GraphicsDeviceManager Graphics => Worker.Graphics;
 
         private IAssetManager _assetManager;
+
+        public GameBase Game => this;
         
-        public Game Game => this;
-        
-        public GameBase(IAssetManager assetManager = null, GameSettings gameSettings = null)
+        public GameBase(IAssetManager assetManager, IScreenManager screenManager)
         {
             // Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -60,12 +64,10 @@ namespace lunge.Library
             if (assetManager == null)
                 assetManager = new ContentAssetManager(Content);
             AssetManager = assetManager;
-            
-            if (gameSettings == null)
-            {
-                gameSettings = new GameSettings();
-            }
-                
+            ScreenManager = screenManager;
+
+            IsMouseVisible = true;
+
             // TODO: Fix GameSettings loading/saving/handling
             // GameSettings = gameSettings;
 
@@ -78,19 +80,18 @@ namespace lunge.Library
             //IsMouseVisible = (bool)GameSettings["IsMouseVisible"];
             //Graphics.IsFullScreen = (bool) GameSettings["IsFullScreen"];
 
-            ResourceManager = new ResourceManager();
-
-            ScreenManagerComponent = new ScreenManager();
-            Components.Add(ScreenManagerComponent);
             //GameSettings = GameSettingsComponent.GameSettings;
         }
 
         protected override void Initialize()
         {
-            Services.AddService(AssetManager);
+            TextureStream.GraphicsDevice = GraphicsDevice;
+            
+            // Services.AddService(AssetManager);
             // Services.AddService(GameSettings);
-            Services.AddService(ResourceManager);
-
+            // Services.AddService(ResourceManager);
+            
+            ScreenManager.Initialize();
 
             base.Initialize();
             // Components.Add(GameSettingsComponent);
@@ -114,36 +115,16 @@ namespace lunge.Library
         {
             InputManager.Update(gameTime);
             GameTimerManager.Update(gameTime);
-            // ScreenManagerComponent.Update(gameTime);
+            ScreenManager.Update(gameTime);
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            // ScreenManagerComponent.Draw(gameTime);
+            ScreenManager.Draw(gameTime);
 
             base.Draw(gameTime);
-        }
-
-        public void LoadScreen<T>(T screen) where T : GameScreen
-        {
-            ScreenManagerComponent.LoadScreen(screen);
-        }
-
-        public void LoadScreen<T>(T screen, Transition transition) where T : GameScreen
-        {
-            ScreenManagerComponent.LoadScreen(screen, transition);
-        }
-
-        public void LoadScreen(GameScreen gameScreen)
-        {
-            ScreenManagerComponent.LoadScreen(gameScreen);
-        }
-
-        public void LoadScreen(GameScreen gameScreen, Transition transition)
-        {
-            ScreenManagerComponent.LoadScreen(gameScreen, transition);
         }
     }
 }

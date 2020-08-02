@@ -16,17 +16,13 @@ namespace lunge.Library.Assets
         private readonly Dictionary<string, object> _loadedAssets = new Dictionary<string, object>();
         private readonly List<Tuple<object, AssetLoaderAttribute>> _assetLoaders = new List<Tuple<object, AssetLoaderAttribute>>();
 
-        private readonly GraphicsDevice _graphicsDevice;
-
         /// <summary>
         /// Gets or sets asset directory which is currently in use
         /// </summary>
         public string AssetDirectory { get; set; }
 
-        public AssetManager(GraphicsDevice graphicsDevice, string assetDirectory = "Content")
+        public AssetManager(string assetDirectory = "Content")
         {
-            _graphicsDevice = graphicsDevice;
-            
             AssetDirectory = assetDirectory;
 
             InitializeContentLoaders();
@@ -49,8 +45,8 @@ namespace lunge.Library.Assets
 
         private void InitializeContentLoaders()
         {
-            if (_graphicsDevice == null)
-                throw new NullReferenceException("Please initialize GraphicsDevice first");
+            // if (_graphicsDevice == null)
+            //     throw new NullReferenceException("Please initialize GraphicsDevice first");
 
             // Get current assembly
             var loaderAssembly = Assembly.GetExecutingAssembly();
@@ -68,17 +64,17 @@ namespace lunge.Library.Assets
                     .GetCustomAttributes(false)
                     .FirstOrDefault(a => a is AssetLoaderAttribute) is AssetLoaderAttribute assetLoaderAttribute)
                 {
-                    if (type.GetInterfaces().Any(x => x == typeof(IGraphicalAsset)))
+                    /*if (type.GetInterfaces().Any(x => x == typeof(IGraphicalAsset)))
                     {
                         var graphAsset = (IGraphicalAsset)Activator.CreateInstance(type);
                         graphAsset.GraphicsDevice = _graphicsDevice;
                         _assetLoaders.Add(new Tuple<object, AssetLoaderAttribute>(graphAsset, assetLoaderAttribute));
                     }
                     else
-                    {
-                        var assetLoader = Activator.CreateInstance(type);
-                        _assetLoaders.Add(new Tuple<object, AssetLoaderAttribute>(assetLoader, assetLoaderAttribute));
-                    }
+                    {*/
+                    var assetLoader = Activator.CreateInstance(type);
+                    _assetLoaders.Add(new Tuple<object, AssetLoaderAttribute>(assetLoader, assetLoaderAttribute));
+                    // }
                 }
             }
         }
@@ -127,7 +123,7 @@ namespace lunge.Library.Assets
 
         public void Dispose()
         {
-            _graphicsDevice.Dispose();
+            // _graphicsDevice.Dispose();
         }
     }
 }

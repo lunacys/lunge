@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace lunge.Library.Resources
 {
-    public class ResourceManager
+    public class ResourceManager : IResourceManager
     {
         private readonly List<object> _resources = new List<object>();
 

@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using lunge.Library.Assets;
+using lunge.Library.Resources;
 using lunge.Library.Screens;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,6 +17,8 @@ namespace lunge.Library.DI
         public static void AddGameConfiguration(this IServiceCollection services)
         {
             services.AddSingleton<IScreenManager, ScreenManager>();
+            services.AddSingleton<IAssetManager, AssetManager>();
+            services.AddSingleton<IResourceManager, ResourceManager>();
         }
         
         public static void AddPlugins(this IServiceCollection services)
