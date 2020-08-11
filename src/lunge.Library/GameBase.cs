@@ -1,16 +1,11 @@
-﻿using System;
-using lunge.Library.Assets;
-using lunge.Library.Debugging.Logging;
-using lunge.Library.DI;
+﻿using lunge.Library.Assets;
 using lunge.Library.GameTimers;
 using lunge.Library.Input;
 using lunge.Library.Resources;
 using lunge.Library.Screens;
-using lunge.Library.Settings;
 using lunge.Library.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended.Screens.Transitions;
 using MonoGame.Extended.ViewportAdapters;
 
 namespace lunge.Library
@@ -50,7 +45,7 @@ namespace lunge.Library
         // protected GameSettingsGameComponent GameSettingsComponent { get; private set; }
         public IScreenManager ScreenManager { get; private set; }
 
-        public GraphicsDeviceManager Graphics => Worker.Graphics;
+        public GraphicsDeviceManager Graphics { get; }
 
         private IAssetManager _assetManager;
 
@@ -58,7 +53,7 @@ namespace lunge.Library
         
         public GameBase(IAssetManager assetManager, IScreenManager screenManager)
         {
-            // Graphics = new GraphicsDeviceManager(this);
+            Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
             if (assetManager == null)

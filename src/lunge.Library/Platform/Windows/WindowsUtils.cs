@@ -20,6 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -41,7 +42,8 @@ namespace lunge.Library.Platform.Windows
 
         public override void RegisterURIScheme(string scheme, string friendlyName)
         {
-            using (var key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\Classes\\" + scheme))
+            throw new NotImplementedException();
+            /*using (var key = Registry.CurrentUser.CreateSubKey("SOFTWARE\\Classes\\" + scheme))
             {
                 // This returns Something.dll, on Windows the published executable is usually called Something.exe.
                 var applicationLocation = Path.ChangeExtension(Assembly.GetEntryAssembly().Location, "exe");
@@ -58,7 +60,7 @@ namespace lunge.Library.Platform.Windows
                 {
                     commandKey.SetValue("", "\"" + applicationLocation + "\" \"%1\"");
                 }
-            }
+            }*/
         }
     }
 }
