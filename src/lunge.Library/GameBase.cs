@@ -16,6 +16,7 @@ namespace lunge.Library
         protected SpriteBatch SpriteBatch { get; set; }
         // protected GameSettings GameSettings { get; set; }
         protected ResourceManager ResourceManager { get; set; }
+        protected bool UseAssetsHotReload { get; set; }
 
         private ViewportAdapter _viewportAdapter;
         public ViewportAdapter ViewportAdapter
@@ -34,11 +35,22 @@ namespace lunge.Library
 
         public IAssetManager AssetManager
         {
-            get => _assetManager;
+            get
+            {
+                return UseAssetsHotReload ? _hotReloadAssetManager : _contentAssetManager;
+            }
             protected set
             {
-                _assetManager?.Dispose();
-                _assetManager = value;
+                if (UseAssetsHotReload)
+                {
+                    _hotReloadAssetManager.Dispose();
+                    _hotReloadAssetManager = value;
+                }
+                else
+                {
+                    _contentAssetManager.Dispose();
+                    _contentAssetManager = value;
+                }
             }
         }
 
@@ -47,18 +59,20 @@ namespace lunge.Library
 
         public GraphicsDeviceManager Graphics { get; }
 
-        private IAssetManager _assetManager;
+        private IAssetManager _contentAssetManager;
+        private IAssetManager _hotReloadAssetManager;
 
         public GameBase Game => this;
         
-        public GameBase(IAssetManager assetManager = null)
+        public GameBase(bool useAssetsHotReload = false)
         {
+            UseAssetsHotReload = useAssetsHotReload;
             Graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
-
-            if (assetManager == null)
-                assetManager = new ContentAssetManager(Content);
-            AssetManager = assetManager;
+            
+            _contentAssetManager = new ContentAssetManager(Content);
+            _contentAssetManager.RootDirectory = "Content";
+            _hotReloadAssetManager = new HotReloadAssetManager();
+            _hotReloadAssetManager.RootDirectory = "Content";
 
             IsMouseVisible = true;
             
