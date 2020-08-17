@@ -51,7 +51,7 @@ namespace lunge.Library
 
         public GameBase Game => this;
         
-        public GameBase(IAssetManager assetManager, IScreenManager screenManager)
+        public GameBase(IAssetManager assetManager = null)
         {
             Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -59,9 +59,10 @@ namespace lunge.Library
             if (assetManager == null)
                 assetManager = new ContentAssetManager(Content);
             AssetManager = assetManager;
-            ScreenManager = screenManager;
 
             IsMouseVisible = true;
+            
+            ScreenManager = new ScreenManager();
 
             // TODO: Fix GameSettings loading/saving/handling
             // GameSettings = gameSettings;
