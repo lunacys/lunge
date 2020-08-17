@@ -1,4 +1,6 @@
-﻿using lunge.Library;
+﻿using System;
+using lunge.Library;
+using lunge.Library.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -16,6 +18,8 @@ namespace AssetsLoading
             
 #if HOTRELOAD
             UseAssetsHotReload = true;
+            // Using a path to the base Content directory which usually contains Content.mgcb
+            AssetManager.RootDirectory = "../../../Content";
 #else
             UseAssetsHotReload = false;
 #endif
@@ -23,6 +27,7 @@ namespace AssetsLoading
 
         protected override void Initialize()
         {
+
             base.Initialize();
         }
 
@@ -30,13 +35,19 @@ namespace AssetsLoading
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _testTexture = AssetManager.Load<Texture2D>("Test_1");
+            _testTexture = AssetManager.Load<Texture2D>("Images/Test_1", "Image");
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            if (InputManager.WasKeyPressed(Keys.Space))
+            {
+                Console.WriteLine("Reloading asset Test_1!");
+                _testTexture = AssetManager.Reload<Texture2D>("Images/Test_1", "Image");
+            }
 
             base.Update(gameTime);
         }

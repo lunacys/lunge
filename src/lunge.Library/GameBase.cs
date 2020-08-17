@@ -69,9 +69,9 @@ namespace lunge.Library
             UseAssetsHotReload = useAssetsHotReload;
             Graphics = new GraphicsDeviceManager(this);
             
-            _contentAssetManager = new ContentAssetManager(Content);
+            _contentAssetManager = new ContentAssetManager(this, Content);
             _contentAssetManager.RootDirectory = "Content";
-            _hotReloadAssetManager = new HotReloadAssetManager();
+            _hotReloadAssetManager = new HotReloadAssetManager(this);
             _hotReloadAssetManager.RootDirectory = "Content";
 
             IsMouseVisible = true;

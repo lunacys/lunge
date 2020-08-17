@@ -10,9 +10,11 @@ namespace lunge.Library.Assets
             get => Content.RootDirectory;
             set => Content.RootDirectory = value;
         }
+        public IGame Game { get; }
         
-        public ContentAssetManager(ContentManager contentManager)
+        public ContentAssetManager(IGame game, ContentManager contentManager)
         {
+            Game = game;
             Content = contentManager;
         }
         
@@ -20,10 +22,26 @@ namespace lunge.Library.Assets
         {
             Content.Dispose();
         }
-        
+
         public T Load<T>(string assetName)
         {
             return Content.Load<T>(assetName);
         }
+
+        public T Load<T>(string assetName, string assetType)
+        {
+            return Content.Load<T>(assetName);
+        }
+
+        public T Reload<T>(string assetName, string assetType)
+        {
+            return Content.Load<T>(assetName);
+        }
+
+        public T Reload<T>(string assetName)
+        {
+            return Content.Load<T>(assetName);
+        }
+
     }
 }
