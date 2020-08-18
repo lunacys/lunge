@@ -11,6 +11,7 @@ namespace AssetsLoading
     {
         private SpriteBatch _spriteBatch;
         private Texture2D _testTexture;
+        private string _testText;
 
         public GameRoot()
         {
@@ -36,6 +37,9 @@ namespace AssetsLoading
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _testTexture = AssetManager.Load<Texture2D>("Images/Test_1", "Image");
+            _testText = AssetManager.Load<string>("Text/TestTextDoc", "Text");
+
+            Console.WriteLine(_testText);
         }
 
         protected override void Update(GameTime gameTime)
@@ -45,8 +49,11 @@ namespace AssetsLoading
 
             if (InputManager.WasKeyPressed(Keys.Space))
             {
-                Console.WriteLine("Reloading asset Test_1!");
                 _testTexture = AssetManager.Reload<Texture2D>("Images/Test_1", "Image");
+                _testText = AssetManager.Reload<string>("Text/TestTextDoc", "Text"); 
+
+                Console.WriteLine("New text:");
+                Console.WriteLine(_testText);
             }
 
             base.Update(gameTime);

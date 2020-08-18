@@ -122,12 +122,18 @@ namespace lunge.Library.Assets
         private void InitializeAssetLoaders()
         {
             var loaderAssembly = Assembly.GetExecutingAssembly();
-            
+            var entryAssembly = Assembly.GetEntryAssembly();
+
             // Check all available classes that implement IAssetLoader interface
             var types = loaderAssembly
                 .GetTypes()
                 .Where(t => t.IsClass && t.GetInterfaces().Any(x =>
-                    x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IAssetLoader<>)));
+                    x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IAssetLoader<>)))
+                .Concat(
+                    entryAssembly.GetTypes()
+                        .Where(t => t.IsClass && t.GetInterfaces()
+                            .Any(x => x.IsGenericType &&
+                                      x.GetGenericTypeDefinition() == typeof(IAssetLoader<>))));
 
             // Go though them and find those that use AssetAttribute
             foreach (var type in types)

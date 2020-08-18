@@ -1,0 +1,8 @@
+Hello there!
+This
+..is
+  a
+  test
+  doc
+!!!
+EOF
