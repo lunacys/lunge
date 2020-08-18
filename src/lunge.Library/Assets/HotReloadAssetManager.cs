@@ -128,7 +128,7 @@ namespace lunge.Library.Assets
             var types = loaderAssembly
                 .GetTypes()
                 .Where(t => t.IsClass && t.GetInterfaces().Any(x =>
-                    x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IAssetLoader<>)))
+                    x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IAssetLoader<>)));
                 
             if (entryAssembly != null)
             {
