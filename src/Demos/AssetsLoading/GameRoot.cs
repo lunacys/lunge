@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using lunge.Library;
 using lunge.Library.Assets;
 using lunge.Library.Input;
@@ -19,13 +20,8 @@ namespace AssetsLoading
         {
             IsMouseVisible = true;
             
-#if HOTRELOAD
-            UseAssetsHotReload = true;
-            // Using a path to the base Content directory which usually contains Content.mgcb
-            AssetManager.RootDirectory = "../../../Content";
-#else
-            UseAssetsHotReload = false;
-#endif
+            SetupDefaultAssetManager();
+            SetupHotReloadAssetManager();
         }
 
         protected override void Initialize()
@@ -77,6 +73,19 @@ namespace AssetsLoading
             _spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        [Conditional("RELEASE")]
+        private void SetupDefaultAssetManager()
+        {
+            UseAssetsHotReload = false;
+        }
+
+        [Conditional("HOTRELOAD")]
+        private void SetupHotReloadAssetManager()
+        {
+            UseAssetsHotReload = true;
+            AssetManager.RootDirectory = "../../../Content";
         }
     }
 }
