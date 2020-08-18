@@ -129,11 +129,15 @@ namespace lunge.Library.Assets
                 .GetTypes()
                 .Where(t => t.IsClass && t.GetInterfaces().Any(x =>
                     x.IsGenericType && x.GetGenericTypeDefinition() == typeof(IAssetLoader<>)))
-                .Concat(
+                
+            if (entryAssembly != null)
+            {
+                types = types.Concat(
                     entryAssembly.GetTypes()
                         .Where(t => t.IsClass && t.GetInterfaces()
                             .Any(x => x.IsGenericType &&
                                       x.GetGenericTypeDefinition() == typeof(IAssetLoader<>))));
+            }
 
             // Go though them and find those that use AssetAttribute
             foreach (var type in types)
