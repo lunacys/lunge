@@ -119,6 +119,11 @@ namespace lunge.Library.Assets
             return newAsset;
         }
 
+        public object GetAssetByName(string assetName)
+        {
+            return _loadedAssets[assetName];
+        }
+
         private void InitializeAssetLoaders()
         {
             var loaderAssembly = Assembly.GetExecutingAssembly();

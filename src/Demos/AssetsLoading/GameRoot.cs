@@ -1,5 +1,6 @@
 ﻿using System;
 using lunge.Library;
+using lunge.Library.Assets;
 using lunge.Library.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,6 +13,7 @@ namespace AssetsLoading
         private SpriteBatch _spriteBatch;
         private Texture2D _testTexture;
         private string _testText;
+        private AssetWatcher _assetWatcher;
 
         public GameRoot()
         {
@@ -28,7 +30,13 @@ namespace AssetsLoading
 
         protected override void Initialize()
         {
-
+            _assetWatcher = new AssetWatcher(AssetManager);
+            _assetWatcher.AssetChanged += (sender, args) =>
+            {
+                Console.WriteLine($"Asset Changed: {args.AssetName}");
+                _testTexture = (Texture2D) args.NewAsset;
+            };
+            
             base.Initialize();
         }
 
@@ -37,6 +45,7 @@ namespace AssetsLoading
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _testTexture = AssetManager.Load<Texture2D>("Images/Test_1", "Image");
+            _assetWatcher.Watch("Images/Test_1", "Image");
             _testText = AssetManager.Load<string>("Text/TestTextDoc", "Text");
 
             Console.WriteLine(_testText);

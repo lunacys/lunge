@@ -1,10 +1,12 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using System;
+using Microsoft.Xna.Framework.Content;
 
 namespace lunge.Library.Assets
 {
     public class ContentAssetManager : IAssetManager
     {
         public ContentManager Content { get; }
+        public event EventHandler<AssetReloadedEventArgs> AssetReloaded;
         public string RootDirectory
         {
             get => Content.RootDirectory;
@@ -35,13 +37,25 @@ namespace lunge.Library.Assets
 
         public T Reload<T>(string assetName, string assetType)
         {
-            return Content.Load<T>(assetName);
+            var newAsset = Content.Load<T>(assetName);
+            
+            AssetReloaded?.Invoke(this, new AssetReloadedEventArgs(newAsset, assetName, assetType));
+            
+            return newAsset;
         }
 
         public T Reload<T>(string assetName)
         {
-            return Content.Load<T>(assetName);
+            var newAsset = Content.Load<T>(assetName);
+            
+            AssetReloaded?.Invoke(this, new AssetReloadedEventArgs(newAsset, assetName, null));
+            
+            return newAsset;
         }
 
+        public object GetAssetByName(string assetName)
+        {
+            return null;
+        }
     }
 }
