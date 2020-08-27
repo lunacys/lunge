@@ -1,17 +1,19 @@
 # lunge
 
-A cross-platform 2D and, in future, 3D Game Framework written in C# using **MonoGame** and **MonoGame.Extended**.
+## Builds
 
 | Branch | Badge |
 | --- | --- |
 | `master` | ![Cake CI](https://github.com/lunacys/lunge/workflows/Cake%20CI/badge.svg?branch=master) |
 | `develop` | ![CI](https://github.com/lunacys/lunge/workflows/Cake%20CI/badge.svg?branch=develop) |
 
-## ATTENTION!
+## Description
+
+lunge is a cross-platform 2D Game Framework written in C# using [MonoGame](https://www.monogame.net/) and released under the [MIT License](https://opensource.org/licenses/MIT). lunge provides a solid base for creating fully-featured 2D games.
+
+### ATTENTION!
 
 **This project is heavily under development, so breaking changes after every commit is possible! The docs may be out of date as well!**
-
-## Description
 
 ### Documentation
 
@@ -19,14 +21,14 @@ Compiled documentation can be found [here](http://loonacuse.link/lunge) [WIP].
 
 The sources are in the `docs/` directory. You probably need files with `*.md` extension. The rest are compiled sources.
 
-### Implemented
+### Features
 
  - Base Game class which takes care about engine internals, just inherit your game from `GameBase` class and you're ready to go;
  - Asset Management with hot-reloadable assets. Hot-reloading work only when it is specified explicitly in the GameBase class. Also, the requirement is to keep all the assets in the original format, that is, not converted to .xnb;
  - Advanced input management based on the Command pattern
  - Expendable Logging system with pre-built Console, File and Drawable (in-game) logging
  - Discord RPC (thanks to [Wobble](https://github.com/Quaver/Wobble) game framework)
- - Entity system (NOT ECS)
+ - Entity system (NOT ECS (yet?))
  - Game Timers and global Game Timer Manager
  - ImGUI integration
  - Native platform features: clipboard
@@ -42,6 +44,17 @@ Every required dependency is linked as a NuGet package. So everything will be ok
 ```bash
 dotnet restore
 ```
+
+The list of the dependencies:
+
+ - [MonoGame.Framework](https://www.monogame.net/) - the base of the engine
+ - [MonoGame.Extended](https://github.com/craftworkgames/MonoGame.Extended) - for advanced MonoGame like Screen implementation and support classes like RectangleF, Size2, etc
+ - [MonoGame.Extended.Input](https://github.com/craftworkgames/MonoGame.Extended) - for advanced input support - input events and settings. **Possibly will be removed in future**
+ - [SpriteFontPlus](https://github.com/rds1983/SpriteFontPlus) - for runtime font building, baking and rendering
+ - [FSMSharp.Core](https://github.com/lunacys/FSMsharp) - Finite State Machine originally created by [wakingviolet](https://github.com/wakingviolet/FSMsharp) and adapted for my needs by me
+ - [ImGUI.NET](https://github.com/mellinoe/ImGui.NET) - ImGUI in .NET Core environment
+ - [Newtonsoft.Json](https://www.newtonsoft.com) - JSON serialization/deserialization. **Possibly will be replaced by more lightweight implementation**
+ - [RSG.Promise](https://github.com/Real-Serious-Games/C-Sharp-Promise) - for Promises in .NET Core environment
 
 #### Projects
 
