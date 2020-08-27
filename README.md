@@ -89,6 +89,7 @@ After that, the book is ready to use from `_books/` directory as `index.html` fi
 ### Current roadmap
 
  - Stabilize the API: thinking about modular system where every subsystem (e.g. advanced input handling, physics, simple collision detection, ImGUI, etc) is a module which can be connected to the game if needed;
+ - Add in-game debug console
  - Rewrite MonoGame.Extended's functionality in order to be taking as few external dependencies as possible;
  - GUI;
  - Add advanced debugging tools: visualize cycles and memory usage for every component, add support for changing params in real time, etc;
