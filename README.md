@@ -1,6 +1,6 @@
-# LunarisGameEngine (lunge)
+# lunge
 
-A cross-platform 2D and 3D Game Engine written in C# using **MonoGame** and **MonoGame.Extended**.
+A cross-platform 2D and, in future, 3D Game Framework written in C# using **MonoGame** and **MonoGame.Extended**.
 
 | Branch | Badge |
 | --- | --- |
@@ -9,29 +9,47 @@ A cross-platform 2D and 3D Game Engine written in C# using **MonoGame** and **Mo
 
 ## ATTENTION!
 
-**The project is heavily under development, so breaking changes after every commit is possible! Also the docs may be out of date as well!**
+**This project is heavily under development, so breaking changes after every commit is possible! The docs may be out of date as well!**
 
 ## Description
 
 ### Documentation
 
-Compiled documentation can be found [here](http://loonacuse.link/lunge).
+Compiled documentation can be found [here](http://loonacuse.link/lunge) [WIP].
 
 The sources are in the `docs/` directory. You probably need files with `*.md` extension. The rest are compiled sources.
 
-### Dependencies
+### Implemented
 
-Every required dependency is taken as a NuGet package. So everything will be ok after just restoring them using this command:
+ - Base Game class which takes care about engine internals, just inherit your game from `GameBase` class and you're ready to go;
+ - Asset Management with hot-reloadable assets. Hot-reloading work only when it is specified explicitly in the GameBase class. Also, the requirement is to keep all the assets in the original format, that is, not converted to .xnb;
+ - Advanced input management based on the Command pattern
+ - Expendable Logging system with pre-built Console, File and Drawable (in-game) logging
+ - Discord RPC (thanks to [Wobble](https://github.com/Quaver/Wobble) game framework)
+ - Entity system (NOT ECS)
+ - Game Timers and global Game Timer Manager
+ - ImGUI integration
+ - Native platform features: clipboard
+ - Screen system (currently based on MonoGame.Extended implementation)
+ - Utility classes: extended mathematics, Circular Array, Noise Helper, TextureStream, and other extensions
+
+### Building
+
+#### Dependencies
+
+Every required dependency is linked as a NuGet package. So everything will be ok after just restoring using this command:
 
 ```bash
 dotnet restore
 ```
 
-### Build
-
 #### Projects
 
-In order to build the engine and the demos, you need to download **.NET Core 3.1 SDK** or higher. Next, go to the root directory of the repo, and run `build.ps1` if you're on Windows, or `build.sh` if you're on Linux or MacOS.
+In order to build the engine and the demos, you need **.NET Core 3.1 SDK** or higher. Next, go to the root directory of the repo, and run `build.ps1` if you're on Windows, or `build.sh` if you're on Linux or MacOS. Also you can go straight to the sources and either open the solution or run
+
+```powershell
+dotnet build
+```
 
 Engine sources are located at `./Source/lunge.Library`.
 
@@ -57,19 +75,17 @@ After that, the book is ready to use from `_books/` directory as `index.html` fi
 
 ### Current roadmap
 
- - Fully implement input management and measure its performance
- - Implement GUI interfaces for mine version and ImGUI. Probably need an easy switch for them
- - Add advanced debugging tools: visualize cycles and memory usage for every component, add support for changing params in real time, etc
- - Add easy to use input command manipulation which is quite useful for game replays, undos/redos, AI, etc
- - Add behavioral functions, especially steering behaviors
- - Fix GameSettings and make it more useful
- - Implement new GUI
- - Fully implement base game class (GameBase.cs)
- - Write tests
- - Add new demos for every aspect
- - Add playable demo games to show all the engine's features
- - Collision Handling
- - Physics
- - Networking
- - 3D voxel engine
- - Scripting. Thinking about Lua, C# or self-made alternative. For the last option the Bytecode pattern will be quite useful
+ - Stabilize the API: thinking about modular system where every subsystem (e.g. advanced input handling, physics, simple collision detection, ImGUI, etc) is a module which can be connected to the game if needed;
+ - Rewrite MonoGame.Extended's functionality in order to be taking as few external dependencies as possible;
+ - GUI;
+ - Add advanced debugging tools: visualize cycles and memory usage for every component, add support for changing params in real time, etc;
+ - Add easy to use input command manipulation which is useful for game replays, undos/redos, AI, etc;
+ - Add behavioral functions, especially steering behaviors;
+ - Write tests;
+ - Add playable demo games which shows all engine features;
+ - Collision Handling (AABB);
+ - Physics;
+ - Networking;
+ - Scripting in Lua;
+ - Dependency Injection or some kind of it (I think modular system will fit well)
+ - Advanced graphics features: draw calls, sprite batching, etc
