@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lunge.MapEditor", "lunge.Ma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InputManagement", "Demos\InputManagement\InputManagement.csproj", "{961A85E7-22DA-4C8D-872E-85AB2BDB7A9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetsLoading", "Demos\AssetsLoading\AssetsLoading.csproj", "{F820751F-18C8-418C-A329-1EC7EA3A7CA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssetsLoading", "Demos\AssetsLoading\AssetsLoading.csproj", "{F820751F-18C8-418C-A329-1EC7EA3A7CA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
