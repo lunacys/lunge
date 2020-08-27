@@ -36,7 +36,7 @@ namespace lunge.Library.Debugging.Logging
             _drawableLoggers = new List<ILoggerDrawable>();
         }
 
-        public void Log(string message, LogLevel level = LogLevel.Debug)
+        public void Log(object message, LogLevel level = LogLevel.Debug)
         {
             var builtString = BuildString(message, level);
 
@@ -44,7 +44,7 @@ namespace lunge.Library.Debugging.Logging
                 logger.Log(builtString, level);
         }
 
-        public async Task LogAsync(string message, LogLevel level = LogLevel.Debug)
+        public async Task LogAsync(object message, LogLevel level = LogLevel.Debug)
         {
             var buildString = BuildString(message, level);
 
@@ -60,7 +60,7 @@ namespace lunge.Library.Debugging.Logging
             }
         }
 
-        private string BuildString(string message, LogLevel level)
+        private string BuildString(object message, LogLevel level)
         {
             string result = "";
             string curDateTimeStr = DateTime.Now.ToString("G");
@@ -86,7 +86,7 @@ namespace lunge.Library.Debugging.Logging
                     throw new ArgumentOutOfRangeException(nameof(level), level, null);
             }
             
-            return result + message;
+            return result + message.ToString();
         }
     }
 }
