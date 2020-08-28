@@ -16,7 +16,7 @@ namespace lunge.Library.Graphics
     /// <summary>
     /// ImGui renderer for use with XNA-likes (FNA & MonoGame)
     /// </summary>
-    public class ImGuiRenderer
+    internal class ImGuiRenderer
     {
         private IGame _game;
 
