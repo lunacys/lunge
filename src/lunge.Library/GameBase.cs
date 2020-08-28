@@ -1,5 +1,7 @@
 ﻿using lunge.Library.Assets;
+using lunge.Library.Debugging.Logging;
 using lunge.Library.GameTimers;
+using lunge.Library.Graphics;
 using lunge.Library.Input;
 using lunge.Library.Resources;
 using lunge.Library.Screens;
@@ -17,6 +19,8 @@ namespace lunge.Library
         // protected GameSettings GameSettings { get; set; }
         protected ResourceManager ResourceManager { get; set; }
         protected bool UseAssetsHotReload { get; set; }
+
+        private LogHelper _logger => LoggerFactory.GetLogger("GameBase");
 
         private ViewportAdapter _viewportAdapter;
         public ViewportAdapter ViewportAdapter
@@ -62,10 +66,14 @@ namespace lunge.Library
         private IAssetManager _contentAssetManager;
         private IAssetManager _hotReloadAssetManager;
 
+        private ImGuiRenderer _imGuiRenderer;
+
         public GameBase Game => this;
         
         public GameBase(bool useAssetsHotReload = false)
         {
+            _logger.Log("Constructing");
+
             UseAssetsHotReload = useAssetsHotReload;
             Graphics = new GraphicsDeviceManager(this);
             
@@ -77,6 +85,8 @@ namespace lunge.Library
             IsMouseVisible = true;
             
             ScreenManager = new ScreenManager();
+
+            _logger.Log("End Constructing");
 
             // TODO: Fix GameSettings loading/saving/handling
             // GameSettings = gameSettings;
@@ -95,30 +105,45 @@ namespace lunge.Library
 
         protected override void Initialize()
         {
+            _logger.Log("Initializing");
+
             TextureStream.GraphicsDevice = GraphicsDevice;
             
             // Services.AddService(AssetManager);
             // Services.AddService(GameSettings);
             // Services.AddService(ResourceManager);
+
+            _imGuiRenderer = new ImGuiRenderer(this);
             
             ScreenManager.Initialize();
 
             base.Initialize();
             // Components.Add(GameSettingsComponent);
+
+            _logger.Log("End Initializing");
         }
 
         protected override void LoadContent()
         {
+            _logger.Log("Loading Content");
+
             SpriteBatch = new SpriteBatch(GraphicsDevice);
+
+            _imGuiRenderer.RebuildFontAtlas();
             
             base.LoadContent();
+
+            _logger.Log("End Loading Content");
         }
 
         protected override void UnloadContent()
         {
+            _logger.Log("Unloading Content");
             //GameSettingsComponent.SerializeToFile();
 
             base.UnloadContent();
+
+            _logger.Log("End Unloading Content");
         }
 
         protected override void Update(GameTime gameTime)
@@ -132,7 +157,9 @@ namespace lunge.Library
 
         protected override void Draw(GameTime gameTime)
         {
+            _imGuiRenderer.BeforeLayout(gameTime);
             ScreenManager.Draw(gameTime);
+            _imGuiRenderer.AfterLayout();
 
             base.Draw(gameTime);
         }
