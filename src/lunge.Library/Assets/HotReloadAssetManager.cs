@@ -41,6 +41,12 @@ namespace lunge.Library.Assets
             }
         }
         
+        /// <summary>
+        /// Loads an asset with specified asset name. File path must be included in the asset name. If asset with that name was loaded previously, it takes it from cache.
+        /// </summary>
+        /// <typeparam name="T">Type of the required asset</typeparam>
+        /// <param name="assetName">Name of the asset to be loaded</param>
+        /// <returns>Loaded asset</returns>
         public T Load<T>(string assetName)
         {
             if (_loadedAssets.ContainsKey(assetName))
@@ -49,6 +55,13 @@ namespace lunge.Library.Assets
             return Load<T>(assetName, GeneralAssetTypeName);
         }
 
+        /// <summary>
+        /// Loads an asset with specified asset name and type. File path must be included in the asset name.
+        /// </summary>
+        /// <typeparam name="T">Type of the required asset</typeparam>
+        /// <param name="assetName">Name of the asset to be loaded</param>
+        /// <param name="assetType">Type of the asset</param>
+        /// <returns>Loaded asset</returns>
         public T Load<T>(string assetName, string assetType)
         {
             var nameTypePair = new AssetNameTypePair(assetName, assetType);
