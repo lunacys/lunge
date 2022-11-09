@@ -8,12 +8,8 @@ namespace lunge.Library.Assets.AssetLoaders
     {
         public string AssetType => "Image";
 
-        public IGame Game { get; }
-
-        public Texture2DAssetLoader(IGame game)
-        {
-            Game = game;
-        }
+        public Texture2DAssetLoader()
+        { }
         
         public Texture2D Load(string assetName)
         {

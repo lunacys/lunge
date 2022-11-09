@@ -1,5 +1,5 @@
 ﻿using InputManagement.Entities;
-using lunge.Library.Input;
+using lunge.Library.InputMgr;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;

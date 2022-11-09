@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using lunge.Library.Graphics;
-using lunge.Library.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended;
+using Nez;
 
 namespace lunge.Library.Gui.Old
 {
@@ -13,18 +11,16 @@ namespace lunge.Library.Gui.Old
     /// all the IControl elements. Canvas cannot have another canvas as a child.
     /// </summary>
     [Obsolete("This GUI system is obsolete, please use the new one from the lunge.Library.Gui namespace")]
-    public class Canvas : DrawableGameComponent, IControl
+    public class Canvas : RenderableComponent, IControl, IUpdatable
     {
         // TODO: Add transitions for controls
         public Vector2 Position { get; set; }
-        public Size2 Size { get; set; }
+        public Vector2 Size { get; set; }
         public Canvas UsedCanvas
         {
             get => this;
             set => throw new InvalidOperationException();
         }
-
-        private readonly SpriteBatch _spriteBatch;
 
         private readonly List<IControl> _controlList;
         private readonly Dictionary<string, IControl> _controls;
@@ -32,15 +28,11 @@ namespace lunge.Library.Gui.Old
         private readonly List<IControl> _controlsToRemove;
 
         private bool _isUpdating;
-
-        public SpriteBatchSettings SpriteBatchSettings { get; }
-
         public event EventHandler MouseHover;
         public event EventHandler MouseIn;
         public event EventHandler MouseOut;
 
-        public Canvas(Game game, string name, Vector2 position, Size2 size)
-            : base(game)
+        public Canvas(string name, Vector2 position, Vector2 size)
         {
             Position = position;
             Size = size;
@@ -52,10 +44,6 @@ namespace lunge.Library.Gui.Old
             _controlsToRemove = new List<IControl>();
 
             ChildControls = new ControlList();
-
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            SpriteBatchSettings = new SpriteBatchSettings();
         }
 
         public void Close()
@@ -64,6 +52,11 @@ namespace lunge.Library.Gui.Old
             {
                 childControl.Close();
             }
+        }
+
+        public void Render(Batcher batcher)
+        {
+            throw new NotImplementedException();
         }
 
         public void AddControl(IControl control)
@@ -126,14 +119,16 @@ namespace lunge.Library.Gui.Old
             _controls[control.Name] = control;
             control.Initialize(this);
         }
+        
+        public void Initialize(IControl parent) { }
 
-        public override void Update(GameTime gameTime)
+        public void Update()
         {
             _isUpdating = true;
 
             foreach (var control in _controlList)
             {
-                control.Update(gameTime);
+                control.Update();
                 CheckBounds(control);
             }
 
@@ -152,24 +147,14 @@ namespace lunge.Library.Gui.Old
             }
 
             _controlsToRemove.Clear();
-
-            base.Update(gameTime);
         }
 
-        public override void Draw(GameTime gameTime)
+        public override void Render(Batcher batcher, Camera camera)
         {
-            _spriteBatch.Begin(SpriteBatchSettings);
-
             foreach (var control in _controlList)
             {
-                control.Draw(_spriteBatch);
+                control.Render(batcher, camera);
             }
-
-            _spriteBatch.DrawRectangle(Position, Size, Color.Red, 3f);
-
-            _spriteBatch.End();
-
-            base.Draw(gameTime);
         }
 
         public string Name { get; }
@@ -182,10 +167,6 @@ namespace lunge.Library.Gui.Old
         }
 
         public ControlList ChildControls { get; set; }
-
-        // TODO: Get rid of these three methods
-        public virtual void Initialize(Canvas canvas) { }
-        public virtual void Draw(SpriteBatch spriteBatch) { }
 
         public RectangleF GetBounds()
         {
@@ -218,9 +199,9 @@ namespace lunge.Library.Gui.Old
         public void CheckBounds(IControl control)
         {
             var minX = control.Position.X;
-            var maxX = control.Position.X + control.Size.Width;
+            var maxX = control.Position.X + control.Size.X;
             var minY = control.Position.Y;
-            var maxY = control.Position.Y + control.Size.Height;
+            var maxY = control.Position.Y + control.Size.Y;
 
             var parentPos = control.ParentControl.Position;
             var parentSize = control.ParentControl.Size;
@@ -229,18 +210,18 @@ namespace lunge.Library.Gui.Old
             {
                 control.Position = new Vector2(parentPos.X, control.Position.Y);
             }
-            else if (maxX > parentPos.X + parentSize.Width)
+            else if (maxX > parentPos.X + parentSize.X)
             {
-                control.Position = new Vector2(parentPos.X + parentSize.Width - control.Size.Width, control.Position.Y);
+                control.Position = new Vector2(parentPos.X + parentSize.X - control.Size.X, control.Position.Y);
             }
 
             if (minY < parentPos.Y)
             {
                 control.Position = new Vector2(control.Position.X, parentPos.Y);
             }
-            else if (maxY > parentPos.Y + parentSize.Height)
+            else if (maxY > parentPos.Y + parentSize.Y)
             {
-                control.Position = new Vector2(control.Position.X, parentPos.Y + parentSize.Height - control.Size.Height);
+                control.Position = new Vector2(control.Position.X, parentPos.Y + parentSize.Y - control.Size.Y);
             }
         }
     }

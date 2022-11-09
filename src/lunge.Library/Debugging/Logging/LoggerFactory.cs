@@ -7,46 +7,51 @@ namespace lunge.Library.Debugging.Logging
 {
     public static class LoggerFactory
     {
-        private static readonly Dictionary<string, LogHelper> LogHelpers = new Dictionary<string, LogHelper>();
+        private static readonly Dictionary<string, ILogger> LogHelpers = new Dictionary<string, ILogger>();
 
-        public static List<Logger> DefaultLoggers { get; set; }
+        public static List<ILoggerFrontend> DefaultLoggers { get; set; }
 
         static LoggerFactory()
         {
-            DefaultLoggers = new List<Logger> { new ConsoleLogger(), new FileLogger() };
+            DefaultLoggers = new List<ILoggerFrontend> { new ConsoleLogger(), new FileLogger(), new DiagnosticsLogger() };
         }
 
 
-        public static LogHelper GetLogger()
+        public static ILogger GetLogger()
         {
             return GetLogger(DefaultLoggers);
         }
 
-        public static LogHelper GetLogger(List<Logger> loggers)
+        public static ILogger GetLogger(List<ILoggerFrontend> loggers)
         {
             return GetLogger(new StackFrame(2).GetMethod()?.DeclaringType?.Name ?? "UNKNOWN", loggers);
         }
 
-        public static LogHelper GetLogger(Type context)
+        public static ILogger GetLogger(Type context)
         {
             return GetLogger(context.Name, DefaultLoggers);
         }
 
-        public static LogHelper GetLogger(Type context, List<Logger> loggers)
+        public static ILogger GetLogger(Type context, List<ILoggerFrontend> loggers)
         {
             return GetLogger(context.Name, loggers);
         }
 
-        public static LogHelper GetLogger(string context)
+        public static ILogger GetLogger(string context)
         {
             return GetLogger(context, DefaultLoggers);
         }
 
-        public static LogHelper GetLogger(string context, List<Logger> loggers)
+        public static ILogger GetLogger<T>()
+        {
+            return GetLogger(typeof(T).Name);
+        }
+
+        public static ILogger GetLogger(string context, List<ILoggerFrontend> loggers)
         {
             if (!LogHelpers.ContainsKey(context))
             {
-                LogHelpers[context] = new LogHelper(context, loggers);
+                LogHelpers[context] = new Logger(context, loggers);
             }
 
             return LogHelpers[context];

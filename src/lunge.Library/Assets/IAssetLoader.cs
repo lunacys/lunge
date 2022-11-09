@@ -2,7 +2,6 @@
 {
     public interface IAssetLoader
     {
-        IGame Game { get; }
         object Load(string assetName);
     }
     public interface IAssetLoader<out T> : IAssetLoader

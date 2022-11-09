@@ -1,9 +1,6 @@
 ﻿using System;
-using lunge.Library.Entities;
-using lunge.Library.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended;
 
 namespace lunge.Library
 {
@@ -39,35 +36,6 @@ namespace lunge.Library
                 origin.Y -= bounds.Height / 2.0f - size.Y / 2;
 
             spriteBatch.DrawString(spriteFont, text, pos, color, 0f, origin, Vector2.One, SpriteEffects.None, 0f);
-        }
-
-        public static void Draw(this SpriteBatch spriteBatch, Sprite sprite, Vector2 position)
-        {
-            spriteBatch.Draw(sprite.Image, position, null, sprite.Tint, sprite.Rotation, sprite.Origin, sprite.Scale, sprite.Effects, sprite.Depth);
-        }
-
-        public static void Draw(this SpriteBatch spriteBatch, Sprite sprite, Rectangle rect)
-        {
-            spriteBatch.Draw(sprite.Image, rect, null, sprite.Tint, sprite.Rotation, sprite.Origin, sprite.Effects, sprite.Depth);
-        }
-
-        public static void Draw(this SpriteBatch spriteBatch, Sprite sprite, Vector2 position, Rectangle rect)
-        {
-            spriteBatch.Draw(sprite.Image, position, rect, sprite.Tint, sprite.Rotation, sprite.Origin, sprite.Scale,
-                sprite.Effects, sprite.Depth);
-        }
-
-        public static void Begin(this SpriteBatch spriteBatch, SpriteBatchSettings spriteBatchSettings)
-        {
-            spriteBatch.Begin(
-                spriteBatchSettings.SpriteSortMode, 
-                spriteBatchSettings.BlendState,
-                spriteBatchSettings.SamplerState, 
-                spriteBatchSettings.DepthStencilState,
-                spriteBatchSettings.RasterizerState, 
-                spriteBatchSettings.Effect, 
-                spriteBatchSettings.TransformMatrix
-                );
         }
     }
 }

@@ -1,8 +1,7 @@
 ﻿using System;
-using lunge.Library.Input;
+using lunge.Library.InputMgr;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended;
+using Nez;
 
 namespace lunge.Library.Gui.Old
 {
@@ -14,7 +13,7 @@ namespace lunge.Library.Gui.Old
         public IControl ParentControl { get; set; }
         public Canvas UsedCanvas { get; set; }
         public virtual Vector2 Position { get; set; }
-        public virtual Size2 Size { get; set; }
+        public virtual Vector2 Size { get; set; }
 
         private Vector2? _origPos;
 
@@ -49,7 +48,7 @@ namespace lunge.Library.Gui.Old
             Initialized?.Invoke(this, EventArgs.Empty);
         }
 
-        public virtual void Update(GameTime gameTime)
+        public virtual void Update()
         {
             if (!_origPos.HasValue)
                 _origPos = Position;
@@ -62,7 +61,10 @@ namespace lunge.Library.Gui.Old
             }
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch) { }
+        public virtual void Initialize(IControl parent)
+        { }
+
+        public virtual void Render(Batcher batcher, Camera camera) { }
 
         protected void MoveControlAndItsChildren(IControl controlToMove, Vector2 newPosition)
         {
@@ -101,5 +103,8 @@ namespace lunge.Library.Gui.Old
         {
             return new RectangleF();
         }
+
+        public bool Enabled { get; } = true;
+        public int UpdateOrder { get; } = 0;
     }
 }

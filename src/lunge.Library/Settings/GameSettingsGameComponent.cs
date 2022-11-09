@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using lunge.Library.Debugging.Logging;
 using Microsoft.Xna.Framework;
-using Newtonsoft.Json;
+using Nez.Persistence;
 
 namespace lunge.Library.Settings
 {
@@ -18,7 +18,7 @@ namespace lunge.Library.Settings
 
         public object this[string name] => GameSettings.Get(name);
 
-        private static readonly LogHelper Logger = LoggerFactory.GetLogger("GameSettingsGameComponent");
+        private static readonly ILogger Logger = LoggerFactory.GetLogger("GameSettingsGameComponent");
 
         public GameSettingsGameComponent(Game game, GameSettings gameSettings = null, bool doScanAssembly = true)
             : base(game)
@@ -61,7 +61,7 @@ namespace lunge.Library.Settings
                     str = sr.ReadToEnd();
                 }
 
-                var tmp = JsonConvert.DeserializeObject<GameSettings>(str);
+                var tmp = Json.FromJson<GameSettings>(str);
                 foreach (var gameSetting in tmp)
                 {
                     gameSettings.Add(gameSetting.Key, gameSetting.Value);
@@ -82,7 +82,7 @@ namespace lunge.Library.Settings
 
         public void SerializeToFile()
         {
-            string str = JsonConvert.SerializeObject(GameSettings, Formatting.Indented);
+            string str = Json.ToJson(GameSettings);
 
             using (StreamWriter sw = new StreamWriter(SettingsFileName))
             {
@@ -112,7 +112,7 @@ namespace lunge.Library.Settings
 
         public static void ScanAssembly(Assembly assembly, GameSettings gameSettings)
         {
-            Logger.Log($"Scanning assembly: {assembly.FullName}");
+            Logger.Trace($"Scanning assembly: {assembly.FullName}");
 
             var types = assembly.GetTypes();
             foreach (var type in types)
@@ -124,7 +124,7 @@ namespace lunge.Library.Settings
 
                 foreach (var prop in props)
                 {
-                    Logger.Log($"Found setting property: {prop.Name}");
+                    Logger.Trace($"Found setting property: {prop.Name}");
 
                     var attr = (GameSettingsEntryAttribute)prop.GetCustomAttribute(typeof(GameSettingsEntryAttribute), false);
 

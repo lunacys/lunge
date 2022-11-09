@@ -2,6 +2,7 @@
 {
     public enum LogLevel
     {
+        Trace,
         Debug,
         /// <summary>
         /// General and non-harmous information message

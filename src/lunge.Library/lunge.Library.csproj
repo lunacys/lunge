@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Authors>loonacuse</Authors>
     <Description>A simple 2D game engine based on MonoGame Framework </Description>
     <Copyright>loonacuse</Copyright>
@@ -12,6 +12,8 @@
     <Company>loonacuse</Company>
     <Product>lunge</Product>
     <NeutralLanguage>en</NeutralLanguage>
+    <LangVersion>10</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -29,17 +31,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FSMSharp.Core" Version="1.0.1" />
-    <PackageReference Include="ImGui.NET" Version="1.78.0" />
-    <PackageReference Include="Lidgren.Network.Core2" Version="1.0.0" />
-    <PackageReference Include="MonoGame.Extended" Version="3.7.0" />
-    <PackageReference Include="MonoGame.Framework.DesktopGL.Core" Version="3.8.0.13" />
-    <PackageReference Include="SpriteFontPlus" Version="0.8.1.40" />
+    <Folder Include="AI" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\Components\" />
-    <Folder Include="Physics\" />
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\deps\jint\Jint\Jint.csproj" />
+    <ProjectReference Include="..\..\deps\LiteNetLib\LiteNetLib\LiteNetLib.csproj" />
+    <ProjectReference Include="..\..\deps\Nez\Nez.ImGui\Nez.MG38.ImGui.csproj" />
+    <ProjectReference Include="..\..\deps\Nez\Nez.Persistence\Nez.MG38.Persistence.csproj" />
+    <ProjectReference Include="..\..\deps\Nez\Nez.Portable\Nez.MG38.csproj" />
   </ItemGroup>
 
 </Project>

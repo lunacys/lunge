@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Xna.Framework;
+using Nez;
 
 namespace lunge.Library.Assets
 {
@@ -17,12 +19,9 @@ namespace lunge.Library.Assets
         public string RootDirectory { get; set; }
 
         public event EventHandler<AssetReloadedEventArgs> AssetReloaded;
-        
-        public IGame Game { get; }
 
-        public HotReloadAssetManager(IGame game)
+        public HotReloadAssetManager()
         {
-            Game = game;
             GeneralAssetTypeName = "General";
             
             _loadedAssets = new Dictionary<string, object>();
@@ -163,7 +162,7 @@ namespace lunge.Library.Assets
                 var attribute = type.GetCustomAttribute<AssetAttribute>();
                 if (attribute != null)
                 {
-                    var assetLoader = Activator.CreateInstance(type, Game);
+                    var assetLoader = Activator.CreateInstance(type);
                     _assetLoaders.Add((assetLoader as IAssetLoader, attribute));
                 }
             }

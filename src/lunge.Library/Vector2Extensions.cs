@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using MonoGame.Extended;
+using Nez;
 
 namespace lunge.Library
 {
@@ -41,7 +41,7 @@ namespace lunge.Library
         {
             return new Vector2(vec.X, vec.Y);
         }
-
+        
         public static Vector2 ClampToRectangleF(this Vector2 vec, RectangleF rect)
         {
             var result = vec.Copy();

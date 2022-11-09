@@ -1,0 +1,9 @@
+[submodule "deps/Nez"]
+	path = deps/Nez
+	url = https://github.com/prime31/Nez.git
+[submodule "deps/LiteNetLib"]
+	path = deps/LiteNetLib
+	url = https://github.com/RevenantX/LiteNetLib.git
+[submodule "deps/jint"]
+	path = deps/jint
+	url = https://github.com/sebastienros/jint.git

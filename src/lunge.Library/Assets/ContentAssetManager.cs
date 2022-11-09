@@ -1,23 +1,23 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Content;
+using Nez;
+using Nez.Systems;
 
 namespace lunge.Library.Assets
 {
     public class ContentAssetManager : IAssetManager
     {
-        public ContentManager Content { get; }
+        public NezContentManager Content { get; }
         public event EventHandler<AssetReloadedEventArgs> AssetReloaded;
         public string RootDirectory
         {
             get => Content.RootDirectory;
             set => Content.RootDirectory = value;
         }
-        public IGame Game { get; }
         
-        public ContentAssetManager(IGame game, ContentManager contentManager)
+        public ContentAssetManager()
         {
-            Game = game;
-            Content = contentManager;
+            Content = Core.Content;
         }
         
         public void Dispose()

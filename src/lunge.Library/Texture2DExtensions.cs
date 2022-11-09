@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended;
 
 namespace lunge.Library
 {
@@ -15,9 +14,9 @@ namespace lunge.Library
         /// <param name="position"><see cref="Point"/> position with x and y coordinates related to the top left corner of the texture</param>
         /// <param name="size"><see cref="Size2"/> size of the area to crop</param>
         /// <returns></returns>
-        public static Texture2D Crop(this Texture2D texture, Point position, Size2 size)
+        public static Texture2D Crop(this Texture2D texture, Point position, Point size)
         {
-            return Crop(texture, position.X, position.Y, (int)size.Width, (int)size.Height);
+            return Crop(texture, position.X, position.Y, size.X, size.Y);
         }
 
         /// <summary>

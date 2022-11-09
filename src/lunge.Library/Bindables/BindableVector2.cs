@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
-using MonoGame.Extended;
 
 namespace lunge.Library.Bindables
 {

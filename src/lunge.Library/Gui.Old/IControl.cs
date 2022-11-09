@@ -1,13 +1,12 @@
 ﻿using System;
-using lunge.Library.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended;
+using Nez;
 
 namespace lunge.Library.Gui.Old
 {
     [Obsolete("This GUI system is obsolete, please use the new one from the lunge.Library.Gui namespace")]
-    public interface IControl
+    public interface IControl : IUpdatable
     {
         string Name { get; }
         float DrawDepth { get; set; }
@@ -15,22 +14,16 @@ namespace lunge.Library.Gui.Old
         ControlList ChildControls { get; set; }
         Canvas UsedCanvas { get; set; }
         Vector2 Position { get; set; }
-        Size2 Size { get; set; }
+        Vector2 Size { get; set; }
 
         event EventHandler MouseHover;
         event EventHandler MouseIn;
         event EventHandler MouseOut;
-
-        void Initialize(Canvas canvas);
-        void Update(GameTime gameTime);
+        
         void Close();
 
-        /// <summary>
-        /// Draws control using <see cref="SpriteBatch"/>. Note: do not call Begin() method
-        /// as it is being called in the <see cref="Canvas"/>.
-        /// </summary>
-        /// <param name="spriteBatch"></param>
-        void Draw(SpriteBatch spriteBatch);
+        void Initialize(IControl parent);
+        void Render(Batcher batcher, Camera camera);
 
         RectangleF GetBounds();
     }

@@ -1,38 +1,31 @@
 ﻿using System;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace lunge.Library.Debugging.Logging.Loggers
 {
-    public class FileLogger : Logger
+    public class FileLogger : ILoggerFrontend
     {
         public string FileDir => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs");
 
-        public string FilePath => Path.Combine(FileDir,
-            $"log-{DateTime.Now:yyyy-MM-dd}.txt");
+        public string FilePath { get; }
 
-        public FileLogger()
+        public FileLogger(string? filePath = null)
         {
+            if (filePath == null)
+                FilePath = Path.Combine(FileDir,
+                    $"log-{DateTime.Now:yyyy-MM-dd}.log");
+            else
+                FilePath = filePath;
+
             if (!Directory.Exists(FileDir))
                 Directory.CreateDirectory(FileDir);
         }
 
-        public override void Log(string message, LogLevel level)
-        {
-            lock (LockObject)
-            {
-                using (var sw = new StreamWriter(FilePath, true))
-                {
-                    sw.WriteLine(message);
-                }
-            }
-        }
-
-        public override async Task LogAsync(string message, LogLevel level)
+        public void Log(string message, LogLevel level)
         {
             using (var sw = new StreamWriter(FilePath, true))
             {
-                await sw.WriteLineAsync(message);
+                sw.WriteLine(message);
             }
         }
     }

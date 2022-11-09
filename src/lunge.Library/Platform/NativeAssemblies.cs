@@ -43,8 +43,6 @@ namespace lunge.Library.Platform
         /// </summary>
         public static string NativeDirectory => $"{BaseDirectory}/{Architecture}/";
 
-        private static readonly LogHelper Logger = LoggerFactory.GetLogger("NativeAssemblies");
-
         /// <summary>
         ///     Copies native assemblies to the executing path
         /// </summary>
@@ -61,7 +59,7 @@ namespace lunge.Library.Platform
                 }
                 catch (Exception e)
                 {
-                    Logger.Log(e.Message, LogLevel.Error);
+                    Console.WriteLine(e);
                 }
             }
         }
