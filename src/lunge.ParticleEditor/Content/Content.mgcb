@@ -1,0 +1,96 @@
+
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:DesktopGL
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+
+#---------------------------------- Content ---------------------------------#
+
+#begin Particles/Atomic Bubble.pex
+/copy:Particles/Atomic Bubble.pex
+
+#begin Particles/Blue Flame.pex
+/copy:Particles/Blue Flame.pex
+
+#begin Particles/Blue Galaxy.pex
+/copy:Particles/Blue Galaxy.pex
+
+#begin Particles/Comet.pex
+/copy:Particles/Comet.pex
+
+#begin Particles/Crazy Blue.pex
+/copy:Particles/Crazy Blue.pex
+
+#begin Particles/Electrons.pex
+/copy:Particles/Electrons.pex
+
+#begin Particles/Fire.pex
+/copy:Particles/Fire.pex
+
+#begin Particles/Foam.pex
+/copy:Particles/Foam.pex
+
+#begin Particles/Giros Gratis.pex
+/copy:Particles/Giros Gratis.pex
+
+#begin Particles/huo1.pex
+/copy:Particles/huo1.pex
+
+#begin Particles/Into The Blue.pex
+/copy:Particles/Into The Blue.pex
+
+#begin Particles/JasonChoi_Flash.pex
+/copy:Particles/JasonChoi_Flash.pex
+
+#begin Particles/JasonChoi_rising up.pex
+/copy:Particles/JasonChoi_rising up.pex
+
+#begin Particles/JasonChoi_Swirl01.pex
+/copy:Particles/JasonChoi_Swirl01.pex
+
+#begin Particles/Leaves.pex
+/copy:Particles/Leaves.pex
+
+#begin Particles/Meks Blood Spill.pex
+/copy:Particles/Meks Blood Spill.pex
+
+#begin Particles/Plasma Glow.pex
+/copy:Particles/Plasma Glow.pex
+
+#begin Particles/Real Popcorn.pex
+/copy:Particles/Real Popcorn.pex
+
+#begin Particles/Shooting Fireball.pex
+/copy:Particles/Shooting Fireball.pex
+
+#begin Particles/Snow.pex
+/copy:Particles/Snow.pex
+
+#begin Particles/The Sun.pex
+/copy:Particles/The Sun.pex
+
+#begin Particles/thingy_tex.png
+/copy:Particles/thingy_tex.png
+
+#begin Particles/Thingy.pex
+/copy:Particles/Thingy.pex
+
+#begin Particles/Touch Up.pex
+/copy:Particles/Touch Up.pex
+
+#begin Particles/Trippy.pex
+/copy:Particles/Trippy.pex
+
+#begin Particles/Winner Stars.pex
+/copy:Particles/Winner Stars.pex
+
+#begin Particles/wu1.pex
+/copy:Particles/wu1.pex
+
