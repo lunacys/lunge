@@ -1,0 +1,412 @@
+
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:DesktopGL
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+
+#---------------------------------- Content ---------------------------------#
+
+#begin another-test-sc.png
+/copy:another-test-sc.png
+
+#begin desert-palace-tiles2x.png
+/copy:desert-palace-tiles2x.png
+
+#begin destructable-map.tmx
+/copy:destructable-map.tmx
+
+#begin grassland_tiles.png
+/copy:grassland_tiles.png
+
+#begin grassland_tiles.tsx
+/copy:grassland_tiles.tsx
+
+#begin nez/effects/Bevels.mgfxo
+/copy:nez/effects/Bevels.mgfxo
+
+#begin nez/effects/BloomCombine.mgfxo
+/copy:nez/effects/BloomCombine.mgfxo
+
+#begin nez/effects/BloomExtract.mgfxo
+/copy:nez/effects/BloomExtract.mgfxo
+
+#begin nez/effects/Crosshatch.mgfxo
+/copy:nez/effects/Crosshatch.mgfxo
+
+#begin nez/effects/DeferredLighting.mgfxo
+/copy:nez/effects/DeferredLighting.mgfxo
+
+#begin nez/effects/DeferredSprite.mgfxo
+/copy:nez/effects/DeferredSprite.mgfxo
+
+#begin nez/effects/Dissolve.mgfxo
+/copy:nez/effects/Dissolve.mgfxo
+
+#begin nez/effects/GaussianBlur.mgfxo
+/copy:nez/effects/GaussianBlur.mgfxo
+
+#begin nez/effects/Grayscale.mgfxo
+/copy:nez/effects/Grayscale.mgfxo
+
+#begin nez/effects/HeatDistortion.mgfxo
+/copy:nez/effects/HeatDistortion.mgfxo
+
+#begin nez/effects/Invert.mgfxo
+/copy:nez/effects/Invert.mgfxo
+
+#begin nez/effects/Letterbox.mgfxo
+/copy:nez/effects/Letterbox.mgfxo
+
+#begin nez/effects/MultiTexture.mgfxo
+/copy:nez/effects/MultiTexture.mgfxo
+
+#begin nez/effects/MultiTextureOverlay.mgfxo
+/copy:nez/effects/MultiTextureOverlay.mgfxo
+
+#begin nez/effects/Noise.mgfxo
+/copy:nez/effects/Noise.mgfxo
+
+#begin nez/effects/PaletteCycler.mgfxo
+/copy:nez/effects/PaletteCycler.mgfxo
+
+#begin nez/effects/PixelGlitch.mgfxo
+/copy:nez/effects/PixelGlitch.mgfxo
+
+#begin nez/effects/PolygonLight.mgfxo
+/copy:nez/effects/PolygonLight.mgfxo
+
+#begin nez/effects/Reflection.mgfxo
+/copy:nez/effects/Reflection.mgfxo
+
+#begin nez/effects/Scanlines.mgfxo
+/copy:nez/effects/Scanlines.mgfxo
+
+#begin nez/effects/Sepia.mgfxo
+/copy:nez/effects/Sepia.mgfxo
+
+#begin nez/effects/SpriteAlphaTest.mgfxo
+/copy:nez/effects/SpriteAlphaTest.mgfxo
+
+#begin nez/effects/SpriteBlinkEffect.mgfxo
+/copy:nez/effects/SpriteBlinkEffect.mgfxo
+
+#begin nez/effects/SpriteEffect.mgfxo
+/copy:nez/effects/SpriteEffect.mgfxo
+
+#begin nez/effects/SpriteLightMultiply.mgfxo
+/copy:nez/effects/SpriteLightMultiply.mgfxo
+
+#begin nez/effects/SpriteLines.mgfxo
+/copy:nez/effects/SpriteLines.mgfxo
+
+#begin nez/effects/StencilLight.mgfxo
+/copy:nez/effects/StencilLight.mgfxo
+
+#begin nez/effects/transitions/Squares.mgfxo
+/copy:nez/effects/transitions/Squares.mgfxo
+
+#begin nez/effects/transitions/TextureWipe.mgfxo
+/copy:nez/effects/transitions/TextureWipe.mgfxo
+
+#begin nez/effects/transitions/Wind.mgfxo
+/copy:nez/effects/transitions/Wind.mgfxo
+
+#begin nez/effects/Twist.mgfxo
+/copy:nez/effects/Twist.mgfxo
+
+#begin nez/effects/Vignette.mgfxo
+/copy:nez/effects/Vignette.mgfxo
+
+#begin nez/fonts/NezDefaultBMFont.xnb
+/copy:nez/fonts/NezDefaultBMFont.xnb
+
+#begin nez/NezDefaultBMFont.xnb
+/copy:nez/NezDefaultBMFont.xnb
+
+#begin nez/textures/heatDistortionNoise.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:nez/textures/heatDistortionNoise.png
+
+#begin nez/textures/textureWipeTransition/angular.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:nez/textures/textureWipeTransition/angular.png
+
+#begin nez/textures/textureWipeTransition/crissCross.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:nez/textures/textureWipeTransition/crissCross.png
+
+#begin nez/textures/textureWipeTransition/diagonalDistort.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:nez/textures/textureWipeTransition/diagonalDistort.png
+
+#begin nez/textures/textureWipeTransition/horizontal.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:nez/textures/textureWipeTransition/horizontal.png
+
+#begin nez/textures/textureWipeTransition/noise.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:nez/textures/textureWipeTransition/noise.png
+
+#begin nez/textures/textureWipeTransition/pokemon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:nez/textures/textureWipeTransition/pokemon.png
+
+#begin nez/textures/textureWipeTransition/sawTooth.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:nez/textures/textureWipeTransition/sawTooth.png
+
+#begin nez/textures/textureWipeTransition/spiral.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:nez/textures/textureWipeTransition/spiral.png
+
+#begin nez/textures/textureWipeTransition/wink.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:nez/textures/textureWipeTransition/wink.png
+
+#begin pathfinding2-map1-big.tmx
+/copy:pathfinding2-map1-big.tmx
+
+#begin pathfinding2-map1.tmx
+/copy:pathfinding2-map1.tmx
+
+#begin pathfinding2-map2-isometric.tmx
+/copy:pathfinding2-map2-isometric.tmx
+
+#begin pathfinding2-tileset1.png
+/copy:pathfinding2-tileset1.png
+
+#begin steering/GrayCircle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:steering/GrayCircle.png
+
+#begin steering/GreenSquare.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:steering/GreenSquare.png
+
+#begin steering/PathPiece.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:steering/PathPiece.png
+
+#begin steering/RedSquare.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:steering/RedSquare.png
+
+#begin steering/Target.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:steering/Target.png
+
+#begin steering/YellowArrow.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:steering/YellowArrow.png
+
+#begin test-block-1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:test-block-1.png
+
+#begin test-character.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:test-character.png
+
+#begin test-isometric-2.tmx
+/copy:test-isometric-2.tmx
+
+#begin test-isometric-3.tmx
+/copy:test-isometric-3.tmx
+
+#begin test-isometric-map-tiles.png
+/copy:test-isometric-map-tiles.png
+
+#begin test-isometric-map-tiles.tsx
+/copy:test-isometric-map-tiles.tsx
+
+#begin test-isometric-map.tmx
+/copy:test-isometric-map.tmx
+
+#begin test-isometric-rightbottom-offset.tmx
+/copy:test-isometric-rightbottom-offset.tmx
+
+#begin test-model.fbx
+/importer:FbxImporter
+/processor:ModelProcessor
+/processorParam:ColorKeyColor=0,0,0,0
+/processorParam:ColorKeyEnabled=True
+/processorParam:DefaultEffect=BasicEffect
+/processorParam:GenerateMipmaps=True
+/processorParam:GenerateTangentFrames=False
+/processorParam:PremultiplyTextureAlpha=True
+/processorParam:PremultiplyVertexColors=True
+/processorParam:ResizeTexturesToPowerOfTwo=False
+/processorParam:RotationX=0
+/processorParam:RotationY=0
+/processorParam:RotationZ=0
+/processorParam:Scale=1
+/processorParam:SwapWindingOrder=False
+/processorParam:TextureFormat=Compressed
+/build:test-model.fbx
+
+#begin test-texture.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:test-texture.png
+
+#begin test.vert
+/copy:test.vert
+
