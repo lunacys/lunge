@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="1">
+ <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="1120" columns="28">
+  <image source="tileset.png" width="448" height="640"/>
+  <wangsets>
+   <wangset name="Terrains" type="corner" tile="-1">
+    <wangcolor name="snow" color="#ff0000" tile="553" probability="1"/>
+    <wangcolor name="dirt" color="#00ff00" tile="385" probability="1"/>
+    <wangcolor name="dirt temple" color="#0000ff" tile="390" probability="1"/>
+    <wangcolor name="farm" color="#ff7700" tile="469" probability="1"/>
+    <wangcolor name="dark farm" color="#00e9ff" tile="474" probability="1"/>
+    <wangcolor name="test" color="#ff00d8" tile="-1" probability="1"/>
+    <wangtile tileid="354" wangid="0,2,0,0,0,2,0,2"/>
+    <wangtile tileid="355" wangid="0,2,0,2,0,0,0,2"/>
+    <wangtile tileid="356" wangid="0,0,0,2,0,0,0,0"/>
+    <wangtile tileid="357" wangid="0,0,0,2,0,2,0,0"/>
+    <wangtile tileid="358" wangid="0,0,0,0,0,2,0,0"/>
+    <wangtile tileid="359" wangid="0,3,0,0,0,3,0,3"/>
+    <wangtile tileid="360" wangid="0,3,0,3,0,0,0,3"/>
+    <wangtile tileid="361" wangid="0,0,0,3,0,0,0,0"/>
+    <wangtile tileid="362" wangid="0,0,0,3,0,3,0,0"/>
+    <wangtile tileid="363" wangid="0,0,0,0,0,3,0,0"/>
+    <wangtile tileid="382" wangid="0,0,0,2,0,2,0,2"/>
+    <wangtile tileid="383" wangid="0,2,0,2,0,2,0,0"/>
+    <wangtile tileid="384" wangid="0,2,0,2,0,0,0,0"/>
+    <wangtile tileid="385" wangid="0,2,0,2,0,2,0,2"/>
+    <wangtile tileid="386" wangid="0,0,0,0,0,2,0,2"/>
+    <wangtile tileid="387" wangid="0,0,0,3,0,3,0,3"/>
+    <wangtile tileid="388" wangid="0,3,0,3,0,3,0,0"/>
+    <wangtile tileid="389" wangid="0,3,0,3,0,0,0,0"/>
+    <wangtile tileid="390" wangid="0,3,0,3,0,3,0,3"/>
+    <wangtile tileid="391" wangid="0,0,0,0,0,3,0,3"/>
+    <wangtile tileid="412" wangid="0,2,0,0,0,0,0,0"/>
+    <wangtile tileid="413" wangid="0,2,0,0,0,0,0,2"/>
+    <wangtile tileid="414" wangid="0,0,0,0,0,0,0,2"/>
+    <wangtile tileid="417" wangid="0,3,0,0,0,0,0,0"/>
+    <wangtile tileid="418" wangid="0,3,0,0,0,0,0,3"/>
+    <wangtile tileid="419" wangid="0,0,0,0,0,0,0,3"/>
+    <wangtile tileid="438" wangid="0,4,0,0,0,4,0,4"/>
+    <wangtile tileid="439" wangid="0,4,0,4,0,0,0,4"/>
+    <wangtile tileid="440" wangid="0,0,0,4,0,0,0,0"/>
+    <wangtile tileid="441" wangid="0,0,0,4,0,4,0,0"/>
+    <wangtile tileid="442" wangid="0,0,0,0,0,4,0,0"/>
+    <wangtile tileid="443" wangid="0,5,0,0,0,5,0,5"/>
+    <wangtile tileid="444" wangid="0,5,0,5,0,0,0,5"/>
+    <wangtile tileid="445" wangid="0,0,0,5,0,0,0,0"/>
+    <wangtile tileid="446" wangid="0,0,0,5,0,5,0,0"/>
+    <wangtile tileid="447" wangid="0,0,0,0,0,5,0,0"/>
+    <wangtile tileid="466" wangid="0,0,0,4,0,4,0,4"/>
+    <wangtile tileid="467" wangid="0,4,0,4,0,4,0,0"/>
+    <wangtile tileid="468" wangid="0,4,0,4,0,0,0,0"/>
+    <wangtile tileid="469" wangid="0,4,0,4,0,4,0,4"/>
+    <wangtile tileid="470" wangid="0,0,0,0,0,4,0,4"/>
+    <wangtile tileid="471" wangid="0,0,0,5,0,5,0,5"/>
+    <wangtile tileid="472" wangid="0,5,0,5,0,5,0,0"/>
+    <wangtile tileid="473" wangid="0,5,0,5,0,0,0,0"/>
+    <wangtile tileid="474" wangid="0,5,0,5,0,5,0,5"/>
+    <wangtile tileid="475" wangid="0,0,0,0,0,5,0,5"/>
+    <wangtile tileid="496" wangid="0,4,0,0,0,0,0,0"/>
+    <wangtile tileid="497" wangid="0,4,0,0,0,0,0,4"/>
+    <wangtile tileid="498" wangid="0,0,0,0,0,0,0,4"/>
+    <wangtile tileid="501" wangid="0,5,0,0,0,0,0,0"/>
+    <wangtile tileid="502" wangid="0,5,0,0,0,0,0,5"/>
+    <wangtile tileid="503" wangid="0,0,0,0,0,0,0,5"/>
+    <wangtile tileid="522" wangid="0,1,0,0,0,1,0,1"/>
+    <wangtile tileid="523" wangid="0,1,0,1,0,0,0,1"/>
+    <wangtile tileid="524" wangid="0,0,0,1,0,0,0,0"/>
+    <wangtile tileid="525" wangid="0,0,0,1,0,1,0,0"/>
+    <wangtile tileid="526" wangid="0,0,0,0,0,1,0,0"/>
+    <wangtile tileid="550" wangid="0,0,0,1,0,1,0,1"/>
+    <wangtile tileid="551" wangid="0,1,0,1,0,1,0,0"/>
+    <wangtile tileid="552" wangid="0,1,0,1,0,0,0,0"/>
+    <wangtile tileid="553" wangid="0,1,0,1,0,1,0,1"/>
+    <wangtile tileid="554" wangid="0,0,0,0,0,1,0,1"/>
+    <wangtile tileid="580" wangid="0,1,0,0,0,0,0,0"/>
+    <wangtile tileid="581" wangid="0,1,0,0,0,0,0,1"/>
+    <wangtile tileid="582" wangid="0,0,0,0,0,0,0,1"/>
+    <wangtile tileid="609" wangid="0,0,0,6,0,0,0,0"/>
+    <wangtile tileid="610" wangid="0,0,0,6,0,6,0,0"/>
+    <wangtile tileid="611" wangid="0,0,0,0,0,6,0,0"/>
+    <wangtile tileid="637" wangid="0,6,0,6,0,0,0,0"/>
+    <wangtile tileid="638" wangid="0,6,0,6,0,6,0,6"/>
+    <wangtile tileid="639" wangid="0,0,0,0,0,6,0,6"/>
+    <wangtile tileid="665" wangid="0,6,0,0,0,0,0,0"/>
+    <wangtile tileid="666" wangid="0,6,0,0,0,0,0,6"/>
+    <wangtile tileid="667" wangid="0,0,0,0,0,0,0,6"/>
+   </wangset>
+  </wangsets>
+ </tileset>
+ <layer id="1" name="tiles" width="64" height="64">
+  <data encoding="base64" compression="zlib">
+   eJztmUuO20YQhkXM4UjMyrCdE4hLY4ycQIRXRoJIsyeX3hhzCTtw7hURrg/8VODYmgXbAtwCCuKjm+y/6q9Xc7erv1d3u93rn8ibs7xdkT/Osm92u8NZxrMMzXI+Sx//U/wPcTzF8aB7jOvif4xnfdhI+L07Y3j4ibw/y18r8ufdd4xjrHvG0+rYumhDH8bfazz6yrI1/o/PYLP8/cz1f8L+M5bjWR4Dz4zlPo5Pge8Y104x/hT3j4HzmMbDqa3xf7oC/3Py+W7hPXieAk8nLH1cP4Z0MbYNnUwx9iF0iE5vxf7PyWx//PoppG0usZ1kX3TQhTzFGO6jw6m5Lf7/CH8f9oK78N44wQo++z32t27GZokrt45/TNixNzo4hn7M+Rnvo+4TP5nvmHjr+ME6NUvsOzRLHiOuT6EHctx8bYj76Iect9e8W8fPevHfY7PEM+I+/kFMOMjO97I/OWLfLDF0a/xfzhi+/kD+DazfVu79d3fpx53WD75T4MX/sf087iEwEz/RAfooUf/gv67f4OW8ho+ytWs08jO8Jfed4vyxWeJ7jm99c5kH4QtjWE8J/4dn1GVgJP4a/yDM3Hf9R/3jfIDNsS9+cNS9oVn4A5/wq1L2p+aGA2Az/rZZ6hL0hS6I/+YDGKl/75ulPrI/wHvrhxi4NX6/z7mXY/tCl84Hrdl9Dr6BHngWdT/65pm9xu41rkT+Bw/+BiY4gF6MAb2Mumb92I69nj9o/qR7zMv6LGF/7OaYC2buYRPzfY0zjh1wgfE8w7GWOdxHB8wr4f/WPXkX/vfpOmuCw/goOrB/MGaUuD8m5rom9LuZUwJ/q3cftAbwYkv0YL9wr57taz/nmTnecO59As8p4f+2Sat1cA6/vW/j3M1cc7nXs6xbdMczxvRM5pNDt8bvWpv4BB/gNPbnutfnvSt4z9i97qGrfXMZDxx/nIvR6db4Hct5r7mZYyD2s30dA7134XyRuZD1x/Pyta3x45es2XuS8N38NmbGwgdyhPHanq4t0BN51rHfPeXW+NE1awFDrkPgsGsB1wmOE73OvQdq7phvzoe93lki/rNO/Nx4ndONHXu7rzdvXPe4n3IccJ43R+xvJfI/6x30zlHXci3stWe++twYXFdm/8lxBr2Xwu/Y697F6/S3DPPFnDXvHefRW/YV10rmUPaVEvxH3+5BsCHrNlfdL1gfrulcE6/1zP5GkusA54oS/M+1BzHANfm1PZH9u9X8Xtdc83Yax3XHoxL4u+Zy7e7viWHX9kS2f65pPGbtOyDjvT++NX7bOfsrNn9JT2SczhmOHweJ7e78UIr/9lvjdR/zkp7ItaPzaa6v8rfPtRxQov7n3f4u4/0Y54JreqK8L4qO3CPkPQHXi+ZFCf9nrfZz89j7Ftf0RNbFqHGuGYgfjqHwi3WUyn+803bNNfFLeqJJ8yzW2dCs54W8B11i/8trcezjnNx0bU/kWOp4YZ16L9TvazWfMVvjh7+uO7CzY+O1PZH7npxHvcdj3/K/426J/OfaxftfObdd2xP5W5/rgNzrOO7xnCnNK8F/96HOPea2uez9uzbNddwjDzDGtY33Cp37vY9Qyv7u0ZyvbEfXI9gGPXGc7ekc6Hji2OgckXsG9FHC/o7pzvXucVwfdknA7l4590WO9/BnrT4gdqDfrfFv9fxbl4q/4q/4f/06Kv6Kv+Kv+Cv+ir/ir/gr/oq/4q/4K/6Kv+Kv+Cv+bfH/zr//AX/XVG0=
+  </data>
+ </layer>
+ <layer id="2" name="terrain" width="64" height="64">
+  <data encoding="base64" compression="zlib">
+   eJztmmlyEzEQhcf+y3YMtnME7uGEsIQz2E7AgTMYSKoS7sC+3CEEyHIJoIrwk+4qddE00kgabTPDvKpXZcfr99SSW8pU1aA+6N6oqu6PSn+LctoG9scD/3+rgX/gf9jzNfDCuKouKl8a//3YHnDfNdTABJ67qrw2/vfxLgjZr4CvKV/WZGCaA1N43hPlpx3lv8rYTRmY5sBUjfukwzWg45cZmObAUo075jADz3vEj75uqYGJGvMu86/Adz7vwK+rgaliXvZwDZD8KLkO0rg3nfe4t9howW+rqQZ066CO37XuiZe8AD9S82pDOHcmpgzkGhDCv614XVyi58QMbihjFufANwvxl+45VwQ7SvL7rns+/KVqoE6Sn/c99Ftoe30X+G/B566Db4vPlz0AH/+lQx10gR/Z5+At8ExkULcXclHb+Tn7liGDJvth+t1beLDfAT/PwE+1vi7YV8Fr6vYDTQ34ZCDHHdn2Lc7BjnrGOLmReVPDj/LNYK8Qm6swgx2VA40755dzANWkDtquTcU6F/y6GkCFrodtE58LyMvv62oA5XM++gqe99rRb8R7vof7H8AfE2dNzDPNmqirAVd+ZP8E/uzoA5HBT7j9Dvw1Qw687uWaKOXKf+jBTv4i3hczOGM5pMhA1wOYegFUTn7SMfz9JFEGprE31YAr/zd4zksP9hfgH5r3xXXgSPG/Bf+KyF839qH8KMzgu6MlO61/R4r7LDI7yjb2pn449e9fyjHnquM39cM5+GndSzHmJFvtUz+EOexm5s8hYtsZ6fcDvC/k6hM/zW3e962KPPrKz/s+ngGNu44f9/WLnvCj6npfqgU593OcU9C+Qe4JUoj2wjrvis/PUft83yD3BKWVml+3ZzrIVAvYc9h66xB+23WFtv1iylqgfus0IX/da4kd9wB1e4aYGVB/TT32SUH+Q8ZnOzOIMR94f81tO2tIxe+7V+Q5+GZhYifX7TdS8aOaZOBbEyHsqflRIRmY1gfdPG/CnoOfMqAzgSZZUAb8/MDE7MOei1+XhW8OeI527MDte76Qm5/kOy9c+X3YQ/c+ob2jTwaSn87PpH3OVkL3PjF6Z9cMkD/2GVLo9491XbltTTCdI4cqlD/2/w5NZ8sp2FEx6rfLZ0cDfxz+Nlz72UQx+OV1IfujP9dUyEza5oXme8YYN10mXXHbrusZNGhQGf0GWSqvLg==
+  </data>
+ </layer>
+ <layer id="3" name="details" width="64" height="64">
+  <data encoding="base64" compression="zlib">
+   eJzt10FOwkAUxvGZziFcsFZE2Wlw3SLidYRTCCvEK6h3YAfcwb0ewa0L+RJd2KQlRcdOR/6/5Mv0JU36Jpm+ZIwBAPzWrTVmokytnzo2D+r7UXmyfurYLNX3SllbPzWAeDD/mf/MfwA+vSfGnLvP557WjyRsP3/hRTPvtWTuHbh83XLF7zXRtn1VFfP+fThz+fN/Een+q54FH2cGQDMV/d/88wAA7KeOcqKcKt3AvYQwUK6UoXIdsI9D5UhpK8cB+wglVTKlr1zW+N0bZaSMa/xmmUXoBgJ73uHdVPeW7B/cXWbfnt++1jtlrtzX3w4AAAAAAAAAAMCPbADfrlMi
+  </data>
+ </layer>
+ <layer id="4" name="above-details" width="64" height="64">
+  <data encoding="base64" compression="zlib">
+   eJzt10sKwjAUheEbOqpacKjOdT8qbXER6sjHTDdn1+VZQAdSYkNv/g/OIIHCKeRBzADEsA9mB+UY4oyn5qzeF+Ua4owBYCo4/zn/AQBxrQqztbIpUjf5j4/uvM7hvef1v8bmYf3/uhZYM4BfffubPQ8AQJ4q5aW8lWXaKlkrlZkyVxaJu+SkVhqlTV0kU6eB3231btk5eLvceubuykN5jtwFAAAAAAAAAAAAw3wBWRQlew==
+  </data>
+ </layer>
+ <layer id="5" name="collision" width="64" height="64" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztm20KwjAMhiv634M4FU/hQfzvFQS9x/QeHsSDeAFXRAihqxlrGuPeB8IWF7Y+tA1+YDMLoTGKdRebLraCut1CJ+5h/D28Qv0ltUNe9wD85f65e3iltP9tHsK5i8v8ncfztosryS/kOq/nuTYa/tyX59yXXue5Nhr+n4i0zIfnvJ7n2mD/w1/6/idk6rzy8ZfU0WMffP+m+t2QXBsL/1y/t+r/kjp67ONb///W7636/1SBP/w9+B9n7+DnY/kl/2um73NfT/45Lyme/UvwL+tfuhZKrBkJXuZfC/jD38I/tb9r7XkK5h/+8J8u8Ic//H+HBwtton+N50h5kGMt/2fPOGrOgxXRf5n4LF17HlLPrUH0XxX6LsEj0X9fwN/rPon+B+Kfcqi9JmsS/U8TX//NxP09/34/FvjDH/7Wo7AD/vCHv/Uo7IA//OFvPQo74A9/+FuPwg74wx/+1qOwQ/K/p3+PF1CWpdk=
+  </data>
+ </layer>
+</map>

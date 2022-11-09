@@ -1,0 +1,312 @@
+
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:DesktopGL
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+
+#---------------------------------- Content ---------------------------------#
+
+#begin bg.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:bg.png
+
+#begin characters/1.png
+/copy:characters/1.png
+
+#begin characters/2.png
+/copy:characters/2.png
+
+#begin characters/3.png
+/copy:characters/3.png
+
+#begin characters/4.png
+/copy:characters/4.png
+
+#begin characters/5.png
+/copy:characters/5.png
+
+#begin characters/6.png
+/copy:characters/6.png
+
+#begin map/tilemap.tmx
+/copy:map/tilemap.tmx
+
+#begin map/tileset.png
+/copy:map/tileset.png
+
+#begin nez/effects/Bevels.mgfxo
+/copy:nez/effects/Bevels.mgfxo
+
+#begin nez/effects/BloomCombine.mgfxo
+/copy:nez/effects/BloomCombine.mgfxo
+
+#begin nez/effects/BloomExtract.mgfxo
+/copy:nez/effects/BloomExtract.mgfxo
+
+#begin nez/effects/Crosshatch.mgfxo
+/copy:nez/effects/Crosshatch.mgfxo
+
+#begin nez/effects/DeferredLighting.mgfxo
+/copy:nez/effects/DeferredLighting.mgfxo
+
+#begin nez/effects/DeferredSprite.mgfxo
+/copy:nez/effects/DeferredSprite.mgfxo
+
+#begin nez/effects/Dissolve.mgfxo
+/copy:nez/effects/Dissolve.mgfxo
+
+#begin nez/effects/Dots.mgfxo
+/copy:nez/effects/Dots.mgfxo
+
+#begin nez/effects/ForwardLighting.mgfxo
+/copy:nez/effects/ForwardLighting.mgfxo
+
+#begin nez/effects/GaussianBlur.mgfxo
+/copy:nez/effects/GaussianBlur.mgfxo
+
+#begin nez/effects/Grayscale.mgfxo
+/copy:nez/effects/Grayscale.mgfxo
+
+#begin nez/effects/HeatDistortion.mgfxo
+/copy:nez/effects/HeatDistortion.mgfxo
+
+#begin nez/effects/Invert.mgfxo
+/copy:nez/effects/Invert.mgfxo
+
+#begin nez/effects/Letterbox.mgfxo
+/copy:nez/effects/Letterbox.mgfxo
+
+#begin nez/effects/MultiTexture.mgfxo
+/copy:nez/effects/MultiTexture.mgfxo
+
+#begin nez/effects/MultiTextureOverlay.mgfxo
+/copy:nez/effects/MultiTextureOverlay.mgfxo
+
+#begin nez/effects/Noise.mgfxo
+/copy:nez/effects/Noise.mgfxo
+
+#begin nez/effects/PaletteCycler.mgfxo
+/copy:nez/effects/PaletteCycler.mgfxo
+
+#begin nez/effects/PixelGlitch.mgfxo
+/copy:nez/effects/PixelGlitch.mgfxo
+
+#begin nez/effects/PolygonLight.mgfxo
+/copy:nez/effects/PolygonLight.mgfxo
+
+#begin nez/effects/Reflection.mgfxo
+/copy:nez/effects/Reflection.mgfxo
+
+#begin nez/effects/Scanlines.mgfxo
+/copy:nez/effects/Scanlines.mgfxo
+
+#begin nez/effects/Sepia.mgfxo
+/copy:nez/effects/Sepia.mgfxo
+
+#begin nez/effects/SpriteAlphaTest.mgfxo
+/copy:nez/effects/SpriteAlphaTest.mgfxo
+
+#begin nez/effects/SpriteBlinkEffect.mgfxo
+/copy:nez/effects/SpriteBlinkEffect.mgfxo
+
+#begin nez/effects/SpriteEffect.mgfxo
+/copy:nez/effects/SpriteEffect.mgfxo
+
+#begin nez/effects/SpriteLightMultiply.mgfxo
+/copy:nez/effects/SpriteLightMultiply.mgfxo
+
+#begin nez/effects/SpriteLines.mgfxo
+/copy:nez/effects/SpriteLines.mgfxo
+
+#begin nez/effects/StencilLight.mgfxo
+/copy:nez/effects/StencilLight.mgfxo
+
+#begin nez/effects/transitions/Squares.mgfxo
+/copy:nez/effects/transitions/Squares.mgfxo
+
+#begin nez/effects/transitions/TextureWipe.mgfxo
+/copy:nez/effects/transitions/TextureWipe.mgfxo
+
+#begin nez/effects/transitions/Wind.mgfxo
+/copy:nez/effects/transitions/Wind.mgfxo
+
+#begin nez/effects/Twist.mgfxo
+/copy:nez/effects/Twist.mgfxo
+
+#begin nez/effects/Vignette.mgfxo
+/copy:nez/effects/Vignette.mgfxo
+
+#begin nez/textures/heatDistortionNoise.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:nez/textures/heatDistortionNoise.png
+
+#begin nez/textures/textureWipeTransition/angular.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:nez/textures/textureWipeTransition/angular.png
+
+#begin nez/textures/textureWipeTransition/crissCross.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:nez/textures/textureWipeTransition/crissCross.png
+
+#begin nez/textures/textureWipeTransition/diagonalDistort.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:nez/textures/textureWipeTransition/diagonalDistort.png
+
+#begin nez/textures/textureWipeTransition/horizontal.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:nez/textures/textureWipeTransition/horizontal.png
+
+#begin nez/textures/textureWipeTransition/noise.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:nez/textures/textureWipeTransition/noise.png
+
+#begin nez/textures/textureWipeTransition/pokemon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:nez/textures/textureWipeTransition/pokemon.png
+
+#begin nez/textures/textureWipeTransition/sawTooth.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:nez/textures/textureWipeTransition/sawTooth.png
+
+#begin nez/textures/textureWipeTransition/spiral.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:nez/textures/textureWipeTransition/spiral.png
+
+#begin nez/textures/textureWipeTransition/wink.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:nez/textures/textureWipeTransition/wink.png
+
+#begin plume.tga
+/copy:plume.tga
+
+#begin sprite-light.png
+/copy:sprite-light.png
+
+#begin steering/GrayCircle.png
+/copy:steering/GrayCircle.png
+
+#begin steering/GreenSquare.png
+/copy:steering/GreenSquare.png
+
+#begin steering/PathPiece.png
+/copy:steering/PathPiece.png
+
+#begin steering/RedSquare.png
+/copy:steering/RedSquare.png
+
+#begin steering/Target.png
+/copy:steering/Target.png
+
+#begin steering/TestNinePatch.png
+/copy:steering/TestNinePatch.png
+
+#begin steering/YellowArrow.png
+/copy:steering/YellowArrow.png
+
+#begin tiles/test-tileset.png
+/copy:tiles/test-tileset.png
+
+#begin tiles/test-tileset-4bit.png
+/copy:tiles/test-tileset-4bit.png
+
+#begin tiles/test-tileset-8bit.png
+/copy:tiles/test-tileset-8bit.png
+
+#begin tiles/wall-1-tileset.png
+/copy:tiles/wall-1-tileset.png
+
