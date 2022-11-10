@@ -1,0 +1,16 @@
+{
+    "Metadata": {
+        // Unique identifier of the mod. Can contain only latin letters and digits
+        "ID": "TestMod1",
+        // Name with which mod will appear in the mod list
+        "Name": "Test Mod #1",
+        // Description of the mod
+        "Description": "A Test Mod created to test MonoGameAndJS",
+        // Author of the mod
+        "Author": "loonacuse",
+        // Mod version
+        "Version": "0.0.1"
+    },
+    // Entry point of the mod
+    "Index": "index.js"
+}
