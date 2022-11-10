@@ -224,14 +224,14 @@ var require = setRequire();
                 typeof(BoundingSphere),
                 typeof(TouchLocation),
                 // collections
-                typeof(TsDictionary<,>),
+                //typeof(TsDictionary<,>),
                 // classes
                 typeof(BoundingFrustum),
                 // enums
                 typeof(SpriteEffects),
                 typeof(Buttons),
                 typeof(Keys),
-                typeof(Direction),
+                //typeof(Direction),
                 typeof(Edge),
                 typeof(VerticalAlign),
                 typeof(HorizontalAlign),
@@ -239,7 +239,7 @@ var require = setRequire();
                 typeof(Touchable),
                 typeof(ContainmentType),
                 typeof(PlaneIntersectionType),
-                typeof(Align),
+                //typeof(Align),
                 typeof(SurfaceFormat),
                 typeof(DepthFormat),
                 typeof(DisplayOrientation)
@@ -251,7 +251,7 @@ var require = setRequire();
                 //typeof(IDrawable),
                 typeof(IInputListener),
                 typeof(IKeyboardListener),
-                typeof(IGamepadFocusable),
+                //typeof(IGamepadFocusable),
                 typeof(ICullable),
         };
 

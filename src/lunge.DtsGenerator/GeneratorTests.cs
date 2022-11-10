@@ -1,5 +1,7 @@
 ﻿using System.Dynamic;
+using System.Reflection;
 using Jint.Native;
+using lunge.DtsGenerator.TestTypes;
 using lunge.Library.Debugging.Profiling;
 using lunge.Library.Scripting;
 using lunge.Library.Scripting.TsDeclarations.Api.Nez;
@@ -30,29 +32,20 @@ public class GeneratorTests : Scene
 
     public void SaveGenerated()
     {
-        //_modHandler.Register(typeof(TestCollectionOne<>));
-        //_modHandler.Register(typeof(TestCollectionTwo<,>));
-        //_modHandler.Register(typeof(TestCollectionConstraints1<>));
+        /*_modHandler.Register(typeof(TestCollectionOne<>));
+        _modHandler.Register(typeof(TestCollectionTwo<,>));
+        _modHandler.Register(typeof(TestCollectionConstraints1<>));
 
-        /*_modHandler.Register(typeof(ITestInterface1));
-        _modHandler.Register(typeof(ITestInterface2));
+        _modHandler.Register(typeof(ITestInterface1));
+        //_modHandler.Register(typeof(ITestInterface2));
         _modHandler.Register(typeof(TestAbstractClass));
-        _modHandler.Register(typeof(TestInheritance));
-        _modHandler.Register(typeof(TestInheritance2));*/
+        //_modHandler.Register(typeof(TestInheritance));
+        _modHandler.Register(typeof(TestInheritance2));
         
-        /*_modHandler.Register(typeof(TestEventObj));
+        _modHandler.Register(typeof(TestEventObj));
         _modHandler.Register(typeof(TestEvents));*/
-
-        /*var newGenerator = new DeclarationFileGenerator();
-        var types = new Type[]
-        {
-            typeof(TestEnum),
-            typeof(TestInheritance<>),
-            typeof(TestInheritance2),
-            typeof(TestInheritance3<>),
-            typeof(TestInheritance4<,>)
-        };
-
+        
+       /*
         foreach (var type in types)
         {
             newGenerator.Register(type);
@@ -76,8 +69,19 @@ public class GeneratorTests : Scene
         
         Console.WriteLine("Warnings:\n " + newGenerator.Warnings.Select(w => $" > {w}\n").JoinToString());*/
 
-        _modHandler.Register(typeof(TestEventHandling));
+        //_modHandler.Register(typeof(TestEventHandling));
         _modHandler.Register(typeof(ModEntry));
+
+        var assembly = Assembly.GetAssembly(typeof(Core))!;
+        var uiTypes = assembly
+            .GetTypes()
+            .Where(t => t.Namespace != null && t.Namespace.StartsWith("Nez") && t.IsPublic);
+
+        foreach (var type in uiTypes)
+        {
+            _modHandler.Register(type);
+        }
+        
         _modHandler.Initialize();
   
         var decl = GlobalTimeManager.TimeFunc(() => _modHandler.GenerateDeclarationFile(), out var elapsed);
@@ -85,7 +89,9 @@ public class GeneratorTests : Scene
         Console.WriteLine($"Generation Done in {elapsed.TotalMilliseconds} ms");
 
         Directory.CreateDirectory(_directory);
-        File.WriteAllText(_directory + "tests.d.ts", decl);
+        File.WriteAllText(_directory + "ui.d.ts", decl);
+
+        return;
         try
         {
             var code = _modHandler.LoadCode("/dist/index.js");

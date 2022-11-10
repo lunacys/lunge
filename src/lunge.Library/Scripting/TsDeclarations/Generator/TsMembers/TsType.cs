@@ -133,11 +133,13 @@ public class TsType : IMemberWritable
                 {
                     var parametersRaw = m.GetParameters();
                     var parameters = _generator.SolveParameters(parametersRaw);
+                    var generics = m.GetGenericArguments().Select(t => t.Name);
 
                     return new TsMethod(
                         m.Name,
                         _generator.SolveType(m.ReturnType),
                         parameters,
+                        generics.ToArray(),
                         m.IsAbstract && !IsInterface,
                         false, // TODO: This
                         m.IsStatic
