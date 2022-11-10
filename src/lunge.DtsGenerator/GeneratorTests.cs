@@ -4,6 +4,7 @@ using Jint.Native;
 using lunge.DtsGenerator.TestTypes;
 using lunge.Library.Debugging.Profiling;
 using lunge.Library.Scripting;
+using lunge.Library.Scripting.TsDeclarations.Api.Common;
 using lunge.Library.Scripting.TsDeclarations.Api.Nez;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -26,7 +27,7 @@ public class GeneratorTests : Scene
     {
         base.Initialize();
 
-        _modHandler = new ModHandler("./Scripts", Content, true);
+        _modHandler = new ModHandler("./Scripts", Content, false);
         SaveGenerated();
     }
 
@@ -71,13 +72,34 @@ public class GeneratorTests : Scene
 
         //_modHandler.Register(typeof(TestEventHandling));
         _modHandler.Register(typeof(ModEntry));
+        _modHandler.Register(typeof(TsBatcher));
+        //_modHandler.Register(typeof(TsSprite));
+        //_modHandler.Register(typeof(TsTexture2D));
+        //_modHandler.Register(typeof(TsBatcher));
+        _modHandler.Register(typeof(Color));
+        _modHandler.Register(typeof(Point));
+        _modHandler.Register(typeof(Vector2));
+        _modHandler.Register(typeof(Rectangle));
+        _modHandler.Register(typeof(RectangleF));
 
         var assembly = Assembly.GetAssembly(typeof(Core))!;
         var uiTypes = assembly
             .GetTypes()
-            .Where(t => t.Namespace != null && t.Namespace.StartsWith("Nez") && t.IsPublic);
+            .Where(t => t.Namespace != null && t.Namespace.StartsWith("Nez.UI") && t.IsPublic)
+            .DistinctBy((k) => k.Name)
+            .ToList();
+
+        var allTypes = new List<Type>();
 
         foreach (var type in uiTypes)
+        {
+            var methods = type.GetMethods();
+            var fields = type.GetFields();
+            
+            allTypes.Add(type);
+        }
+
+        foreach (var type in allTypes)
         {
             _modHandler.Register(type);
         }
@@ -91,6 +113,7 @@ public class GeneratorTests : Scene
         Directory.CreateDirectory(_directory);
         File.WriteAllText(_directory + "ui.d.ts", decl);
 
+        Core.Exit();
         return;
         try
         {
