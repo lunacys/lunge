@@ -30,10 +30,10 @@ jobs:
           6.0.x
         
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore ./src/lunge.sln
       
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build ./src/lunge.sln --no-restore
       
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test ./src/lunge.sln --no-build --verbosity normal
