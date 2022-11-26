@@ -19,7 +19,8 @@ public class EditorScene : Scene
 
         base.Initialize();
 
-        CreateEntity("ui-viewer").AddComponent(new EditorUiViewerComponent());
-        CreateEntity("editor-code").AddComponent(new EditorCodeComponent());
+        CreateEntity("ui")
+            .AddComponent(new EditorUiViewerComponent())
+            .AddComponent(new EditorCodeComponent());
     }
 }

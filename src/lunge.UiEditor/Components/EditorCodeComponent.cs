@@ -12,6 +12,7 @@ public class EditorCodeComponent : Component
     private bool _isAutoApplyEnabled;
     private string _codeText = "";
     private string _inputPath = "./code.js";
+    private EditorUiViewerComponent _editorUi;
     
     public EditorCodeComponent()
     {
@@ -22,6 +23,8 @@ public class EditorCodeComponent : Component
         var imGuiManager = Core.GetGlobalManager<ImGuiManager>();
         ImGui.SetNextWindowSize(new Vector2(800, 300));
         imGuiManager.RegisterDrawCommand(DrawCode);
+        
+        _editorUi = Entity.GetComponent<EditorUiViewerComponent>();
     }
 
     private void LoadCode()
@@ -51,7 +54,7 @@ public class EditorCodeComponent : Component
 
     private void ApplyCode()
     {
-        
+        _editorUi.Apply(_codeText);
     }
     
     private unsafe void DrawCode()
