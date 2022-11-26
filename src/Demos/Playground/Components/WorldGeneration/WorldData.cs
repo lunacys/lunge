@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using lunge.Library.Utils;
+using lunge.Library.Utils.Bitmasking;
 using Microsoft.Xna.Framework;
 using Nez;
 
@@ -41,7 +42,7 @@ public class WorldData
 
     public int[,] CalculateBitMaskForCell(CellType cell, bool includeDiagonals)
     {
-        return BitMaskHelper.CalculateBitMaskForBitMap(_bitMap, includeDiagonals);
+        return BitMaskCalculator.CalculateBitMaskForBitMap(_bitMap, includeDiagonals);
     }
 
     public CellType GetCellAt(int x, int y) 
@@ -65,6 +66,7 @@ public class WorldData
         => SetBitAt(point.X, point.Y, bit);
 
     public bool IsNotOutOfBounds(Point point) 
-        => BitMaskHelper.IsNotOutOfBounds(point, WorldWidth, WorldHeight);
+        => point.X >= 0 && point.Y >= 0 && point.X < WorldWidth && point.Y < WorldHeight;
+    // BitMaskCalculator.IsNotOutOfBounds(point, WorldWidth, WorldHeight);
 
 }

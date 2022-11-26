@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using lunge.Library.AI.Pathfinding;
 using lunge.Library.Debugging.Logging;
 using lunge.Library.Utils;
+using lunge.Library.Utils.Bitmasking;
 using lunge.Library.Utils.DelaunayAlgorithm;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -464,8 +465,8 @@ public class WorldGeneratorComponent : Component, IUpdatable
     private void Stage7()
     {
         // Generate bitmaps and bitmasks 
-        BitMap = BitMaskHelper.CreateBitMapFrom(Grid, CellType.Wall);
-        BitMask = BitMaskHelper.CalculateBitMaskForBitMap(BitMap, false);
+        BitMap = BitMaskCalculator.CreateBitMapFrom(Grid, CellType.Wall);
+        BitMask = BitMaskCalculator.CalculateBitMaskForBitMap(BitMap, false);
     }
 
     private void Stage8()
@@ -480,7 +481,7 @@ public class WorldGeneratorComponent : Component, IUpdatable
         var w = Grid.GetLength(1);
         var h = Grid.GetLength(0);
 
-        if (!BitMaskHelper.IsNotOutOfBounds(position, w, h))
+        if (!IsNotOutOfBounds(position))
             return;
 
         if (Grid[position.Y, position.X] == cellType)
@@ -494,7 +495,7 @@ public class WorldGeneratorComponent : Component, IUpdatable
         else if (cellType == CellType.None)
         {
             RemoveTiles(position, size);
-            BitMask = BitMaskHelper.CalculateBitMaskForBitMap(BitMap, false);
+            BitMask = BitMaskCalculator.CalculateBitMaskForBitMap(BitMap, false);
         }
         else
         {
@@ -516,7 +517,7 @@ public class WorldGeneratorComponent : Component, IUpdatable
                 {
                     for (int x = startX; x <= endX; x++)
                     {
-                        if (!BitMaskHelper.IsNotOutOfBounds(new Point(x, y), w, h))
+                        if (!IsNotOutOfBounds(new Point(x, y)))
                             continue;
 
                         if (x == startX || y == startY || x == endX || y == endY)
@@ -546,7 +547,7 @@ public class WorldGeneratorComponent : Component, IUpdatable
                 {
                     for (int x = startX; x <= endX; x++)
                     {
-                        if (!BitMaskHelper.IsNotOutOfBounds(new Point(x, y), w, h))
+                        if (!IsNotOutOfBounds(new Point(x, y)))
                             continue;
 
                         Grid[y, x] = cellType;
@@ -555,7 +556,7 @@ public class WorldGeneratorComponent : Component, IUpdatable
             }
 
             if (BitMap != null)
-                BitMask = BitMaskHelper.CalculateBitMaskForBitMap(BitMap, false);
+                BitMask = BitMaskCalculator.CalculateBitMaskForBitMap(BitMap, false);
         }
     }
 
@@ -564,6 +565,9 @@ public class WorldGeneratorComponent : Component, IUpdatable
         BitMap[position.Y, position.X] = false;
         Grid[position.Y, position.X] = CellType.None;
     }
+    
+    public bool IsNotOutOfBounds(Point point) 
+        => point.X >= 0 && point.Y >= 0 && point.X < WorldWidth && point.Y < WorldHeight;
 
     public static string ParseStage(int stageIndex)
     {

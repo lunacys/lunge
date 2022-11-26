@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using lunge.Library;
 using lunge.Library.Utils;
+using lunge.Library.Utils.Bitmasking;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Nez;
@@ -307,8 +308,8 @@ public class BitmaskTestsComponent : RenderableComponent, IUpdatable
 
     private void RecalculateBitmasks()
     {
-        _bitMask = BitMaskHelper.CalculateBitMaskForBitMap(_bitMap, false);
-        _bitMaskDiag = BitMaskHelper.CalculateBitMaskForBitMap(_bitMap, true);
+        _bitMask = BitMaskCalculator.CalculateBitMaskForBitMap(_bitMap, false);
+        _bitMaskDiag = BitMaskCalculator.CalculateBitMaskForBitMap(_bitMap, true);
     }
 
     bool IsNotOutOfBounds(Point pos)

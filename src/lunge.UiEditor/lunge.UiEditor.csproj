@@ -33,6 +33,7 @@
     <ProjectReference Include="..\..\deps\Nez\Nez.ImGui\Nez.MG38.ImGui.csproj" />
     <ProjectReference Include="..\..\deps\Nez\Nez.Persistence\Nez.MG38.Persistence.csproj" />
     <ProjectReference Include="..\..\deps\Nez\Nez.Portable\Nez.MG38.csproj" />
+    <ProjectReference Include="..\lunge.Library.Scripting\lunge.Library.Scripting.csproj" />
     <ProjectReference Include="..\lunge.Library\lunge.Library.csproj" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
