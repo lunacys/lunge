@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <Folder Include="AI" />
+    <Folder Include="Utils\Tiles" />
   </ItemGroup>
 
   <ItemGroup>

@@ -20,6 +20,7 @@ namespace lunge.Library.Utils
         /// <param name="minValue">Minimal value</param>
         /// <param name="maxValue">Maximal value</param>
         /// <returns>The intermediate value</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float NormalizeInRange(float width, float currentValue, float minValue, float maxValue)
         {
             return width * (currentValue / (maxValue - minValue));
@@ -31,11 +32,12 @@ namespace lunge.Library.Utils
         /// <param name="angle">Angle in radians</param>
         /// <param name="magnitude">Magnitude</param>
         /// <returns>A new <see cref="Vector2"/></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 FromPolar(float angle, float magnitude)
         {
             return magnitude * new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
         }
-
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 FromPolar(float angle, float magnitude, Vector2 positionFrom)
         {
             return new Vector2(magnitude * (float)Math.Cos(angle) + positionFrom.X, magnitude * (float)Math.Sin(angle) + positionFrom.Y);
@@ -158,6 +160,7 @@ namespace lunge.Library.Utils
         /// <param name="min">Minimum value possible</param>
         /// <param name="max">Maximum value possible</param>
         /// <returns>Normalized value in range [0;1]</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Normalize(float value, float min, float max)
         {
             return (value - min) / (max - min);
@@ -170,6 +173,7 @@ namespace lunge.Library.Utils
         /// <param name="value"></param>
         /// <param name="gridSize"></param>
         /// <returns></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float SnapToGridRounding(float value, float gridSize)
         {
             return value - value % gridSize;
@@ -201,7 +205,7 @@ namespace lunge.Library.Utils
             );
         }
         
-               [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Preference(Vector2 goal, Vector2 hex)
         {
             return (0xFFFF & Math.Abs((int) CrossScalar(goal, hex)));
@@ -216,6 +220,22 @@ namespace lunge.Library.Utils
         public static IEnumerable<Point> GetPointsOnLine(Point a, Point b) =>
             GetPointsOnLine(a.X, a.Y, b.X, b.Y);
         
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNotOutOfBounds(Point pos, int width, int height)
+            => pos.X >= 0 && pos.Y >= 0 && pos.X < width && pos.Y < height;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOutOfBounds(Point pos, int width, int height)
+            => !IsNotOutOfBounds(pos, width, height);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNotOutOfBounds(Vector2 pos, int width, int height)
+            => pos.X >= 0 && pos.Y >= 0 && pos.X < width && pos.Y < height;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsOutOfBounds(Vector2 pos, int width, int height)
+            => !IsNotOutOfBounds(pos, width, height);
+
         public static IEnumerable<Point> GetPointsOnLine(int x0, int y0, int x1, int y1)
         {
             bool steep = Math.Abs(y1 - y0) > Math.Abs(x1 - x0);
