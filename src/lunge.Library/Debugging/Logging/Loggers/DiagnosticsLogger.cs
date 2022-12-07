@@ -2,9 +2,14 @@
 {
     public class DiagnosticsLogger : ILoggerFrontend
     {
+        private readonly object _lockObj = new object();
+        
         public void Log(string message, LogLevel level)
         {
-            System.Diagnostics.Debug.WriteLine(message);
+            lock (_lockObj)
+            {
+                System.Diagnostics.Debug.WriteLine(message);    
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ namespace UnexpectedJourney
 
         public Texture2D TileSetImage { get; }
 
-        private readonly Texture2D[,] _tiles;
+        private readonly Texture2D?[,] _tiles;
 
         public Texture2D this[int x, int y] => GetTile(x, y);
 
@@ -37,7 +37,7 @@ namespace UnexpectedJourney
             if (_tiles[x, y] == null)
                 _tiles[x, y] = TileSetImage.Crop(x * TileWidth, y * TileHeight, TileWidth, TileHeight);
 
-            return _tiles[x, y];
+            return _tiles[x, y]!;
         }
 
         /// <summary>

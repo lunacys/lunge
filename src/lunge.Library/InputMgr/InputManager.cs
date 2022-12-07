@@ -1,9 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Nez;
 
 namespace lunge.Library.InputMgr
 {
+    [Obsolete("Use Nez.Input instead")]
     public static class InputManager
     {
         /// <summary>

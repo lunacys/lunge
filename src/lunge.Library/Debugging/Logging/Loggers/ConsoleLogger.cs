@@ -4,7 +4,7 @@ namespace lunge.Library.Debugging.Logging.Loggers
 {
     public class ConsoleLogger : ILoggerFrontend
     {
-        private ConsoleColor _origColor;
+        private readonly ConsoleColor _origColor;
         public ConsoleColor ColorTrace { get; set; }
         public ConsoleColor ColorDebug { get; set; }
         public ConsoleColor ColorInfo { get; set; }
@@ -12,7 +12,7 @@ namespace lunge.Library.Debugging.Logging.Loggers
         public ConsoleColor ColorError { get; set; }
         public ConsoleColor ColorFatal { get; set; }
 
-        private object _lockObject = new object();
+        private readonly object _lockObject = new object();
 
         public ConsoleLogger()
         {

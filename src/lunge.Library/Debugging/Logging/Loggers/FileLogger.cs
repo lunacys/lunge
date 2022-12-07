@@ -9,6 +9,8 @@ namespace lunge.Library.Debugging.Logging.Loggers
 
         public string FilePath { get; }
 
+        private readonly object _lockObj = new object();
+
         public FileLogger(string? filePath = null)
         {
             if (filePath == null)
@@ -23,8 +25,9 @@ namespace lunge.Library.Debugging.Logging.Loggers
 
         public void Log(string message, LogLevel level)
         {
-            using (var sw = new StreamWriter(FilePath, true))
+            lock (_lockObj)
             {
+                using var sw = new StreamWriter(FilePath, true);
                 sw.WriteLine(message);
             }
         }

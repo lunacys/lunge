@@ -2,8 +2,13 @@
 
 public class TraceLogger : ILoggerFrontend
 {
+    private readonly object _lockObj = new();
+    
     public void Log(string message, LogLevel level)
     {
-        System.Diagnostics.Trace.WriteLine(message);
+        lock (_lockObj)
+        {
+            System.Diagnostics.Trace.WriteLine(message);    
+        }
     }
 }

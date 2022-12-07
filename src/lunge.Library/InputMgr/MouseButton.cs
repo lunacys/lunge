@@ -1,8 +1,11 @@
-﻿namespace lunge.Library.InputMgr
+﻿using System;
+
+namespace lunge.Library.InputMgr
 {
     /// <summary>
     /// Determines which mouse button currently is in use.
     /// </summary>
+    [Obsolete("Use Nez instead")]
     public enum MouseButton
     {
         /// <summary>
