@@ -8,7 +8,51 @@
 
 **This project is heavily under development, so breaking changes after every commit is possible! The docs may be out of date as well!**
 
-### The latest update (10 Nov 2022)
+## Features
+
+### Completed
+
+ - Pathfinding implementations and examples:
+    - A*
+    - FlowField
+ - Steering behaviors:
+    - Seek/Flee/Arrival
+    - Evade
+    - Collision Avoidance
+    - Leader Following
+    - Path Following
+    - Pursuit
+    - Queue
+    - Separation
+    - Wander
+ - Hot-reloadable assets
+ - Aseprite animation support
+ - FMOD bindings and wrappers
+ - Bindables
+ - Debugging features:
+    - Customizable logging
+    - Simple profiling via `GlobalTimeManager`
+ - Extended input management implementing the Command pattern
+ - Platfrom-specific features, such as clipboard
+ - Bitmasking support
+ - A lot of utility functions
+ - JavaScript scripting support
+
+### In Progress
+
+ - TypeScript declaration file generator (usable now, but probably needs manual adjustments after generation)
+ - Particle editor (Nez format)
+ - WYSIWYG UI editor (via Nez's tables)
+
+## Samples
+
+You can find demos here: `/src/Demos/`:
+
+ - `AssetsLoading` - showcase of asset hot reloading
+ - `InputManagement` - showcase of advanced input handling
+ - `Playground` & `Playground2` - A LOT of small samples such as steering behaviors, pathfinding, world generation, etc.
+
+## The latest update (10 Nov 2022)
 
 We decided to redesign the project by adding, removing and replacing a lot of stuff. The list of changes:
 
