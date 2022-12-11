@@ -11,6 +11,11 @@ public static class BatcherExtensions
     {
         batcher.Draw(sprite.Texture2D, position, sprite.SourceRect, Color.White);
     }
+
+    public static void DrawSprite(this Batcher batcher, Sprite sprite, Vector2 position, Color color)
+    {
+        batcher.Draw(sprite.Texture2D, position, sprite.SourceRect, color);
+    }
     
     
     public static void DrawString(this Batcher spriteBatch, IFont spriteFont, string text, Rectangle bounds,
