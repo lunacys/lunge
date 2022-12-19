@@ -20,6 +20,8 @@ public class TileWorldRenderer : RenderableComponent
     private TileLayer? _collisionLayer;
     private Collider[]? _colliders;
 
+    private int[]? _layersToRender;
+
     public TileWorldRenderer(TileWorld world, TileLayer? collisionLayer = null)
     {
         World = world;
@@ -35,13 +37,37 @@ public class TileWorldRenderer : RenderableComponent
         }
     }
 
+    public void SetLayerToRender(string layer)
+    {
+        _layersToRender = new int[1];
+
+        _layersToRender[0] = World.Layers.IndexOf(World.GetLayer(layer));
+    }
+
+    public void SetLayersToRender(params string[] layers)
+    {
+        _layersToRender = new int[layers.Length];
+
+        for (int i = 0; i < _layersToRender.Length; i++)
+        {
+            _layersToRender[i] = World.Layers.IndexOf(World.GetLayer(layers[i]));
+        }
+    }
+
     public override void Render(Batcher batcher, Camera camera)
     {
-        for (var i = 0; i < World.Layers.Count; i++)
+        if (_layersToRender == null)
         {
-            var layer = World.Layers[i];
-
-            RenderTileLayer(batcher, layer);
+            foreach (var layer in World.Layers)
+                RenderTileLayer(batcher, layer);
+        }
+        else
+        {
+            for (int i = 0; i < World.Layers.Count; i++)
+            {
+                if (World.Layers[i].IsVisible && _layersToRender.Contains(i))
+                    RenderTileLayer(batcher, World.Layers[i]);
+            }
         }
     }
 

@@ -8,10 +8,12 @@ public class TileLayer
 {
     private readonly LayerTile?[,] _tileMap;
     
-    public int Index { get; }
+    public string Name { get; }
     
     public int Width { get; }
     public int Height { get; }
+
+    public bool IsVisible { get; set; } = true;
 
     public LayerTile? this[int x, int y]
     {
@@ -27,18 +29,12 @@ public class TileLayer
     
     public TileWorld World { get; }
 
-    private static int _nextIndex = 0;
-
-    public TileLayer(TileWorld world)
-        : this(world, _nextIndex++)
-    { }
-    
-    public TileLayer(TileWorld world, int index)
+    public TileLayer(TileWorld world, string name)
     {
 	    World = world;
         Width = world.Width;
         Height = world.Height;
-        Index = index;
+        Name = name;
         _tileMap = new LayerTile[world.Height, world.Width];
         Clear();
     }
@@ -62,6 +58,12 @@ public class TileLayer
         for (int x = 0; x < Width; x++)
             SetTileAt(x, y, null);
     }
+
+    public bool IsOutOfBounds(Point pos)
+	    => World.IsOutOfBounds(pos);
+
+    public bool IsOutOfBounds(int x, int y)
+	    => World.IsOutOfBounds(x, y);
 
     public List<Rectangle> GetCollisionRectangles()
     {

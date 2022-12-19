@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Nez;
 
@@ -7,7 +8,6 @@ namespace lunge.Library.Tiles;
 public class TileWorld
 {
     public List<TileLayer> Layers { get; }
-    public Dictionary<string, TileLayer> LayerMap { get; }
 
     public int Width { get; }
     public int Height { get; }
@@ -18,7 +18,6 @@ public class TileWorld
     public TileWorld(int width, int height, int tileWidth, int tileHeight, TileSet tileSet)
     {
         Layers = new List<TileLayer>();
-        LayerMap = new Dictionary<string, TileLayer>();
 
         Width = width;
         Height = height;
@@ -27,8 +26,8 @@ public class TileWorld
         TileSet = tileSet;
     }
 
-    public TileLayer GetLayer(int index) => Layers[index];
-    public TileLayer GetLayer(string name) => LayerMap[name];
+    public TileLayer? GetLayer(string name) => Layers.FirstOrDefault(l => l.Name == name);
+    public TileLayer? GetLayer(int index) => index >= 0 && index < Layers.Count ? Layers[index] : null;
 
     public Point WorldToTile(Vector2 position, bool clamp = true)
     {
@@ -72,15 +71,9 @@ public class TileWorld
         return y * TileHeight;
     }
 
-    public void SetTileOnLayer(int layerId, Point pos, LayerTile tile)
-        => Layers[layerId][pos] = tile;
+    public bool IsOutOfBounds(Point pos)
+        => pos.X < 0 || pos.Y < 0 || pos.X >= Width || pos.Y >= Height;
 
-    public void SetTileOnLayer(int layerId, int x, int y, LayerTile tile)
-        => Layers[layerId][x, y] = tile;
-
-    public LayerTile GetTileOnLayer(int layerId, Point pos)
-        => Layers[layerId][pos];
-
-    public LayerTile GetTileOnLayer(int layerId, int x, int y)
-        => Layers[layerId][x, y];
+    public bool IsOutOfBounds(int x, int y)
+        => x < 0 || y < 0 || x >= Width || y >= Height;
 }
