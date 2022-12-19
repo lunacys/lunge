@@ -31,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="AI" />
+    <Folder Include="AI\SteeringNew" />
     <Folder Include="Utils\Tiles" />
   </ItemGroup>
 
