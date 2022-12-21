@@ -1,7 +1,6 @@
 using ImGuiNET;
 using lunge.UiEditor.Components;
 using Nez;
-using Nez.ImGuiTools;
 
 namespace lunge.UiEditor.Scenes;
 

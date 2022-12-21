@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace lunge.Library.Scripting.TsDeclarations;
+﻿namespace lunge.Library.Scripting.TsDeclarations;
 
 /// <summary>
 /// 

@@ -26,7 +26,7 @@ namespace lunge.Library.Bindables
             set
             {
                 var previousVal = _value;
-                _value = MathHelper.Clamp(value, MinValue, MaxValue);
+                _value = (int)MathHelper.Clamp(value, MinValue, MaxValue);
 
                 if (_value != previousVal)
                     ValueChanged?.Invoke(this, new BindableValueChangeEvent<int>(_value, previousVal));

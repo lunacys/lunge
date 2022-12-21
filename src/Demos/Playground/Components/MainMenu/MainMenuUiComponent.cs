@@ -115,10 +115,10 @@ public class MainMenuUiComponent : Component
         var cbBorderless = _table.Add(new CheckBox("Borderless", _skin)).Left()
             .GetElement<CheckBox>();
 
-        cbBorderless.IsChecked = Core.Instance.Window.IsBorderless;
+        cbBorderless.IsChecked = Core.Instance.Window.IsBorderlessEXT;
         cbBorderless.OnChanged += b =>
         {
-            Core.Instance.Window.IsBorderless = b;
+            Core.Instance.Window.IsBorderlessEXT = b;
         };
 
         _table.Row().SetPadTop(10);

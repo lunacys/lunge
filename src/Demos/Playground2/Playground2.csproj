@@ -7,19 +7,11 @@
     <TieredCompilation>false</TieredCompilation>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
-    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\..\deps\jint\Jint\Jint.csproj" />
     <ProjectReference Include="..\..\..\deps\LiteNetLib\LiteNetLib\LiteNetLib.csproj" />
-    <ProjectReference Include="..\..\..\deps\Nez\Nez.ImGui\Nez.MG38.ImGui.csproj" />
-    <ProjectReference Include="..\..\..\deps\Nez\Nez.Persistence\Nez.MG38.Persistence.csproj" />
-    <ProjectReference Include="..\..\..\deps\Nez\Nez.Portable\Nez.MG38.csproj" />
     <ProjectReference Include="..\..\lunge.Library.Scripting\lunge.Library.Scripting.csproj" />
     <ProjectReference Include="..\..\lunge.Library\lunge.Library.csproj" />
   </ItemGroup>

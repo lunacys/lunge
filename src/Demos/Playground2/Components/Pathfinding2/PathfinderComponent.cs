@@ -40,13 +40,13 @@ namespace Playground2.Components.Pathfinding2
         private bool _showThetaStar2 = false;
         private bool _showAStarPostSmooth = true;
 
-        private AStar _aStar;
+        //private AStar _aStar;
         private BreadthFirst _breadthFirst;
         private Dijkstra _dijkstra;
         private FlowFieldBackup _flowFieldBackup;
         private FlowFieldOld _flowFieldOld;
         private FlowFieldNew _flowFieldNew;
-        private AStarPostSmooth _aStarPostSmooth;
+        //private AStarPostSmooth _aStarPostSmooth;
 
         private Entity _flowFieldEntity;
 
@@ -69,16 +69,16 @@ namespace Playground2.Components.Pathfinding2
             base.Initialize();
 
             //_thetaStar = new ThetaStar(_tiledMap);
-            _aStar = new AStar(_tiledMap);
+            //_aStar = new AStar(_tiledMap);
             _breadthFirst = new BreadthFirst(_tiledMap);
             _dijkstra = new Dijkstra(_tiledMap);
             _flowFieldBackup = new FlowFieldBackup(_tiledMap);
             _flowFieldOld = new FlowFieldOld(_tiledMap);
             _flowFieldNew = new FlowFieldNew(_tiledMap);
             //_thetaStar2 = new ThetaStar2(_tiledMap);
-            _aStarPostSmooth = new AStarPostSmooth(_tiledMap);
+            //_aStarPostSmooth = new AStarPostSmooth(_tiledMap);
 
-            _pathfinders.Add(_aStar);
+            //_pathfinders.Add(_aStar);
             _pathfinders.Add(_breadthFirst);
             _pathfinders.Add(_dijkstra);
             _pathfinders.Add(_flowFieldBackup);
@@ -86,7 +86,7 @@ namespace Playground2.Components.Pathfinding2
             _pathfinders.Add(_flowFieldNew);
             //_pathfinders.Add(_thetaStar);
             //_pathfinders.Add(_thetaStar2);
-            _pathfinders.Add(_aStarPostSmooth);
+            //_pathfinders.Add(_aStarPostSmooth);
 
             foreach (var pathfinder in _pathfinders)
             {
@@ -299,7 +299,7 @@ namespace Playground2.Components.Pathfinding2
             
             if (_showAStar)
             {
-                _aStar?.Render(batcher);
+                //_aStar?.Render(batcher);
             }
             if (_showBreadthFirst)
             {
@@ -323,7 +323,7 @@ namespace Playground2.Components.Pathfinding2
             }
             if (_showAStarPostSmooth)
             {
-                _aStarPostSmooth?.Render(batcher);
+                //_aStarPostSmooth?.Render(batcher);
             }
         }
 

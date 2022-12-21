@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace lunge.Library.Scripting;
+﻿namespace lunge.Library.Scripting;
 
 public enum LuaRunnerType
 {

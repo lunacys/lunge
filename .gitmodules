@@ -7,3 +7,6 @@
 [submodule "deps/jint"]
 	path = deps/jint
 	url = https://github.com/sebastienros/jint.git
+[submodule "deps/FNA"]
+	path = deps/FNA
+	url = https://github.com/FNA-XNA/FNA.git

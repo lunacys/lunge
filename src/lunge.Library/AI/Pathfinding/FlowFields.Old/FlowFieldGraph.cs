@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using Nez;
 using Nez.Tiled;
 
 namespace lunge.Library.AI.Pathfinding.FlowFields.Old

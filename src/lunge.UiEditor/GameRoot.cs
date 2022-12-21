@@ -13,7 +13,6 @@ public class GameRoot : Core
     public GameRoot()
     {
         Window.AllowUserResizing = true;
-        Window.Position = Point.Zero;
         Window.ClientSizeChanged += (sender, args) =>
         {
             Console.WriteLine($"{Screen.Width}x{Screen.Height}");

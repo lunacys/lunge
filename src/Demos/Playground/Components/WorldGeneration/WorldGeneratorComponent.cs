@@ -51,7 +51,7 @@ public class WorldGeneratorComponent : Component, IUpdatable
     private List<Point> _hallwayTilesList = new List<Point>();
 
     private AStarExitFinderGraph _aStarGraph;
-    private AStarGridGraph2 _aStarHallwayGraph;
+    private AStarGridGraphExt _aStarHallwayGraph;
 
     public CellType[,] Grid { get; private set; }
 
@@ -380,10 +380,11 @@ public class WorldGeneratorComponent : Component, IUpdatable
         AStarPath = AStarPathfinder.Search(_aStarGraph, startPosition, endPosition);
 
         
-        _aStarHallwayGraph = new AStarGridGraph2(WorldWidthTiles, WorldHeightTiles, false)
+        _aStarHallwayGraph = new AStarGridGraphExt(WorldWidthTiles, WorldHeightTiles)//AStarGridGraph2(WorldWidthTiles, WorldHeightTiles, false)
         {
-            WeightedNodeWeight = 10,
-            WeightedNodeCostable = ConvertToNodes()
+            // TODO: Fix this!
+            //WeightedNodeWeight = 10,
+            //WeightedNodeCostable = ConvertToNodes()
         };
 
         foreach (var edge in Edges)
@@ -405,8 +406,8 @@ public class WorldGeneratorComponent : Component, IUpdatable
                     Grid[node.Y, node.X] = CellType.Hallway;*/
                 AddTiles(node, new Point(3, 3), CellType.Hallway, true);
             }
-
-            _aStarHallwayGraph.WeightedNodeCostable = ConvertToNodes();
+            // TODO: Fix this!
+            //_aStarHallwayGraph.WeightedNodeCostable = ConvertToNodes();
         }
     }
 
@@ -700,4 +701,10 @@ public class WorldGeneratorComponent : Component, IUpdatable
             Random.RNG.Next(minH, maxH)
         );
     }
+}
+
+public class NodeCostable
+{
+    public Point Node;
+    public int Weight;
 }

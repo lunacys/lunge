@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace lunge.Library.Scripting.TsDeclarations.Api.Common;
+﻿namespace lunge.Library.Scripting.TsDeclarations.Api.Common;
 
 [TsClass(Name = "Dictionary")]
 public class TsDictionary<TKey, TValue> where TKey : notnull

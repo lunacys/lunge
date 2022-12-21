@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace lunge.Library.Scripting.TsDeclarations.Generator;
+﻿namespace lunge.Library.Scripting.TsDeclarations.Generator;
 
 public class TypeWrapped
 {

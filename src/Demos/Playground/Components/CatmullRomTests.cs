@@ -46,7 +46,7 @@ public class CatmullRomTests : RenderableComponent
 
         DrawLine(batcher, _start, v, Color.Red, 2f);*/
 
-        var knots = new List<Vector2>
+        /*var knots = new List<Vector2>
         {
             _value1, _value2, _value3, _value4
         };
