@@ -9,12 +9,7 @@ namespace lunge.Library.Debugging.Logging
     {
         private static readonly Dictionary<string, ILogger> LogHelpers = new Dictionary<string, ILogger>();
 
-        public static List<ILoggerFrontend> DefaultLoggers { get; set; }
-
-        static LoggerFactory()
-        {
-            DefaultLoggers = new List<ILoggerFrontend> { new ConsoleLogger(), new FileLogger(), new DiagnosticsLogger() };
-        }
+        public static List<ILoggerFrontend> DefaultLoggers { get; set; } = new List<ILoggerFrontend>();
 
 
         public static ILogger GetLogger()

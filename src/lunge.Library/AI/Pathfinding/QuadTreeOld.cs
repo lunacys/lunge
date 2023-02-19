@@ -7,7 +7,7 @@ namespace lunge.Library.AI.Pathfinding
 
     public class Element<T>
     {
-        public QuadTree<T> Parent;
+        public QuadTreeOld<T> Parent;
         public AABB Span;
         public T Value;
 
@@ -19,15 +19,15 @@ namespace lunge.Library.AI.Pathfinding
         }
     }
 
-    public class QuadTree<T>
+    public class QuadTreeOld<T>
     {
         public int MaxBucket;
         public int MaxDepth;
         public List<Element<T>> Nodes;
         public AABB Span;
-        public QuadTree<T>[] SubTrees;
+        public QuadTreeOld<T>[] SubTrees;
 
-        public QuadTree(AABB span, int maxbucket, int maxdepth)
+        public QuadTreeOld(AABB span, int maxbucket, int maxdepth)
         {
             Span = span;
             Nodes = new List<Element<T>>();
@@ -68,11 +68,11 @@ namespace lunge.Library.AI.Pathfinding
                     //
                     Nodes.Add(node); //treat new node just like other nodes for partitioning
 
-                    SubTrees = new QuadTree<T>[4];
-                    SubTrees[0] = new QuadTree<T>(Span.Q1, MaxBucket, MaxDepth - 1);
-                    SubTrees[1] = new QuadTree<T>(Span.Q2, MaxBucket, MaxDepth - 1);
-                    SubTrees[2] = new QuadTree<T>(Span.Q3, MaxBucket, MaxDepth - 1);
-                    SubTrees[3] = new QuadTree<T>(Span.Q4, MaxBucket, MaxDepth - 1);
+                    SubTrees = new QuadTreeOld<T>[4];
+                    SubTrees[0] = new QuadTreeOld<T>(Span.Q1, MaxBucket, MaxDepth - 1);
+                    SubTrees[1] = new QuadTreeOld<T>(Span.Q2, MaxBucket, MaxDepth - 1);
+                    SubTrees[2] = new QuadTreeOld<T>(Span.Q3, MaxBucket, MaxDepth - 1);
+                    SubTrees[3] = new QuadTreeOld<T>(Span.Q4, MaxBucket, MaxDepth - 1);
 
                     List<Element<T>> remNodes = new List<Element<T>>();
                     //nodes that are not fully contained by any quadrant
@@ -175,12 +175,12 @@ namespace lunge.Library.AI.Pathfinding
 
         public void QueryAABB(Func<Element<T>, bool> callback, ref AABB searchR)
         {
-            Stack<QuadTree<T>> stack = new Stack<QuadTree<T>>();
+            Stack<QuadTreeOld<T>> stack = new Stack<QuadTreeOld<T>>();
             stack.Push(this);
 
             while (stack.Count > 0)
             {
-                QuadTree<T> qt = stack.Pop();
+                QuadTreeOld<T> qt = stack.Pop();
                 if (!AABB.TestOverlap(ref searchR, ref qt.Span))
                     continue;
 
@@ -191,14 +191,14 @@ namespace lunge.Library.AI.Pathfinding
                     }
 
                 if (qt.IsPartitioned)
-                    foreach (QuadTree<T> st in qt.SubTrees)
+                    foreach (QuadTreeOld<T> st in qt.SubTrees)
                         stack.Push(st);
             }
         }
 
         public void RayCast(Func<RayCastInput, Element<T>, float> callback, ref RayCastInput input)
         {
-            Stack<QuadTree<T>> stack = new Stack<QuadTree<T>>();
+            Stack<QuadTreeOld<T>> stack = new Stack<QuadTreeOld<T>>();
             stack.Push(this);
 
             float maxFraction = input.MaxFraction;
@@ -207,7 +207,7 @@ namespace lunge.Library.AI.Pathfinding
 
             while (stack.Count > 0)
             {
-                QuadTree<T> qt = stack.Pop();
+                QuadTreeOld<T> qt = stack.Pop();
 
                 if (!RayCastAABB(qt.Span, p1, p2))
                     continue;
@@ -233,7 +233,7 @@ namespace lunge.Library.AI.Pathfinding
                     p2 = p1 + (input.Point2 - input.Point1) * maxFraction; //update segment endpoint
                 }
                 if (IsPartitioned)
-                    foreach (QuadTree<T> st in qt.SubTrees)
+                    foreach (QuadTreeOld<T> st in qt.SubTrees)
                         stack.Push(st);
             }
         }
@@ -243,7 +243,7 @@ namespace lunge.Library.AI.Pathfinding
             nodes.AddRange(Nodes);
 
             if (IsPartitioned)
-                foreach (QuadTree<T> st in SubTrees) st.GetAllNodesR(ref nodes);
+                foreach (QuadTreeOld<T> st in SubTrees) st.GetAllNodesR(ref nodes);
         }
 
         public void RemoveNode(Element<T> node)

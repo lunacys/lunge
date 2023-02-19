@@ -38,5 +38,27 @@ namespace lunge.Library
 
             spriteBatch.DrawString(spriteFont, text, pos, color, 0f, origin, Vector2.One, SpriteEffects.None, 0f);
         }
+
+        public static void DrawString(this Batcher batcher, IFont font, string text, Rectangle bounds,
+            Color color, TextAlignment align)
+        {
+            Vector2 size = font.MeasureString(text);
+            Vector2 pos = bounds.Center.ToVector2();
+            Vector2 origin = size * 0.5f;
+
+            if (align.HasFlag(TextAlignment.Left))
+                origin.X += bounds.Width / 2.0f - size.X / 2;
+
+            if (align.HasFlag(TextAlignment.Right))
+                origin.X -= bounds.Width / 2.0f - size.X / 2;
+
+            if (align.HasFlag(TextAlignment.Top))
+                origin.Y += bounds.Height / 2.0f - size.Y / 2;
+
+            if (align.HasFlag(TextAlignment.Bottom))
+                origin.Y -= bounds.Height / 2.0f - size.Y / 2;
+
+            batcher.DrawString(font, text, pos, color, 0f, origin, Vector2.One, SpriteEffects.None, 0f);
+        }
     }
 }

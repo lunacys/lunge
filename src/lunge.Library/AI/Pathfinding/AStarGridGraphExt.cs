@@ -231,7 +231,7 @@ public class AStarGridGraphExt : IAstarGraph<Point>
     {
         if (!IsDiagonal(dir))
             return true;
-
+        // TODO: Maybe use dir instead of diagonal dir? Check it 
         foreach (var diagonalDir in DiagonalDirs)
         {
             if (!IsNodePassable(node + new Point(0, diagonalDir.Y)) ||
