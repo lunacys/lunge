@@ -12,7 +12,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\deps\jint\Jint\Jint.csproj" />
     <ProjectReference Include="..\..\..\deps\LiteNetLib\LiteNetLib\LiteNetLib.csproj" />
-    <ProjectReference Include="..\..\lunge.Library.Scripting\lunge.Library.Scripting.csproj" />
     <ProjectReference Include="..\..\lunge.Library\lunge.Library.csproj" />
   </ItemGroup>
   <ItemGroup>

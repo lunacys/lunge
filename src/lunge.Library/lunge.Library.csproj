@@ -34,22 +34,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="AI\SteeringNew\**" />
     <Compile Remove="Entities\ECS\**" />
+    <Compile Remove="Utils\Tiles\**" />
+    <EmbeddedResource Remove="AI\SteeringNew\**" />
     <EmbeddedResource Remove="Entities\ECS\**" />
+    <EmbeddedResource Remove="Utils\Tiles\**" />
+    <None Remove="AI\SteeringNew\**" />
     <None Remove="Entities\ECS\**" />
+    <None Remove="Utils\Tiles\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="AI\SteeringNew" />
-    <Folder Include="Utils\Tiles" />
+    <Folder Include="Utils\WaveFunctionCollapse\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\deps\FNA\FNA.Core.csproj" />
-    <ProjectReference Include="..\..\deps\LiteNetLib\LiteNetLib\LiteNetLib.csproj" />
-    <ProjectReference Include="..\..\deps\Nez\Nez.ImGui\Nez.FNA.Standard.ImGui.csproj" />
-    <ProjectReference Include="..\..\deps\Nez\Nez.Persistence\Nez.FNA.Standard.Persistence.csproj" />
-    <ProjectReference Include="..\..\deps\Nez\Nez.Portable\Nez.FNA.Standard.csproj" />
+    <ProjectReference Include="..\..\..\FNA\FNA.Core.csproj" />
+    <ProjectReference Include="..\..\..\Nez\Nez.ImGui\Nez.FNA.Standard.ImGui.csproj" />
+    <ProjectReference Include="..\..\..\Nez\Nez.Persistence\Nez.FNA.Standard.Persistence.csproj" />
+    <ProjectReference Include="..\..\..\Nez\Nez.Portable\Nez.FNA.Standard.csproj" />
   </ItemGroup>
 
 </Project>

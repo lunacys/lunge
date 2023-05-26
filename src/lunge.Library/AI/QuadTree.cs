@@ -5,7 +5,7 @@ namespace lunge.Library.AI;
 
 public class QuadTree<T> where T : IHasRect
 {
-    private QuadTreeNode<T> _root;
+    private readonly QuadTreeNode<T> _root;
     private RectangleF _rect;
 
     public int Count => _root.Count;
