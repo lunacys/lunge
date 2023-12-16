@@ -7,8 +7,6 @@ public class TileWorldRenderer : RenderableComponent
 {
     public override float Width => World.Width * World.TileWidth;
     public override float Height => World.Height * World.TileHeight;
-
-    public int ActiveLayerIndex { get; set; } = 0;
     
     public int PhysicsLayer = 1 << 0;
 
@@ -18,54 +16,80 @@ public class TileWorldRenderer : RenderableComponent
     public TileWorld World { get; }
 
     private TileLayer? _collisionLayer;
+
+    public TileLayer? CollisionLayer
+    {
+        get => _collisionLayer;
+        set
+        {
+            _collisionLayer = value;
+            RemoveColliders();
+            AddColliders(_collisionLayer);
+        }
+    }
+    
     private Collider[]? _colliders;
 
-    private int[]? _layersToRender;
-
-    public TileWorldRenderer(TileWorld world, TileLayer? collisionLayer = null)
+    public int[]? LayersToRender;
+    
+    public TileWorldRenderer(TileWorld world, string? collisionLayer = null)
     {
         World = world;
 
-        _collisionLayer = collisionLayer;
+        _collisionLayer = World.GetLayer(collisionLayer);
     }
 
-    public override void OnAddedToEntity()
+    public override void OnEntityTransformChanged(Transform.Component comp)
     {
-        if (_collisionLayer != null)
+        if (_collisionLayer != null && comp == Transform.Component.Position)
         {
+            RemoveColliders();
             AddColliders(_collisionLayer);
         }
     }
 
+    public override void OnAddedToEntity()
+    {
+        AddColliders(_collisionLayer);
+    }
+
+    public override void OnRemovedFromEntity()
+    {
+        RemoveColliders();
+    }
+
     public void SetLayerToRender(string layer)
     {
-        _layersToRender = new int[1];
+        LayersToRender = new int[1];
 
-        _layersToRender[0] = World.Layers.IndexOf(World.GetLayer(layer));
+        LayersToRender[0] = World.Layers.IndexOf(World.GetLayer(layer));
     }
 
     public void SetLayersToRender(params string[] layers)
     {
-        _layersToRender = new int[layers.Length];
+        LayersToRender = new int[layers.Length];
 
-        for (int i = 0; i < _layersToRender.Length; i++)
+        for (int i = 0; i < LayersToRender.Length; i++)
         {
-            _layersToRender[i] = World.Layers.IndexOf(World.GetLayer(layers[i]));
+            LayersToRender[i] = World.Layers.IndexOf(World.GetLayer(layers[i]));
         }
     }
 
     public override void Render(Batcher batcher, Camera camera)
     {
-        if (_layersToRender == null)
+        if (LayersToRender == null)
         {
-            foreach (var layer in World.Layers)
-                RenderTileLayer(batcher, layer);
+            for (var i = 0; i < World.Layers.Count; i++)
+            {
+                if (World.Layers[i].IsVisible)
+                    RenderTileLayer(batcher, World.Layers[i]);
+            }
         }
         else
         {
             for (int i = 0; i < World.Layers.Count; i++)
             {
-                if (World.Layers[i].IsVisible && _layersToRender.Contains(i))
+                if (World.Layers[i].IsVisible && LayersToRender.Contains(i))
                     RenderTileLayer(batcher, World.Layers[i]);
             }
         }
@@ -92,22 +116,22 @@ public class TileWorldRenderer : RenderableComponent
                 var tile = layer[x, y];
                 if (tile == null)
                     continue;
-
-                var alpha = 1.0f; //i == ActiveLayerIndex ? 1f : 0.1f;
-                var offset = Vector2.Zero; // i == ActiveLayerIndex ? Vector2.Zero : new Vector2(16, 16);
-
+                
                 batcher.DrawSprite(
                     tile.Tile.TileSet.Sprites[tile.Tile.Index],
                     new Vector2(x * TileWidth, y * TileHeight)
-                    + offset + Entity.Position,
-                    Color.White * alpha
+                    + layer.RenderOffset + Entity.Position,
+                    Color.White
                 );
             }
         }
     }
     
-    public void AddColliders(TileLayer layer)
+    public void AddColliders(TileLayer? layer)
     {
+        if (_collisionLayer == null || layer == null)
+            return;
+        
         // fetch the collision layer and its rects for collision
         var collisionRects = layer.GetCollisionRectangles();
 
@@ -123,5 +147,15 @@ public class TileWorldRenderer : RenderableComponent
 
             Physics.AddCollider(collider);
         }
+    }
+    
+    public void RemoveColliders()
+    {
+        if (_colliders == null)
+            return;
+
+        foreach (var collider in _colliders)
+            Physics.RemoveCollider(collider);
+        _colliders = null;
     }
 }

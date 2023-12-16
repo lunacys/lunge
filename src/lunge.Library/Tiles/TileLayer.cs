@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Microsoft.Xna.Framework;
 
 namespace lunge.Library.Tiles;
@@ -28,6 +29,8 @@ public class TileLayer
     }
     
     public TileWorld World { get; }
+    
+    public Vector2 RenderOffset { get; set; } = Vector2.Zero;
 
     public TileLayer(TileWorld world, string name)
     {
@@ -59,9 +62,11 @@ public class TileLayer
             SetTileAt(x, y, null);
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool IsOutOfBounds(Point pos)
 	    => World.IsOutOfBounds(pos);
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool IsOutOfBounds(int x, int y)
 	    => World.IsOutOfBounds(x, y);
 
@@ -142,7 +147,7 @@ public class TileLayer
 		    (endX - startX) * World.TileWidth, (World.Height - startY) * World.TileHeight);
     }
 
-    private void ForEach(Action<LayerTile> action)
+    private void ForEach(Action<LayerTile?> action)
     {
         for (int y = 0; y < Height; y++)
         for (int x = 0; x < Width; x++)

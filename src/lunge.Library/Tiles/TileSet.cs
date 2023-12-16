@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nez.Textures;
 
@@ -12,6 +13,9 @@ public class TileSet
     public List<Sprite> Sprites { get; }
 
     private Dictionary<string, TilesetTile> _tiles;
+    
+    public int AtlasWidth { get; }
+    public int AtlasHeight { get; }
 
     public TileSet(Texture2D atlas, int tileWidth, int tileHeight)
     {
@@ -19,6 +23,9 @@ public class TileSet
         
         TileWidth = tileWidth;
         TileHeight = tileHeight;
+
+        AtlasWidth = atlas.Width;
+        AtlasHeight = atlas.Height;
 
         Sprites = Sprite.SpritesFromAtlas(atlas, tileWidth, tileHeight);
     }
@@ -34,4 +41,10 @@ public class TileSet
         _tiles[name] = tile;
         return tile;
     }
+
+    public int IndexFromPosition(Point point)
+        => IndexFromPosition(point.X, point.Y);
+
+    public int IndexFromPosition(int x, int y)
+        => y * (AtlasWidth / TileWidth) + x;
 }

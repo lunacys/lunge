@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Microsoft.Xna.Framework;
 using Nez;
 
@@ -26,7 +27,7 @@ public class TileWorld
         TileSet = tileSet;
     }
 
-    public TileLayer? GetLayer(string name) => Layers.FirstOrDefault(l => l.Name == name);
+    public TileLayer? GetLayer(string? name) => Layers.FirstOrDefault(l => l.Name == name);
     public TileLayer? GetLayer(int index) => index >= 0 && index < Layers.Count ? Layers[index] : null;
 
     public Point WorldToTile(Vector2 position, bool clamp = true)
@@ -61,19 +62,21 @@ public class TileWorld
         );
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int TileToWorldX(int x)
-    {
-        return x * TileWidth;
-    }
+        => x * TileWidth;
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public int TileToWorldY(int y)
-    {
-        return y * TileHeight;
-    }
+        => y * TileHeight;
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool IsOutOfBounds(Point pos)
         => pos.X < 0 || pos.Y < 0 || pos.X >= Width || pos.Y >= Height;
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool IsOutOfBounds(int x, int y)
         => x < 0 || y < 0 || x >= Width || y >= Height;
+    
+    
 }
