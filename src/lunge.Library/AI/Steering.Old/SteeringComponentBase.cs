@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Nez;
 
-namespace lunge.Library.AI.Steering
+namespace lunge.Library.AI.Steering.Old
 {
     public abstract class SteeringComponentBase : Component, ISteeringBehavior
     {

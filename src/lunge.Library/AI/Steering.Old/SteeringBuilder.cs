@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Nez;
 using Nez.Sprites;
 
-namespace lunge.Library.AI.Steering
+namespace lunge.Library.AI.Steering.Old
 {
     public class SteeringBuilder
     {

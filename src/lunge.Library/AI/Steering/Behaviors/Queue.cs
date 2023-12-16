@@ -1,36 +1,21 @@
-﻿using System;
+using System;
+using lunge.Library.AI.Steering.Behaviors.Common;
 using Microsoft.Xna.Framework;
 
-namespace lunge.Library.AI.Steering.Behaviors
+namespace lunge.Library.AI.Steering.Behaviors;
+
+public class Queue : BehaviorBase
 {
-    public class Queue : SteeringComponentBase
+    public float MaxQueueRadius;
+    public Func<SteeringHost, SteeringHost?> GetNeighborAheadFunc;
+    
+    public Queue(SteeringHost host, Func<SteeringHost, SteeringHost?> getNeighborAheadFunc) : base(host)
     {
-        private Func<ISteeringEntity, ISteeringEntity> _getNeighborAheadFunc;
-        private float _maxQueueRadius;
+        GetNeighborAheadFunc = getNeighborAheadFunc;
+    }
 
-        public Queue(Func<ISteeringEntity, ISteeringEntity> getNeighborAheadFunc, float maxQueueRadius)
-        {
-            _getNeighborAheadFunc = getNeighborAheadFunc;
-            _maxQueueRadius = maxQueueRadius;
-        }
-
-        public override Vector2 Steer(ISteeringTarget target)
-        {
-            var v = SteeringEntity.Velocity;
-            var brake = Vector2.Zero;
-            var neighbor = _getNeighborAheadFunc.Invoke(SteeringEntity);
-
-            if (neighbor != null)
-            {
-                brake = -SteeringEntity.Steering * 0.8f;
-                v *= -1;
-                brake += v;
-
-                if (Vector2.Distance(SteeringEntity.Position, neighbor.Position) <= _maxQueueRadius)
-                    SteeringEntity.Velocity *= 0.3f;
-            }
-
-            return brake;
-        }
+    public override Vector2 Steer(SteeringHost target)
+    {
+        return CommonBehaviors.Queue(Host, GetNeighborAheadFunc, MaxQueueRadius);
     }
 }

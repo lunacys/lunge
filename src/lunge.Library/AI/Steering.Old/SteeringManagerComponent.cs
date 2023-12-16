@@ -4,7 +4,7 @@ using lunge.Library.Utils;
 using Microsoft.Xna.Framework;
 using Nez;
 
-namespace lunge.Library.AI.Steering
+namespace lunge.Library.AI.Steering.Old
 {
     public class SteeringManagerComponent : Component, IUpdatable
     {

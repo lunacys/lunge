@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace lunge.Library.AI.Steering.Pathing
+namespace lunge.Library.AI.Steering.Old.Pathing
 {
     public class Path : IEnumerable<PathNode>
     {

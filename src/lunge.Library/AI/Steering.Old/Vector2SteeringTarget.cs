@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace lunge.Library.AI.Steering
+namespace lunge.Library.AI.Steering.Old
 {
     public struct Vector2SteeringTarget : ISteeringTarget
     {

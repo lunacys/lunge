@@ -1,9 +1,9 @@
 ﻿using System;
-using lunge.Library.AI.Steering.Pathing;
+using lunge.Library.AI.Steering.Old.Pathing;
 using Microsoft.Xna.Framework;
 using Nez;
 
-namespace lunge.Library.AI.Steering.Behaviors
+namespace lunge.Library.AI.Steering.Old.Behaviors
 {
     public enum PathFollowingMode
     {

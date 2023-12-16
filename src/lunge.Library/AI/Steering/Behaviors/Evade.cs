@@ -1,22 +1,18 @@
-﻿using Microsoft.Xna.Framework;
+using lunge.Library.AI.Steering.Behaviors.Common;
+using Microsoft.Xna.Framework;
 
-namespace lunge.Library.AI.Steering.Behaviors
+namespace lunge.Library.AI.Steering.Behaviors;
+
+public class Evade : BehaviorBase
 {
-    public class Evade : SteeringComponentBase
+    public bool PredictPosition = true;
+    
+    public Evade(SteeringHost host) : base(host)
     {
-        public override Vector2 Steer(ISteeringTarget target)
-        {
-            var distance = (target.Position - SteeringEntity.Position).Length();
-            var updatesAhead = distance / SteeringEntity.MaxVelocity;
-            Vector2 futurePos;
-            if (target is ISteeringEntity steeringTarget)
-                futurePos = target.Position + steeringTarget.Velocity * updatesAhead;
-            else 
-                futurePos = target.Position;
+    }
 
-            return NestedBehavior == null
-                ? BehaviorMath.Flee((Vector2SteeringTarget) futurePos, SteeringEntity)
-                : NestedBehavior.Steer((Vector2SteeringTarget) futurePos);
-        }
+    public override Vector2 Steer(SteeringHost target)
+    {
+        return CommonBehaviors.Evade(Host, target, PredictPosition);
     }
 }

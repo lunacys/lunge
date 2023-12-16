@@ -1,42 +1,23 @@
-﻿using Microsoft.Xna.Framework;
-using Nez;
+using lunge.Library.AI.Steering.Behaviors.Common;
+using Microsoft.Xna.Framework;
 
-namespace lunge.Library.AI.Steering.Behaviors
+namespace lunge.Library.AI.Steering.Behaviors;
+
+public class Arrival : BehaviorBase
 {
-    public class Arrival : SteeringComponentBase
+    public float SlowingRadius = 20f;
+    
+    public Arrival(SteeringHost host) : base(host)
     {
-        [Inspectable]
-        public float SlowingRadius { get; set; }
+    }
 
-        private ISteeringTarget _target;
-        
-        public Arrival(float slowingRadius)
-        {
-            SlowingRadius = slowingRadius;
-        }
-        
-        public override Vector2 Steer(ISteeringTarget target)
-        {
-            if (_target == null)
-                _target = target;
-            
-            SteeringEntity.DesiredVelocity = target.Position - SteeringEntity.Position;
-            var distance = SteeringEntity.DesiredVelocity.Length();
+    public override Vector2 Steer(SteeringHost target)
+    {
+        return CommonBehaviors.Arrival(Host, target, SlowingRadius);
+    }
 
-            if (distance < SlowingRadius)
-                SteeringEntity.DesiredVelocity = SteeringEntity.DesiredVelocity.Normalized() * SteeringEntity.MaxVelocity * (distance / SlowingRadius);
-            else
-                SteeringEntity.DesiredVelocity = SteeringEntity.DesiredVelocity.Normalized() * SteeringEntity.MaxVelocity;
-
-            return SteeringEntity.DesiredVelocity - SteeringEntity.Velocity;
-        }
-
-        public override void DebugRender(Batcher batcher)
-        {
-            if (_target != null)
-                batcher.DrawCircle(_target.Position, SlowingRadius, Color.Red);
-            
-            base.DebugRender(batcher);
-        }
+    public override Vector2 Steer(Vector2 target)
+    {
+        return CommonBehaviors.Arrival(Host, target, SlowingRadius);
     }
 }

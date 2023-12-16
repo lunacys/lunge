@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Nez;
 
-namespace lunge.Library.AI.Steering.Pathing
+namespace lunge.Library.AI.Steering.Old.Pathing
 {
     public class PathNode
     {

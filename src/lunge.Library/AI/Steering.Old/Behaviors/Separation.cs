@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Nez;
 
-namespace lunge.Library.AI.Steering.Behaviors
+namespace lunge.Library.AI.Steering.Old.Behaviors
 {
 
     public class Separation : SteeringComponentBase

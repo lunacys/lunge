@@ -1,12 +1,21 @@
-﻿using Microsoft.Xna.Framework;
+using lunge.Library.AI.Steering.Behaviors.Common;
+using Microsoft.Xna.Framework;
 
-namespace lunge.Library.AI.Steering.Behaviors
+namespace lunge.Library.AI.Steering.Behaviors;
+
+public class Flee : BehaviorBase
 {
-    public class Flee : SteeringComponentBase
+    public Flee(SteeringHost host) : base(host)
     {
-        public override Vector2 Steer(ISteeringTarget target)
-        {
-            return BehaviorMath.Flee(target, SteeringEntity);
-        }
+    }
+
+    public override Vector2 Steer(SteeringHost target)
+    {
+        return CommonBehaviors.Flee(Host, target);
+    }
+
+    public override Vector2 Steer(Vector2 target)
+    {
+        return CommonBehaviors.Flee(Host, target);
     }
 }

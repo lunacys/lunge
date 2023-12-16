@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace lunge.Library.AI.Steering.Behaviors
+namespace lunge.Library.AI.Steering.Old.Behaviors
 {
     public static class BehaviorMath
     {

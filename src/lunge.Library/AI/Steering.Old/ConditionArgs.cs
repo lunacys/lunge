@@ -1,4 +1,4 @@
-﻿namespace lunge.Library.AI.Steering
+﻿namespace lunge.Library.AI.Steering.Old
 {
     public class ConditionArgs
     {

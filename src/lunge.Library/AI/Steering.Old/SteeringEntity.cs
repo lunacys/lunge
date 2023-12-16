@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Nez;
 using Vector2 = Microsoft.Xna.Framework.Vector2;
 
-namespace lunge.Library.AI.Steering
+namespace lunge.Library.AI.Steering.Old
 {
     public class SteeringEntity : Entity, ISteeringEntity, ISteeringTarget
     {
