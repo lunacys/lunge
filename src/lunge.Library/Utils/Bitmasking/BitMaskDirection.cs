@@ -1,6 +1,6 @@
 namespace lunge.Library.Utils.Bitmasking;
 
-public enum BitMaskDirections
+public enum BitMaskDirection
 {
     Edges,
     Corners,

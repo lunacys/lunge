@@ -43,18 +43,12 @@ public static class BitMaskCalculator
     /// <param name="bitMap"></param>
     /// <param name="dirs"></param>
     /// <exception cref="ArgumentOutOfRangeException"></exception>
-    public static void CalculateBitMaskForBitMap(int[,] bitMask, bool[,] bitMap, BitMaskDirections dirs)
+    public static void CalculateBitMaskForBitMap(int[,] bitMask, bool[,] bitMap, BitMaskDirection dirs)
     {
         var h = bitMap.GetLength(0);
         var w = bitMap.GetLength(1);
 
-        var dirsToUse = dirs switch
-        {
-            BitMaskDirections.Edges => _dirsEdges,
-            BitMaskDirections.Corners => _dirsCorners,
-            BitMaskDirections.CornersAndEdges => _dirsCornersAndEdges,
-            _ => throw new ArgumentOutOfRangeException(nameof(dirs), dirs, null)
-        };
+        var dirsToUse = GetDirsToUse(dirs);
         
         // Edges: 
         //      1
@@ -87,6 +81,7 @@ public static class BitMaskCalculator
                 var bit = bitMap[y, x];
                 int newByte = 0;
 
+                // If bit is set to true (1) then get its neighbors and calculate bitmap
                 if (bit)
                 {
                     for (var i = 0; i < dirsToUse.Length; i++)
@@ -95,7 +90,7 @@ public static class BitMaskCalculator
                         var p = new Point(x + dir.X, y + dir.Y);
 
                         if (MathUtils.IsNotOutOfBounds(p, w, h) && bitMap[p.Y, p.X])
-                            newByte |= (int)Math.Pow(2, i);
+                            newByte |= 1 << i; //(int)Math.Pow(2, i);
                     }
                 }
 
@@ -104,7 +99,7 @@ public static class BitMaskCalculator
         }
     }
     
-    public static int[,] CalculateBitMaskForBitMap(bool[,] bitMap, BitMaskDirections dirs)
+    public static int[,] CalculateBitMaskForBitMap(bool[,] bitMap, BitMaskDirection dirs)
     {
         var h = bitMap.GetLength(0);
         var w = bitMap.GetLength(1);
@@ -120,13 +115,13 @@ public static class BitMaskCalculator
     {
         var type = 
             includeDiagonals 
-                ? BitMaskDirections.CornersAndEdges 
-                : BitMaskDirections.Edges;
+                ? BitMaskDirection.CornersAndEdges 
+                : BitMaskDirection.Edges;
         
         return CalculateBitMaskForBitMap(bitMap, type);
     }
-
-    public static bool[,] CreateBitMapFrom<T>(T[,] world, T includeVal) where T : struct
+    
+    public static bool[,] CreateBitMapFrom<T>(T[,] world, Predicate<T> predicate) where T : struct
     {
         var h = world.GetLength(0);
         var w = world.GetLength(1);
@@ -137,12 +132,21 @@ public static class BitMaskCalculator
         {
             for (int x = 0; x < w; x++)
             {
-                result[y, x] = world[y, x].Equals(includeVal);
+                result[y, x] = predicate(world[y, x]);
             }
         }
 
         return result;
     }
 
-    
+    private static Point[] GetDirsToUse(BitMaskDirection dirs)
+    {
+        return dirs switch
+        {
+            BitMaskDirection.Edges => _dirsEdges,
+            BitMaskDirection.Corners => _dirsCorners,
+            BitMaskDirection.CornersAndEdges => _dirsCornersAndEdges,
+            _ => throw new ArgumentOutOfRangeException(nameof(dirs), dirs, null)
+        };
+    }
 }
