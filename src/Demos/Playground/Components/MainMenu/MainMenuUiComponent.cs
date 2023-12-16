@@ -1,5 +1,5 @@
 ﻿using System;
-using lunge.Library.Debugging.Logging;
+using LiteLog.Logging;
 using Nez;
 using Nez.UI;
 using Playground.Scenes;

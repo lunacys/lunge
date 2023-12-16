@@ -1,5 +1,4 @@
 ﻿using lunge.Library.Assets.Aseprite;
-using lunge.Library.Debugging.Profiling;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Nez;
@@ -10,7 +9,7 @@ using Playground.Components.Renderers;
 
 namespace Playground.Scenes;
 
-public class SimpleGameplayScene : SceneTimed<SimpleGameplayScene>
+public class SimpleGameplayScene : Scene
 {
     public const int ScreenSpaceRenderLayer = 999;
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using ImGuiNET;
-using lunge.Library.Debugging.Profiling;
+using LiteLog.Profiling;
 using Nez;
 using Nez.ImGuiTools;
 

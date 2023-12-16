@@ -4,8 +4,8 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Threading;
-using lunge.Library.Debugging.Logging;
-using lunge.Library.Debugging.Logging.Loggers;
+using LiteLog.Logging;
+using LiteLog.Logging.Loggers;
 using Nez;
 
 namespace Playground;

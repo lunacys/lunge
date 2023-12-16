@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using lunge.Library.Debugging.Logging;
+using LiteLog.Logging;
 using Microsoft.Xna.Framework;
 using Nez;
 using Playground.Components;

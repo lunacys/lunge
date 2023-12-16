@@ -1,6 +1,6 @@
 ﻿using System;
-using lunge.Library.Debugging.Logging;
-using lunge.Library.Debugging.Profiling;
+using LiteLog.Logging;
+using LiteLog.Profiling;
 using Microsoft.Xna.Framework;
 using Nez;
 using Nez.ImGuiTools;

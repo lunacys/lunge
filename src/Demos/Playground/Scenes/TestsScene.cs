@@ -1,4 +1,4 @@
-﻿using lunge.Library.Debugging.Logging;
+﻿using LiteLog.Logging;
 using Nez;
 using Playground.Components;
 using Playground.Components.Debugging;

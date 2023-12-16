@@ -1,20 +1,28 @@
 ﻿using ImGuiNET;
 using lunge.Library;
 using lunge.Library.AI.Steering;
-using lunge.Library.AI.Steering.Behaviors;
-using lunge.Library.AI.Steering.Pathing;
+using lunge.Library.AI.Steering.Old;
+using lunge.Library.AI.Steering.Old.Behaviors;
+using lunge.Library.AI.Steering.Old.Pathing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nez;
 using Nez.ImGuiTools;
 using Nez.Sprites;
+using Arrival = lunge.Library.AI.Steering.Behaviors.Arrival;
+using CollisionAvoidance = lunge.Library.AI.Steering.Behaviors.CollisionAvoidance;
+using Evade = lunge.Library.AI.Steering.Behaviors.Evade;
+using Flee = lunge.Library.AI.Steering.Behaviors.Flee;
+using Pursuit = lunge.Library.AI.Steering.Behaviors.Pursuit;
 using Random = Nez.Random;
+using Seek = lunge.Library.AI.Steering.Behaviors.Seek;
+using Wander = lunge.Library.AI.Steering.Behaviors.Wander;
 
 namespace Playground.Components.SteeringBehaviors;
 
-public class SteeringBehaviorsComponent : RenderableComponent, IUpdatable
+public class SteeringBehaviorsComponent : Component//RenderableComponent/*, IUpdatable*/
 {
-    public override float Width => 1360;
+    /*public override float Width => 1360;
     public override float Height => 768;
 
     private Texture2D _defaultTexture;
@@ -304,8 +312,8 @@ public class SteeringBehaviorsComponent : RenderableComponent, IUpdatable
             .AddCollider(12f)
             .Build();
 
-        Core.Scene.AddEntity(entity);*/
-    }
+        Core.Scene.AddEntity(entity);
+    }*/
 
     private void AddQueue()
     {

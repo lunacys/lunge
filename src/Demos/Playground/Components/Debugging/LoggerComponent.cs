@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using ImGuiNET;
-using lunge.Library.Debugging.Logging.Loggers;
+using LiteLog.Logging.Loggers;
 using Nez;
 using Nez.ImGuiTools;
 

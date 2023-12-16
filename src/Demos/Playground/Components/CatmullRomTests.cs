@@ -13,7 +13,7 @@ namespace Playground.Components;
 
 public class CatmullRomTests : RenderableComponent
 {
-    private System.Numerics.Vector2 
+    private Vector2 
         _value1 = new (64, 64),
         _value2 = new (100, 64), 
         _value3 = new (128, 100),
@@ -36,17 +36,17 @@ public class CatmullRomTests : RenderableComponent
 
     public override void OnAddedToEntity()
     {
-        Core.GetGlobalManager<ImGuiManager>()?.RegisterDrawCommand(Draw);
+        //Core.GetGlobalManager<ImGuiManager>()?.RegisterDrawCommand(Draw);
         //_lineRenderer = Entity.GetComponent<LineRenderer>();
     }
 
     public override void Render(Batcher batcher, Camera camera)
     {
-        /*var v = Vector2.CatmullRom(_value1, _value2, _value3, _value4, _amount);
+        var v = Vector2.CatmullRom(_value1, _value2, _value3, _value4, _amount);
 
-        DrawLine(batcher, _start, v, Color.Red, 2f);*/
+        DrawLine(batcher, _start, v, Color.Red, 2f);
 
-        /*var knots = new List<Vector2>
+        var knots = new List<Vector2>
         {
             _value1, _value2, _value3, _value4
         };
@@ -73,7 +73,7 @@ public class CatmullRomTests : RenderableComponent
             batcher.DrawArrow(curvePoint, next, Color.Black, 6, 2f);
             batcher.DrawPixel(curvePoint.X, curvePoint.Y, Color.Red, 8);
         }
-
+        
         foreach (var knot in knots)
         {
             batcher.DrawCircle(knot, 8f, Color.Yellow, 1f, 32);
@@ -85,12 +85,10 @@ public class CatmullRomTests : RenderableComponent
 
         batcher.DrawCircle(_catmullRom, 6f, Color.Blue, 2f, 32);
 
-        _lastTime2 = Debug.TimeAction(() =>
-        {
-            var points = Bezier.GetOptimizedDrawingPoints(_value1, _value2, _value3, _value4, _amount);
-        });
         
-        /*for (var i = 0; i < points.Count - 1; i++)
+        var points = Bezier.GetOptimizedDrawingPoints(_value1, _value2, _value3, _value4, _amount);
+        
+        for (var i = 0; i < points.Count - 1; i++)
         {
             var curvePoint = points[i];
             var next = points[i + 1];
@@ -98,10 +96,10 @@ public class CatmullRomTests : RenderableComponent
 
             DrawLine(batcher, curvePoint, next, Color.Green);
             batcher.DrawPixel(curvePoint.X, curvePoint.Y, Color.Red, 8);
-        }*/
+        }
     }
 
-    private void Draw()
+    /*private void Draw()
     {
         ImGui.Begin("Catmull Rom Settings");
 
@@ -118,7 +116,7 @@ public class CatmullRomTests : RenderableComponent
         ImGui.Text($"LastTime2: {_lastTime2.TotalMilliseconds} ms");
 
         ImGui.End();
-    }
+    }*/
 
     private void DrawLine(Batcher batcher, Vector2 start, Vector2 end, Color color, float thickness = 2f)
     {

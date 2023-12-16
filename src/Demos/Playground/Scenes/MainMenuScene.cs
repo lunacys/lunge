@@ -1,5 +1,4 @@
-﻿using lunge.Library.Debugging.Logging;
-using lunge.Library.Debugging.Profiling;
+﻿using LiteLog.Logging;
 using Nez;
 using Nez.UI;
 using Playground.Components.Debugging;
@@ -7,7 +6,7 @@ using Playground.Components.MainMenu;
 
 namespace Playground.Scenes;
 
-public class MainMenuScene : SceneTimed<MainMenuScene>
+public class MainMenuScene : Scene
 {
     public const int ScreenSpaceRenderLayer = 999;
 
@@ -48,7 +47,7 @@ public class MainMenuScene : SceneTimed<MainMenuScene>
 
         
 
-        SetDesignResolution(Width, Height, SceneResolutionPolicy.ShowAllPixelPerfect);
+        SetDesignResolution(Width, Height, Scene.SceneResolutionPolicy.ShowAllPixelPerfect);
         Screen.SetSize(2560, 1440);
 
         CreateEntity("profiler").AddComponent(new ProfilerComponent()).AddComponent(new LoggerComponent());
