@@ -1,4 +1,9 @@
 using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Nez;
 
 namespace lunge.Library.Utils
 {
@@ -8,21 +13,14 @@ namespace lunge.Library.Utils
         Gustavson
     }
 
-    public sealed class NoiseHelper
+    public static class NoiseHelper
     {
-
-        // Random seed
-        private static int _seed = -1;
-        public static int Seed
+        public static void Reseed()
         {
-            set
-            {
-                _seed = value;
-                _reseed(); // Carmody
-                _recalculatePermutations(); // Gustavson
-            }
+            _reseed();
+            _recalculatePermutations();
+            CalculatePermutation(out _permutation);
         }
-
         
         /* Based off the Simplex implementation by Stephen Carmody
          * http://stephencarmody.wikispaces.com/Simplex+Noise
@@ -71,7 +69,179 @@ namespace lunge.Library.Utils
         /// <summary>
         /// Constructor
         /// </summary>
-        static NoiseHelper() { for (int i = 0; i < 512; i++) perm[i] = p[i & 255]; }
+        static NoiseHelper()
+        {
+            for (int i = 0; i < 512; i++) perm[i] = p[i & 255];
+            CalculatePermutation(out _permutation);
+            CalculateGradients(out _gradients);
+        }
+        
+        private static int[] _permutation;
+
+        private static Vector2[] _gradients;
+
+        private static void CalculatePermutation(out int[] p)
+        {
+            p = Enumerable.Range(0, 256).ToArray();
+
+            // shuffle the array
+            for (var i = 0; i < p.Length; i++)
+            {
+                var source = Nez.Random.RNG.Next(p.Length);
+
+                (p[i], p[source]) = (p[source], p[i]);
+            }
+        }
+
+        private static void CalculateGradients(out Vector2[] grad)
+        {
+            grad = new Vector2[256];
+
+            for (var i = 0; i < grad.Length; i++)
+            {
+                Vector2 gradient;
+
+                do
+                {
+                    gradient = new Vector2(Nez.Random.NextFloat() * 2 - 1, Nez.Random.NextFloat() * 2 - 1);
+                } while (gradient.LengthSquared() >= 1);
+
+                gradient.Normalize();
+
+                grad[i] = gradient;
+            }
+
+        }
+
+        private static float Drop(float t)
+        {
+            t = Math.Abs(t);
+            return 1f - t * t * t * (t * (t * 6 - 15) + 10);
+        }
+
+        private static float Q(float u, float v)
+        {
+            return Drop(u) * Drop(v);
+        }
+
+        public static float Noise2D(float x, float y)
+        {
+            var cell = new Vector2((float)Math.Floor(x), (float)Math.Floor(y));
+
+            var total = 0f;
+
+            var corners = new[] { new Vector2(0, 0), new Vector2(0, 1), new Vector2(1, 0), new Vector2(1, 1) };
+
+            foreach (var n in corners)
+            {
+                var ij = cell + n;
+                var uv = new Vector2(x - ij.X, y - ij.Y);
+
+                var index = _permutation[(int)ij.X % _permutation.Length];
+                index = _permutation[(index + (int)ij.Y) % _permutation.Length];
+
+                var grad = _gradients[index % _gradients.Length];
+
+                total += Q(uv.X, uv.Y) * Vector2.Dot(grad, uv);
+            }
+
+            return Math.Max(Math.Min(total, 1f), -1f);
+        }
+
+        public static void GenerateNoiseMapTexture(int width, int height, ref Texture2D? noiseTexture, int octaves,
+            Func<float, float, float> noiseFunc, bool reseed = true)
+        {
+            var data = GenerateNoiseMap2D(width, height, octaves, noiseFunc, reseed);
+
+
+            if (noiseTexture != null && (noiseTexture.Width != width || noiseTexture.Height != height))
+            {
+                noiseTexture.Dispose();
+                noiseTexture = null;
+            }
+
+            if (noiseTexture == null)
+            {
+                noiseTexture = new Texture2D(Core.GraphicsDevice, width, height, false, SurfaceFormat.Color);
+            }
+
+            var colors = data.Map.Select(
+                (f) =>
+                {
+                    var norm = (f - data.Min) / (data.Max - data.Min);
+                    return new Color(norm, norm, norm, 1);
+                }
+            ).ToArray();
+
+            noiseTexture.SetData(colors);
+        }
+
+        public static void RenderNoiseMapToTexture(int width, int height, ref RenderTarget2D? renderTarget2D,
+            int octaves, Func<float, float, float> noiseFunc, bool reseed = true)
+        {
+            if (renderTarget2D == null)
+                renderTarget2D = new RenderTarget2D(Core.GraphicsDevice, width, height);
+            
+            renderTarget2D.RenderFrom((batcher) =>
+            {
+                var data = GenerateNoiseMap2D(width, height, octaves, noiseFunc, reseed);
+
+                for (int i = 0; i < data.Map.Length; i++)
+                {
+                    var x = i % width;
+                    var y = i / width;
+                    var curr = data.Map[i];
+                    var norm = (curr - data.Min) / (data.Max - data.Min);
+                    batcher.DrawPixel(x, y, new Color(norm, norm, norm, 1));
+                }
+            });
+        }
+
+        public static (float[] Map, float Min, float Max) GenerateNoiseMap2D(int width, int height, int octaves
+            , Func<float, float, float> noiseFunc, bool reseed = true)
+        {
+            var size = height * width;
+            var outputMap = new float[size];
+            
+            // track min and max noise value. Used to normalize the result to the 0 to 1.0 range.
+            var min = float.MaxValue;
+            var max = float.MinValue;
+
+            // rebuild the permutation table to get a different noise pattern. 
+            // Leave this out if you want to play with changing the number of octaves while 
+            // maintaining the same overall pattern.
+            if (reseed)
+                Reseed();
+
+            var frequency = 0.5f;
+            var amplitude = 1f;
+            // var persistence = 0.25f;
+
+            for (var octave = 0; octave < octaves; octave++)
+            {
+                // parallel loop - easy and fast.
+                Parallel.For(0
+                    , width * height
+                    , (offset) =>
+                    {
+                        var i = offset % width;
+                        var j = offset / width;
+                        var noise = noiseFunc(i * frequency * 1f / width,
+                            j * frequency * 1f / height);
+                        noise = outputMap[j * width + i] += noise * amplitude;
+
+                        min = Math.Min(min, noise);
+                        max = Math.Max(max, noise);
+
+                    }
+                );
+
+                frequency *= 2;
+                amplitude /= 2;
+            }
+
+            return (outputMap, min, max);
+        }
 
         #region Fractional Brownian Motion
         /// <summary>
@@ -413,15 +583,9 @@ namespace lunge.Library.Utils
         #region Gustavson Private Helper Functions
         private static void _recalculatePermutations()
         {
-            Random rand;
-            if (_seed != -1)
-                rand = new Random(_seed);
-            else
-                rand = new Random();
-
             // Randomize permutations array
             for (int i = 0; i < p.Length; i++)
-                p[i] = rand.Next(_halfLength);
+                p[i] = Nez.Random.NextInt(_halfLength);
 
             for (int i = 0; i < 512; i++) 
                 perm[i] = p[i & 255];
@@ -444,21 +608,15 @@ namespace lunge.Library.Utils
         #region Carmody Private Helper Functions
         private static void _reseed()
         {
-            Random rand;
-            if (_seed != -1)
-                rand = new Random(_seed);
-            else
-                rand = new Random();
-
             T = new int[] { 
-                rand.Next(int.MinValue, int.MaxValue), 
-                rand.Next(int.MinValue, int.MaxValue), 
-                rand.Next(int.MinValue, int.MaxValue), 
-                rand.Next(int.MinValue, int.MaxValue), 
-                rand.Next(int.MinValue, int.MaxValue), 
-                rand.Next(int.MinValue, int.MaxValue), 
-                rand.Next(int.MinValue, int.MaxValue), 
-                rand.Next(int.MinValue, int.MaxValue)
+                Nez.Random.RNG.Next(int.MinValue, int.MaxValue), 
+                Nez.Random.RNG.Next(int.MinValue, int.MaxValue), 
+                Nez.Random.RNG.Next(int.MinValue, int.MaxValue), 
+                Nez.Random.RNG.Next(int.MinValue, int.MaxValue), 
+                Nez.Random.RNG.Next(int.MinValue, int.MaxValue), 
+                Nez.Random.RNG.Next(int.MinValue, int.MaxValue), 
+                Nez.Random.RNG.Next(int.MinValue, int.MaxValue), 
+                Nez.Random.RNG.Next(int.MinValue, int.MaxValue)
             };
         }
 
