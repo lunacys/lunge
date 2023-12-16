@@ -50,7 +50,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\FNA\FNA.Core.csproj" />
+    <ProjectReference Include="..\..\..\FNA\FNA.NetStandard.csproj" />
     <ProjectReference Include="..\..\..\Nez\Nez.ImGui\Nez.FNA.Standard.ImGui.csproj" />
     <ProjectReference Include="..\..\..\Nez\Nez.Persistence\Nez.FNA.Standard.Persistence.csproj" />
     <ProjectReference Include="..\..\..\Nez\Nez.Portable\Nez.FNA.Standard.csproj" />
