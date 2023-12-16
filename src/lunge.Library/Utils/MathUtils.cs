@@ -188,8 +188,25 @@ namespace lunge.Library.Utils
         /// <returns></returns>
         public static Vector2 SnapToGridRounding(Vector2 value, Vector2 gridSize)
         {
-            return new Vector2(value.X - value.X % gridSize.X, value.Y - value.Y % gridSize.Y);
+            return SnapToGridRounding(value, gridSize.X, gridSize.Y);
         }
+        
+        public static Vector2 SnapToGridRounding(Vector2 value, float gridWidth, float gridHeight)
+        {
+            return new Vector2(value.X - value.X % gridWidth, value.Y - value.Y % gridHeight);
+        }
+        
+        public static void SnapToGridRounding(ref Vector2 value, Vector2 size)
+        {
+            SnapToGridRounding(ref value, size.X, size.Y);
+        }
+        
+        public static void SnapToGridRounding(ref Vector2 value, float gridWidth, float gridHeight)
+        {
+            value.X -= value.X % gridWidth;
+            value.Y -= value.Y % gridHeight;
+        }
+        
 
         public static float SnapToGrid(float value, float gridSize)
         {
