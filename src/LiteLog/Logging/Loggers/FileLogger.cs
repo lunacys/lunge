@@ -2,28 +2,56 @@
 {
     public class FileLogger : ILoggerFrontend
     {
-        public string FileDir => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs");
-
-        public string FilePath { get; }
-
-        private readonly object _lockObj = new object();
-
-        public FileLogger(string? filePath = null)
+        /// <summary>
+        /// Gets or sets directory in which the logs will be written.
+        /// It is combined with FileFormat.
+        /// </summary>
+        public string FileDirectory
         {
-            if (filePath == null)
-                FilePath = Path.Combine(FileDir,
-                    $"log-{DateTime.Now:yyyy-MM-dd}.log");
-            else
-                FilePath = filePath;
+            get => _fileDirectory;
+            set
+            {
+                _fileDirectory = value;
+                UpdatePaths();
+            }
+        }
 
-            if (!Directory.Exists(FileDir))
-                Directory.CreateDirectory(FileDir);
+        /// <summary>
+        /// Gets or sets file format.
+        /// Is is combined with FileDirectory.
+        /// <example>"log-{DateTime.Now:yyyy-MM-dd}.log"</example>
+        /// </summary>
+        public string FileFormat
+        {
+            get => _fileFormat;
+            set
+            {
+                _fileFormat = value;
+                UpdatePaths();
+            }
+        }
+
+        public string FilePath { get; private set; } = null!;
+
+        private string _fileDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs");
+        private string _fileFormat = $"log-{DateTime.Now:yyyy-MM-dd}.log";
+
+        public FileLogger()
+        {
+            UpdatePaths();
         }
 
         public void Log(string message, LogLevel level)
         {
             using var sw = new StreamWriter(FilePath, true);
             sw.WriteLine(message);
+        }
+
+        private void UpdatePaths()
+        {
+            FilePath = Path.Combine(_fileDirectory, _fileFormat);
+            
+            Directory.CreateDirectory(_fileDirectory);
         }
     }
 }

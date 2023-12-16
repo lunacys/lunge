@@ -10,7 +10,7 @@ namespace LiteLog.Logging
         public string Context { get; }
         private List<ILoggerFrontend> ActiveLoggers { get; }
 
-        private Dictionary<LogLevel, ILoggerFrontend> _activeLoggersMap { get; } 
+        private Dictionary<LogLevel, ILoggerFrontend> _activeLoggersMap;
 
         private object _lock = new object();
 
