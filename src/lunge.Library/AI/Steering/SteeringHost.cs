@@ -4,7 +4,7 @@ using Nez;
 
 namespace lunge.Library.AI.Steering;
 
-public class SteeringHost : Entity
+public class SteeringHost : Component
 {
     public Vector2 DesiredVelocity;
     public Vector2 Velocity;
@@ -15,18 +15,16 @@ public class SteeringHost : Entity
     public float Mass;
     public float Friction;
 
-    public SteeringManager SteeringManager { get; private set; } = null!;
+    public SteeringManager? SteeringManager { get; private set; }
 
-    public SteeringHost(string name)
+    public SteeringHost()
     {
-        MaxVelocity = 4.0f;
-        MaxForce = 3.8f;
+        MaxVelocity = 180.0f;
+        MaxForce = 150f;
         Mass = 1.0f;
         Friction = 0.8f;
         
         Reset();
-
-        Name = name;
     }
 
     public void Reset()
@@ -36,18 +34,18 @@ public class SteeringHost : Entity
         DesiredVelocity = Vector2.Zero;
     }
 
-    public override void OnAddedToScene()
+    public override void OnAddedToEntity()
     {
-        SteeringManager = AddComponent(new SteeringManager());
+        SteeringManager = Entity.AddComponent(new SteeringManager(this));
     }
 
     public override void DebugRender(Batcher batcher)
     {
         // Steering Line (Blue)
-        batcher.DrawArrow(Position, Position + Steering * 30, Color.Blue);
+        batcher.DrawArrow(Entity.Position, Entity.Position + Steering, Color.Blue);
         // Velocity Line (Green)
-        batcher.DrawArrow(Position, Position + Velocity * 20, Color.Green);
+        batcher.DrawArrow(Entity.Position, Entity.Position + Velocity, Color.Green);
         // Desired Velocity Line (Red)
-        batcher.DrawArrow(Position, Position + DesiredVelocity * 30, Color.Red);
+        batcher.DrawArrow(Entity.Position, Entity.Position + DesiredVelocity * 30, Color.Red);
     }
 }

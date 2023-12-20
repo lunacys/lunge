@@ -20,10 +20,10 @@ public static partial class CommonBehaviors
 
         dv.Normalize();
         dv *= leaderBehindDist;
-        ahead = leader.Position + dv;
+        ahead = leader.Entity.Position + dv;
 
         dv *= -1;
-        behind = leader.Position + dv;
+        behind = leader.Entity.Position + dv;
 
         if (evadeWhenClose && IsOnLeaderSight(host, leader, ahead, leaderSightRadius))
             force += Evade(host, leader);
@@ -33,7 +33,7 @@ public static partial class CommonBehaviors
 
     private static bool IsOnLeaderSight(SteeringHost host, SteeringHost leader, Vector2 leaderAhead, float leaderSightRadius)
     {
-        return Vector2.Distance(leaderAhead, host.Position) <= leaderSightRadius ||
-               Vector2.Distance(leader.Position, host.Position) <= leaderSightRadius;
+        return Vector2.Distance(leaderAhead, host.Entity.Position) <= leaderSightRadius ||
+               Vector2.Distance(leader.Entity.Position, host.Entity.Position) <= leaderSightRadius;
     }
 }

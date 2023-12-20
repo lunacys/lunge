@@ -21,7 +21,7 @@ public static partial class CommonBehaviors
             v *= -1;
             brake += v;
 
-            if (Vector2.Distance(host.Position, neighbor.Position) <= maxQueueRadius)
+            if (Vector2.Distance(host.Entity.Position, neighbor.Entity.Position) <= maxQueueRadius)
                 host.Velocity *= 0.3f;
         }
 

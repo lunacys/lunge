@@ -5,11 +5,11 @@ namespace lunge.Library.AI.Steering.Behaviors.Common;
 public static partial class CommonBehaviors
 {
     public static Vector2 Seek(SteeringHost host, SteeringHost target)
-        => Seek(host, target.Position);
+        => Seek(host, target.Entity.Position);
 
     public static Vector2 Seek(SteeringHost host, Vector2 target)
     {
-        var dv = target - host.Position;
+        var dv = target - host.Entity.Position;
         dv.Normalize();
 
         host.DesiredVelocity = dv;
@@ -18,11 +18,11 @@ public static partial class CommonBehaviors
     }
 
     public static Vector2 Flee(SteeringHost host, SteeringHost target)
-        => Flee(host, target.Position);
+        => Flee(host, target.Entity.Position);
 
     public static Vector2 Flee(SteeringHost host, Vector2 target)
     {
-        var dv = (target - host.Position);
+        var dv = (target - host.Entity.Position);
         dv.Normalize();
         dv *= host.MaxVelocity;
 
@@ -32,11 +32,11 @@ public static partial class CommonBehaviors
     }
 
     public static Vector2 Arrival(SteeringHost host, SteeringHost target, float slowingRadius = 20f)
-        => Arrival(host, target.Position, slowingRadius);
+        => Arrival(host, target.Entity.Position, slowingRadius);
 
     public static Vector2 Arrival(SteeringHost host, Vector2 target, float slowingRadius = 20f)
     {
-        host.DesiredVelocity = target - host.Position;
+        host.DesiredVelocity = target - host.Entity.Position;
         var distance = host.DesiredVelocity.Length();
 
         host.DesiredVelocity.Normalize();

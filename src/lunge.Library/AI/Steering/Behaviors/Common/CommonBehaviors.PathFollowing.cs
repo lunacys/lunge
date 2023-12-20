@@ -87,7 +87,7 @@ public static partial class CommonBehaviors
     
     private static bool IsWithinTarget(SteeringHost host, FollowingPathNode target)
     {
-        var distance = (host.Position - target.Target).Length();
+        var distance = (host.Entity.Position - target.Target).Length();
         return distance <= target.TargetRadius;
     }
 }

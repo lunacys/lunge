@@ -16,14 +16,14 @@ public class SteeringManager : Component, IUpdatable
 
     private List<BehaviorBase> _behaviors = null!;
 
-    public SteeringManager()
+    public SteeringManager(SteeringHost host)
     {
-        UpdateOrder = 999;
+        //UpdateOrder = 999;
+        Host = host;
     }
 
     public override void OnAddedToEntity()
     {
-        Host = Entity.ToHost();
         _mover = Entity.AddComponent(new Mover());
 
         _behaviors = Entity.GetComponents<BehaviorBase>();
@@ -45,7 +45,7 @@ public class SteeringManager : Component, IUpdatable
 
     private void DoMove()
     {
-        var movement = Host.Velocity * (Time.DeltaTime * 60);
+        var movement = Host.Velocity * Time.DeltaTime;
         
         // TODO: Try AdvancedCalculateMovement
         _mover.CalculateMovement(ref movement, out _);

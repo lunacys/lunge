@@ -19,13 +19,13 @@ public static partial class CommonBehaviors
             dv.Normalize();
         dv *= maxAvoidAhead * host.Velocity.Length() / host.MaxVelocity;
 
-        ahead = host.Position + dv;
+        ahead = host.Entity.Position + dv;
 
         // BUG: It really likes to get stuck on edges (rectangle colliders), probably need to check field of view, not just a ray.
-        var collision = Physics.Linecast(host.Position, ahead, layerMask);
+        var collision = Physics.Linecast(host.Entity.Position, ahead, layerMask);
         var mostThreatening = collision.Collider;
 
-        if (mostThreatening != null && collision.Collider.Entity != host)
+        if (mostThreatening != null && collision.Collider.Entity != host.Entity)
         {
             avoidance = ahead - mostThreatening.AbsolutePosition;
             avoidance.Normalize();
