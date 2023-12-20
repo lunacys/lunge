@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 using Nez;
 
@@ -24,7 +25,7 @@ public class TileWorldRenderer : RenderableComponent
         {
             _collisionLayer = value;
             RemoveColliders();
-            AddColliders(_collisionLayer);
+            AddColliders();
         }
     }
     
@@ -44,13 +45,13 @@ public class TileWorldRenderer : RenderableComponent
         if (_collisionLayer != null && comp == Transform.Component.Position)
         {
             RemoveColliders();
-            AddColliders(_collisionLayer);
+            AddColliders();
         }
     }
 
     public override void OnAddedToEntity()
     {
-        AddColliders(_collisionLayer);
+        AddColliders();
     }
 
     public override void OnRemovedFromEntity()
@@ -126,14 +127,14 @@ public class TileWorldRenderer : RenderableComponent
             }
         }
     }
-    
-    public void AddColliders(TileLayer? layer)
+
+    public void AddColliders()
     {
-        if (_collisionLayer == null || layer == null)
+        if (_collisionLayer == null)
             return;
         
         // fetch the collision layer and its rects for collision
-        var collisionRects = layer.GetCollisionRectangles();
+        var collisionRects = _collisionLayer.GetCollisionRectangles();
 
         // create colliders for the rects we received
         _colliders = new Collider[collisionRects.Count];
@@ -148,7 +149,7 @@ public class TileWorldRenderer : RenderableComponent
             Physics.AddCollider(collider);
         }
     }
-    
+
     public void RemoveColliders()
     {
         if (_colliders == null)
