@@ -1,14 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <LangVersion>latestmajor</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\FNA\FNA.Core.csproj" />
     <ProjectReference Include="..\..\..\Nez\Nez.Portable\Nez.FNA.Standard.csproj" />
     <ProjectReference Include="..\lunge.Library\lunge.Library.csproj" />
   </ItemGroup>

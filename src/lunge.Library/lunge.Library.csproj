@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Authors>loonacuse</Authors>
     <Description>A simple 2D game engine based on MonoGame Framework </Description>
     <Copyright>loonacuse</Copyright>
@@ -50,10 +50,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\FNA\FNA.NetStandard.csproj" />
-    <ProjectReference Include="..\..\..\Nez\Nez.ImGui\Nez.FNA.Standard.ImGui.csproj" />
-    <ProjectReference Include="..\..\..\Nez\Nez.Persistence\Nez.FNA.Standard.Persistence.csproj" />
-    <ProjectReference Include="..\..\..\Nez\Nez.Portable\Nez.FNA.Standard.csproj" />
+    <ProjectReference Include="..\..\..\FNA\FNA.Core.csproj" />
+    <ProjectReference Include="..\..\..\Nez\Nez.ImGui\Nez.FNA.Core.ImGui.csproj" />
+    <ProjectReference Include="..\..\..\Nez\Nez.Persistence\Nez.FNA.Core.Persistence.csproj" />
+    <ProjectReference Include="..\..\..\Nez\Nez.Portable\Nez.FNA.Core.csproj" />
+    <ProjectReference Include="..\LiteLog\LiteLog.csproj" />
   </ItemGroup>
 
 </Project>
