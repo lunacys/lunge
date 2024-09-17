@@ -41,7 +41,7 @@ namespace lunge.Library.Bindables
         /// <param name="min"></param>
         /// <param name="max"></param>
         /// <param name="action"></param>
-        public BindableInt(int defaultVal, int min, int max, EventHandler<BindableValueChangeEvent<int>> action = null)
+        public BindableInt(int defaultVal, int min, int max, EventHandler<BindableValueChangeEvent<int>>? action = null)
             : base(defaultVal, action)
         {
             MinValue = min;
@@ -58,7 +58,7 @@ namespace lunge.Library.Bindables
         /// <param name="max"></param>
         /// <param name="action"></param>
         public BindableInt(string name, int defaultVal, int min, int max,
-            EventHandler<BindableValueChangeEvent<int>> action = null)
+            EventHandler<BindableValueChangeEvent<int>>? action = null)
             : base(name, defaultVal, action)
         {
             MinValue = min;

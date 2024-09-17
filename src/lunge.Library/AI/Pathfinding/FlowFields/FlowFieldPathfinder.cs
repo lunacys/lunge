@@ -5,7 +5,7 @@ namespace lunge.Library.AI.Pathfinding.FlowFields
 {
     public static class FlowFieldPathfinder
     {
-        public static Dictionary<T, FlowFieldNode> Search<T>(IFlowFieldGraph<T> graph, T target)
+        public static Dictionary<T, FlowFieldNode> Search<T>(IFlowFieldGraph<T> graph, T target) where T : notnull
         {
             Dictionary<T, FlowFieldNode> nodes = new Dictionary<T, FlowFieldNode>();
 

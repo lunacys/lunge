@@ -1,8 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿
 
 // DO NOT include FMOD namespace in ANY of your classes.
 // Use FMOD.SomeClass instead.
 // FMOD classes seriously interfere with System namespace.
+
+using Microsoft.Xna.Framework;
 
 namespace lunge.Library.Audio.Studio
 {

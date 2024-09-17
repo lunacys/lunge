@@ -15,12 +15,8 @@ public static class RenderTarget2DExtensions
 
         Core.GraphicsDevice.SetRenderTarget(renderTarget);
         Core.GraphicsDevice.Clear(clearColor.Value);
-
-        batcher.Begin();
-
+        
         renderAction(batcher);
-
-        batcher.End();
     }
 
     public static void RenderFrom(this RenderTarget2D renderTarget, Action<Batcher> renderAction, Color? clearColor = null)

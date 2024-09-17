@@ -24,13 +24,13 @@ namespace lunge.Library.Bindables
                 else
                     _value = value;
                 
-                if (_value != prevVal)
+                if (Math.Abs(_value - prevVal) > float.Epsilon)
                     ValueChanged?.Invoke(this, new BindableValueChangeEvent<double>(_value,prevVal));
             }
         }
 
         public BindableDouble(double defaultVal, double min, double max,
-            EventHandler<BindableValueChangeEvent<double>> action = null) : base(defaultVal, action)
+            EventHandler<BindableValueChangeEvent<double>>? action = null) : base(defaultVal, action)
         {
             MinValue = min;
             MaxValue = max;
@@ -38,7 +38,7 @@ namespace lunge.Library.Bindables
         }
 
         public BindableDouble(string name, double defaultVal, double min, double max,
-            EventHandler<BindableValueChangeEvent<double>> action = null) : base(name, defaultVal, action)
+            EventHandler<BindableValueChangeEvent<double>>? action = null) : base(name, defaultVal, action)
         {
             MinValue = min;
             MaxValue = max;

@@ -49,7 +49,7 @@ namespace lunge.Library
 
         public bool Equals(Range<T> value) => Min.Equals(value.Min) && Max.Equals(value.Max);
 
-        public override bool Equals(object obj) => obj is Range<T> && Equals((Range<T>) obj);
+        public override bool Equals(object? obj) => obj is Range<T> && Equals((Range<T>) obj);
 
         public override int GetHashCode() => Min.GetHashCode() ^ Max.GetHashCode();
 

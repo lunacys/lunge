@@ -19,7 +19,7 @@ namespace lunge.Library.InputMgr
             return EqualityComparer<T>.Default.Equals(Key, other.Key) && Func.Equals(other.Func);
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return obj is InputEntry<T> other && Equals(other);
         }

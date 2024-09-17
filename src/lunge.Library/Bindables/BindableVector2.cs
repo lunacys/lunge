@@ -22,13 +22,13 @@ namespace lunge.Library.Bindables
             }
         }
         
-        public BindableVector2(Vector2 defaultVal, EventHandler<BindableValueChangeEvent<Vector2>> action = null) :
+        public BindableVector2(Vector2 defaultVal, EventHandler<BindableValueChangeEvent<Vector2>>? action = null) :
             base(defaultVal, action)
         {
         }
 
         public BindableVector2(string name, Vector2 defaultVal,
-            EventHandler<BindableValueChangeEvent<Vector2>> action = null) : base(name, defaultVal, action)
+            EventHandler<BindableValueChangeEvent<Vector2>>? action = null) : base(name, defaultVal, action)
         {
         }
 

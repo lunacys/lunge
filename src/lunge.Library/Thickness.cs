@@ -42,7 +42,7 @@ namespace lunge.Library
             return new Thickness(value);
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is Thickness)
             {

@@ -30,21 +30,36 @@ namespace lunge.Library
             return (float)Math.Atan2(vector.Y, vector.X);
         }
 
+        public static void NormalizeOrZero(ref this Vector2 vec)
+        {
+            var rcp = 1.0f / vec.Length();
+            if (float.IsFinite(rcp) && rcp > 0.0f)
+                vec *= rcp;
+            else
+                vec *= 0.0f;
+        }
+
+        public static Vector2 NormalizedOrZero(this Vector2 vec)
+        {
+            vec.NormalizeOrZero();
+            return vec;
+        }
+
+        public static bool IsNormalized(this Vector2 vec)
+        {
+            return MathF.Abs(vec.LengthSquared() - 1.0f) <= 1e-4;
+        }
+
         public static Vector2 Abs(this Vector2 vec2)
         {
             vec2.X = Math.Abs(vec2.X);
             vec2.Y = Math.Abs(vec2.Y);
             return vec2;
         }
-
-        public static Vector2 Copy(this Vector2 vec)
-        {
-            return new Vector2(vec.X, vec.Y);
-        }
         
         public static Vector2 ClampToRectangleF(this Vector2 vec, RectangleF rect)
         {
-            var result = vec.Copy();
+            var result = vec;
 
             if (result.X < rect.X)
                 result.X = rect.X;

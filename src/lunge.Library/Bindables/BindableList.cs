@@ -30,7 +30,7 @@ namespace lunge.Library.Bindables
         /// </summary>
         /// <param name="defaultVal"></param>
         /// <param name="action"></param>
-        public BindableList(List<T> defaultVal, EventHandler<BindableValueChangeEvent<List<T>>> action = null) : base(
+        public BindableList(List<T> defaultVal, EventHandler<BindableValueChangeEvent<List<T>>>? action = null) : base(
             defaultVal, action)
         {
         }
@@ -42,7 +42,7 @@ namespace lunge.Library.Bindables
         /// <param name="defaultVal"></param>
         /// <param name="action"></param>
         public BindableList(string name, List<T> defaultVal,
-            EventHandler<BindableValueChangeEvent<List<T>>> action = null) : base(name, defaultVal, action)
+            EventHandler<BindableValueChangeEvent<List<T>>>? action = null) : base(name, defaultVal, action)
         {
         }
 

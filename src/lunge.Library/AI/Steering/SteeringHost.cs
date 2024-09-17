@@ -21,7 +21,7 @@ public class SteeringHost : Component
     {
         MaxVelocity = 180.0f;
         MaxForce = 150f;
-        Mass = 1.0f;
+        Mass = 2.0f;
         Friction = 0.8f;
         
         Reset();

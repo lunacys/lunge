@@ -4,9 +4,9 @@ namespace lunge.Library.Bindables
 {
     public class Bindable<T> : IDisposable
     {
-        public EventHandler<BindableValueChangeEvent<T>> ValueChanged;
+        public EventHandler<BindableValueChangeEvent<T>>? ValueChanged;
         
-        public string Name { get; }
+        public string? Name { get; }
         public T Default { get; set; }
 
         public T Value
@@ -20,9 +20,9 @@ namespace lunge.Library.Bindables
             }
         }
 
-        private T _value;
+        private T _value = default!;
 
-        public Bindable(T defaultVal, EventHandler<BindableValueChangeEvent<T>> action = null)
+        public Bindable(T defaultVal, EventHandler<BindableValueChangeEvent<T>>? action = null)
         {
             if (action != null)
                 ValueChanged += action;
@@ -31,7 +31,7 @@ namespace lunge.Library.Bindables
             Value = defaultVal;
         }
 
-        public Bindable(string name, T defaultVal, EventHandler<BindableValueChangeEvent<T>> action = null)
+        public Bindable(string name, T defaultVal, EventHandler<BindableValueChangeEvent<T>>? action = null)
         {
             if (action != null)
                 ValueChanged += action;

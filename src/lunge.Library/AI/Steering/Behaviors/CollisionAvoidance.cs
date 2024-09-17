@@ -16,6 +16,6 @@ public class CollisionAvoidance : BehaviorBase
 
     public override Vector2 Steer(SteeringHost target)
     {
-        return CommonBehaviors.CollisionAvoidance(Host, MaxAvoidAhead, AvoidForce, out Ahead, ref Avoidance);
+        return CommonBehaviors.CollisionAvoidanceLinecast(Host, MaxAvoidAhead, AvoidForce, out Ahead, ref Avoidance);
     }
 }

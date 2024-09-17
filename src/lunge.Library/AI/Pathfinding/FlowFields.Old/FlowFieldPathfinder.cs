@@ -17,7 +17,7 @@ namespace lunge.Library.AI.Pathfinding.FlowFields.Old
 
     public static class FlowFieldPathfinder
     {
-        public static void Search<T>(IFlowFieldGraph<T> graph, T start, T target, out Dictionary<T, T> cameFrom)
+        public static void Search<T>(IFlowFieldGraph<T> graph, T start, T target, out Dictionary<T, T> cameFrom) where T : notnull
         {
             cameFrom = new Dictionary<T, T>();
             cameFrom.Add(target, target);

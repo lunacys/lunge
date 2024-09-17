@@ -26,7 +26,7 @@ namespace lunge.Library.Bindables
         }
 
         public BindableFloat(float defaultVal, float min, float max,
-            EventHandler<BindableValueChangeEvent<float>> action = null)
+            EventHandler<BindableValueChangeEvent<float>>? action = null)
             : base(defaultVal, action)
         {
             MinValue = min;
@@ -43,7 +43,7 @@ namespace lunge.Library.Bindables
         /// <param name="max"></param>
         /// <param name="action"></param>
         public BindableFloat(string name, float defaultVal, float min, float max,
-            EventHandler<BindableValueChangeEvent<float>> action = null)
+            EventHandler<BindableValueChangeEvent<float>>? action = null)
             : base(name, defaultVal, action)
         {
             MinValue = min;

@@ -150,7 +150,7 @@ namespace lunge.Library.Utils
         /// <returns></returns>
         public static float DistanceBetween(Vector2 a, Vector2 b)
         {
-            return (float)(Math.Abs(a.X - b.X) + Math.Abs(a.Y - b.Y));
+            return (Math.Abs(a.X - b.X) + Math.Abs(a.Y - b.Y));
         }
 
         /// <summary>
@@ -291,7 +291,6 @@ namespace lunge.Library.Utils
                     error += dx;
                 }
             }
-            yield break;
         }
 
         // The algorithm is: 
@@ -306,22 +305,23 @@ namespace lunge.Library.Utils
             float sa = tension * d01 / (d01 + d12);
             float sb = tension * d12 / (d01 + d12);
             // left control point
-            float c1x = p1.X - sa * (p2.X - p0.X);
-            float c1y = p1.Y - sa * (p2.Y - p0.Y);
+            float c1X = p1.X - sa * (p2.X - p0.X);
+            float c1Y = p1.Y - sa * (p2.Y - p0.Y);
             // right control point
-            float c2x = p1.X + sb * (p2.X - p0.X);
-            float c2y = p1.Y + sb * (p2.Y - p0.Y);
+            float c2X = p1.X + sb * (p2.X - p0.X);
+            float c2Y = p1.Y + sb * (p2.Y - p0.Y);
             // return control points
-            return new Vector2[] { new Vector2(c1x, c1y), new Vector2(c2x, c2y) };
+            return new[] { new Vector2(c1X, c1Y), new Vector2(c2X, c2Y) };
         }
 
-        public static List<Vector2> GenerateControlPoints(List<Vector2> knots, float tension = 0.5f)
+        public static List<Vector2>? GenerateControlPoints(List<Vector2>? knots, float tension = 0.5f)
         {
             if (knots == null || knots.Count < 3)
                 return null;
-            List<Vector2> res = new List<Vector2>();
-            // First control point is same as first knot
-            res.Add(knots.First());
+            var res = new List<Vector2> {
+                // First control point is same as first knot
+                knots.First() 
+            };
             // generate control point pairs for each non-end knot 
             for (int i = 1; i < knots.Count - 1; ++i)
             {
